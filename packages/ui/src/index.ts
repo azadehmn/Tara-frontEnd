@@ -1,6 +1,25 @@
 /**
- * Shared UI lives here only after a component is used by more than one app
- * or by several features in a way that a local `shared/` copy is no longer enough.
- * Until then, keep feature UI inside `apps/merchant-panel`.
+ * Tara UI kit public API (Tr / tr- prefix).
+ * Apps import components from here and tokens via `color`.
+ * Load theme tokens with `import '@tara/ui/styles'` after Tailwind.
  */
-export {};
+export { TrButton } from './components/button';
+export type {
+  TrButtonHtmlType,
+  TrButtonProps,
+  TrButtonSize,
+  TrButtonVariant,
+} from './components/button';
+export { color, radius, spacing, breakpoint, typography } from './tokens';
+export type {
+  TrColorState,
+  TrColorToken,
+  TrOutlinePalette,
+  TrPalette,
+  TrRadiusToken,
+  TrSpacingToken,
+  TrBreakpointToken,
+  TrResponsiveType,
+  TrTypeStyle,
+  TrTypographyToken,
+} from './tokens';

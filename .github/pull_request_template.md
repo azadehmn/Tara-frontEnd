@@ -18,6 +18,9 @@
 
 - [PROJTARA-XXXX](https://jira.tara360.ir/browse/PROJTARA-XXXX)
 
+## Screenshots
+
+<!-- UI only. Remove this section if not applicable. -->
 
 ## Reviewers
 

@@ -1,0 +1,99 @@
+/* Shared Tara tokens. Dark colors are named *-dark-* for `dark:` utilities on components. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --color-primary: #5825c5;
+  --color-primary-hover: #6e3dd6;
+  --color-primary-focus: #6e3dd6;
+  --color-primary-pressed: #451d9a;
+  --color-primary-select: #451d9a;
+  --color-primary-disabled: #c4b5e8;
+  --color-primary-loading: #6e3dd6;
+  --color-primary-dark: #7c5cff;
+  --color-primary-dark-hover: #9580ff;
+  --color-primary-dark-focus: #9580ff;
+  --color-primary-dark-pressed: #5825c5;
+  --color-primary-dark-select: #9580ff;
+  --color-primary-dark-disabled: #4a3a72;
+  --color-primary-dark-loading: #6b52d6;
+  --color-text-onPrimary: #ffffff;
+  --color-text-dark-onPrimary: #ffffff;
+
+  --color-secondary: #ed0ca8;
+  --color-secondary-hover: #f53bc0;
+  --color-secondary-focus: #f53bc0;
+  --color-secondary-pressed: #b80e80;
+  --color-secondary-select: #b80e80;
+  --color-secondary-disabled: #f5a8d8;
+  --color-secondary-loading: #f53bc0;
+  --color-secondary-dark: #ff4dcc;
+  --color-secondary-dark-hover: #ff6ad4;
+  --color-secondary-dark-focus: #ff6ad4;
+  --color-secondary-dark-pressed: #b80e80;
+  --color-secondary-dark-select: #b80e80;
+  --color-secondary-dark-disabled: #6b2a55;
+  --color-secondary-dark-loading: #d14aa8;
+  --color-text-onSecondary: #ffffff;
+  --color-text-dark-onSecondary: #ffffff;
+
+  --color-outlined: #ffffff;
+  --color-outlined-hover: #f5f7ff;
+  --color-outlined-focus: #ffffff;
+  --color-outlined-pressed: #ebe4ff;
+  --color-outlined-select: #f5f7ff;
+  --color-outlined-disabled: #efeff1;
+  --color-outlined-loading: #f5f7ff;
+  --color-outlined-dark: #0c051a;
+  --color-outlined-dark-hover: #1a1230;
+  --color-outlined-dark-focus: #1a1230;
+  --color-outlined-dark-pressed: #24183c;
+  --color-outlined-dark-select: #1a1230;
+  --color-outlined-dark-disabled: #2a2438;
+  --color-outlined-dark-loading: #1a1230;
+  --color-text-onOutlined: #5825c5;
+  --color-text-dark-onOutlined: #5825c5;
+  --color-outlined-border: #d3c3f4;
+  --color-outlined-border-hover: #d3c3f4;
+  --color-outlined-border-disabled: #d1d5db;
+  --color-outlined-dark-border: #d3c3f4;
+  --color-outlined-dark-border-hover: #d3c3f4;
+  --color-outlined-dark-border-disabled: #4a3a72;
+}
+
+:root {
+  --tr-radius-none: 0px;
+  --tr-radius-xs: 2px;
+  --tr-radius-sm: 4px;
+  --tr-radius-md: 8px;
+  --tr-radius-lg: 12px;
+  --tr-radius-xl: 16px;
+  --tr-radius-full: 100%;
+
+  --tr-space-none: 0px;
+  --tr-space-2xs: 4px;
+  --tr-space-xs: 8px;
+  --tr-space-sm: 12px;
+  --tr-space-md: 16px;
+  --tr-space-lg: 20px;
+  --tr-space-xl: 24px;
+  --tr-space-2xl: 32px;
+  --tr-space-3xl: 48px;
+  --tr-space-4xl: 64px;
+  --tr-space-5xl: 96px;
+  --tr-space-6xl: 128px;
+
+  --tr-font-button-weight: 600;
+  --tr-font-button-sm-size: 12px;
+  --tr-font-button-sm-leading: 20px;
+  --tr-font-button-md-size: 14px;
+  --tr-font-button-md-leading: 24px;
+  --tr-font-button-lg-size: 16px;
+  --tr-font-button-lg-leading: 24px;
+
+  --tr-screen-xs: 320px;
+  --tr-screen-sm: 640px;
+  --tr-screen-md: 768px;
+  --tr-screen-lg: 912px;
+  --tr-screen-xl: 1200px;
+  --tr-screen-2xl: 1456px;
+}
