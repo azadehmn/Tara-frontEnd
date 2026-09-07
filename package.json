@@ -1,0 +1,23 @@
+{
+  "name": "tara-frontend",
+  "private": true,
+  "description": "Tara frontend workspace — Vue 3 apps and shared packages",
+  "scripts": {
+    "dev": "pnpm --filter @tara/merchant-panel dev",
+    "build": "pnpm --filter @tara/merchant-panel build",
+    "preview": "pnpm --filter @tara/merchant-panel preview",
+    "test": "pnpm --filter @tara/merchant-panel test",
+    "test:coverage": "pnpm --filter @tara/merchant-panel test:coverage",
+    "lint": "pnpm --filter @tara/merchant-panel lint",
+    "typecheck": "pnpm --filter @tara/merchant-panel typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.9.0",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}
