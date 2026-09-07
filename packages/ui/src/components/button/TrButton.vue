@@ -60,4 +60,4 @@ const isIconOnly = computed(() => Boolean(slots.icon) && !hasLabel.value);
   </button>
 </template>
 
-<style src="./TrButton.css"></style>
+<style lang="scss" src="./TrButton.scss"></style>

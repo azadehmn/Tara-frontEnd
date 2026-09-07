@@ -60,6 +60,9 @@ importers:
       jsdom:
         specifier: ^27.0.0
         version: 27.4.0
+      sass:
+        specifier: ^1.92.1
+        version: 1.104.0
       tailwindcss:
         specifier: ^4.1.13
         version: 4.3.3

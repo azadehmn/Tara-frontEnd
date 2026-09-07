@@ -1,2 +1,3 @@
 /* App-wide Tailwind entry. Feature-specific styles stay next to that feature. */
 @import 'tailwindcss';
+@import '@tara/ui/styles';

@@ -1,4 +1,4 @@
-/* Shared Tara tokens. Dark colors are named *-dark-* for `dark:` utilities on components. */
+/* Tara tokens. Button SCSS reads --tr-*. Tailwind @theme only maps colors. */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 @theme {
@@ -61,6 +61,63 @@
 }
 
 :root {
+  --tr-color-primary: #5825c5;
+  --tr-color-primary-hover: #6e3dd6;
+  --tr-color-primary-focus: #6e3dd6;
+  --tr-color-primary-pressed: #451d9a;
+  --tr-color-primary-select: #451d9a;
+  --tr-color-primary-disabled: #c4b5e8;
+  --tr-color-primary-loading: #6e3dd6;
+  --tr-color-primary-text: #ffffff;
+  --tr-color-primary-dark: #7c5cff;
+  --tr-color-primary-dark-hover: #9580ff;
+  --tr-color-primary-dark-focus: #9580ff;
+  --tr-color-primary-dark-pressed: #5825c5;
+  --tr-color-primary-dark-select: #9580ff;
+  --tr-color-primary-dark-disabled: #4a3a72;
+  --tr-color-primary-dark-loading: #6b52d6;
+  --tr-color-primary-text-dark: #ffffff;
+
+  --tr-color-secondary: #ed0ca8;
+  --tr-color-secondary-hover: #f53bc0;
+  --tr-color-secondary-focus: #f53bc0;
+  --tr-color-secondary-pressed: #b80e80;
+  --tr-color-secondary-select: #b80e80;
+  --tr-color-secondary-disabled: #f5a8d8;
+  --tr-color-secondary-loading: #f53bc0;
+  --tr-color-secondary-text: #ffffff;
+  --tr-color-secondary-dark: #ff4dcc;
+  --tr-color-secondary-dark-hover: #ff6ad4;
+  --tr-color-secondary-dark-focus: #ff6ad4;
+  --tr-color-secondary-dark-pressed: #b80e80;
+  --tr-color-secondary-dark-select: #b80e80;
+  --tr-color-secondary-dark-disabled: #6b2a55;
+  --tr-color-secondary-dark-loading: #d14aa8;
+  --tr-color-secondary-text-dark: #ffffff;
+
+  --tr-color-outlined: #ffffff;
+  --tr-color-outlined-hover: #f5f7ff;
+  --tr-color-outlined-focus: #ffffff;
+  --tr-color-outlined-pressed: #ebe4ff;
+  --tr-color-outlined-select: #f5f7ff;
+  --tr-color-outlined-disabled: #efeff1;
+  --tr-color-outlined-loading: #f5f7ff;
+  --tr-color-outlined-text: #5825c5;
+  --tr-color-outlined-border: #d3c3f4;
+  --tr-color-outlined-border-hover: #d3c3f4;
+  --tr-color-outlined-border-disabled: #d1d5db;
+  --tr-color-outlined-dark: #0c051a;
+  --tr-color-outlined-dark-hover: #1a1230;
+  --tr-color-outlined-dark-focus: #1a1230;
+  --tr-color-outlined-dark-pressed: #24183c;
+  --tr-color-outlined-dark-select: #1a1230;
+  --tr-color-outlined-dark-disabled: #2a2438;
+  --tr-color-outlined-dark-loading: #1a1230;
+  --tr-color-outlined-text-dark: #5825c5;
+  --tr-color-outlined-dark-border: #d3c3f4;
+  --tr-color-outlined-dark-border-hover: #d3c3f4;
+  --tr-color-outlined-dark-border-disabled: #4a3a72;
+
   --tr-radius-none: 0px;
   --tr-radius-xs: 2px;
   --tr-radius-sm: 4px;
