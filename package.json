@@ -6,7 +6,7 @@
     "dev": "pnpm --filter @tara/merchant-panel dev",
     "build": "pnpm --filter @tara/merchant-panel build",
     "preview": "pnpm --filter @tara/merchant-panel preview",
-    "test": "pnpm --filter @tara/merchant-panel test",
+    "test": "pnpm --filter @tara/merchant-panel test && pnpm --filter @tara/locale test",
     "test:coverage": "pnpm --filter @tara/merchant-panel test:coverage",
     "lint": "pnpm --filter @tara/merchant-panel lint",
     "typecheck": "pnpm --filter @tara/merchant-panel typecheck",

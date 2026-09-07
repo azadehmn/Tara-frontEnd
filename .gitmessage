@@ -1,0 +1,13 @@
+# <type>(<scope>): <subject>
+#
+# type: feat | fix | docs | style | refactor | test | chore | ci | build | perf
+# scope: merchant-panel | locale | ui | workspace
+# subject: imperative, lowercase, no period, max ~72 chars
+#
+# Why this change (optional body). Wrap at 72 chars.
+#
+# Jira: PROJTARA-XXXX
+#
+# Examples:
+#   feat(locale): add shared i18n package for Tara apps
+#   fix(merchant-panel): resolve tsconfig baseUrl deprecation

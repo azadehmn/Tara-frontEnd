@@ -1,0 +1,21 @@
+{
+  "name": "@tara/locale",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "vue-i18n": "^11.1.12"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}
