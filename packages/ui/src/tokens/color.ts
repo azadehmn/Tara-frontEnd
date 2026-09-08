@@ -33,54 +33,53 @@ export type TrOutlinePalette = TrPalette & {
   };
 };
 
-/**
- * Brand palette used by TrButton and later components.
- *
- * primary   filled purple  — «دانلود تارا» (#5825C5)
- * secondary filled magenta — «دانلود اپلیکیشن» (#ED0CA8)
- * outlined  border button  — «شروع همکاری»
- */
 export const color = {
-  white:'#fff',
+  white: '#fff',
   primary: {
-    DEFAULT: '#5825C5',
+    DEFAULT: '#1423BA',
+
     dark: {
-      DEFAULT: '#7C5CFF',
-      disabled: '#4A3A72',
-      focus: '#9580FF',
-      hover: '#9580FF',
-      pressed: '#5825C5',
-      select: '#9580FF',
-      loading: '#6B52D6',
+      DEFAULT: '#7380E8',
+      disabled: '#343A63',
+      focus: '#8792ED',
+      hover: '#8E98EE',
+      pressed: '#A7AFF2',
+      select: '#7380E8',
+      loading: '#8792ED',
     },
-    disabled: '#C4B5E8',
-    focus: '#6E3DD6',
-    hover: '#6E3DD6',
-    pressed: '#451D9A',
-    select: '#451D9A',
-    loading: '#6E3DD6',
+
+    disabled: '#C7CAF0',
+    focus: '#3544CE',
+    hover: '#2939C7',
+    pressed: '#101C99',
+    select: '#1423BA',
+    loading: '#3544CE',
+
     text: {
       DEFAULT: '#FFFFFF',
       dark: '#FFFFFF',
     },
   },
   secondary: {
-    DEFAULT: '#ED0CA8',
+    DEFAULT: '#B30A84',
+
     dark: {
-      DEFAULT: '#FF4DCC',
-      disabled: '#6B2A55',
-      focus: '#FF6AD4',
-      hover: '#FF6AD4',
-      pressed: '#B80E80',
-      select: '#B80E80',
-      loading: '#D14AA8',
+      DEFAULT: '#E36AC2',
+      disabled: '#5E3653',
+      focus: '#EC83D1',
+      hover: '#EA79CC',
+      pressed: '#F09BDC',
+      select: '#E36AC2',
+      loading: '#EC83D1',
     },
-    disabled: '#F5A8D8',
-    focus: '#F53BC0',
-    hover: '#F53BC0',
-    pressed: '#B80E80',
-    select: '#B80E80',
-    loading: '#F53BC0',
+
+    disabled: '#E6B4D8',
+    focus: '#C92A9B',
+    hover: '#C11B91',
+    pressed: '#8E0868',
+    select: '#B30A84',
+    loading: '#C92A9B',
+
     text: {
       DEFAULT: '#FFFFFF',
       dark: '#FFFFFF',
@@ -104,8 +103,8 @@ export const color = {
     select: '#F5F7FF',
     loading: '#F5F7FF',
     text: {
-      DEFAULT: '#fff',
-      dark: '#fff',
+      DEFAULT: '#1423BA',
+      dark: '#1423BA',
     },
     border: {
       DEFAULT: '#D3C3F4',
