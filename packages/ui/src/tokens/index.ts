@@ -1,3 +1,8 @@
+/**
+ * Design tokens are currently duplicated between TypeScript exports and the
+ * Tailwind CSS theme. Consolidation to a single source of truth will be handled
+ * separately if runtime token access is required.
+ */
 export { color } from './color';
 export type { TrColorState, TrColorToken, TrOutlinePalette, TrPalette } from './color';
 

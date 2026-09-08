@@ -1,10 +1,19 @@
 import { fileURLToPath, URL } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [vue(), tailwindcss()],
+  plugins: [
+    vue(),
+    tailwindcss(),
+    AutoImport({
+      imports: [{ 'vue-i18n': ['useI18n'] }],
+      dts: 'src/auto-imports.d.ts',
+      vueTemplate: true,
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -17,5 +26,9 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+  },
+  optimizeDeps: {
+    include: ['vue-i18n'],
+    exclude: ['@tara/locale'],
   },
 });

@@ -1,7 +1,7 @@
-export { default as TrButton } from './TrButton.vue';
+export { default as TrButton } from './Button.vue';
 export type {
   TrButtonHtmlType,
   TrButtonProps,
   TrButtonSize,
   TrButtonVariant,
-} from './TrButton';
+} from './Button';

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
-import type { TrButtonProps } from './TrButton';
+import type { TrButtonProps } from './Button';
+
+defineOptions({ name: 'Tr-Button' });
 
 const props = withDefaults(defineProps<TrButtonProps>(), {
   variant: 'primary',
@@ -60,4 +62,4 @@ const isIconOnly = computed(() => Boolean(slots.icon) && !hasLabel.value);
   </button>
 </template>
 
-<style lang="scss" src="./TrButton.scss"></style>
+<style lang="scss" src="./styles.scss"></style>

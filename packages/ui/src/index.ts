@@ -1,8 +1,8 @@
 /**
- * Tara UI kit public API (Tr / tr- prefix).
- * Apps import components from here and tokens via `color`.
- * Load theme tokens with `import '@tara/ui/styles'` after Tailwind.
+ * Tara UI kit public API.
+ * Template tags after `app.use(taraUi)`: Tr-Button,.....
  */
+export { taraUi } from './plugin';
 export { TrButton } from './components/button';
 export type {
   TrButtonHtmlType,
@@ -10,6 +10,8 @@ export type {
   TrButtonSize,
   TrButtonVariant,
 } from './components/button';
+export { TrTopBar } from './components/TopBar';
+export type { TrTopBarProps } from './components/TopBar';
 export { color, radius, spacing, breakpoint, typography } from './tokens';
 export type {
   TrColorState,

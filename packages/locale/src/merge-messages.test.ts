@@ -21,14 +21,5 @@ describe('mergeLocaleMessages', () => {
     expect(merged.fa.app).toEqual(merchantPanelMessages.fa.app);
     expect(merged.en.common).toEqual(commonMessages.en.common);
     expect(merged.en.app).toEqual(merchantPanelMessages.en.app);
-
-describe('mergeLocaleMessages', () => {
-  it('merges every locale from the shared and app dictionaries', () => {
-    const merged = mergeLocaleMessages(commonMessages, merchantPanelMessages);
-
-    expect(merged.fa.common).toEqual(commonMessages.fa.common);
-    expect(merged.fa.app).toEqual(merchantPanelMessages.fa.app);
-    expect(merged.en.common).toEqual(commonMessages.en.common);
-    expect(merged.en.app).toEqual(merchantPanelMessages.en.app);
   });
 });

@@ -41,6 +41,7 @@ export type TrOutlinePalette = TrPalette & {
  * outlined  border button  — «شروع همکاری»
  */
 export const color = {
+  white:'#fff',
   primary: {
     DEFAULT: '#5825C5',
     dark: {
@@ -103,8 +104,8 @@ export const color = {
     select: '#F5F7FF',
     loading: '#F5F7FF',
     text: {
-      DEFAULT: '#5825C5',
-      dark: '#5825C5',
+      DEFAULT: '#fff',
+      dark: '#fff',
     },
     border: {
       DEFAULT: '#D3C3F4',
@@ -121,6 +122,7 @@ export const color = {
   primary: TrPalette;
   secondary: TrPalette;
   outlined: TrOutlinePalette;
+  white: string;
 };
 
 export type TrColorToken = typeof color;
