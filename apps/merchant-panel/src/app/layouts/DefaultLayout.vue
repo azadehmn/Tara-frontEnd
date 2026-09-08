@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterView } from 'vue-router';
 import type { SupportedLocale } from '@tara/locale';
 import AppSidebar from './AppSidebar.vue';
+import taraLogo from '@assets/images/logo.svg';
 
 const { locale } = useI18n();
 const isDark = ref(document.documentElement.dataset.theme === 'dark');
@@ -25,6 +26,9 @@ function toggleTheme() {
 
     <div class="flex min-w-0 flex-1 flex-col">
       <Tr-TopBar>
+        <template #start>
+          <img :src="taraLogo" alt="Tara" width="61" height="25" />
+        </template>
         <template #end>
           <Tr-Button variant="primary" size="small" text="fa" @click="setLocale('fa')" />
           <Tr-Button variant="secondary" size="small" text="en" @click="setLocale('en')" />
