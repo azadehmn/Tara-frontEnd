@@ -1,24 +1,42 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import SidebarNavIcon, { type SidebarNavIconName } from './SidebarNavIcon.vue';
 
 const { t } = useI18n();
+
+const items: { to: string; key: SidebarNavIconName; exact?: boolean }[] = [
+  { to: '/', key: 'dashboard', exact: true },
+  { to: '/transactions', key: 'transactions' },
+  { to: '/reports', key: 'reports' },
+  { to: '/invoices', key: 'invoices' },
+  { to: '/contracts', key: 'contracts' },
+];
+
+const linkClass =
+  'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
+const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark';
 </script>
 
 <template>
   <aside
     class="flex w-64 shrink-0 flex-col border-e border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950"
   >
-    <div class="flex h-14 items-center border-b border-slate-200 px-4 dark:border-slate-800">
-      <span class="truncate text-sm font-semibold">{{ t('app.name') }}</span>
-    </div>
-
     <nav class="flex flex-col gap-1 p-3" :aria-label="t('layout.nav.label')">
       <RouterLink
-        to="/"
-        class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
-        exact-active-class="bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark"
+        v-for="item in items"
+        :key="item.key"
+        :to="item.to"
+        custom
+        v-slot="{ href, navigate, isActive, isExactActive }"
       >
-        {{ t('layout.nav.home') }}
+        <a
+          :href="href"
+          :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
+          @click="navigate"
+        >
+          <SidebarNavIcon :name="item.key" />
+          {{ t(`layout.nav.${item.key}`) }}
+        </a>
       </RouterLink>
     </nav>
   </aside>
