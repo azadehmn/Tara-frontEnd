@@ -1,0 +1,9 @@
+/* Source of truth for Tara layout breakpoints (min-width). */
+@theme {
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 912px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1456px;
+}

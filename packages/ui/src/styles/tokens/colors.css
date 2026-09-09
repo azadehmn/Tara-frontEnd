@@ -1,0 +1,61 @@
+/* Source of truth for Tara color tokens. Values from the current UI kit. */
+@theme {
+  --color-white: #fff;
+
+  --color-primary: #1423ba;
+  --color-primary-hover: #2939c7;
+  --color-primary-focus: #3544ce;
+  --color-primary-pressed: #101c99;
+  --color-primary-select: #1423ba;
+  --color-primary-disabled: #c7caf0;
+  --color-primary-loading: #3544ce;
+  --color-primary-dark: #7380e8;
+  --color-primary-dark-hover: #8e98ee;
+  --color-primary-dark-focus: #8792ed;
+  --color-primary-dark-pressed: #a7aff2;
+  --color-primary-dark-select: #7380e8;
+  --color-primary-dark-disabled: #343a63;
+  --color-primary-dark-loading: #8792ed;
+  --color-text-onPrimary: #ffffff;
+  --color-text-dark-onPrimary: #ffffff;
+
+  --color-secondary: #b30a84;
+  --color-secondary-hover: #c11b91;
+  --color-secondary-focus: #c92a9b;
+  --color-secondary-pressed: #8e0868;
+  --color-secondary-select: #b30a84;
+  --color-secondary-disabled: #e6b4d8;
+  --color-secondary-loading: #c92a9b;
+  --color-secondary-dark: #e36ac2;
+  --color-secondary-dark-hover: #ea79cc;
+  --color-secondary-dark-focus: #ec83d1;
+  --color-secondary-dark-pressed: #f09bdc;
+  --color-secondary-dark-select: #e36ac2;
+  --color-secondary-dark-disabled: #5e3653;
+  --color-secondary-dark-loading: #ec83d1;
+  --color-text-onSecondary: #ffffff;
+  --color-text-dark-onSecondary: #ffffff;
+
+  --color-outlined: #ffffff;
+  --color-outlined-hover: #f5f7ff;
+  --color-outlined-focus: #ffffff;
+  --color-outlined-pressed: #ebe4ff;
+  --color-outlined-select: #f5f7ff;
+  --color-outlined-disabled: #efeff1;
+  --color-outlined-loading: #f5f7ff;
+  --color-outlined-dark: #0c051a;
+  --color-outlined-dark-hover: #1a1230;
+  --color-outlined-dark-focus: #1a1230;
+  --color-outlined-dark-pressed: #24183c;
+  --color-outlined-dark-select: #1a1230;
+  --color-outlined-dark-disabled: #2a2438;
+  --color-outlined-dark-loading: #1a1230;
+  --color-text-onOutlined: #1423ba;
+  --color-text-dark-onOutlined: #1423ba;
+  --color-outlined-border: #d3c3f4;
+  --color-outlined-border-hover: #d3c3f4;
+  --color-outlined-border-disabled: #d1d5db;
+  --color-outlined-dark-border: #d3c3f4;
+  --color-outlined-dark-border-hover: #d3c3f4;
+  --color-outlined-dark-border-disabled: #4a3a72;
+}

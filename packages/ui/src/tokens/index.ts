@@ -1,7 +1,6 @@
 /**
- * Design tokens are currently duplicated between TypeScript exports and the
- * Tailwind CSS theme. Consolidation to a single source of truth will be handled
- * separately if runtime token access is required.
+ * Runtime TypeScript token maps for JS (e.g. matchMedia).
+ * CSS source of truth is `src/styles/tokens` via Tailwind 4 `@theme`.
  */
 export { color } from './color';
 export type { TrColorState, TrColorToken, TrOutlinePalette, TrPalette } from './color';
