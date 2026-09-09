@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive, watch } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import SidebarNavIcon, { type SidebarNavIconName } from './SidebarNavIcon.vue';
 
 const { t } = useI18n();
 const route = useRoute();
+const router = useRouter();
 
 type NavChild = { to: string; key: string };
 
@@ -35,13 +36,27 @@ const items: NavItem[] = [
 
 const openMenus = reactive<Record<string, boolean>>({});
 
-function toggleMenu(key: string) {
+function toggleMenu(key: string, event: MouseEvent) {
+  const inCollapsedRail = Boolean(
+    (event.currentTarget as HTMLElement).closest('.tr-nav-bar.is-collapsed'),
+  );
+  if (inCollapsedRail) {
+    const firstChild = items.find((item) => item.key === key)?.children?.[0];
+    if (firstChild) router.push(firstChild.to);
+    return;
+  }
   openMenus[key] = !openMenus[key];
 }
 
 const linkClass =
   'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
 const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark';
+
+function isChildRouteActive(children: NavChild[] | undefined) {
+  return Boolean(
+    children?.some((child) => route.path === child.to || route.path.startsWith(`${child.to}/`)),
+  );
+}
 
 watch(
   () => route.path,
@@ -62,9 +77,9 @@ watch(
       <div v-if="item.children?.length" class="flex flex-col gap-1">
         <button
           type="button"
-          :class="[linkClass, 'w-full']"
+          :class="[linkClass, 'w-full', isChildRouteActive(item.children) && 'tr-nav-bar__parent-active']"
           :aria-expanded="Boolean(openMenus[item.key])"
-          @click="toggleMenu(item.key)"
+          @click="toggleMenu(item.key, $event)"
         >
           <SidebarNavIcon :name="item.key" />
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
@@ -82,22 +97,27 @@ watch(
             </svg>
           </span>
         </button>
-        <div v-show="openMenus[item.key]" class="tr-nav-bar__submenu flex flex-col gap-1">
-          <RouterLink
-            v-for="child in item.children"
-            :key="child.key"
-            v-slot="{ href, navigate, isActive }"
-            :to="child.to"
-            custom
-          >
-            <a
-              :href="href"
-              :class="[linkClass, 'ps-9', isActive && activeClass]"
-              @click="navigate"
+        <div
+          class="tr-nav-bar__submenu"
+          :class="{ 'is-open': openMenus[item.key] }"
+        >
+          <div class="tr-nav-bar__submenu-inner">
+            <RouterLink
+              v-for="child in item.children"
+              :key="child.key"
+              v-slot="{ href, navigate, isActive }"
+              :to="child.to"
+              custom
             >
-              <span class="tr-nav-bar__label">{{ t(`layout.nav.${child.key}`) }}</span>
-            </a>
-          </RouterLink>
+              <a
+                :href="href"
+                :class="[linkClass, 'tr-nav-bar__subitem', isActive && activeClass]"
+                @click="navigate"
+              >
+                <span class="tr-nav-bar__label">{{ t(`layout.nav.${child.key}`) }}</span>
+              </a>
+            </RouterLink>
+          </div>
         </div>
       </div>
 
