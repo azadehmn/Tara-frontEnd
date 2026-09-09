@@ -18,26 +18,23 @@ const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:tex
 </script>
 
 <template>
-  <aside
-    class="flex w-64 shrink-0 flex-col border-e border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950"
-  >
-    <nav class="flex flex-col gap-1 p-3" :aria-label="t('layout.nav.label')">
-      <RouterLink
-        v-for="item in items"
-        :key="item.key"
-        :to="item.to"
-        custom
-        v-slot="{ href, navigate, isActive, isExactActive }"
+  <nav class="flex flex-col gap-1" :aria-label="t('layout.nav.label')">
+    <RouterLink
+      v-for="item in items"
+      :key="item.key"
+      :to="item.to"
+      custom
+      v-slot="{ href, navigate, isActive, isExactActive }"
+    >
+      <a
+        :href="href"
+        :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
+        :aria-label="t(`layout.nav.${item.key}`)"
+        @click="navigate"
       >
-        <a
-          :href="href"
-          :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
-          @click="navigate"
-        >
-          <SidebarNavIcon :name="item.key" />
-          {{ t(`layout.nav.${item.key}`) }}
-        </a>
-      </RouterLink>
-    </nav>
-  </aside>
+        <SidebarNavIcon :name="item.key" />
+        <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.key}`) }}</span>
+      </a>
+    </RouterLink>
+  </nav>
 </template>

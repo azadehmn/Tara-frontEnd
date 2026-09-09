@@ -12,6 +12,11 @@ export type {
 } from './components/button';
 export { TrTopBar } from './components/TopBar';
 export type { TrTopBarProps } from './components/TopBar';
+export { TrNavigationBar, useNavigationMode } from './components/NavigationBar';
+export type {
+  TrNavigationBarProps,
+  TrNavigationMode,
+} from './components/NavigationBar';
 export { color, radius, spacing, breakpoint, typography } from './tokens';
 export type {
   TrColorState,

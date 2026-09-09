@@ -1,0 +1,124 @@
+.tr-nav-bar-host {
+  display: contents;
+}
+
+.tr-nav-bar-overlay {
+  display: contents;
+}
+
+.tr-nav-bar {
+  --tr-nav-bar-width: 16rem;
+  --tr-nav-bar-collapsed: 3.5rem;
+
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: var(--tr-nav-bar-width);
+  min-height: 0;
+  background: var(--tr-color-outlined);
+  border-inline-end: 1px solid var(--tr-color-outlined-border);
+  transition: width 0.2s ease;
+
+  [data-theme='dark'] & {
+    background: var(--tr-color-outlined-dark);
+    border-inline-end-color: var(--tr-color-outlined-dark-border);
+  }
+
+  &.is-collapsed {
+    width: var(--tr-nav-bar-collapsed);
+    overflow: hidden;
+  }
+
+  &.is-overlay {
+    position: fixed;
+    top: 0;
+    inset-inline-start: 0;
+    z-index: 10001;
+    width: 16rem;
+    height: 100vh;
+    visibility: hidden;
+    box-shadow: 0 4px 8px 2px rgb(96 96 108 / 0.1);
+    border-inline-end: none;
+    transform: translate3d(100%, 0, 0);
+    transition:
+      transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+      visibility 0s linear 0.32s;
+  }
+
+  [dir='ltr'] &.is-overlay {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &.is-overlay.is-open {
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    transition:
+      transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+      visibility 0s;
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgb(0 0 0 / 0.32);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease;
+  }
+
+  &__backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &.is-overlay,
+    &.is-overlay.is-open,
+    &__backdrop {
+      transition: none;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--tr-space-xs);
+    min-height: 3.5rem;
+    padding: var(--tr-space-xs) var(--tr-space-sm);
+    flex-shrink: 0;
+  }
+
+  &__header-start {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__main {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: var(--tr-space-xs);
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    padding: var(--tr-space-xs);
+  }
+
+  &.is-collapsed :deep(a),
+  &.is-collapsed :deep(button) {
+    justify-content: center;
+    padding-inline: var(--tr-space-xs);
+  }
+
+  &.is-collapsed :deep(.tr-nav-bar__label) {
+    display: none;
+  }
+
+  :deep(a),
+  :deep(.tr-nav-bar__item) {
+    white-space: nowrap;
+  }
+}

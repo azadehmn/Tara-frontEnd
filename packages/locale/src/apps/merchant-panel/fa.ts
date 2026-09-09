@@ -15,5 +15,6 @@ export const merchantPanelFa: MessageTree = {
       contracts: 'قراردادها',
     },
     sidebarToggle: 'باز و بسته کردن منو',
+    sidebarClose: 'بستن منو',
   },
 };

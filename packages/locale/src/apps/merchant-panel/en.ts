@@ -15,5 +15,6 @@ export const merchantPanelEn: MessageTree = {
       contracts: 'Contracts',
     },
     sidebarToggle: 'Toggle menu',
+    sidebarClose: 'Close menu',
   },
 };

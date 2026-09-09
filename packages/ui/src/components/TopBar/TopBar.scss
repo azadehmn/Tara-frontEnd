@@ -1,4 +1,6 @@
 .tr-top-bar {
+  position: relative;
+  z-index: 60;
   display: flex;
   align-items: center;
   gap: var(--tr-space-sm);
