@@ -25,4 +25,4 @@ const slots = useSlots();
   </header>
 </template>
 
-<style lang="scss" src="./TopBar.scss"></style>
+<style src="./TopBar.css"></style>

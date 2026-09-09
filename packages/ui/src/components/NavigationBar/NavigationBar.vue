@@ -63,23 +63,5 @@ const emit = defineEmits<{ close: [] }>();
 const slots = useSlots();
 </script>
 
-<style lang="scss" src="./NavigationBar.scss"></style>
-
-<style>
-.tr-nav-bar.is-collapsed .tr-nav-bar__label,
-.tr-nav-bar.is-collapsed .tr-nav-bar__chevron,
-.tr-nav-bar.is-collapsed .tr-nav-bar__submenu {
-  display: none !important;
-}
-
-.tr-nav-bar.is-collapsed .tr-nav-bar__parent-active {
-  background: color-mix(in srgb, var(--tr-color-primary) 10%, transparent);
-  color: var(--tr-color-primary);
-}
-
-[data-theme='dark'] .tr-nav-bar.is-collapsed .tr-nav-bar__parent-active {
-  background: color-mix(in srgb, var(--tr-color-primary-dark) 20%, transparent);
-  color: var(--tr-color-primary-dark);
-}
-</style>
+<style src="./NavigationBar.css"></style>
 

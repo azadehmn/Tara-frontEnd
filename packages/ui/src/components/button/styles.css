@@ -1,0 +1,197 @@
+@reference '../../styles/index.css';
+
+.tr-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
+  @apply gap-2xs rounded-md font-button;
+}
+
+.tr-button:disabled {
+  cursor: not-allowed;
+}
+
+.tr-button.is-loading {
+  opacity: 0.6;
+}
+
+.tr-button.is-loading .tr-button__body {
+  visibility: hidden;
+}
+
+.tr-button--small {
+  min-height: 32px;
+  @apply py-2xs px-sm text-button-sm;
+}
+
+.tr-button--medium {
+  min-height: 40px;
+  @apply py-xs px-md text-button-md;
+}
+
+.tr-button--large {
+  min-height: 48px;
+  @apply py-sm px-lg text-button-lg;
+}
+
+.tr-button.is-icon-only.tr-button--small {
+  width: 32px;
+  min-width: 32px;
+  @apply p-2xs;
+}
+
+.tr-button.is-icon-only.tr-button--medium {
+  width: 40px;
+  min-width: 40px;
+  @apply p-xs;
+}
+
+.tr-button.is-icon-only.tr-button--large {
+  width: 48px;
+  min-width: 48px;
+  @apply p-sm;
+}
+
+.tr-button--primary {
+  border-color: transparent;
+  @apply bg-primary text-text-onPrimary dark:bg-primary-dark dark:text-text-dark-onPrimary;
+}
+
+.tr-button--primary:hover:not(:disabled):not(.is-loading) {
+  @apply bg-primary-hover dark:bg-primary-dark-hover;
+}
+
+.tr-button--primary:focus-visible:not(:disabled):not(.is-loading) {
+  outline: 2px solid;
+  outline-offset: 2px;
+  @apply bg-primary-focus outline-primary-focus dark:bg-primary-dark-focus dark:outline-primary-dark-focus;
+}
+
+.tr-button--primary:active:not(:disabled):not(.is-loading) {
+  @apply bg-primary-pressed dark:bg-primary-dark-pressed;
+}
+
+.tr-button--primary.is-selected:not(:disabled) {
+  @apply bg-primary-select dark:bg-primary-dark-select;
+}
+
+.tr-button--primary.is-loading {
+  @apply bg-primary-loading dark:bg-primary-dark-loading;
+}
+
+.tr-button--primary:disabled:not(.is-loading) {
+  @apply bg-primary-disabled text-text-onPrimary dark:bg-primary-dark-disabled dark:text-text-dark-onPrimary;
+}
+
+.tr-button--secondary {
+  border-color: transparent;
+  @apply bg-secondary text-text-onSecondary dark:bg-secondary-dark dark:text-text-dark-onSecondary;
+}
+
+.tr-button--secondary:hover:not(:disabled):not(.is-loading) {
+  @apply bg-secondary-hover dark:bg-secondary-dark-hover;
+}
+
+.tr-button--secondary:focus-visible:not(:disabled):not(.is-loading) {
+  outline: 2px solid;
+  outline-offset: 2px;
+  @apply bg-secondary-focus outline-secondary-focus dark:bg-secondary-dark-focus dark:outline-secondary-dark-focus;
+}
+
+.tr-button--secondary:active:not(:disabled):not(.is-loading) {
+  @apply bg-secondary-pressed dark:bg-secondary-dark-pressed;
+}
+
+.tr-button--secondary.is-selected:not(:disabled) {
+  @apply bg-secondary-select dark:bg-secondary-dark-select;
+}
+
+.tr-button--secondary.is-loading {
+  @apply bg-secondary-loading dark:bg-secondary-dark-loading;
+}
+
+.tr-button--secondary:disabled:not(.is-loading) {
+  @apply bg-secondary-disabled text-text-onSecondary dark:bg-secondary-dark-disabled dark:text-text-dark-onSecondary;
+}
+
+.tr-button--outlined {
+  border-width: 1px;
+  border-style: solid;
+  @apply bg-outlined text-text-onOutlined border-outlined-border dark:bg-outlined-dark dark:text-white dark:border-outlined-dark-border;
+}
+
+.tr-button--outlined:hover:not(:disabled):not(.is-loading) {
+  @apply bg-outlined-hover border-outlined-border-hover dark:bg-outlined-dark-hover dark:border-outlined-dark-border-hover;
+}
+
+.tr-button--outlined:focus-visible:not(:disabled):not(.is-loading) {
+  outline: 2px solid;
+  outline-offset: 2px;
+  @apply bg-outlined-focus outline-outlined-border-hover dark:bg-outlined-dark-focus dark:outline-outlined-dark-border-hover;
+}
+
+.tr-button--outlined:active:not(:disabled):not(.is-loading) {
+  @apply bg-outlined-pressed dark:bg-outlined-dark-pressed;
+}
+
+.tr-button--outlined.is-selected:not(:disabled) {
+  @apply bg-outlined-select border-outlined-border-hover dark:bg-outlined-dark-select dark:border-outlined-dark-border-hover;
+}
+
+.tr-button--outlined.is-loading {
+  @apply bg-outlined-loading text-text-onOutlined dark:bg-outlined-dark-loading dark:text-white;
+}
+
+.tr-button--outlined:disabled:not(.is-loading) {
+  @apply bg-outlined-disabled border-outlined-border-disabled text-outlined-border-disabled dark:bg-outlined-dark-disabled dark:border-outlined-dark-border-disabled dark:text-outlined-dark-border-disabled;
+}
+
+.tr-button__label,
+.tr-button__icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tr-button__icon {
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tr-button__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.tr-button__pulse {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1em;
+  height: 1em;
+  background: currentColor;
+  animation: tr-button-pulse 1s ease-in-out infinite;
+  @apply rounded-full;
+}
+
+@keyframes tr-button-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
