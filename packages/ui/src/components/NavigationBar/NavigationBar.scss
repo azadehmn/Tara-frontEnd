@@ -113,7 +113,9 @@
     padding-inline: var(--tr-space-xs);
   }
 
-  &.is-collapsed :deep(.tr-nav-bar__label) {
+  &.is-collapsed :deep(.tr-nav-bar__label),
+  &.is-collapsed :deep(.tr-nav-bar__chevron),
+  &.is-collapsed :deep(.tr-nav-bar__submenu) {
     display: none;
   }
 

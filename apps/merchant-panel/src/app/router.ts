@@ -28,6 +28,24 @@ export const router = createRouter({
           meta: { titleKey: 'layout.nav.reports' },
         },
         {
+          path: 'reports/summary',
+          name: 'reports-summary',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.reportsSummary' },
+        },
+        {
+          path: 'reports/purchase-detail',
+          name: 'reports-purchase-detail',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.reportsPurchaseDetail' },
+        },
+        {
+          path: 'reports/returns',
+          name: 'reports-returns',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.reportsReturns' },
+        },
+        {
           path: 'invoices',
           name: 'invoices',
           component: () => import('@pages/section/SectionPage.vue'),
@@ -38,6 +56,12 @@ export const router = createRouter({
           name: 'contracts',
           component: () => import('@pages/section/SectionPage.vue'),
           meta: { titleKey: 'layout.nav.contracts' },
+        },
+        {
+          path: 'contracts/acquiring',
+          name: 'contracts-acquiring',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.contractsAcquiring' },
         },
       ],
     },

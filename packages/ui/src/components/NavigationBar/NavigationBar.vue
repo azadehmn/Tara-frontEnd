@@ -1,18 +1,3 @@
-<script setup lang="ts">
-import { useSlots } from 'vue';
-import { TrButton } from '../button';
-import type { TrNavigationBarProps } from './NavigationBar';
-
-defineOptions({ name: 'Tr-NavigationBar' });
-
-withDefaults(defineProps<TrNavigationBarProps>(), {
-  open: false,
-});
-
-const emit = defineEmits<{ close: [] }>();
-const slots = useSlots();
-</script>
-
 <template>
   <div :class="mode === 'overlay' ? 'tr-nav-bar-overlay' : 'tr-nav-bar-host'">
     <div
@@ -63,5 +48,19 @@ const slots = useSlots();
     </aside>
   </div>
 </template>
+<script setup lang="ts">
+import { useSlots } from 'vue';
+import { TrButton } from '../button';
+import type { TrNavigationBarProps } from './NavigationBar';
+
+defineOptions({ name: 'Tr-NavigationBar' });
+
+withDefaults(defineProps<TrNavigationBarProps>(), {
+  open: false,
+});
+
+const emit = defineEmits<{ close: [] }>();
+const slots = useSlots();
+</script>
 
 <style lang="scss" src="./NavigationBar.scss"></style>
