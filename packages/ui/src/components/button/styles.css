@@ -1,70 +1,56 @@
+@reference 'tailwindcss';
 @reference '../../styles/index.css';
 
 .tr-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  vertical-align: middle;
+  @apply relative inline-flex items-center justify-center gap-2xs rounded-md
+    font-button cursor-pointer border border-solid border-transparent
+    whitespace-nowrap align-middle;
   transition:
     background-color 0.22s ease,
     border-color 0.22s ease,
     color 0.22s ease,
     box-shadow 0.22s ease;
-  @apply gap-2xs rounded-md font-button;
 }
 
 .tr-button:disabled {
-  cursor: not-allowed;
+  @apply cursor-not-allowed;
 }
 
 .tr-button.is-loading {
-  opacity: 0.6;
+  @apply opacity-60;
 }
 
 .tr-button.is-loading .tr-button__body {
-  visibility: hidden;
+  @apply invisible;
 }
 
 .tr-button--small {
-  min-height: 32px;
-  @apply py-2xs px-sm text-button-sm;
+  @apply min-h-[32px] py-2xs px-sm text-button-sm;
 }
 
 .tr-button--medium {
-  min-height: 40px;
-  @apply py-xs px-md text-button-md;
+  @apply min-h-[40px] py-xs px-md text-button-md;
 }
 
 .tr-button--large {
-  min-height: 48px;
-  @apply py-sm px-lg text-button-lg;
+  @apply min-h-[48px] py-sm px-lg text-button-lg;
 }
 
 .tr-button.is-icon-only.tr-button--small {
-  width: 32px;
-  min-width: 32px;
-  @apply p-2xs;
+  @apply w-[32px] min-w-[32px] p-2xs;
 }
 
 .tr-button.is-icon-only.tr-button--medium {
-  width: 40px;
-  min-width: 40px;
-  @apply p-xs;
+  @apply w-[40px] min-w-[40px] p-xs;
 }
 
 .tr-button.is-icon-only.tr-button--large {
-  width: 48px;
-  min-width: 48px;
-  @apply p-sm;
+  @apply w-[48px] min-w-[48px] p-sm;
 }
 
 .tr-button--primary {
-  border-color: transparent;
-  @apply bg-primary text-text-onPrimary dark:bg-primary-dark dark:text-text-dark-onPrimary;
+  @apply bg-primary text-text-onPrimary border-transparent
+    dark:bg-primary-dark dark:text-text-dark-onPrimary;
 }
 
 .tr-button--primary:hover:not(:disabled):not(.is-loading) {
@@ -72,9 +58,8 @@
 }
 
 .tr-button--primary:focus-visible:not(:disabled):not(.is-loading) {
-  outline: 2px solid;
-  outline-offset: 2px;
-  @apply bg-primary-focus outline-primary-focus dark:bg-primary-dark-focus dark:outline-primary-dark-focus;
+  @apply bg-primary-focus outline-2 outline-solid outline-offset-2 outline-primary-focus
+    dark:bg-primary-dark-focus dark:outline-primary-dark-focus;
 }
 
 .tr-button--primary:active:not(:disabled):not(.is-loading) {
@@ -90,12 +75,13 @@
 }
 
 .tr-button--primary:disabled:not(.is-loading) {
-  @apply bg-primary-disabled text-text-onPrimary dark:bg-primary-dark-disabled dark:text-text-dark-onPrimary;
+  @apply bg-primary-disabled text-text-onPrimary
+    dark:bg-primary-dark-disabled dark:text-text-dark-onPrimary;
 }
 
 .tr-button--secondary {
-  border-color: transparent;
-  @apply bg-secondary text-text-onSecondary dark:bg-secondary-dark dark:text-text-dark-onSecondary;
+  @apply bg-secondary text-text-onSecondary border-transparent
+    dark:bg-secondary-dark dark:text-text-dark-onSecondary;
 }
 
 .tr-button--secondary:hover:not(:disabled):not(.is-loading) {
@@ -103,9 +89,8 @@
 }
 
 .tr-button--secondary:focus-visible:not(:disabled):not(.is-loading) {
-  outline: 2px solid;
-  outline-offset: 2px;
-  @apply bg-secondary-focus outline-secondary-focus dark:bg-secondary-dark-focus dark:outline-secondary-dark-focus;
+  @apply bg-secondary-focus outline-2 outline-solid outline-offset-2 outline-secondary-focus
+    dark:bg-secondary-dark-focus dark:outline-secondary-dark-focus;
 }
 
 .tr-button--secondary:active:not(:disabled):not(.is-loading) {
@@ -121,23 +106,23 @@
 }
 
 .tr-button--secondary:disabled:not(.is-loading) {
-  @apply bg-secondary-disabled text-text-onSecondary dark:bg-secondary-dark-disabled dark:text-text-dark-onSecondary;
+  @apply bg-secondary-disabled text-text-onSecondary
+    dark:bg-secondary-dark-disabled dark:text-text-dark-onSecondary;
 }
 
 .tr-button--outlined {
-  border-width: 1px;
-  border-style: solid;
-  @apply bg-outlined text-text-onOutlined border-outlined-border dark:bg-outlined-dark dark:text-white dark:border-outlined-dark-border;
+  @apply bg-outlined text-text-onOutlined border border-solid border-outlined-border
+    dark:bg-outlined-dark dark:text-white dark:border-outlined-dark-border;
 }
 
 .tr-button--outlined:hover:not(:disabled):not(.is-loading) {
-  @apply bg-outlined-hover border-outlined-border-hover dark:bg-outlined-dark-hover dark:border-outlined-dark-border-hover;
+  @apply bg-outlined-hover border-outlined-border-hover
+    dark:bg-outlined-dark-hover dark:border-outlined-dark-border-hover;
 }
 
 .tr-button--outlined:focus-visible:not(:disabled):not(.is-loading) {
-  outline: 2px solid;
-  outline-offset: 2px;
-  @apply bg-outlined-focus outline-outlined-border-hover dark:bg-outlined-dark-focus dark:outline-outlined-dark-border-hover;
+  @apply bg-outlined-focus outline-2 outline-solid outline-offset-2 outline-outlined-border-hover
+    dark:bg-outlined-dark-focus dark:outline-outlined-dark-border-hover;
 }
 
 .tr-button--outlined:active:not(:disabled):not(.is-loading) {
@@ -145,42 +130,37 @@
 }
 
 .tr-button--outlined.is-selected:not(:disabled) {
-  @apply bg-outlined-select border-outlined-border-hover dark:bg-outlined-dark-select dark:border-outlined-dark-border-hover;
+  @apply bg-outlined-select border-outlined-border-hover
+    dark:bg-outlined-dark-select dark:border-outlined-dark-border-hover;
 }
 
 .tr-button--outlined.is-loading {
-  @apply bg-outlined-loading text-text-onOutlined dark:bg-outlined-dark-loading dark:text-white;
+  @apply bg-outlined-loading text-text-onOutlined
+    dark:bg-outlined-dark-loading dark:text-white;
 }
 
 .tr-button--outlined:disabled:not(.is-loading) {
-  @apply bg-outlined-disabled border-outlined-border-disabled text-outlined-border-disabled dark:bg-outlined-dark-disabled dark:border-outlined-dark-border-disabled dark:text-outlined-dark-border-disabled;
+  @apply bg-outlined-disabled border-outlined-border-disabled text-outlined-border-disabled
+    dark:bg-outlined-dark-disabled dark:border-outlined-dark-border-disabled
+    dark:text-outlined-dark-border-disabled;
 }
 
 .tr-button__label,
 .tr-button__icon {
-  display: inline-flex;
-  align-items: center;
+  @apply inline-flex items-center;
 }
 
 .tr-button__icon {
-  justify-content: center;
-  flex-shrink: 0;
+  @apply justify-center shrink-0;
 }
 
 .tr-button__icon svg {
-  width: 1em;
-  height: 1em;
+  @apply w-[1em] h-[1em];
 }
 
 .tr-button__pulse {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 1em;
-  height: 1em;
-  background: currentColor;
+  @apply absolute inset-0 m-auto w-[1em] h-[1em] rounded-full bg-current;
   animation: tr-button-pulse 1s ease-in-out infinite;
-  @apply rounded-full;
 }
 
 @keyframes tr-button-pulse {
