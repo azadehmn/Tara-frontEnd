@@ -8,9 +8,7 @@
           variant="outlined"
           size="small"
           :aria-label="t('layout.sidebarToggle')"
-          :aria-expanded="
-            viewportMode === 'overlay' ? isOverlayOpen : isRailExpanded
-          "
+          :aria-expanded="isOverlayOpen || isRailExpanded"
           @click="toggleNavigation"
         >
           <template #icon>
@@ -40,7 +38,15 @@
 
     <div class="relative flex min-h-0 flex-1">
       <TrNavigationBar
-        :mode="barMode"
+        v-if="showRail"
+        :mode="railMode"
+        :aria-label="t('layout.nav.label')"
+      >
+        <AppSidebar />
+      </TrNavigationBar>
+
+      <TrNavigationBar
+        mode="overlay"
         :open="isOverlayOpen"
         :aria-label="t('layout.nav.label')"
         :close-label="t('layout.sidebarClose')"
@@ -61,7 +67,6 @@ import { computed, ref, watch } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import type { SupportedLocale } from '@tara/locale';
 import { TrButton, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
-import type { TrNavigationMode } from '@tara/ui';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo.svg';
 
@@ -73,10 +78,8 @@ const isDark = ref(document.documentElement.dataset.theme === 'dark');
 const isOverlayOpen = ref(false);
 const isRailExpanded = ref(viewportMode.value === 'expanded');
 
-const barMode = computed<TrNavigationMode>(() => {
-  if (viewportMode.value === 'overlay') return 'overlay';
-  return isRailExpanded.value ? 'expanded' : 'collapsed';
-});
+const showRail = computed(() => viewportMode.value !== 'overlay');
+const railMode = computed(() => (isRailExpanded.value ? 'expanded' : 'collapsed'));
 
 watch(viewportMode, (next) => {
   isOverlayOpen.value = false;
@@ -102,10 +105,10 @@ function toggleTheme() {
 }
 
 function toggleNavigation() {
-  if (viewportMode.value === 'overlay') {
-    isOverlayOpen.value = !isOverlayOpen.value;
+  if (viewportMode.value === 'expanded') {
+    isRailExpanded.value = !isRailExpanded.value;
     return;
   }
-  isRailExpanded.value = !isRailExpanded.value;
+  isOverlayOpen.value = !isOverlayOpen.value;
 }
 </script>

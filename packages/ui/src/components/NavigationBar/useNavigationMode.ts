@@ -2,9 +2,12 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { breakpoint } from '../../tokens/breakpoint';
 import type { TrNavigationMode } from './NavigationBar';
 
-// Viewport ≥ xl        → expanded
-// lg ≤ Viewport < xl   → collapsed
-// Viewport < lg        → overlay
+/** Icon rail + mobile-style toggle: 992px ≤ width < xl (1200px). */
+const railMin = '992px';
+
+// Viewport ≥ xl (1200)     → expanded (hamburger expands/collapses)
+// 992 ≤ Viewport < 1200    → collapsed (hamburger opens overlay)
+// Viewport < 992           → overlay
 
 function readMode(): TrNavigationMode {
   if (typeof window === 'undefined') return 'overlay';
@@ -13,7 +16,7 @@ function readMode(): TrNavigationMode {
     return 'expanded';
   }
 
-  if (window.matchMedia(`(min-width: ${breakpoint.lg})`).matches) {
+  if (window.matchMedia(`(min-width: ${railMin})`).matches) {
     return 'collapsed';
   }
 
@@ -24,7 +27,7 @@ function readMode(): TrNavigationMode {
 export function useNavigationMode() {
   const mode = ref<TrNavigationMode>(readMode());
   let xl: MediaQueryList | undefined;
-  let lg: MediaQueryList | undefined;
+  let rail: MediaQueryList | undefined;
 
   function sync() {
     mode.value = readMode();
@@ -32,16 +35,16 @@ export function useNavigationMode() {
 
   onMounted(() => {
     xl = window.matchMedia(`(min-width: ${breakpoint.xl})`);
-    lg = window.matchMedia(`(min-width: ${breakpoint.lg})`);
+    rail = window.matchMedia(`(min-width: ${railMin})`);
     sync();
     xl.addEventListener('change', sync);
-    lg.addEventListener('change', sync);
+    rail.addEventListener('change', sync);
     window.addEventListener('resize', sync);
   });
 
   onUnmounted(() => {
     xl?.removeEventListener('change', sync);
-    lg?.removeEventListener('change', sync);
+    rail?.removeEventListener('change', sync);
     window.removeEventListener('resize', sync);
   });
 
