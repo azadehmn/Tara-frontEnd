@@ -17,8 +17,6 @@ export type ClubApiVersion = keyof typeof API_BASE_PATHS.club;
 
 export const PANEL_DEVICE_TYPE = 'DEVICE_TYPE_PANEL';
 
-export const VITE_PROXY_PREFIXES = ['/club', '/bnpl', '/settings', '/dreport'] as const;
-
 // host api
 export function getApiOrigin(): string {
   if (import.meta.env.DEV) return '';
