@@ -1,4 +1,5 @@
 /* Tara UI styles. Apps import this once: `@import '@tara/ui/styles';` */
+@import './fonts.css';
 @import './theme.css';
 
 /* Dark utilities (`dark:`) follow `data-theme="dark"` on an ancestor, not prefers-color-scheme. */
@@ -85,6 +86,19 @@
   --tr-space-5xl: var(--spacing-5xl);
   --tr-space-6xl: var(--spacing-6xl);
 
+  --tr-font-fanum: var(--font-fanum);
+  --tr-font-sans: var(--font-sans);
+  --tr-font-weight-thin: var(--font-weight-thin);
+  --tr-font-weight-ultraLight: var(--font-weight-ultraLight);
+  --tr-font-weight-light: var(--font-weight-light);
+  --tr-font-weight-regular: var(--font-weight-regular);
+  --tr-font-weight-medium: var(--font-weight-medium);
+  --tr-font-weight-demiBold: var(--font-weight-demiBold);
+  --tr-font-weight-bold: var(--font-weight-bold);
+  --tr-font-weight-extraBold: var(--font-weight-extraBold);
+  --tr-font-weight-black: var(--font-weight-black);
+  --tr-font-weight-extraBlack: var(--font-weight-extraBlack);
+  --tr-font-weight-heavy: var(--font-weight-heavy);
   --tr-font-button-weight: var(--font-weight-button);
   --tr-font-button-sm-size: var(--text-button-sm);
   --tr-font-button-sm-leading: var(--text-button-sm--line-height);
@@ -99,4 +113,10 @@
   --tr-screen-lg: var(--breakpoint-lg);
   --tr-screen-xl: var(--breakpoint-xl);
   --tr-screen-2xl: var(--breakpoint-2xl);
+}
+
+/* App default: IRANYekan FaNum Regular (Latin + Persian digits). */
+html {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
 }

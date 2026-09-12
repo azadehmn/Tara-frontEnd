@@ -12,8 +12,27 @@ export type TrResponsiveType = {
 /**
  * Type scale. Prefer semantic keys (heading / body / caption / display / button)
  * over legacy names like b1 or ls-h1.
+ * Font family CSS source of truth: `src/styles/tokens/typography.css` (`--font-sans`).
  */
 export const typography = {
+  fontFamily: {
+    fanum: "'IRANYekanXFaNum', ui-sans-serif, system-ui, sans-serif",
+    sans: "'IRANYekanXFaNum', ui-sans-serif, system-ui, sans-serif",
+  },
+  fontWeight: {
+    thin: '100',
+    ultraLight: '200',
+    light: '300',
+    regular: '400',
+    medium: '500',
+    demiBold: '600',
+    bold: '700',
+    extraBold: '800',
+    black: '900',
+    extraBlack: '950',
+    heavy: '1000',
+    button: '600',
+  },
   heading: {
     sm: { fontSize: '16px', lineHeight: '24px', fontWeight: '600' },
     md: { fontSize: '18px', lineHeight: '28px', fontWeight: '600' },
@@ -55,6 +74,8 @@ export const typography = {
     },
   },
 } as const satisfies {
+  fontFamily: { fanum: string; sans: string };
+  fontWeight: Record<string, string>;
   heading: Record<string, TrTypeStyle>;
   body: Record<string, TrTypeStyle>;
   caption: Record<string, TrTypeStyle>;
