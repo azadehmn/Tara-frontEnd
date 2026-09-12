@@ -1,5 +1,3 @@
-import type { ApiServiceName } from '@app/config/api';
-
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type HttpResponseType = 'json' | 'blob' | 'text' | 'void';
@@ -21,36 +19,32 @@ export interface HttpRequestContext {
   url: string;
   headers: Headers;
   config: HttpRequestConfig;
-  service: ApiServiceName;
+  service: string;
 }
 
 export type RequestInterceptor = (context: HttpRequestContext) => void | Promise<void>;
-// ----------------------------------------------------------
-//* Client  Instance For Example Not Request
-// createHttpClient({
-//   service: 'club',
-//   basePath: '/club/api/',
-//   timeoutMs: 20_000,
-// });
-//*
-// ----------------------------------------------------------
 
+/**----------------------------------------------------------
+ * Client  Instance For Example Not Request.
+    * createHttpClient({
+      service: 'club',
+      basePath: '/club/api/',
+      timeoutMs: 20_000,
+    }); 
+---------------------------------------------------------- */
 export interface CreateHttpClientOptions {
-  service: ApiServiceName;
+  service: string;
   basePath: string;
   origin?: string;
   requestInterceptors?: RequestInterceptor[];
   defaultHeaders?: Record<string, string>;
   timeoutMs?: number;
 }
-// ----------------------------------------------------------
-//*
-// PUBLIC CONTRACT
-//*
-// ----------------------------------------------------------
-
+/**----------------------------------------------------------
+ *  PUBLIC CONTRACT
+---------------------------------------------------------- */
 export interface HttpClient {
-  readonly service: ApiServiceName;
+  readonly service: string;
   request<T>(config: HttpRequestConfig): Promise<T>;
   get<T>(path: string, config?: Omit<HttpRequestConfig, 'path' | 'method' | 'body'>): Promise<T>;
   post<T>(

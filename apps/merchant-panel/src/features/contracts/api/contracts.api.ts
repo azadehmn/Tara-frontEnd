@@ -1,7 +1,3 @@
-//*
-// CONTRACTS API LAYER
-//*
-
 import { clubClient } from '@shared/api/clients/club.client';
 import { normalizePage, type Paginated } from '@shared/api/normalize/page';
 import type {
