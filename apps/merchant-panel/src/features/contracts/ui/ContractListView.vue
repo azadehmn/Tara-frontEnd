@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router';
 import { TrButton } from '@tara/ui';
 import { setContractOrgStatus } from '../api/contracts.api';
 import { useContractList } from '../composables/use-contract-list';
-import { formatDate, formatStatus } from '../lib/format';
 import type { ContractListItem, ContractScope } from '../model/contract';
 
 const props = defineProps<{
@@ -109,8 +108,10 @@ function goToNextPage() {
             <td class="px-3 py-2">{{ row.title }}</td>
             <td class="px-3 py-2">{{ row.profileTitle }}</td>
             <td v-if="scope === 'organization'" class="px-3 py-2">{{ row.type }}</td>
-            <td class="px-3 py-2">{{ formatDate(row.endDate) }}</td>
-            <td class="px-3 py-2">{{ formatStatus(row.isEnabled, t) }}</td>
+            <td class="px-3 py-2">{{ row.endDate }}</td>
+            <td class="px-3 py-2">{{
+              row.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive')
+            }}</td>
             <td class="px-3 py-2">
               <div class="flex flex-wrap gap-2">
                 <TrButton

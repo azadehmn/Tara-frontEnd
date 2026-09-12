@@ -1,5 +1,11 @@
-import { API_BASE_PATHS, type ClubApiVersion } from '@app/config/api';
+import {
+  API_BASE_PATHS,
+  PANEL_DEVICE_TYPE,
+  getApiOrigin,
+  type ClubApiVersion,
+} from '@app/config/api';
 import { createHttpClient } from '../http/create-http-client';
+import { applyDeviceHeader } from '../http/interceptors/device.interceptor';
 import type { HttpClient, HttpRequestConfig } from '../http/types';
 
 type ClubRequestConfig = HttpRequestConfig & { version?: ClubApiVersion };
@@ -16,21 +22,22 @@ export interface ClubClient {
   delete<T>(path: string, config?: ClubCallConfig): Promise<T>;
 }
 
-const defaultClient = createHttpClient({
-  service: 'club',
-  basePath: API_BASE_PATHS.club.default,
-});
+function createClubHttpClient(basePath: string): HttpClient {
+  return createHttpClient({
+    service: 'club',
+    origin: getApiOrigin(),
+    basePath,
+    requestInterceptors: [applyDeviceHeader(PANEL_DEVICE_TYPE)],
+  });
+}
 
-const v1Client = createHttpClient({
-  service: 'club',
-  basePath: API_BASE_PATHS.club.v1,
-});
+const defaultClient = createClubHttpClient(API_BASE_PATHS.club.default);
+const v1Client = createClubHttpClient(API_BASE_PATHS.club.v1);
 
 function pick(version: ClubApiVersion = 'default'): HttpClient {
   return version === 'v1' ? v1Client : defaultClient;
 }
 
-/** Single Club service boundary with two path versions. */
 export const clubClient: ClubClient = {
   request: ({ version, ...config }) => pick(version).request(config),
   get: (path, config) => {
