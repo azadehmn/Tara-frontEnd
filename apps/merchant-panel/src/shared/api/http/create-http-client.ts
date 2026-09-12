@@ -16,7 +16,7 @@ createHttpClient
 import { ApiError } from '../errors/api-error';
 import { normalizeError } from '../errors/normalize-error';
 import { applyAuthHeader } from './interceptors/auth.interceptor';
-import { joinUrl, withQuery } from './join-url';
+import { joinUrl, withQuery } from './url';
 
 import type { CreateHttpClientOptions, HttpClient, HttpRequestConfig } from './types';
 
