@@ -18,6 +18,13 @@ type NavItem = {
 
 const items: NavItem[] = [
   { to: '/', key: 'dashboard', exact: true },
+  {
+    key: 'contracts',
+    children: [
+      { to: '/contracts/organization', key: 'contractsOrganization' },
+      { to: '/contracts/acquiring', key: 'contractsAcquiring' },
+    ],
+  },
   { to: '/transactions', key: 'transactions' },
   {
     key: 'reports',
@@ -28,10 +35,6 @@ const items: NavItem[] = [
     ],
   },
   { to: '/invoices', key: 'invoices' },
-  {
-    key: 'contracts',
-    children: [{ to: '/contracts/acquiring', key: 'contractsAcquiring' }],
-  },
 ];
 
 const openMenus = reactive<Record<string, boolean>>({});
@@ -77,7 +80,11 @@ watch(
       <div v-if="item.children?.length" class="flex flex-col gap-1">
         <button
           type="button"
-          :class="[linkClass, 'w-full', isChildRouteActive(item.children) && 'tr-nav-bar__parent-active']"
+          :class="[
+            linkClass,
+            'w-full',
+            isChildRouteActive(item.children) && 'tr-nav-bar__parent-active',
+          ]"
           :aria-expanded="Boolean(openMenus[item.key])"
           @click="toggleMenu(item.key, $event)"
         >
@@ -85,7 +92,9 @@ watch(
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
             {{ t(`layout.nav.${item.key}`) }}
           </span>
-          <span class="tr-nav-bar__chevron ms-auto inline-flex size-6 shrink-0 items-center justify-center">
+          <span
+            class="tr-nav-bar__chevron ms-auto inline-flex size-6 shrink-0 items-center justify-center"
+          >
             <svg class="size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
                 :d="openMenus[item.key] ? 'M4 10l4-4 4 4' : 'M4 6l4 4 4-4'"
@@ -97,10 +106,7 @@ watch(
             </svg>
           </span>
         </button>
-        <div
-          class="tr-nav-bar__submenu"
-          :class="{ 'is-open': openMenus[item.key] }"
-        >
+        <div class="tr-nav-bar__submenu" :class="{ 'is-open': openMenus[item.key] }">
           <div class="tr-nav-bar__submenu-inner">
             <RouterLink
               v-for="child in item.children"
@@ -121,12 +127,7 @@ watch(
         </div>
       </div>
 
-      <RouterLink
-        v-else
-        v-slot="{ href, navigate, isActive, isExactActive }"
-        :to="item.to!"
-        custom
-      >
+      <RouterLink v-else v-slot="{ href, navigate, isActive, isExactActive }" :to="item.to!" custom>
         <a
           :href="href"
           :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
