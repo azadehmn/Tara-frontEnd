@@ -76,3 +76,15 @@ function buildScopeFilters(scope: ContractScope): SearchCriterion[] {
 function buildListFilters(filters: ContractListFilters): SearchCriterion[] {
   const search: SearchCriterion[] = [];
   if (filters.id) search.push(criterion('id', FilterOperation.EQUALITY, Number(filters.id)));
+  if (filters.title) search.push(criterion('title', FilterOperation.LIKE, filters.title));
+  if (filters.profileTitle) {
+    search.push(criterion('profileTitle', FilterOperation.LIKE, filters.profileTitle));
+  }
+  if (filters.fromDate) {
+    search.push(criterion('fromDate', FilterOperation.GREATER_EQUALITY_THAN, filters.fromDate));
+  }
+  if (filters.toDate) {
+    search.push(criterion('toDate', FilterOperation.LESS_EQUALITY_THAN, filters.toDate));
+  }
+  return search;
+}
