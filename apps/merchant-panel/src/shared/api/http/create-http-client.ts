@@ -60,7 +60,6 @@ export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
           service: options.service,
           status: response.status,
           payload,
-          url,
         });
       }
 
@@ -70,7 +69,6 @@ export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
       throw normalizeError({
         service: options.service,
         cause,
-        url,
       });
     } finally {
       globalThis.clearTimeout(timeout);
