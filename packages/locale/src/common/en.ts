@@ -7,6 +7,12 @@ export const commonEn: MessageTree = {
     cancel: 'Cancel',
     confirm: 'Confirm',
     retry: 'Try again',
+    search: 'Search',
+    loading: 'Loading…',
+    empty: 'No items found',
+    prev: 'Previous',
+    next: 'Next',
+    back: 'Back',
   },
   errors: {
     unexpected: 'Something went wrong. Please try again.',
