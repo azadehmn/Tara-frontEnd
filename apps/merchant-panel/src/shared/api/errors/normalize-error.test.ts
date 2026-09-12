@@ -8,7 +8,6 @@ describe('normalizeError', () => {
     });
 
     expect(error.message).toBe('کیف پول فعال نشده است');
-    expect(error.code).toBe('2014');
   });
 
   it('falls back when Spring 401 message is empty', () => {
@@ -18,7 +17,7 @@ describe('normalizeError', () => {
     });
 
     expect(error.message).toBe('بروز خطا، لطفا دوباره امتحان کنید');
-    expect(error.code).toBe('UNAUTHORIZED');
+    expect(error.status).toBe(401);
   });
 
   it('reads apierror.message', () => {
@@ -29,10 +28,9 @@ describe('normalizeError', () => {
     expect(error.message).toBe('bnpl failed');
   });
 
-  it('maps fetch TypeError to a network error', () => {
+  it('maps fetch TypeError to a network message', () => {
     const error = normalizeError({ cause: new TypeError('Failed to fetch') });
 
     expect(error.message).toBe('ارتباط با سرور برقرار نشد');
-    expect(error.isNetworkError).toBe(true);
   });
 });

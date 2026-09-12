@@ -57,7 +57,6 @@ export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
       if (!response.ok) {
         const payload = await readErrorPayload(response);
         throw normalizeError({
-          service: options.service,
           status: response.status,
           payload,
         });
@@ -66,10 +65,7 @@ export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
       return (await parseSuccess<T>(response, config.responseType ?? 'json')) as T;
     } catch (cause) {
       if (cause instanceof ApiError) throw cause;
-      throw normalizeError({
-        service: options.service,
-        cause,
-      });
+      throw normalizeError({ cause });
     } finally {
       globalThis.clearTimeout(timeout);
     }

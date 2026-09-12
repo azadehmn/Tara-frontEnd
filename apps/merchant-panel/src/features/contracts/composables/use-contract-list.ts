@@ -28,7 +28,7 @@ export function useContractList(scope: ContractScope) {
       contracts.value = result.items;
       total.value = result.total;
     } catch (cause) {
-      error.value = cause instanceof ApiError ? cause : new ApiError({ message: String(cause) });
+      error.value = cause instanceof ApiError ? cause : new ApiError(String(cause));
       contracts.value = [];
       total.value = 0;
     } finally {

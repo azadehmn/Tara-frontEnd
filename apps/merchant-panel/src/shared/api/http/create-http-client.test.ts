@@ -49,7 +49,6 @@ describe('createHttpClient', () => {
     await expect(client.get('v2/installment/panel/report')).rejects.toMatchObject({
       status: 403,
       message: 'no access',
-      service: 'bnpl',
     });
   });
 });

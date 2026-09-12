@@ -6,41 +6,19 @@ export function normalizeError(input: {
   status?: number;
   payload?: unknown;
   cause?: unknown;
-  service?: string;
 }): ApiError {
   if (input.cause instanceof ApiError) return input.cause;
 
   if (input.cause instanceof TypeError) {
-    return new ApiError({
-      message: 'ارتباط با سرور برقرار نشد',
-      isNetworkError: true,
-      cause: input.cause,
-    });
+    return new ApiError('ارتباط با سرور برقرار نشد');
   }
 
   const body = asObject(input.payload);
   const nested = asObject(body?.data);
-  const rawMessage = nested?.message ?? body?.message ?? asObject(body?.apierror)?.message;
-  const message = typeof rawMessage === 'string' && rawMessage.trim() ? rawMessage.trim() : FALLBACK;
+  const raw = nested?.message ?? body?.message ?? asObject(body?.apierror)?.message;
+  const message = typeof raw === 'string' && raw.trim() ? raw.trim() : FALLBACK;
 
-  const rawCode = nested?.code ?? body?.code;
-  let code: string | undefined;
-  if (rawCode !== undefined && rawCode !== null && rawCode !== '') {
-    code = String(rawCode);
-  } else if (input.status === 401) {
-    code = 'UNAUTHORIZED';
-  } else if (input.status === 403) {
-    code = 'FORBIDDEN';
-  }
-
-  return new ApiError({
-    message,
-    status: input.status ?? 0,
-    service: input.service,
-    code,
-    details: input.payload,
-    cause: input.cause,
-  });
+  return new ApiError(message, input.status ?? 0);
 }
 
 function asObject(value: unknown): Record<string, unknown> | undefined {
