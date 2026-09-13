@@ -1,0 +1,24 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-action {
+  @apply relative inline-flex;
+}
+
+.tr-action__menu {
+  @apply absolute end-0 top-full z-20 mt-2xs min-w-[160px];
+}
+
+.tr-action__item {
+  @apply flex w-full cursor-pointer items-center rounded-sm border-none bg-transparent
+    px-sm py-xs text-start text-body-md text-text
+    dark:text-text-dark;
+}
+
+.tr-action__item:hover:not(:disabled) {
+  @apply bg-surface-hover dark:bg-surface-dark-hover;
+}
+
+.tr-action__item:disabled {
+  @apply cursor-not-allowed text-text-disabled dark:text-text-dark-disabled;
+}
