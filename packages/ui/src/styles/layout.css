@@ -1,0 +1,9 @@
+/* Page width: use on layout RouterView (default) or a page root. */
+.container-xl {
+  width: 100%;
+  max-width: var(--breakpoint-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-2xl);
+  padding-right: var(--spacing-2xl);
+}

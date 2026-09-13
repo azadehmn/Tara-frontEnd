@@ -10,6 +10,7 @@ export const commonEn: MessageTree = {
     search: 'Search',
     loading: 'Loading…',
     empty: 'No items found',
+    actions: 'Actions',
     prev: 'Previous',
     next: 'Next',
     back: 'Back',

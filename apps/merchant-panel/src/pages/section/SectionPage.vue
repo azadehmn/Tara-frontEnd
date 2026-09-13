@@ -8,5 +8,7 @@ const title = computed(() => t(String(route.meta.titleKey ?? 'layout.nav.dashboa
 </script>
 
 <template>
-  <h1 class="text-heading-lg">{{ title }}</h1>
+  <div>
+    <h1 class="text-heading-lg">{{ title }}</h1>
+  </div>
 </template>

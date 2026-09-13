@@ -1,0 +1,9 @@
+/* Source of truth for Tara elevation shadows. */
+@theme {
+  --shadow-elevation-50: 0px 1px 4px rgba(0, 0, 0, 0.05);
+  --shadow-elevation-100: 0px 4px 8px 2px rgba(96, 96, 108, 0.1);
+  --shadow-elevation-200: 0px 4px 16px rgba(96, 96, 108, 0.2);
+  --shadow-elevation-dark-50: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-dark-100: 0px 4px 8px -2px rgba(0, 0, 0, 0.6);
+  --shadow-elevation-dark-200: 0px 4px 15px rgba(0, 0, 0, 0.6);
+}

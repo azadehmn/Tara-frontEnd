@@ -16,3 +16,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    titleKey?: string;
+    /** Set `false` to skip layout `container-xl` and apply it on the page root yourself. */
+    container?: boolean;
+  }
+}

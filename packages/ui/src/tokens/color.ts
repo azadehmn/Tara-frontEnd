@@ -117,11 +117,85 @@ export const color = {
       },
     },
   },
+  surface: {
+    DEFAULT: '#FFFFFF',
+    hover: '#F7F7F8',
+    focus: '#F4F4F5',
+    pressed: '#EEEEF1',
+    select: '#F4F4F5',
+    disabled: '#EFEFF0',
+    dark: {
+      DEFAULT: '#19191A',
+      hover: '#28282A',
+      focus: '#28282A',
+      pressed: '#39393C',
+      select: '#323234',
+      disabled: '#2B2B2C',
+    },
+  },
+  text: {
+    DEFAULT: '#2E2E38',
+    soft: '#747481',
+    disabled: '#8C8C8C',
+    dark: {
+      DEFAULT: '#FFFFFF',
+      soft: '#BDBDBD',
+      disabled: '#5E5E5E',
+    },
+  },
+  border: {
+    DEFAULT: '#DADBE1',
+    soft: '#F4F4F6',
+    divider: '#EEEEF1',
+    dark: {
+      DEFAULT: '#525252',
+      soft: '#252525',
+      divider: '#2E2E2E',
+    },
+  },
+  skeleton: {
+    DEFAULT: '#EDEEEF',
+    dark: '#343536',
+  },
+  background: {
+    DEFAULT: '#F5F5F5',
+    dark: '#0F0F0F',
+  },
 } as const satisfies {
   primary: TrPalette;
   secondary: TrPalette;
   outlined: TrOutlinePalette;
   white: string;
+  surface: {
+    DEFAULT: string;
+    hover: string;
+    focus: string;
+    pressed: string;
+    select: string;
+    disabled: string;
+    dark: {
+      DEFAULT: string;
+      hover: string;
+      focus: string;
+      pressed: string;
+      select: string;
+      disabled: string;
+    };
+  };
+  text: {
+    DEFAULT: string;
+    soft: string;
+    disabled: string;
+    dark: { DEFAULT: string; soft: string; disabled: string };
+  };
+  border: {
+    DEFAULT: string;
+    soft: string;
+    divider: string;
+    dark: { DEFAULT: string; soft: string; divider: string };
+  };
+  skeleton: { DEFAULT: string; dark: string };
+  background: { DEFAULT: string; dark: string };
 };
 
 export type TrColorToken = typeof color;

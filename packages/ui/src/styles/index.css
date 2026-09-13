@@ -1,6 +1,7 @@
 /* Tara UI styles. Apps import this once: `@import '@tara/ui/styles';` */
 @import './fonts.css';
 @import './theme.css';
+@import './layout.css';
 
 /* Dark utilities (`dark:`) follow `data-theme="dark"` on an ancestor, not prefers-color-scheme. */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
@@ -65,6 +66,39 @@
   --tr-color-outlined-dark-border-hover: var(--color-outlined-dark-border-hover);
   --tr-color-outlined-dark-border-disabled: var(--color-outlined-dark-border-disabled);
 
+  --tr-color-surface: var(--color-surface);
+  --tr-color-surface-hover: var(--color-surface-hover);
+  --tr-color-surface-focus: var(--color-surface-focus);
+  --tr-color-surface-pressed: var(--color-surface-pressed);
+  --tr-color-surface-select: var(--color-surface-select);
+  --tr-color-surface-disabled: var(--color-surface-disabled);
+  --tr-color-surface-dark: var(--color-surface-dark);
+  --tr-color-surface-dark-hover: var(--color-surface-dark-hover);
+  --tr-color-surface-dark-focus: var(--color-surface-dark-focus);
+  --tr-color-surface-dark-pressed: var(--color-surface-dark-pressed);
+  --tr-color-surface-dark-select: var(--color-surface-dark-select);
+  --tr-color-surface-dark-disabled: var(--color-surface-dark-disabled);
+
+  --tr-color-text: var(--color-text);
+  --tr-color-text-soft: var(--color-text-soft);
+  --tr-color-text-disabled: var(--color-text-disabled);
+  --tr-color-text-dark: var(--color-text-dark);
+  --tr-color-text-dark-soft: var(--color-text-dark-soft);
+  --tr-color-text-dark-disabled: var(--color-text-dark-disabled);
+
+  --tr-color-border: var(--color-border);
+  --tr-color-border-soft: var(--color-border-soft);
+  --tr-color-border-divider: var(--color-border-divider);
+  --tr-color-border-dark: var(--color-border-dark);
+  --tr-color-border-dark-soft: var(--color-border-dark-soft);
+  --tr-color-border-dark-divider: var(--color-border-dark-divider);
+
+  --tr-color-skeleton: var(--color-skeleton);
+  --tr-color-skeleton-dark: var(--color-skeleton-dark);
+
+  --tr-color-background: var(--color-background);
+  --tr-color-background-dark: var(--color-background-dark);
+
   --tr-radius-none: var(--radius-none);
   --tr-radius-xs: var(--radius-xs);
   --tr-radius-sm: var(--radius-sm);
@@ -72,6 +106,13 @@
   --tr-radius-lg: var(--radius-lg);
   --tr-radius-xl: var(--radius-xl);
   --tr-radius-full: var(--radius-full);
+
+  --tr-shadow-elevation-50: var(--shadow-elevation-50);
+  --tr-shadow-elevation-100: var(--shadow-elevation-100);
+  --tr-shadow-elevation-200: var(--shadow-elevation-200);
+  --tr-shadow-elevation-dark-50: var(--shadow-elevation-dark-50);
+  --tr-shadow-elevation-dark-100: var(--shadow-elevation-dark-100);
+  --tr-shadow-elevation-dark-200: var(--shadow-elevation-dark-200);
 
   --tr-space-none: var(--spacing-none);
   --tr-space-2xs: var(--spacing-2xs);
@@ -113,10 +154,20 @@
   --tr-screen-lg: var(--breakpoint-lg);
   --tr-screen-xl: var(--breakpoint-xl);
   --tr-screen-2xl: var(--breakpoint-2xl);
+  --tr-container-xl: var(--breakpoint-xl);
 }
 
-/* App default: IRANYekan FaNum Regular (Latin + Persian digits). */
-html {
+html,
+body {
   font-family: var(--font-sans);
   font-weight: var(--font-weight-regular);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100%;
+}
+
+html:where([data-theme='dark']),
+html:where([data-theme='dark']) body {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
 }

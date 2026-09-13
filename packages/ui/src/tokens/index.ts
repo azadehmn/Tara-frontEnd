@@ -8,6 +8,9 @@ export type { TrColorState, TrColorToken, TrOutlinePalette, TrPalette } from './
 export { radius } from './radius';
 export type { TrRadiusToken } from './radius';
 
+export { shadow } from './shadow';
+export type { TrShadowToken } from './shadow';
+
 export { spacing } from './spacing';
 export type { TrSpacingToken } from './spacing';
 

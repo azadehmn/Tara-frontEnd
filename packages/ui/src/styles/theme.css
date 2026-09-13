@@ -2,5 +2,6 @@
 @import './tokens/colors.css';
 @import './tokens/spacing.css';
 @import './tokens/radius.css';
+@import './tokens/shadow.css';
 @import './tokens/typography.css';
 @import './tokens/breakpoints.css';

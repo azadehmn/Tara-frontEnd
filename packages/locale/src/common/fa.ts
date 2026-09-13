@@ -10,6 +10,7 @@ export const commonFa: MessageTree = {
     search: 'جستجو',
     loading: 'در حال بارگذاری…',
     empty: 'موردی یافت نشد',
+    actions: 'عملیات',
     prev: 'قبلی',
     next: 'بعدی',
     back: 'بازگشت',
