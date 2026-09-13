@@ -16,11 +16,7 @@ const sizes: TrButtonSize[] = ['small', 'medium', 'large'];
     <section v-for="variant in variants" :key="variant" class="mb-10">
       <h2 class="mb-3 text-lg font-semibold">{{ variant }}</h2>
 
-      <div
-        v-for="size in sizes"
-        :key="size"
-        class="mb-4 flex flex-wrap items-center gap-2"
-      >
+      <div v-for="size in sizes" :key="size" class="mb-4 flex flex-wrap items-center gap-2">
         <span class="w-20 text-xs opacity-60">{{ size }}</span>
         <TrButton :variant="variant" :size="size" text="default" />
         <TrButton :variant="variant" :size="size" text="selected" selected />
