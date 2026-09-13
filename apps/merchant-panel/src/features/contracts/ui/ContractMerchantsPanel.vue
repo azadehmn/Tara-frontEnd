@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
+import { TrButton, TrCard, TrTable, type TrTableColumn } from '@tara/ui';
 import { useContractMerchants } from '../composables/use-contract-merchants';
-import { TrButton } from '@tara/ui';
 
 const props = defineProps<{ contractId: string }>();
 const { t } = useI18n();
@@ -21,62 +21,53 @@ watch(contractId, () => {
 function pageCount() {
   return Math.max(1, Math.ceil(total.value / size.value));
 }
+
+const columns = computed<TrTableColumn[]>(() => [
+  { name: 'title', label: t('contracts.merchants.name') },
+  { name: 'branchCode', label: t('contracts.merchants.branchCode') },
+  { name: 'accessibleType', label: t('contracts.merchants.type') },
+  { name: 'provinceName', label: t('contracts.merchants.province') },
+]);
 </script>
 
 <template>
-  <section class="flex flex-col gap-3">
-    <h2 class="text-heading-sm">{{ t('contracts.merchants.title') }}</h2>
-    <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-    <p v-else-if="pending" class="text-sm opacity-70">{{ t('common.loading') }}</p>
-    <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
-      <table class="min-w-full text-sm">
-        <thead class="bg-slate-50 dark:bg-slate-800">
-          <tr>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.merchants.name') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.merchants.branchCode') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.merchants.type') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.merchants.province') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="!pending && merchants.length === 0">
-            <td colspan="4" class="px-3 py-6 text-center opacity-60">{{ t('common.empty') }}</td>
-          </tr>
-          <tr
-            v-for="row in merchants"
-            :key="row.id"
-            class="border-t border-slate-100 dark:border-slate-800"
-          >
-            <td class="px-3 py-2">{{ row.title }}</td>
-            <td class="px-3 py-2">{{ row.branchCode }}</td>
-            <td class="px-3 py-2">{{ row.accessibleType }}</td>
-            <td class="px-3 py-2">{{ row.provinceName ?? '—' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="flex items-center gap-3 text-sm">
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.prev')"
-        :disabled="page <= 1"
-        @click="
-          page -= 1;
-          fetch();
-        "
-      />
-      <span>{{ page }} / {{ pageCount() }}</span>
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.next')"
-        :disabled="page >= pageCount()"
-        @click="
-          page += 1;
-          fetch();
-        "
-      />
-    </div>
-  </section>
+  <TrCard>
+    <template #header>{{ t('contracts.merchants.title') }}</template>
+    <p v-if="error" class="mb-3 text-sm text-red-600">{{ error.message }}</p>
+    <TrTable
+      :columns="columns"
+      :items="merchants"
+      :loading="pending"
+      :empty-text="t('common.empty')"
+    >
+      <template #item-provincename="{ item }">
+        {{ item.provinceName ?? '—' }}
+      </template>
+    </TrTable>
+    <template #footer>
+      <div class="flex items-center gap-3">
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.prev')"
+          :disabled="page <= 1"
+          @click="
+            page -= 1;
+            fetch();
+          "
+        />
+        <span>{{ page }} / {{ pageCount() }}</span>
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.next')"
+          :disabled="page >= pageCount()"
+          @click="
+            page += 1;
+            fetch();
+          "
+        />
+      </div>
+    </template>
+  </TrCard>
 </template>

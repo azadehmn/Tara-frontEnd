@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { TrButton } from '@tara/ui';
+import { TrButton, TrCard } from '@tara/ui';
 import { useContractDetail } from '../composables/use-contract-detail';
 import type { ContractScope } from '../model/contract';
 import ContractBatchesPanel from './ContractBatchesPanel.vue';
@@ -44,10 +44,8 @@ function goBack() {
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
     <p v-else-if="pending" class="text-sm opacity-70">{{ t('common.loading') }}</p>
 
-    <dl
-      v-if="contractDetail"
-      class="grid gap-4 rounded-lg border border-slate-200 p-4 text-sm dark:border-slate-800 sm:grid-cols-2 lg:grid-cols-3"
-    >
+    <TrCard v-if="contractDetail">
+      <dl class="grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
       <div>
         <dt class="opacity-60">{{ t('contracts.fields.profileTitle') }}</dt>
         <dd>{{ contractDetail.profileTitle || '—' }}</dd>
@@ -100,7 +98,8 @@ function goBack() {
           </span>
         </dd>
       </div>
-    </dl>
+      </dl>
+    </TrCard>
 
     <div v-if="contractId" class="flex flex-col gap-4">
       <div class="flex gap-2">

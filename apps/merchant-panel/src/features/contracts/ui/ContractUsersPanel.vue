@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
+import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
 import { useContractUsers } from '../composables/use-contract-users';
-import { TrButton } from '@tara/ui';
+import type { ContractUser } from '../model/user';
 
 const props = defineProps<{ contractId: string }>();
 const { t } = useI18n();
@@ -21,81 +22,76 @@ watch(contractId, () => {
 function pageCount() {
   return Math.max(1, Math.ceil(total.value / size.value));
 }
+
+const columns = computed<TrTableColumn[]>(() => [
+  { name: 'name', label: t('contracts.users.name') },
+  { name: 'family', label: t('contracts.users.family') },
+  { name: 'mobile', label: t('contracts.users.mobile') },
+  { name: 'nationalCode', label: t('contracts.users.nationalCode') },
+  { name: 'birthDate', label: t('contracts.users.birthDate') },
+  { name: 'contractAccountDeactivated', label: t('contracts.users.orgStatus') },
+]);
+
+function rowActions(item: ContractUser): TrActionItem[] {
+  return [
+    {
+      id: 'toggle-status',
+      label: item.contractAccountDeactivated
+        ? t('contracts.actions.activate')
+        : t('contracts.actions.deactivate'),
+      command: () => {
+        void toggleOrgStatus(item);
+      },
+    },
+  ];
+}
 </script>
 
 <template>
-  <section class="flex flex-col gap-3">
-    <h2 class="text-heading-sm">{{ t('contracts.users.title') }}</h2>
-    <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-    <p v-else-if="pending" class="text-sm opacity-70">{{ t('common.loading') }}</p>
-    <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
-      <table class="min-w-full text-sm">
-        <thead class="bg-slate-50 dark:bg-slate-800">
-          <tr>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.name') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.family') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.mobile') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.nationalCode') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.birthDate') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.users.orgStatus') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.fields.actions') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="!pending && users.length === 0">
-            <td colspan="7" class="px-3 py-6 text-center opacity-60">{{ t('common.empty') }}</td>
-          </tr>
-          <tr
-            v-for="row in users"
-            :key="row.id"
-            class="border-t border-slate-100 dark:border-slate-800"
-          >
-            <td class="px-3 py-2">{{ row.name }}</td>
-            <td class="px-3 py-2">{{ row.family }}</td>
-            <td class="px-3 py-2">{{ row.mobile }}</td>
-            <td class="px-3 py-2">{{ row.nationalCode }}</td>
-            <td class="px-3 py-2">{{ row.birthDate }}</td>
-            <td class="px-3 py-2">{{
-              !row.contractAccountDeactivated ? t('contracts.status.active') : t('contracts.status.inactive')
-            }}</td>
-            <td class="px-3 py-2">
-              <TrButton
-                variant="outlined"
-                size="small"
-                :text="
-                  row.contractAccountDeactivated
-                    ? t('contracts.actions.activate')
-                    : t('contracts.actions.deactivate')
-                "
-                @click="toggleOrgStatus(row)"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="flex items-center gap-3 text-sm">
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.prev')"
-        :disabled="page <= 1"
-        @click="
-          page -= 1;
-          fetch();
-        "
-      />
-      <span>{{ page }} / {{ pageCount() }}</span>
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.next')"
-        :disabled="page >= pageCount()"
-        @click="
-          page += 1;
-          fetch();
-        "
-      />
-    </div>
-  </section>
+  <TrCard>
+    <template #header>{{ t('contracts.users.title') }}</template>
+    <p v-if="error" class="mb-3 text-sm text-red-600">{{ error.message }}</p>
+    <TrTable
+      :columns="columns"
+      :items="users"
+      :loading="pending"
+      :empty-text="t('common.empty')"
+    >
+      <template #item-contractaccountdeactivated="{ item }">
+        {{
+          !item.contractAccountDeactivated
+            ? t('contracts.status.active')
+            : t('contracts.status.inactive')
+        }}
+      </template>
+      <template #action="{ item }">
+        <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />
+      </template>
+    </TrTable>
+    <template #footer>
+      <div class="flex items-center gap-3">
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.prev')"
+          :disabled="page <= 1"
+          @click="
+            page -= 1;
+            fetch();
+          "
+        />
+        <span>{{ page }} / {{ pageCount() }}</span>
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.next')"
+          :disabled="page >= pageCount()"
+          @click="
+            page += 1;
+            fetch();
+          "
+        />
+      </div>
+    </template>
+  </TrCard>
 </template>

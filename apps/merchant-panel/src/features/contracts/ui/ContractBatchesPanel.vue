@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
-import { TrButton } from '@tara/ui';
+import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
 import { useContractBatches } from '../composables/use-contract-batches';
+import type { ContractBatch } from '../model/batch';
 
 const props = defineProps<{ contractId: string }>();
 const { t } = useI18n();
@@ -29,79 +30,75 @@ watch(contractId, () => {
 function pageCount() {
   return Math.max(1, Math.ceil(total.value / size.value));
 }
+
+const columns = computed<TrTableColumn[]>(() => [
+  { name: 'title', label: t('contracts.batches.fileTitle') },
+  { name: 'batchType', label: t('contracts.batches.fileType') },
+  { name: 'createdOn', label: t('contracts.batches.uploadedAt') },
+  { name: 'state', label: t('contracts.batches.state') },
+]);
+
+function rowActions(item: ContractBatch): TrActionItem[] {
+  return [
+    {
+      id: 'run',
+      label: t('contracts.batches.run'),
+      command: () => {
+        void run(item);
+      },
+    },
+    {
+      id: 'pause',
+      label: t('contracts.batches.pause'),
+      command: () => {
+        void pause(item);
+      },
+    },
+  ];
+}
 </script>
 
 <template>
-  <section class="flex flex-col gap-3">
-    <h2 class="text-heading-sm">{{ t('contracts.batches.title') }}</h2>
-    <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-    <p v-else-if="pending" class="text-sm opacity-70">{{ t('common.loading') }}</p>
-    <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
-      <table class="min-w-full text-sm">
-        <thead class="bg-slate-50 dark:bg-slate-800">
-          <tr>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.batches.fileTitle') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.batches.fileType') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.batches.uploadedAt') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.batches.state') }}</th>
-            <th class="px-3 py-2 text-start font-medium">{{ t('contracts.fields.actions') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="!pending && batches.length === 0">
-            <td colspan="5" class="px-3 py-6 text-center opacity-60">{{ t('common.empty') }}</td>
-          </tr>
-          <tr
-            v-for="row in batches"
-            :key="row.batchId"
-            class="border-t border-slate-100 dark:border-slate-800"
-          >
-            <td class="px-3 py-2">{{ row.title }}</td>
-            <td class="px-3 py-2">{{ row.batchType }}</td>
-            <td class="px-3 py-2">{{ row.createdOn }}</td>
-            <td class="px-3 py-2">{{ row.state ?? '—' }}</td>
-            <td class="px-3 py-2">
-              <div class="flex flex-wrap gap-2">
-                <TrButton
-                  variant="outlined"
-                  size="small"
-                  :text="t('contracts.batches.run')"
-                  @click="run(row)"
-                />
-                <TrButton
-                  variant="secondary"
-                  size="small"
-                  :text="t('contracts.batches.pause')"
-                  @click="pause(row)"
-                />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="flex items-center gap-3 text-sm">
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.prev')"
-        :disabled="page <= 1"
-        @click="
-          page -= 1;
-          fetch();
-        "
-      />
-      <span>{{ page }} / {{ pageCount() }}</span>
-      <TrButton
-        variant="outlined"
-        size="small"
-        :text="t('common.next')"
-        :disabled="page >= pageCount()"
-        @click="
-          page += 1;
-          fetch();
-        "
-      />
-    </div>
-  </section>
+  <TrCard>
+    <template #header>{{ t('contracts.batches.title') }}</template>
+    <p v-if="error" class="mb-3 text-sm text-red-600">{{ error.message }}</p>
+    <TrTable
+      :columns="columns"
+      :items="batches"
+      :loading="pending"
+      :empty-text="t('common.empty')"
+    >
+      <template #item-state="{ item }">
+        {{ item.state ?? '—' }}
+      </template>
+      <template #action="{ item }">
+        <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />
+      </template>
+    </TrTable>
+    <template #footer>
+      <div class="flex items-center gap-3">
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.prev')"
+          :disabled="page <= 1"
+          @click="
+            page -= 1;
+            fetch();
+          "
+        />
+        <span>{{ page }} / {{ pageCount() }}</span>
+        <TrButton
+          variant="outlined"
+          size="small"
+          :text="t('common.next')"
+          :disabled="page >= pageCount()"
+          @click="
+            page += 1;
+            fetch();
+          "
+        />
+      </div>
+    </template>
+  </TrCard>
 </template>
