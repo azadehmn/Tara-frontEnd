@@ -17,7 +17,7 @@ export const merchantPanelEn: MessageTree = {
       invoices: 'Merchant invoices',
       contracts: 'Contracts',
       contractsOrganization: 'Organization contracts',
-      contractsAcquiring: 'Acquiring contracts',
+      contractsAcceptor: 'Acceptor contracts',
     },
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',

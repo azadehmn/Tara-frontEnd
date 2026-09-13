@@ -22,7 +22,7 @@ const items: NavItem[] = [
     key: 'contracts',
     children: [
       { to: '/contracts/organization', key: 'contractsOrganization' },
-      { to: '/contracts/acquiring', key: 'contractsAcquiring' },
+      { to: '/contracts/acceptor', key: 'contractsAcceptor' },
     ],
   },
   { to: '/transactions', key: 'transactions' },

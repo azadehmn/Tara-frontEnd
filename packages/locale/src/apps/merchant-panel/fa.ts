@@ -17,7 +17,7 @@ export const merchantPanelFa: MessageTree = {
       invoices: 'صورتحساب‌های پذیرندگان',
       contracts: 'قراردادها',
       contractsOrganization: 'قراردادهای سازمانی',
-      contractsAcquiring: 'قراردادهای پذیرندگی',
+      contractsAcceptor: 'قراردادهای پذیرندگی',
     },
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',

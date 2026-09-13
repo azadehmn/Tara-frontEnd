@@ -6,7 +6,7 @@ const { t } = useI18n();
 
 <template>
   <div class="flex flex-col gap-4">
-    <h1 class="text-heading-lg">{{ t('layout.nav.contractsAcquiring') }}</h1>
-    <ContractListView scope="acceptor" detail-route="contracts-acquiring-detail" />
+    <h1 class="text-heading-lg">{{ t('layout.nav.contractsAcceptor') }}</h1>
+    <ContractListView scope="acceptor" detail-route="contracts-acceptor-detail" />
   </div>
 </template>

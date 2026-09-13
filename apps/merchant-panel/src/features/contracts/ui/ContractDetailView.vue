@@ -29,7 +29,7 @@ watch(contractId, (id) => {
 
 function goBack() {
   void router.push({
-    name: props.scope === 'organization' ? 'contracts-organization' : 'contracts-acquiring',
+    name: props.scope === 'organization' ? 'contracts-organization' : 'contracts-acceptor',
   });
 }
 </script>
