@@ -13,12 +13,12 @@ const props = defineProps<{
 
 const { t } = useI18n();
 const router = useRouter();
-const { contracts, total, page, size, pending, error, filters, fetchList } = useContractList(
+const { contracts, total, page, size, pending, error, filters, fetch } = useContractList(
   props.scope,
 );
 
 onMounted(() => {
-  void fetchList(true);
+  void fetch(true);
 });
 
 function openDetail(row: ContractListItem) {
@@ -27,11 +27,11 @@ function openDetail(row: ContractListItem) {
 
 async function toggleOrgStatus(row: ContractListItem) {
   await setContractOrgStatus(row.id, row.deactivatedByOrg);
-  await fetchList();
+  await fetch();
 }
 
 function applyFilters() {
-  void fetchList(true);
+  void fetch(true);
 }
 
 const pageCount = computed(() => Math.max(1, Math.ceil(total.value / size.value)));
@@ -39,14 +39,14 @@ function goToPreviousPage() {
   if (page.value <= 1) return;
 
   page.value -= 1;
-  void fetchList();
+  void fetch();
 }
 
 function goToNextPage() {
   if (page.value >= pageCount.value) return;
 
   page.value += 1;
-  void fetchList();
+  void fetch();
 }
 </script>
 

@@ -6,16 +6,24 @@ import { useContractBatches } from '../composables/use-contract-batches';
 const props = defineProps<{ contractId: string }>();
 const { t } = useI18n();
 const contractId = computed(() => props.contractId);
-const { items, total, page, size, loading, error, fetchList, run, pause } = useContractBatches(
-  () => contractId.value,
-);
+const {
+  batches,
+  total,
+  page,
+  size,
+  pending,
+  error,
+  fetch,
+  run,
+  pause,
+} = useContractBatches(() => contractId.value);
 
 onMounted(() => {
-  void fetchList(true);
+  void fetch(true);
 });
 
 watch(contractId, () => {
-  void fetchList(true);
+  void fetch(true);
 });
 
 function pageCount() {
@@ -27,7 +35,7 @@ function pageCount() {
   <section class="flex flex-col gap-3">
     <h2 class="text-heading-sm">{{ t('contracts.batches.title') }}</h2>
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-    <p v-else-if="loading" class="text-sm opacity-70">{{ t('common.loading') }}</p>
+    <p v-else-if="pending" class="text-sm opacity-70">{{ t('common.loading') }}</p>
     <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-800">
       <table class="min-w-full text-sm">
         <thead class="bg-slate-50 dark:bg-slate-800">
@@ -40,11 +48,11 @@ function pageCount() {
           </tr>
         </thead>
         <tbody>
-          <tr v-if="!loading && items.length === 0">
+          <tr v-if="!pending && batches.length === 0">
             <td colspan="5" class="px-3 py-6 text-center opacity-60">{{ t('common.empty') }}</td>
           </tr>
           <tr
-            v-for="row in items"
+            v-for="row in batches"
             :key="row.batchId"
             class="border-t border-slate-100 dark:border-slate-800"
           >
@@ -80,7 +88,7 @@ function pageCount() {
         :disabled="page <= 1"
         @click="
           page -= 1;
-          fetchList();
+          fetch();
         "
       />
       <span>{{ page }} / {{ pageCount() }}</span>
@@ -91,7 +99,7 @@ function pageCount() {
         :disabled="page >= pageCount()"
         @click="
           page += 1;
-          fetchList();
+          fetch();
         "
       />
     </div>
