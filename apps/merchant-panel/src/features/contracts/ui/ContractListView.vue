@@ -52,6 +52,7 @@ function goToNextPage() {
 
 <template>
   <div class="flex flex-col gap-4">
+    {{ pending }}
     <form class="flex flex-wrap items-end gap-3" @submit.prevent="applyFilters">
       <label class="flex flex-col gap-1 text-sm">
         <span>{{ t('contracts.fields.id') }}</span>
