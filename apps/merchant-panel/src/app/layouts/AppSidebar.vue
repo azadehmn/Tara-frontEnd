@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
+import { reactive, watch, type Component } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { TrIcon, type TrIconName } from '@tara/ui';
+import { TrIcon } from '@tara/ui';
+import TrContractsIcon from '@tara/ui/icons/ContractsIcon.vue';
+import TrGridLayoutIcon from '@tara/ui/icons/GridLayoutIcon.vue';
+import TrInvoicesIcon from '@tara/ui/icons/InvoicesIcon.vue';
+import TrReportsIcon from '@tara/ui/icons/ReportsIcon.vue';
+import TrTransactionIcon from '@tara/ui/icons/TransactionIcon.vue';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -12,32 +17,32 @@ type NavChild = { to: string; key: string };
 type NavItem = {
   to?: string;
   key: string;
-  icon: TrIconName;
+  icon: Component;
   exact?: boolean;
   children?: NavChild[];
 };
 
 const items: NavItem[] = [
-  { to: '/', key: 'dashboard', icon: 'gridLayout', exact: true },
+  { to: '/', key: 'dashboard', icon: TrGridLayoutIcon, exact: true },
   {
     key: 'contracts',
-    icon: 'contracts',
+    icon: TrContractsIcon,
     children: [
       { to: '/contracts/organization', key: 'contractsOrganization' },
       { to: '/contracts/acceptor', key: 'contractsAcceptor' },
     ],
   },
-  { to: '/transactions', key: 'transactions', icon: 'transaction' },
+  { to: '/transactions', key: 'transactions', icon: TrTransactionIcon },
   {
     key: 'reports',
-    icon: 'reports',
+    icon: TrReportsIcon,
     children: [
       { to: '/reports/summary', key: 'reportsSummary' },
       { to: '/reports/purchase-detail', key: 'reportsPurchaseDetail' },
       { to: '/reports/returns', key: 'reportsReturns' },
     ],
   },
-  { to: '/invoices', key: 'invoices', icon: 'invoices' },
+  { to: '/invoices', key: 'invoices', icon: TrInvoicesIcon },
 ];
 
 const openMenus = reactive<Record<string, boolean>>({});
@@ -91,7 +96,9 @@ watch(
           :aria-expanded="Boolean(openMenus[item.key])"
           @click="toggleMenu(item.key, $event)"
         >
-          <TrIcon :name="item.icon" size="sm" />
+          <TrIcon size="sm">
+            <component :is="item.icon" />
+          </TrIcon>
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
             {{ t(`layout.nav.${item.key}`) }}
           </span>
@@ -137,7 +144,9 @@ watch(
           :aria-label="t(`layout.nav.${item.key}`)"
           @click="navigate"
         >
-          <TrIcon :name="item.icon" size="sm" />
+          <TrIcon size="sm">
+            <component :is="item.icon" />
+          </TrIcon>
           <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.key}`) }}</span>
         </a>
       </RouterLink>

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex min-h-screen flex-col text-text dark:text-text-dark"
-  >
+  <div class="flex min-h-screen flex-col text-text dark:text-text-dark">
     <TrTopBar>
       <template #start>
         <TrButton
@@ -12,7 +10,9 @@
           @click="toggleNavigation"
         >
           <template #icon>
-            <TrIcon name="menu" />
+            <TrIcon size="lg" class="text-primary">
+              <TrMenuIcon />
+            </TrIcon>
           </template>
         </TrButton>
         <img :src="taraLogo" alt="Tara" width="61" height="25" />
@@ -30,11 +30,7 @@
     </TrTopBar>
 
     <div class="relative flex min-h-0 flex-1">
-      <TrNavigationBar
-        v-if="showRail"
-        :mode="railMode"
-        :aria-label="t('layout.nav.label')"
-      >
+      <TrNavigationBar v-if="showRail" :mode="railMode" :aria-label="t('layout.nav.label')">
         <AppSidebar />
       </TrNavigationBar>
 
@@ -59,9 +55,10 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { RouterView, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import type { SupportedLocale } from '@tara/locale';
 import { TrButton, TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
+import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo.svg';
 

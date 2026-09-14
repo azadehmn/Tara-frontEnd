@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { icons, type TrIconProps } from './Icon';
+import type { TrIconProps } from './Icon';
 
 defineOptions({ name: 'TrIcon' });
 
@@ -16,7 +16,7 @@ withDefaults(defineProps<TrIconProps>(), {
     :aria-label="label"
     :role="label ? 'img' : undefined"
   >
-    <component :is="icons[name]" />
+    <slot />
   </span>
 </template>
 
