@@ -26,10 +26,10 @@ export type {
 export {
   TrTable,
   columnSlotName,
-  getItemValue,
+  resolvePathValue,
   itemSlotName,
   itemTextContent,
-  rowIdentity,
+  getRowKey,
 } from './components/table';
 export type {
   TrTableColumn,

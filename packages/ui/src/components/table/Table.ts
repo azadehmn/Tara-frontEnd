@@ -9,7 +9,7 @@ export type TrTableColumn = {
   class?: string;
 };
 
-export type TrTableRow = object;
+export type TrTableRow = Record<string, unknown>;
 
 export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   columns: TrTableColumn[];
@@ -22,6 +22,8 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   emptyText?: string;
   /** Property used as Vue key; defaults to `id`, then row index. */
   rowKey?: string;
+  /** Optional class for a row; decided by the UI, not the data model. */
+  rowClass?: (item: T) => string | undefined;
   /** Grid track for the built-in `#action` column. */
   actionWidth?: string;
 };
@@ -32,18 +34,13 @@ export type TrTableRowHoverPayload<T extends TrTableRow = TrTableRow> = {
   hovering: boolean;
 };
 
-function asRecord(item: TrTableRow): Record<string, unknown> {
-  return item as Record<string, unknown>;
-}
-
-export function getItemValue(column: string, item: TrTableRow): unknown {
-  const record = asRecord(item);
-  if (!column.includes('.')) {
-    return record[column];
+export function resolvePathValue(path: string, item: TrTableRow): unknown {
+  if (!path.includes('.')) {
+    return item[path];
   }
 
-  const keys = column.split('.');
-  let current: unknown = record;
+  const keys = path.split('.');
+  let current: unknown = item;
 
   for (const key of keys) {
     if (!current || typeof current !== 'object') return undefined;
@@ -54,7 +51,7 @@ export function getItemValue(column: string, item: TrTableRow): unknown {
 }
 
 export function itemTextContent(column: string, item: TrTableRow): string {
-  const content = getItemValue(column, item);
+  const content = resolvePathValue(column, item);
   if (content == null || content === '') return '';
   if (Array.isArray(content)) return content.join(', ');
   return String(content);
@@ -68,13 +65,8 @@ export function itemSlotName(column: TrTableColumn): string {
   return `item-${column.name.toLowerCase()}`;
 }
 
-export function rowIdentity(item: TrTableRow, index: number, rowKey = 'id'): string | number {
-  const value = asRecord(item)[rowKey];
+export function getRowKey(item: TrTableRow, index: number, rowKey = 'id'): string | number {
+  const value = item[rowKey];
   if (typeof value === 'string' || typeof value === 'number') return value;
   return index;
-}
-
-export function rowClassName(item: TrTableRow): string | undefined {
-  const value = asRecord(item).class;
-  return typeof value === 'string' ? value : undefined;
 }

@@ -1,11 +1,10 @@
 export { default as TrTable } from './Table.vue';
 export {
   columnSlotName,
-  getItemValue,
+  resolvePathValue,
   itemSlotName,
   itemTextContent,
-  rowClassName,
-  rowIdentity,
+  getRowKey,
 } from './Table';
 export type {
   TrTableColumn,

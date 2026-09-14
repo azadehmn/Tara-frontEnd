@@ -4,8 +4,7 @@ import {
   columnSlotName,
   itemSlotName,
   itemTextContent,
-  rowClassName,
-  rowIdentity,
+  getRowKey,
   type TrTableProps,
   type TrTableRow,
   type TrTableRowHoverPayload,
@@ -35,13 +34,21 @@ const hasActionSlot = computed(() => Boolean(slots.action));
 
 const itemSlots = computed(() => new Set(Object.keys(slots)));
 
-const gridTemplate = computed(() => {
-  const tracks = props.columns.map((column) => column.width ?? 'minmax(100px, 1fr)');
+const normalizedColumns = computed(() =>
+  props.columns.map((column) => ({
+    ...column,
+    columnSlot: columnSlotName(column),
+    itemSlot: itemSlotName(column),
+  })),
+);
+
+const gridColumns = computed(() => {
+  const tracks = normalizedColumns.value.map((column) => column.width ?? 'minmax(100px, 1fr)');
   if (hasActionSlot.value) tracks.push(props.actionWidth);
   return tracks.join(' ');
 });
 
-const skeletonRows = computed(() =>
+const loadingRows = computed(() =>
   Array.from({ length: Math.max(1, props.loadingRowCount) }, (_, index) => index),
 );
 
@@ -60,16 +67,16 @@ function onRowHover(item: T, index: number, hovering: boolean) {
       v-if="!hideHeader"
       class="tr-table__head"
       role="row"
-      :style="{ gridTemplateColumns: gridTemplate }"
+      :style="{ gridTemplateColumns: gridColumns }"
     >
       <div
-        v-for="column in columns"
+        v-for="column in normalizedColumns"
         :key="column.id ?? column.name"
         class="tr-table__head-cell"
         :class="column.class"
         role="columnheader"
       >
-        <slot v-if="itemSlots.has(columnSlotName(column))" :name="columnSlotName(column)" :column="column">
+        <slot v-if="itemSlots.has(column.columnSlot)" :name="column.columnSlot" :column="column">
           {{ column.label }}
         </slot>
         <template v-else>{{ column.label }}</template>
@@ -84,13 +91,13 @@ function onRowHover(item: T, index: number, hovering: boolean) {
     <div v-if="loading">
       <slot name="loading">
         <div
-          v-for="rowIndex in skeletonRows"
+          v-for="rowIndex in loadingRows"
           :key="`skeleton-${rowIndex}`"
           class="tr-table__row"
           role="row"
-          :style="{ gridTemplateColumns: gridTemplate }"
+          :style="{ gridTemplateColumns: gridColumns }"
         >
-          <div v-for="column in columns" :key="column.id ?? column.name" class="tr-table__cell" role="cell">
+          <div v-for="column in normalizedColumns" :key="column.id ?? column.name" class="tr-table__cell" role="cell">
             <span class="tr-table__skeleton" aria-hidden="true" />
           </div>
           <div v-if="hasActionSlot" class="tr-table__cell tr-table__cell--action" role="cell">
@@ -103,26 +110,27 @@ function onRowHover(item: T, index: number, hovering: boolean) {
     <template v-else-if="items.length > 0">
       <div
         v-for="(item, index) in items"
-        :key="rowIdentity(item, index, rowKey)"
+        :key="getRowKey(item, index, rowKey)"
         class="tr-table__row"
-        :class="[rowClassName(item), { 'tr-table__row--pointer': rowPointer }]"
+        :class="[rowClass?.(item), { 'tr-table__row--pointer': rowPointer }]"
         role="row"
         :tabindex="rowPointer ? 0 : undefined"
-        :style="{ gridTemplateColumns: gridTemplate }"
+        :style="{ gridTemplateColumns: gridColumns }"
         @click="onRowClick(item)"
         @keydown.enter.prevent="onRowClick(item)"
+        @keydown.space.prevent="onRowClick(item)"
         @mouseenter="onRowHover(item, index, true)"
         @mouseleave="onRowHover(item, index, false)"
       >
         <div
-          v-for="column in columns"
+          v-for="column in normalizedColumns"
           :key="column.id ?? column.name"
           class="tr-table__cell"
           role="cell"
         >
           <slot
-            v-if="itemSlots.has(itemSlotName(column))"
-            :name="itemSlotName(column)"
+            v-if="itemSlots.has(column.itemSlot)"
+            :name="column.itemSlot"
             :item="item"
             :column="column"
             :index="index"
