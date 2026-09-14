@@ -5,11 +5,11 @@
   --color-gray-800: #1d2939;
   --color-gray-900: #101828;
 
-  --color-primary: #1423ba;
-  --color-primary-hover: #2939c7;
+  --color-primary: #1423bd;
+  --color-primary-hover: #192be6;
   --color-primary-focus: #3544ce;
   --color-primary-pressed: #101c99;
-  --color-primary-select: #1423ba;
+  --color-primary-select: #1423bd;
   --color-primary-disabled: #c7caf0;
   --color-primary-loading: #3544ce;
   --color-primary-dark: #7380e8;
@@ -53,8 +53,8 @@
   --color-outlined-dark-select: #1a1230;
   --color-outlined-dark-disabled: #2a2438;
   --color-outlined-dark-loading: #1a1230;
-  --color-text-onOutlined: #1423ba;
-  --color-text-dark-onOutlined: #1423ba;
+  --color-text-onOutlined: #1423bd;
+  --color-text-dark-onOutlined: #1423bd;
   --color-outlined-border: #d3c3f4;
   --color-outlined-border-hover: #d3c3f4;
   --color-outlined-border-disabled: #d1d5db;

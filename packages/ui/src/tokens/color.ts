@@ -36,7 +36,7 @@ export type TrOutlinePalette = TrPalette & {
 export const color = {
   white: '#fff',
   primary: {
-    DEFAULT: '#1423BA',
+    DEFAULT: '#1423BD',
 
     dark: {
       DEFAULT: '#7380E8',
@@ -50,9 +50,9 @@ export const color = {
 
     disabled: '#C7CAF0',
     focus: '#3544CE',
-    hover: '#2939C7',
+    hover: '#192BE6',
     pressed: '#101C99',
-    select: '#1423BA',
+    select: '#1423BD',
     loading: '#3544CE',
 
     text: {
@@ -103,8 +103,8 @@ export const color = {
     select: '#F5F7FF',
     loading: '#F5F7FF',
     text: {
-      DEFAULT: '#1423BA',
-      dark: '#1423BA',
+      DEFAULT: '#1423BD',
+      dark: '#1423BD',
     },
     border: {
       DEFAULT: '#D3C3F4',
