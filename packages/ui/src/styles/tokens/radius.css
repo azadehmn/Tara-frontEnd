@@ -1,0 +1,10 @@
+/* Source of truth for Tara radius tokens. Names match the existing scale. */
+@theme {
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 100%;
+}

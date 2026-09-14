@@ -1,0 +1,79 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-table {
+  @apply overflow-visible rounded-md border border-solid border-[#e4e7ec] bg-surface
+    dark:border-gray-800 dark:bg-[#1e2634];
+}
+
+.tr-table__head {
+  @apply grid border-b-0 bg-transparent dark:bg-gray-900;
+}
+
+.tr-table__head-cell {
+  @apply flex items-center justify-start border-none px-md py-md
+    text-body-md font-medium text-text
+    dark:text-gray-400;
+}
+
+.tr-table__row {
+  @apply grid border-none text-body-md font-normal text-text
+    dark:text-gray-400;
+}
+
+.tr-table__row:hover {
+  @apply bg-surface-hover dark:bg-surface-dark-hover;
+}
+
+.tr-table__row:active {
+  @apply bg-surface-pressed dark:bg-surface-dark-pressed;
+}
+
+.tr-table__row:focus-visible {
+  @apply bg-surface-focus outline-none dark:bg-surface-dark-focus;
+}
+
+.tr-table__cell {
+  @apply grid min-w-0 items-center border-b border-solid border-border-divider px-md py-md;
+}
+
+html[data-theme='dark'] .tr-table__cell {
+  border-bottom-color: #1d2939;
+}
+
+.tr-table__row:last-child .tr-table__cell {
+  @apply border-b-0;
+}
+
+.tr-table__head-cell--action,
+.tr-table__cell--action {
+  @apply justify-end overflow-visible px-xs;
+}
+
+.tr-table__row--pointer .tr-table__cell {
+  @apply cursor-pointer;
+}
+
+.tr-table__row--pointer .tr-table__cell--action {
+  @apply cursor-default;
+}
+
+.tr-table__empty {
+  @apply px-md py-xl text-center text-body-md text-text-soft dark:text-gray-400;
+}
+
+.tr-table__skeleton {
+  @apply h-3 w-16 max-w-full rounded-xs bg-skeleton dark:bg-skeleton-dark;
+  animation: tr-table-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes tr-table-shimmer {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

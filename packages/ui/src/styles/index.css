@@ -1,0 +1,173 @@
+/* Tara UI styles. Apps import this once: `@import '@tara/ui/styles';` */
+@import './fonts.css';
+@import './theme.css';
+@import './layout.css';
+
+/* Dark utilities (`dark:`) follow `data-theme="dark"` on an ancestor, not prefers-color-scheme. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* SCSS kit aliases. Same values as @theme; do not set hex here. */
+:root {
+  --tr-color-white: var(--color-white);
+  --tr-color-primary: var(--color-primary);
+  --tr-color-primary-hover: var(--color-primary-hover);
+  --tr-color-primary-focus: var(--color-primary-focus);
+  --tr-color-primary-pressed: var(--color-primary-pressed);
+  --tr-color-primary-select: var(--color-primary-select);
+  --tr-color-primary-disabled: var(--color-primary-disabled);
+  --tr-color-primary-loading: var(--color-primary-loading);
+  --tr-color-primary-text: var(--color-text-onPrimary);
+  --tr-color-primary-dark: var(--color-primary-dark);
+  --tr-color-primary-dark-hover: var(--color-primary-dark-hover);
+  --tr-color-primary-dark-focus: var(--color-primary-dark-focus);
+  --tr-color-primary-dark-pressed: var(--color-primary-dark-pressed);
+  --tr-color-primary-dark-select: var(--color-primary-dark-select);
+  --tr-color-primary-dark-disabled: var(--color-primary-dark-disabled);
+  --tr-color-primary-dark-loading: var(--color-primary-dark-loading);
+  --tr-color-primary-text-dark: var(--color-text-dark-onPrimary);
+
+  --tr-color-secondary: var(--color-secondary);
+  --tr-color-secondary-hover: var(--color-secondary-hover);
+  --tr-color-secondary-focus: var(--color-secondary-focus);
+  --tr-color-secondary-pressed: var(--color-secondary-pressed);
+  --tr-color-secondary-select: var(--color-secondary-select);
+  --tr-color-secondary-disabled: var(--color-secondary-disabled);
+  --tr-color-secondary-loading: var(--color-secondary-loading);
+  --tr-color-secondary-text: var(--color-text-onSecondary);
+  --tr-color-secondary-dark: var(--color-secondary-dark);
+  --tr-color-secondary-dark-hover: var(--color-secondary-dark-hover);
+  --tr-color-secondary-dark-focus: var(--color-secondary-dark-focus);
+  --tr-color-secondary-dark-pressed: var(--color-secondary-dark-pressed);
+  --tr-color-secondary-dark-select: var(--color-secondary-dark-select);
+  --tr-color-secondary-dark-disabled: var(--color-secondary-dark-disabled);
+  --tr-color-secondary-dark-loading: var(--color-secondary-dark-loading);
+  --tr-color-secondary-text-dark: var(--color-text-dark-onSecondary);
+
+  --tr-color-outlined: var(--color-outlined);
+  --tr-color-outlined-hover: var(--color-outlined-hover);
+  --tr-color-outlined-focus: var(--color-outlined-focus);
+  --tr-color-outlined-pressed: var(--color-outlined-pressed);
+  --tr-color-outlined-select: var(--color-outlined-select);
+  --tr-color-outlined-disabled: var(--color-outlined-disabled);
+  --tr-color-outlined-loading: var(--color-outlined-loading);
+  --tr-color-outlined-text: var(--color-text-onOutlined);
+  --tr-color-outlined-border: var(--color-outlined-border);
+  --tr-color-outlined-border-hover: var(--color-outlined-border-hover);
+  --tr-color-outlined-border-disabled: var(--color-outlined-border-disabled);
+  --tr-color-outlined-dark: var(--color-outlined-dark);
+  --tr-color-outlined-dark-hover: var(--color-outlined-dark-hover);
+  --tr-color-outlined-dark-focus: var(--color-outlined-dark-focus);
+  --tr-color-outlined-dark-pressed: var(--color-outlined-dark-pressed);
+  --tr-color-outlined-dark-select: var(--color-outlined-dark-select);
+  --tr-color-outlined-dark-disabled: var(--color-outlined-dark-disabled);
+  --tr-color-outlined-dark-loading: var(--color-outlined-dark-loading);
+  --tr-color-outlined-text-dark: var(--color-text-dark-onOutlined);
+  --tr-color-outlined-dark-border: var(--color-outlined-dark-border);
+  --tr-color-outlined-dark-border-hover: var(--color-outlined-dark-border-hover);
+  --tr-color-outlined-dark-border-disabled: var(--color-outlined-dark-border-disabled);
+
+  --tr-color-surface: var(--color-surface);
+  --tr-color-surface-hover: var(--color-surface-hover);
+  --tr-color-surface-focus: var(--color-surface-focus);
+  --tr-color-surface-pressed: var(--color-surface-pressed);
+  --tr-color-surface-select: var(--color-surface-select);
+  --tr-color-surface-disabled: var(--color-surface-disabled);
+  --tr-color-surface-dark: var(--color-surface-dark);
+  --tr-color-surface-dark-hover: var(--color-surface-dark-hover);
+  --tr-color-surface-dark-focus: var(--color-surface-dark-focus);
+  --tr-color-surface-dark-pressed: var(--color-surface-dark-pressed);
+  --tr-color-surface-dark-select: var(--color-surface-dark-select);
+  --tr-color-surface-dark-disabled: var(--color-surface-dark-disabled);
+
+  --tr-color-text: var(--color-text);
+  --tr-color-text-soft: var(--color-text-soft);
+  --tr-color-text-disabled: var(--color-text-disabled);
+  --tr-color-text-dark: var(--color-text-dark);
+  --tr-color-text-dark-soft: var(--color-text-dark-soft);
+  --tr-color-text-dark-disabled: var(--color-text-dark-disabled);
+
+  --tr-color-border: var(--color-border);
+  --tr-color-border-soft: var(--color-border-soft);
+  --tr-color-border-divider: var(--color-border-divider);
+  --tr-color-border-dark: var(--color-border-dark);
+  --tr-color-border-dark-soft: var(--color-border-dark-soft);
+  --tr-color-border-dark-divider: var(--color-border-dark-divider);
+
+  --tr-color-skeleton: var(--color-skeleton);
+  --tr-color-skeleton-dark: var(--color-skeleton-dark);
+
+  --tr-color-background: var(--color-background);
+  --tr-color-background-dark: var(--color-background-dark);
+
+  --tr-radius-none: var(--radius-none);
+  --tr-radius-xs: var(--radius-xs);
+  --tr-radius-sm: var(--radius-sm);
+  --tr-radius-md: var(--radius-md);
+  --tr-radius-lg: var(--radius-lg);
+  --tr-radius-xl: var(--radius-xl);
+  --tr-radius-full: var(--radius-full);
+
+  --tr-shadow-elevation-50: var(--shadow-elevation-50);
+  --tr-shadow-elevation-100: var(--shadow-elevation-100);
+  --tr-shadow-elevation-200: var(--shadow-elevation-200);
+  --tr-shadow-elevation-dark-50: var(--shadow-elevation-dark-50);
+  --tr-shadow-elevation-dark-100: var(--shadow-elevation-dark-100);
+  --tr-shadow-elevation-dark-200: var(--shadow-elevation-dark-200);
+
+  --tr-space-none: var(--spacing-none);
+  --tr-space-2xs: var(--spacing-2xs);
+  --tr-space-xs: var(--spacing-xs);
+  --tr-space-sm: var(--spacing-sm);
+  --tr-space-md: var(--spacing-md);
+  --tr-space-lg: var(--spacing-lg);
+  --tr-space-xl: var(--spacing-xl);
+  --tr-space-2xl: var(--spacing-2xl);
+  --tr-space-3xl: var(--spacing-3xl);
+  --tr-space-4xl: var(--spacing-4xl);
+  --tr-space-5xl: var(--spacing-5xl);
+  --tr-space-6xl: var(--spacing-6xl);
+
+  --tr-font-fanum: var(--font-fanum);
+  --tr-font-sans: var(--font-sans);
+  --tr-font-weight-thin: var(--font-weight-thin);
+  --tr-font-weight-ultraLight: var(--font-weight-ultraLight);
+  --tr-font-weight-light: var(--font-weight-light);
+  --tr-font-weight-regular: var(--font-weight-regular);
+  --tr-font-weight-medium: var(--font-weight-medium);
+  --tr-font-weight-demiBold: var(--font-weight-demiBold);
+  --tr-font-weight-bold: var(--font-weight-bold);
+  --tr-font-weight-extraBold: var(--font-weight-extraBold);
+  --tr-font-weight-black: var(--font-weight-black);
+  --tr-font-weight-extraBlack: var(--font-weight-extraBlack);
+  --tr-font-weight-heavy: var(--font-weight-heavy);
+  --tr-font-button-weight: var(--font-weight-button);
+  --tr-font-button-sm-size: var(--text-button-sm);
+  --tr-font-button-sm-leading: var(--text-button-sm--line-height);
+  --tr-font-button-md-size: var(--text-button-md);
+  --tr-font-button-md-leading: var(--text-button-md--line-height);
+  --tr-font-button-lg-size: var(--text-button-lg);
+  --tr-font-button-lg-leading: var(--text-button-lg--line-height);
+
+  --tr-screen-xs: var(--breakpoint-xs);
+  --tr-screen-sm: var(--breakpoint-sm);
+  --tr-screen-md: var(--breakpoint-md);
+  --tr-screen-lg: var(--breakpoint-lg);
+  --tr-screen-xl: var(--breakpoint-xl);
+  --tr-screen-2xl: var(--breakpoint-2xl);
+  --tr-container-xl: var(--breakpoint-xl);
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-regular);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100%;
+}
+
+html[data-theme='dark'],
+html[data-theme='dark'] body {
+  background-color:var(--color-outlined-dark, #0c051a);
+  color: var(--color-text-dark);
+}

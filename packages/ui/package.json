@@ -4,9 +4,25 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./icons/*": "./src/icons/*",
+    "./styles": "./src/styles/index.css",
+    "./styles/theme": "./src/styles/theme.css"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "vue-tsc --noEmit"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tara/tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "typescript": "^5.9.2",
+    "sass": "^1.92.1",
+    "vite": "^7.1.7",
+    "vue": "^3.5.21",
+    "vue-tsc": "^3.0.8"
   }
 }

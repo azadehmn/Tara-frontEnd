@@ -1,0 +1,176 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-nav-bar-host,
+.tr-nav-bar-overlay {
+  @apply contents;
+}
+
+.tr-nav-bar {
+  --tr-nav-bar-width: 16rem;
+  --tr-nav-bar-collapsed: 3.5rem;
+
+  @apply flex flex-col shrink-0 min-h-0 overflow-hidden
+    bg-outlined border-e border-solid border-[#e4e7ec]
+    dark:bg-outlined-dark dark:border-gray-800;
+  width: var(--tr-nav-bar-width);
+  transition: width 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tr-nav-bar.is-collapsed {
+  width: var(--tr-nav-bar-collapsed);
+}
+
+.tr-nav-bar.is-collapsed .tr-nav-bar__main {
+  @apply overflow-hidden px-2xs;
+}
+
+.tr-nav-bar a,
+.tr-nav-bar button {
+  transition:
+    padding 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+    gap 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tr-nav-bar.is-collapsed a,
+.tr-nav-bar.is-collapsed button {
+  @apply relative justify-center gap-0 w-full px-2xs;
+}
+
+.tr-nav-bar__label,
+.tr-nav-bar__chevron {
+  @apply min-w-0 overflow-hidden whitespace-nowrap;
+  max-width: 12rem;
+  opacity: 1;
+  transition:
+    opacity 0.18s ease 0.1s,
+    max-width 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tr-nav-bar.is-collapsed .tr-nav-bar__label,
+.tr-nav-bar.is-collapsed .tr-nav-bar__chevron {
+  max-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.12s ease,
+    max-width 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tr-nav-bar.is-collapsed .tr-nav-bar__parent-active {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  @apply text-primary;
+}
+
+[data-theme='dark'] .tr-nav-bar.is-collapsed .tr-nav-bar__parent-active {
+  background: color-mix(in srgb, var(--color-primary-dark) 20%, transparent);
+  @apply text-primary-dark;
+}
+
+.tr-nav-bar.is-overlay {
+  @apply fixed top-0 start-0 z-[10001] w-[16rem] h-screen invisible overflow-visible;
+  box-shadow: 0 4px 8px 2px rgb(96 96 108 / 0.1);
+  border-inline-end: none;
+  transform: translate3d(100%, 0, 0);
+  transition:
+    transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+    visibility 0s linear 0.32s;
+}
+
+[dir='ltr'] .tr-nav-bar.is-overlay {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.tr-nav-bar.is-overlay.is-open {
+  @apply visible;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+    visibility 0s;
+}
+
+.tr-nav-bar__backdrop {
+  @apply fixed inset-0 z-[10000] opacity-0 pointer-events-none;
+  background: rgb(0 0 0 / 0.32);
+  transition: opacity 0.32s ease;
+}
+
+.tr-nav-bar__backdrop.is-open {
+  @apply opacity-100 pointer-events-auto;
+}
+
+.tr-nav-bar__header {
+  @apply flex items-center justify-end shrink-0 gap-xs py-xs px-sm min-h-[3.5rem];
+}
+
+.tr-nav-bar__header-start {
+  @apply min-w-0 flex-1;
+}
+
+.tr-nav-bar__main {
+  @apply flex-1 min-h-0 overflow-auto p-xs;
+  transition: padding 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.tr-nav-bar__footer {
+  @apply shrink-0 p-xs;
+}
+
+.tr-nav-bar a,
+.tr-nav-bar .tr-nav-bar__item {
+  @apply whitespace-nowrap;
+}
+
+.tr-nav-bar__submenu {
+  @apply grid opacity-0;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.22s ease,
+    opacity 0.18s ease;
+}
+
+.tr-nav-bar__submenu.is-open {
+  @apply opacity-100;
+  grid-template-rows: 1fr;
+}
+
+.tr-nav-bar.is-collapsed .tr-nav-bar__submenu,
+.tr-nav-bar.is-collapsed .tr-nav-bar__submenu.is-open {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tr-nav-bar__submenu-inner {
+  @apply overflow-hidden min-h-0 flex flex-col gap-2xs ps-sm
+    border-s border-solid border-[#e4e7ec]
+    dark:border-gray-800;
+  margin-inline-start: calc(var(--spacing-sm) + 0.5rem);
+}
+
+.tr-nav-bar__subitem {
+  @apply relative ps-sm;
+}
+
+.tr-nav-bar__subitem::before {
+  content: '';
+  @apply absolute top-1/2 w-2xs h-2xs rounded-full bg-outlined-border pointer-events-none
+    dark:bg-outlined-dark-border;
+  inset-inline-start: calc(-1 * var(--spacing-2xs) / 2 - 0.5px);
+  margin-block-start: calc(-1 * var(--spacing-2xs) / 2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-nav-bar,
+  .tr-nav-bar a,
+  .tr-nav-bar button,
+  .tr-nav-bar__label,
+  .tr-nav-bar__chevron,
+  .tr-nav-bar__main,
+  .tr-nav-bar__submenu,
+  .tr-nav-bar.is-overlay,
+  .tr-nav-bar.is-overlay.is-open,
+  .tr-nav-bar__backdrop {
+    transition: none;
+  }
+}

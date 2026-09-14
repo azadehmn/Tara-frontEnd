@@ -1,0 +1,97 @@
+/* Source of truth for Tara color tokens. Values from the current UI kit. */
+@theme {
+  --color-white: #fff;
+  --color-gray-400: #98a2b3;
+  --color-gray-800: #1d2939;
+  --color-gray-900: #101828;
+
+  --color-primary: #1423ba;
+  --color-primary-hover: #2939c7;
+  --color-primary-focus: #3544ce;
+  --color-primary-pressed: #101c99;
+  --color-primary-select: #1423ba;
+  --color-primary-disabled: #c7caf0;
+  --color-primary-loading: #3544ce;
+  --color-primary-dark: #7380e8;
+  --color-primary-dark-hover: #8e98ee;
+  --color-primary-dark-focus: #8792ed;
+  --color-primary-dark-pressed: #a7aff2;
+  --color-primary-dark-select: #7380e8;
+  --color-primary-dark-disabled: #343a63;
+  --color-primary-dark-loading: #8792ed;
+  --color-text-onPrimary: #ffffff;
+  --color-text-dark-onPrimary: #ffffff;
+
+  --color-secondary: #b30a84;
+  --color-secondary-hover: #c11b91;
+  --color-secondary-focus: #c92a9b;
+  --color-secondary-pressed: #8e0868;
+  --color-secondary-select: #b30a84;
+  --color-secondary-disabled: #e6b4d8;
+  --color-secondary-loading: #c92a9b;
+  --color-secondary-dark: #e36ac2;
+  --color-secondary-dark-hover: #ea79cc;
+  --color-secondary-dark-focus: #ec83d1;
+  --color-secondary-dark-pressed: #f09bdc;
+  --color-secondary-dark-select: #e36ac2;
+  --color-secondary-dark-disabled: #5e3653;
+  --color-secondary-dark-loading: #ec83d1;
+  --color-text-onSecondary: #ffffff;
+  --color-text-dark-onSecondary: #ffffff;
+
+  --color-outlined: #ffffff;
+  --color-outlined-hover: #f5f7ff;
+  --color-outlined-focus: #ffffff;
+  --color-outlined-pressed: #ebe4ff;
+  --color-outlined-select: #f5f7ff;
+  --color-outlined-disabled: #efeff1;
+  --color-outlined-loading: #f5f7ff;
+  --color-outlined-dark: #0c051a;
+  --color-outlined-dark-hover: #1a1230;
+  --color-outlined-dark-focus: #1a1230;
+  --color-outlined-dark-pressed: #24183c;
+  --color-outlined-dark-select: #1a1230;
+  --color-outlined-dark-disabled: #2a2438;
+  --color-outlined-dark-loading: #1a1230;
+  --color-text-onOutlined: #1423ba;
+  --color-text-dark-onOutlined: #1423ba;
+  --color-outlined-border: #d3c3f4;
+  --color-outlined-border-hover: #d3c3f4;
+  --color-outlined-border-disabled: #d1d5db;
+  --color-outlined-dark-border: #d3c3f4;
+  --color-outlined-dark-border-hover: #d3c3f4;
+  --color-outlined-dark-border-disabled: #4a3a72;
+
+  --color-surface: #ffffff;
+  --color-surface-hover: #f7f7f8;
+  --color-surface-focus: #f4f4f5;
+  --color-surface-pressed: #eeeef1;
+  --color-surface-select: #f4f4f5;
+  --color-surface-disabled: #efeff0;
+  --color-surface-dark: #19191a;
+  --color-surface-dark-hover: #28282a;
+  --color-surface-dark-focus: #28282a;
+  --color-surface-dark-pressed: #39393c;
+  --color-surface-dark-select: #323234;
+  --color-surface-dark-disabled: #2b2b2c;
+
+  --color-text: #2e2e38;
+  --color-text-soft: #747481;
+  --color-text-disabled: #8c8c8c;
+  --color-text-dark: #ffffff;
+  --color-text-dark-soft: #bdbdbd;
+  --color-text-dark-disabled: #5e5e5e;
+
+  --color-border: #dadbe1;
+  --color-border-soft: #f4f4f6;
+  --color-border-divider: #eeeef1;
+  --color-border-dark: #525252;
+  --color-border-dark-soft: #252525;
+  --color-border-dark-divider: #2e2e2e;
+
+  --color-skeleton: #edeeef;
+  --color-skeleton-dark: #343536;
+
+  --color-background: #f5f5f5;
+  --color-background-dark: #101828;
+}

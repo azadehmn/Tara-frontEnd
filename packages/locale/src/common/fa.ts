@@ -7,6 +7,13 @@ export const commonFa: MessageTree = {
     cancel: 'انصراف',
     confirm: 'تأیید',
     retry: 'تلاش مجدد',
+    search: 'جستجو',
+    loading: 'در حال بارگذاری…',
+    empty: 'موردی یافت نشد',
+    actions: 'عملیات',
+    prev: 'قبلی',
+    next: 'بعدی',
+    back: 'بازگشت',
   },
   errors: {
     unexpected: 'بروز خطا، لطفا دوباره امتحان کنید',

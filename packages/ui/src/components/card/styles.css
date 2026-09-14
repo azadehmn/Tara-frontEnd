@@ -1,0 +1,38 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-card {
+  @apply flex flex-col gap-md rounded-md border border-solid border-[#e4e7ec] bg-surface
+    shadow-elevation-50 text-text
+    dark:border-gray-800 dark:bg-[#171f2e] dark:shadow-elevation-dark-50 dark:text-text-dark;
+}
+
+.tr-card--padding-none {
+  @apply p-0 gap-0;
+}
+
+.tr-card--padding-sm {
+  @apply p-sm;
+}
+
+.tr-card--padding-md {
+  @apply p-md;
+}
+.tr-card--padding-lg {
+  @apply p-lg;
+}
+.tr-card--padding-2xl {
+  @apply p-2xl;
+}
+
+.tr-card__header {
+  @apply text-heading-sm text-text dark:text-text-dark;
+}
+
+.tr-card__body {
+  @apply min-h-0 flex-1;
+}
+
+.tr-card__footer {
+  @apply text-body-md text-text-soft dark:text-text-dark-soft;
+}
