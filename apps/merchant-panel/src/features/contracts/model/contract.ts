@@ -1,3 +1,5 @@
+export type ContractType = 'Cash' | 'Credit';
+
 export const ContractKind = {
   Credit: 'Credit',
   Acceptor: 'Acceptor',
@@ -20,7 +22,7 @@ export interface ContractListItemDto {
   profileTitle: string;
   endDate: string | null;
   title: string;
-  type: string;
+  type: ContractType;
   disabled: boolean;
   isEnabled: boolean;
   deactivated: boolean;
@@ -47,7 +49,7 @@ export interface ContractListItem {
   id: number;
   title: string;
   profileTitle: string;
-  type: string;
+  type: ContractType;
   endDate: string | null;
   isEnabled: boolean;
   deactivatedByOrg: boolean;

@@ -11,4 +11,4 @@ export { useContractDetail } from './composables/use-contract-detail';
 export { useContractUsers } from './composables/use-contract-users';
 export { useContractMerchants } from './composables/use-contract-merchants';
 export { useContractBatches } from './composables/use-contract-batches';
-export type { ContractListItem, ContractDetail, ContractScope } from './model/contract';
+export type { ContractListItem, ContractDetail, ContractScope, ContractType } from './model/contract';

@@ -25,6 +25,7 @@ export const merchantPanelEn: MessageTree = {
   contracts: {
     detail: { title: 'Contract details' },
     status: { active: 'Active', inactive: 'Inactive' },
+    types: { Cash: 'Cash', Credit: 'Credit' },
     fields: {
       id: 'Contract ID',
       title: 'Title',

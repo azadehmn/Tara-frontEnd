@@ -95,9 +95,7 @@ function rowActions(item: ContractListItem): TrActionItem[] {
 
 <template>
   <div class="flex flex-col gap-4">
-    <!-- <TrCard>
-     
-    </TrCard> -->
+
 
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
 
@@ -132,6 +130,9 @@ function rowActions(item: ContractListItem): TrActionItem[] {
         :loading="pending"
         :empty-text="t('common.empty')"
       >
+        <template #item-type="{ item }">
+          {{ t(`contracts.types.${item.type}`) }}
+        </template>
         <template #item-isenabled="{ item }">
           {{ item.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive') }}
         </template>

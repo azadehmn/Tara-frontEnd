@@ -25,6 +25,7 @@ export const merchantPanelFa: MessageTree = {
   contracts: {
     detail: { title: 'جزئیات قرارداد' },
     status: { active: 'فعال', inactive: 'غیرفعال' },
+    types: { Cash: 'نقدی', Credit: 'اعتباری' },
     fields: {
       id: 'شماره قرارداد',
       title: 'عنوان قرارداد',

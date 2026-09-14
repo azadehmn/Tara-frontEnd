@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+    class="flex min-h-screen flex-col text-text dark:text-text-dark"
   >
     <TrTopBar>
       <template #start>
@@ -55,8 +55,10 @@
         <AppSidebar />
       </TrNavigationBar>
 
-      <main class="min-w-0 flex-1 overflow-auto p-6">
-        <RouterView />
+      <main class="min-w-0 flex-1 overflow-auto py-xl">
+        <div class="container-xl">
+          <RouterView />
+        </div>
       </main>
     </div>
   </div>
