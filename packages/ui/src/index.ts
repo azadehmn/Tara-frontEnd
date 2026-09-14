@@ -4,7 +4,7 @@
  */
 export { taraUi } from './plugin';
 export { TrAction } from './components/action';
-export type { TrActionItem, TrActionProps } from './components/action';
+export type { TrActionItem, TrActionProps, TrActionTone } from './components/action';
 export { TrButton } from './components/button';
 export { TrIcon } from './components/icon';
 export type { TrIconProps, TrIconSize } from './components/icon';

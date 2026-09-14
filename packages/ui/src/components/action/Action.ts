@@ -1,3 +1,7 @@
+import type { Component } from 'vue';
+
+export type TrActionTone = 'danger' | 'success';
+
 export type TrActionItem = {
   id: number | string;
   label: string;
@@ -5,6 +9,10 @@ export type TrActionItem = {
   disabled?: boolean;
   /** When false, the item is omitted. Defaults to true. */
   active?: boolean;
+  icon?: Component;
+  iconClass?: string;
+  itemClass?: string;
+  tone?: TrActionTone;
 };
 
 export type TrActionProps = {

@@ -5,14 +5,55 @@
   @apply relative inline-flex;
 }
 
+.tr-action__trigger {
+  @apply inline-flex size-8 cursor-pointer items-center justify-center
+    border-none bg-transparent p-0 text-text
+    dark:text-text-dark;
+}
+
+.tr-action__trigger svg {
+  @apply block size-4;
+}
+
 .tr-action__menu {
-  @apply absolute end-0 top-full z-20 mt-2xs min-w-[160px];
+  @apply absolute end-0 top-full z-20 min-w-[160px] pt-2xs;
+}
+
+.tr-action__menu .tr-card {
+  @apply p-xs gap-0;
 }
 
 .tr-action__item {
-  @apply flex w-full cursor-pointer items-center rounded-sm border-none bg-transparent
-    px-sm py-xs text-start text-body-md text-text
-    dark:text-text-dark;
+  @apply relative flex w-full cursor-pointer items-center gap-xs rounded-sm border-none bg-transparent
+    px-xs py-2xs text-start text-body-md text-text
+    dark:text-gray-400;
+}
+
+.tr-action__item-icon {
+  @apply inline-flex size-[20px] shrink-0 items-center justify-center;
+}
+
+.tr-action__item-icon svg {
+  @apply block size-full;
+}
+
+.tr-action__item--danger .tr-action__item-icon {
+  color: #c30e24;
+}
+
+.tr-action__item--success .tr-action__item-icon {
+  color: #248061;
+}
+
+.tr-action__item:not(:last-child)::after {
+  content: '';
+  @apply pointer-events-none absolute bottom-0 bg-[#e4e7ec];
+  height: 1px;
+  inset-inline: var(--spacing-xs);
+}
+
+html[data-theme='dark'] .tr-action__item:not(:last-child)::after {
+  background-color: #1d2939;
 }
 
 .tr-action__item:hover:not(:disabled) {
