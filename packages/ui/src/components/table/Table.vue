@@ -33,6 +33,8 @@ const slots = useSlots();
 
 const hasActionSlot = computed(() => Boolean(slots.action));
 
+const itemSlots = computed(() => new Set(Object.keys(slots)));
+
 const gridTemplate = computed(() => {
   const tracks = props.columns.map((column) => column.width ?? 'minmax(100px, 1fr)');
   if (hasActionSlot.value) tracks.push(props.actionWidth);
@@ -42,10 +44,6 @@ const gridTemplate = computed(() => {
 const skeletonRows = computed(() =>
   Array.from({ length: Math.max(1, props.loadingRowCount) }, (_, index) => index),
 );
-
-function hasSlot(name: string): boolean {
-  return Boolean(slots[name]);
-}
 
 function onRowClick(item: T) {
   emit('rowClick', item);
@@ -71,7 +69,7 @@ function onRowHover(item: T, index: number, hovering: boolean) {
         :class="column.class"
         role="columnheader"
       >
-        <slot v-if="hasSlot(columnSlotName(column))" :name="columnSlotName(column)" :column="column">
+        <slot v-if="itemSlots.has(columnSlotName(column))" :name="columnSlotName(column)" :column="column">
           {{ column.label }}
         </slot>
         <template v-else>{{ column.label }}</template>
@@ -123,7 +121,7 @@ function onRowHover(item: T, index: number, hovering: boolean) {
           role="cell"
         >
           <slot
-            v-if="hasSlot(itemSlotName(column))"
+            v-if="itemSlots.has(itemSlotName(column))"
             :name="itemSlotName(column)"
             :item="item"
             :column="column"
