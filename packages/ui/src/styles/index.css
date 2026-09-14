@@ -168,6 +168,6 @@ body {
 
 html[data-theme='dark'],
 html[data-theme='dark'] body {
-  background-color:var(--color-outlined-dark, #0c051a);
+  background-color: var(--color-background-dark);
   color: var(--color-text-dark);
 }

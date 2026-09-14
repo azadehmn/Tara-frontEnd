@@ -6,7 +6,7 @@
     border-b border-solid
     gap-sm px-md
     bg-outlined border-[#e4e7ec]
-    dark:bg-outlined-dark dark:border-gray-800;
+    dark:bg-background-dark dark:border-gray-800;
 }
 
 .tr-top-bar__start,

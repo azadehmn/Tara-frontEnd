@@ -12,7 +12,7 @@
 
   @apply flex flex-col shrink-0 min-h-0 overflow-hidden
     bg-outlined border-e border-solid border-[#e4e7ec]
-    dark:bg-outlined-dark dark:border-gray-800;
+    dark:bg-background-dark dark:border-gray-800;
   width: var(--tr-nav-bar-width);
   transition: width 0.32s cubic-bezier(0.32, 0.72, 0, 1);
 }
