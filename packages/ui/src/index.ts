@@ -1,6 +1,6 @@
 /**
  * Tara UI kit public API.
- * Template tags after `app.use(taraUi)`: Tr-Button,.....
+ * Template tags after `app.use(taraUi)`: TrButton, TrTable, …
  */
 export { taraUi } from './plugin';
 export { TrAction } from './components/action';

@@ -2,7 +2,7 @@
 import { computed, useSlots } from 'vue';
 import type { TrButtonProps } from './Button';
 
-defineOptions({ name: 'Tr-Button' });
+defineOptions({ name: 'TrButton' });
 
 const props = withDefaults(defineProps<TrButtonProps>(), {
   variant: 'primary',

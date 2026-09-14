@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { useSlots } from 'vue';
 import type { TrCardProps } from './Card';
 
-defineOptions({ name: 'Tr-Card' });
+defineOptions({ name: 'TrCard' });
 
 withDefaults(defineProps<TrCardProps>(), {
   padding: '2xl',
 });
-
-const slots = useSlots();
 </script>
 
 <template>
   <div class="tr-card" :class="`tr-card--padding-${padding}`">
-    <div v-if="slots.header" class="tr-card__header">
+    <div v-if="$slots.header" class="tr-card__header">
       <slot name="header" />
     </div>
     <div class="tr-card__body">
@@ -21,7 +18,7 @@ const slots = useSlots();
         <slot />
       </slot>
     </div>
-    <div v-if="slots.footer" class="tr-card__footer">
+    <div v-if="$slots.footer" class="tr-card__footer">
       <slot name="footer" />
     </div>
   </div>

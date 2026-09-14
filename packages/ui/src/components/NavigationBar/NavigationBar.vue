@@ -16,8 +16,8 @@
       :aria-label="ariaLabel"
       :aria-hidden="mode === 'overlay' && !open ? true : undefined"
     >
-      <div v-if="mode === 'overlay' || slots.header" class="tr-nav-bar__header">
-        <div v-if="slots.header" class="tr-nav-bar__header-start">
+      <div v-if="mode === 'overlay' || $slots.header" class="tr-nav-bar__header">
+        <div v-if="$slots.header" class="tr-nav-bar__header-start">
           <slot name="header" />
         </div>
         <TrButton
@@ -39,28 +39,26 @@
           </template>
         </TrButton>
       </div>
-      <div v-if="slots.default" class="tr-nav-bar__main">
+      <div v-if="$slots.default" class="tr-nav-bar__main">
         <slot />
       </div>
-      <div v-if="slots.footer" class="tr-nav-bar__footer">
+      <div v-if="$slots.footer" class="tr-nav-bar__footer">
         <slot name="footer" />
       </div>
     </aside>
   </div>
 </template>
 <script setup lang="ts">
-import { useSlots } from 'vue';
 import { TrButton } from '../button';
 import type { TrNavigationBarProps } from './NavigationBar';
 
-defineOptions({ name: 'Tr-NavigationBar' });
+defineOptions({ name: 'TrNavigationBar' });
 
 withDefaults(defineProps<TrNavigationBarProps>(), {
   open: false,
 });
 
 const emit = defineEmits<{ close: [] }>();
-const slots = useSlots();
 </script>
 
 <style src="./NavigationBar.css"></style>

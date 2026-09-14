@@ -4,7 +4,7 @@ import { TrButton } from '../button';
 import { TrCard } from '../card';
 import type { TrActionItem, TrActionProps } from './Action';
 
-defineOptions({ name: 'Tr-Action' });
+defineOptions({ name: 'TrAction' });
 
 const props = withDefaults(defineProps<TrActionProps>(), {
   items: () => [],

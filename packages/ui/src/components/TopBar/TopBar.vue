@@ -1,25 +1,22 @@
 <script setup lang="ts">
-import { useSlots } from 'vue';
 import type { TrTopBarProps } from './TopBar';
 
-defineOptions({ name: 'Tr-TopBar' });
+defineOptions({ name: 'TrTopBar' });
 
 defineProps<TrTopBarProps>();
-
-const slots = useSlots();
 </script>
 
 <template>
   <header class="tr-top-bar" :aria-label="ariaLabel">
-    <div v-if="slots.start" class="tr-top-bar__start">
+    <div v-if="$slots.start" class="tr-top-bar__start">
       <slot name="start" />
     </div>
 
-    <div v-if="slots.default" class="tr-top-bar__center">
+    <div v-if="$slots.default" class="tr-top-bar__center">
       <slot />
     </div>
 
-    <div v-if="slots.end" class="tr-top-bar__end">
+    <div v-if="$slots.end" class="tr-top-bar__end">
       <slot name="end" />
     </div>
   </header>

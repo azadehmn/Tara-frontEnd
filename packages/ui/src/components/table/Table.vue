@@ -10,7 +10,7 @@ import {
   type TrTableRowHoverPayload,
 } from './Table';
 
-defineOptions({ name: 'Tr-Table' });
+defineOptions({ name: 'TrTable' });
 
 const props = withDefaults(defineProps<TrTableProps<T>>(), {
   items: () => [],
