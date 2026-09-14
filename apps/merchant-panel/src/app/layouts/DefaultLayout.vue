@@ -2,19 +2,20 @@
   <div class="flex min-h-screen flex-col text-text dark:text-text-dark">
     <TrTopBar>
       <template #start>
-        <TrButton
-          variant="outlined"
-          size="small"
+        <div
+          class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md text-text hover:bg-surface-hover dark:text-text-dark dark:hover:bg-surface-dark-hover"
+          role="button"
+          tabindex="0"
           :aria-label="t('layout.sidebarToggle')"
           :aria-expanded="isOverlayOpen || isRailExpanded"
           @click="toggleNavigation"
+          @keydown.enter.prevent="toggleNavigation"
+          @keydown.space.prevent="toggleNavigation"
         >
-          <template #icon>
-            <TrIcon size="lg" class="text-primary">
-              <TrMenuIcon />
-            </TrIcon>
-          </template>
-        </TrButton>
+          <TrIcon >
+            <TrMenuIcon />
+          </TrIcon>
+        </div>
         <img :src="taraLogo" alt="Tara" width="61" height="25" />
       </template>
       <template #end>
