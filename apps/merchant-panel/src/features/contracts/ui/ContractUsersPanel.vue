@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
 import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
+import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
+import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
 import { useContractUsers } from '../composables/use-contract-users';
 import type { ContractUser } from '../model/user';
 
@@ -33,12 +35,15 @@ const columns = computed<TrTableColumn[]>(() => [
 ]);
 
 function rowActions(item: ContractUser): TrActionItem[] {
+  const isInactive = Boolean(item.contractAccountDeactivated);
   return [
     {
       id: 'toggle-status',
-      label: item.contractAccountDeactivated
+      label: isInactive
         ? t('contracts.actions.activate')
         : t('contracts.actions.deactivate'),
+      icon: isInactive ? TrCircleCheckIcon : TrCircleSlashIcon,
+      tone: isInactive ? 'success' : 'danger',
       command: () => {
         void toggleOrgStatus(item);
       },

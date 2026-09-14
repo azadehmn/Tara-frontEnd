@@ -2,6 +2,9 @@
 import { onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
+import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
+import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
+import TrDetailsIcon from '@tara/ui/icons/DetailsIcon.vue';
 import { setContractOrgStatus } from '../api/contracts.api';
 import { useContractList } from '../composables/use-contract-list';
 import type { ContractListItem, ContractScope } from '../model/contract';
@@ -73,16 +76,20 @@ function rowActions(item: ContractListItem): TrActionItem[] {
     {
       id: 'details',
       label: t('contracts.actions.details'),
+      icon: TrDetailsIcon,
       command: () => openDetail(item),
     },
   ];
 
   if (props.scope === 'organization') {
+    const isInactive = Boolean(item.deactivatedByOrg) || !item.isEnabled;
     items.push({
       id: 'toggle-status',
-      label: item.deactivatedByOrg
+      label: isInactive
         ? t('contracts.actions.activate')
         : t('contracts.actions.deactivate'),
+      icon: isInactive ? TrCircleCheckIcon : TrCircleSlashIcon,
+      tone: isInactive ? 'success' : 'danger',
       command: () => {
         void toggleOrgStatus(item);
       },
