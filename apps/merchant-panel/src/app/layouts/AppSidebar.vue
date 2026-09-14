@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, watch } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import SidebarNavIcon, { type SidebarNavIconName } from './SidebarNavIcon.vue';
+import { TrIcon, type TrIconName } from '@tara/ui';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -11,30 +11,33 @@ type NavChild = { to: string; key: string };
 
 type NavItem = {
   to?: string;
-  key: SidebarNavIconName;
+  key: string;
+  icon: TrIconName;
   exact?: boolean;
   children?: NavChild[];
 };
 
 const items: NavItem[] = [
-  { to: '/', key: 'dashboard', exact: true },
+  { to: '/', key: 'dashboard', icon: 'gridLayout', exact: true },
   {
     key: 'contracts',
+    icon: 'contracts',
     children: [
       { to: '/contracts/organization', key: 'contractsOrganization' },
       { to: '/contracts/acceptor', key: 'contractsAcceptor' },
     ],
   },
-  { to: '/transactions', key: 'transactions' },
+  { to: '/transactions', key: 'transactions', icon: 'transaction' },
   {
     key: 'reports',
+    icon: 'reports',
     children: [
       { to: '/reports/summary', key: 'reportsSummary' },
       { to: '/reports/purchase-detail', key: 'reportsPurchaseDetail' },
       { to: '/reports/returns', key: 'reportsReturns' },
     ],
   },
-  { to: '/invoices', key: 'invoices' },
+  { to: '/invoices', key: 'invoices', icon: 'invoices' },
 ];
 
 const openMenus = reactive<Record<string, boolean>>({});
@@ -88,7 +91,7 @@ watch(
           :aria-expanded="Boolean(openMenus[item.key])"
           @click="toggleMenu(item.key, $event)"
         >
-          <SidebarNavIcon :name="item.key" />
+          <TrIcon :name="item.icon" size="sm" />
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
             {{ t(`layout.nav.${item.key}`) }}
           </span>
@@ -134,7 +137,7 @@ watch(
           :aria-label="t(`layout.nav.${item.key}`)"
           @click="navigate"
         >
-          <SidebarNavIcon :name="item.key" />
+          <TrIcon :name="item.icon" size="sm" />
           <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.key}`) }}</span>
         </a>
       </RouterLink>

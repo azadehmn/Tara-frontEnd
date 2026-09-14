@@ -1,0 +1,23 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-icon {
+  @apply inline-flex items-center justify-center shrink-0
+    text-text dark:text-text-dark;
+}
+
+.tr-icon svg {
+  @apply block size-full;
+}
+
+.tr-icon--sm {
+  @apply size-4;
+}
+
+.tr-icon--md {
+  @apply size-6;
+}
+
+.tr-icon--lg {
+  @apply size-8;
+}

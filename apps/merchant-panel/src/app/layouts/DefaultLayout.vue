@@ -12,14 +12,7 @@
           @click="toggleNavigation"
         >
           <template #icon>
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path
-                d="M2 4h12M2 8h12M2 12h12"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-            </svg>
+            <TrIcon name="menu" />
           </template>
         </TrButton>
         <img :src="taraLogo" alt="Tara" width="61" height="25" />
@@ -68,7 +61,7 @@
 import { computed, ref, watch } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import type { SupportedLocale } from '@tara/locale';
-import { TrButton, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
+import { TrButton, TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo.svg';
 
