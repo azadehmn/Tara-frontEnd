@@ -5,7 +5,7 @@ import type { TrCardProps } from './Card';
 defineOptions({ name: 'Tr-Card' });
 
 withDefaults(defineProps<TrCardProps>(), {
-  padding: 'md',
+  padding: '2xl',
 });
 
 const slots = useSlots();

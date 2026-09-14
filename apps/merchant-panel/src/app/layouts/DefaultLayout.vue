@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen flex-col text-text dark:text-text-dark">
+  <div class="flex min-h-screen flex-col bg-background text-text dark:bg-background-dark dark:text-text-dark">
     <TrTopBar>
       <template #start>
         <div

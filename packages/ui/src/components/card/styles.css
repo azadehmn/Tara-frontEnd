@@ -2,10 +2,9 @@
 @reference '../../styles/index.css';
 
 .tr-card {
-  @apply flex flex-col gap-md rounded-md border border-solid border-border-soft bg-surface
+  @apply flex flex-col gap-md rounded-md border border-solid border-[#e4e7ec] bg-surface
     shadow-elevation-50 text-text
-    dark:border-border-dark-soft dark:bg-surface-dark dark:shadow-elevation-dark-50
-    dark:text-text-dark;
+    dark:border-gray-800 dark:bg-[#171f2e] dark:shadow-elevation-dark-50 dark:text-text-dark;
 }
 
 .tr-card--padding-none {
@@ -18,6 +17,12 @@
 
 .tr-card--padding-md {
   @apply p-md;
+}
+.tr-card--padding-lg {
+  @apply p-lg;
+}
+.tr-card--padding-2xl {
+  @apply p-2xl;
 }
 
 .tr-card__header {

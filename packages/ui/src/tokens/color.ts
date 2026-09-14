@@ -159,7 +159,7 @@ export const color = {
   },
   background: {
     DEFAULT: '#F5F5F5',
-    dark: '#0F0F0F',
+    dark: '#101828',
   },
 } as const satisfies {
   primary: TrPalette;

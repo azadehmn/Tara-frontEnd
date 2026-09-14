@@ -166,8 +166,8 @@ body {
   min-height: 100%;
 }
 
-html:where([data-theme='dark']),
-html:where([data-theme='dark']) body {
-  background-color: var(--color-background-dark);
+html[data-theme='dark'],
+html[data-theme='dark'] body {
+  background-color:var(--color-outlined-dark, #0c051a);
   color: var(--color-text-dark);
 }

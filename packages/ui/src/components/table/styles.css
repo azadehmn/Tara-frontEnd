@@ -2,24 +2,23 @@
 @reference '../../styles/index.css';
 
 .tr-table {
-  @apply overflow-visible rounded-md border border-solid border-border-divider bg-surface
-    dark:border-border-dark-divider dark:bg-surface-dark;
+  @apply overflow-visible rounded-md border border-solid border-[#e4e7ec] bg-surface
+    dark:border-gray-800 dark:bg-[#1e2634];
 }
 
 .tr-table__head {
-  @apply grid border-b border-border-divider
-    dark:border-border-dark-divider;
+  @apply grid border-b-0 bg-transparent dark:bg-gray-900;
 }
 
 .tr-table__head-cell {
   @apply flex items-center justify-start border-none px-md py-md
     text-body-md font-medium text-text
-    dark:text-text-dark;
+    dark:text-gray-400;
 }
 
 .tr-table__row {
   @apply grid border-none text-body-md font-normal text-text
-    dark:text-text-dark;
+    dark:text-gray-400;
 }
 
 .tr-table__row:hover {
@@ -35,8 +34,11 @@
 }
 
 .tr-table__cell {
-  @apply grid min-w-0 items-center border-b border-border-divider px-md py-md
-    dark:border-border-dark-divider;
+  @apply grid min-w-0 items-center border-b border-solid border-border-divider px-md py-md;
+}
+
+html[data-theme='dark'] .tr-table__cell {
+  border-bottom-color: #1d2939;
 }
 
 .tr-table__row:last-child .tr-table__cell {
@@ -57,8 +59,7 @@
 }
 
 .tr-table__empty {
-  @apply px-md py-xl text-center text-body-md text-text-soft
-    dark:text-text-dark-soft;
+  @apply px-md py-xl text-center text-body-md text-text-soft dark:text-gray-400;
 }
 
 .tr-table__skeleton {

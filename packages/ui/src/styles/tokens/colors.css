@@ -1,6 +1,9 @@
 /* Source of truth for Tara color tokens. Values from the current UI kit. */
 @theme {
   --color-white: #fff;
+  --color-gray-400: #98a2b3;
+  --color-gray-800: #1d2939;
+  --color-gray-900: #101828;
 
   --color-primary: #1423ba;
   --color-primary-hover: #2939c7;
@@ -90,5 +93,5 @@
   --color-skeleton-dark: #343536;
 
   --color-background: #f5f5f5;
-  --color-background-dark: #0f0f0f;
+  --color-background-dark: #101828;
 }
