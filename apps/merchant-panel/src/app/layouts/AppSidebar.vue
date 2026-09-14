@@ -60,7 +60,7 @@ function toggleMenu(key: string, event: MouseEvent) {
 }
 
 const linkClass =
-  'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
+  'flex items-center gap-2 rounded-md px-3 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
 const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark';
 
 function isChildRouteActive(children: NavChild[] | undefined) {
@@ -91,12 +91,12 @@ watch(
           :class="[
             linkClass,
             'w-full',
-            isChildRouteActive(item.children) && 'tr-nav-bar__parent-active',
+            isChildRouteActive(item.children) && [activeClass, 'tr-nav-bar__parent-active'],
           ]"
           :aria-expanded="Boolean(openMenus[item.key])"
           @click="toggleMenu(item.key, $event)"
         >
-          <TrIcon size="sm">
+          <TrIcon size="md">
             <component :is="item.icon" />
           </TrIcon>
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
@@ -144,7 +144,7 @@ watch(
           :aria-label="t(`layout.nav.${item.key}`)"
           @click="navigate"
         >
-          <TrIcon size="sm">
+          <TrIcon size="md">
             <component :is="item.icon" />
           </TrIcon>
           <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.key}`) }}</span>

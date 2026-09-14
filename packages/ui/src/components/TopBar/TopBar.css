@@ -2,11 +2,11 @@
 @reference '../../styles/index.css';
 
 .tr-top-bar {
-  @apply relative z-[60] flex items-center min-h-[56px] shrink-0
+  @apply sticky top-0 z-[60] flex items-center min-h-[56px] shrink-0
     border-b border-solid
     gap-sm px-md
-    bg-outlined border-[#e4e7ec]
-    dark:bg-background-dark dark:border-gray-800;
+    bg-white shadow-elevation-50 border-[#e4e7ec]
+    dark:bg-background-dark dark:shadow-none dark:border-gray-800;
 }
 
 .tr-top-bar__start,

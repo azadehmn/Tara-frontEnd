@@ -34,7 +34,7 @@
 
 .tr-nav-bar.is-collapsed a,
 .tr-nav-bar.is-collapsed button {
-  @apply relative justify-center gap-0 w-full px-2xs;
+  @apply relative justify-center gap-0 w-full px-0;
 }
 
 .tr-nav-bar__label,
@@ -47,10 +47,18 @@
     max-width 0.32s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+.tr-nav-bar__label {
+  @apply text-body-md-medium;
+}
+
 .tr-nav-bar.is-collapsed .tr-nav-bar__label,
 .tr-nav-bar.is-collapsed .tr-nav-bar__chevron {
+  flex: 0 0 0;
+  width: 0;
   max-width: 0;
+  margin: 0;
   opacity: 0;
+  overflow: hidden;
   pointer-events: none;
   transition:
     opacity 0.12s ease,
@@ -142,22 +150,12 @@
 }
 
 .tr-nav-bar__submenu-inner {
-  @apply overflow-hidden min-h-0 flex flex-col gap-2xs ps-sm
-    border-s border-solid border-[#e4e7ec]
-    dark:border-gray-800;
-  margin-inline-start: calc(var(--spacing-sm) + 0.5rem);
+  @apply overflow-hidden min-h-0 flex flex-col gap-2xs;
 }
 
 .tr-nav-bar__subitem {
-  @apply relative ps-sm;
-}
-
-.tr-nav-bar__subitem::before {
-  content: '';
-  @apply absolute top-1/2 w-2xs h-2xs rounded-full bg-outlined-border pointer-events-none
-    dark:bg-outlined-dark-border;
-  inset-inline-start: calc(-1 * var(--spacing-2xs) / 2 - 0.5px);
-  margin-block-start: calc(-1 * var(--spacing-2xs) / 2);
+  /* parent: px-3 + icon md (1.5rem) + gap-2 */
+  padding-inline-start: calc(0.75rem + 1.5rem + 0.5rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
