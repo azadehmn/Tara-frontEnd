@@ -154,8 +154,9 @@
   @apply justify-center shrink-0;
 }
 
-.tr-button__icon > svg {
-  @apply w-[1em] h-[1em];
+.tr-button__icon svg,
+.tr-button__icon .tr-icon {
+  @apply size-[1em];
 }
 
 .tr-button .tr-icon {
