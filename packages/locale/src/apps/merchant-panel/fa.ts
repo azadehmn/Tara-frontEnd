@@ -8,7 +8,7 @@ export const merchantPanelFa: MessageTree = {
   layout: {
     nav: {
       label: 'منوی اصلی',
-      dashboard: 'داشبورد',
+      dashboard: 'پیشخوان',
       transactions: 'تراکنش‌ها',
       reports: 'گزارشات',
       reportsSummary: 'گزارش تجمیعی',
@@ -18,6 +18,7 @@ export const merchantPanelFa: MessageTree = {
       contracts: 'قراردادها',
       contractsOrganization: 'قراردادهای سازمانی',
       contractsAcceptor: 'قراردادهای پذیرندگی',
+      demo: 'دمو',
     },
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',

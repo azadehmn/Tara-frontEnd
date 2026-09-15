@@ -8,7 +8,7 @@ export const merchantPanelEn: MessageTree = {
   layout: {
     nav: {
       label: 'Main menu',
-      dashboard: 'Dashboard',
+      dashboard: 'Home',
       transactions: 'Transactions',
       reports: 'Reports',
       reportsSummary: 'Summary report',
@@ -18,6 +18,7 @@ export const merchantPanelEn: MessageTree = {
       contracts: 'Contracts',
       contractsOrganization: 'Organization contracts',
       contractsAcceptor: 'Acceptor contracts',
+      demo: 'Demo',
     },
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',

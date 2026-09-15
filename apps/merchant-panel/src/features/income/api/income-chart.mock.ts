@@ -6,7 +6,7 @@ export const monthlyIncomeChartMock: IncomeChartEnvelopeDto = {
     current: {
       from: '2026-08-23',
       to: '2026-09-15',
-      totalValue: 405_200_000,
+      totalValue: 405_200_080,
       totalCount: 1071,
       items: [
         { date: '2026-08-23', value: 15_200_000, count: 31 },

@@ -80,6 +80,12 @@ export const router = createRouter({
           meta: { titleKey: 'layout.nav.contractsAcceptor' },
         },
         {
+          path: 'demo',
+          name: 'demo',
+          component: () => import('@pages/demo/DemoPage.vue'),
+          meta: { titleKey: 'layout.nav.demo' },
+        },
+        {
           path: 'fonts',
           name: 'fonts-preview',
           component: () => import('@pages/fonts/FontsPreviewPage.vue'),
