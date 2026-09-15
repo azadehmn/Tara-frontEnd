@@ -12,6 +12,7 @@ interface ImportMetaEnv {
   readonly VITE_DOC_ORIGIN?: string;
   readonly VITE_DEV_ACCESS_TOKEN?: string;
   readonly VITE_INCOME_CHART_USE_MOCK?: string;
+  readonly VITE_SUMMARY_USE_MOCK?: string;
 }
 
 interface ImportMeta {

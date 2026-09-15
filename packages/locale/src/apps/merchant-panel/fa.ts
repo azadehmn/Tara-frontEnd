@@ -23,6 +23,22 @@ export const merchantPanelFa: MessageTree = {
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',
   },
+  summary: {
+    loading: 'در حال بارگذاری...',
+    sales: {
+      title: 'فروش',
+      daily: 'فروش امروز',
+      week: 'فروش هفته قبل',
+      month: 'فروش ماه قبل',
+      year: 'فروش سال قبل',
+    },
+    balance: {
+      title: 'موجودی و تراکنش',
+      withdrawable: 'موجودی قابل برداشت',
+      totalTransactions: 'تعداد تراکنش',
+      returned: 'تراکنش مرجوعی',
+    },
+  },
   income: {
     chart: {
       title: 'درآمد',

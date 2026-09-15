@@ -23,6 +23,22 @@ export const merchantPanelEn: MessageTree = {
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',
   },
+  summary: {
+    loading: 'Loading...',
+    sales: {
+      title: 'Sales',
+      daily: 'Daily sales',
+      week: 'Previous week sales',
+      month: 'Previous month sales',
+      year: 'Previous year sales',
+    },
+    balance: {
+      title: 'Balance and transactions',
+      withdrawable: 'Withdrawable balance',
+      totalTransactions: 'Transactions',
+      returned: 'Returned transactions',
+    },
+  },
   income: {
     chart: {
       title: 'Income',

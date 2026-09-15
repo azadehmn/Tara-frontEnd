@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import { TrButton, TrCard } from '@tara/ui';
+import { formatAmount } from '@shared/utils/format';
 import { useIncomeChart } from '../composables/use-income-chart';
 import { useIncomeChartSeries } from '../composables/use-income-chart-series';
 import { IncomeChartPeriod } from '../model/income-chart';
@@ -13,10 +14,6 @@ const plotEl = ref<HTMLElement | null>(null);
 let plotObserver: ResizeObserver | undefined;
 
 onMounted(fetch);
-
-function formatAmount(value: number): string {
-  return new Intl.NumberFormat(locale.value === 'fa' ? 'fa-IR' : 'en-US').format(value);
-}
 
 function fitPlot() {
   const host = plotEl.value;
@@ -55,7 +52,7 @@ onUnmounted(() => {
           <p v-if="rangeLabel" class="mt-1 text-sm text-text-soft">{{ rangeLabel }}</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <p v-if="chart" class="text-heading-md">{{ formatAmount(chart.current.totalValue) }}</p>
+          <p v-if="chart" class="text-heading-md">{{ formatAmount(chart.current.totalValue, locale) }}</p>
           <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
             <TrButton
               size="small"
