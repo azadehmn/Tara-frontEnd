@@ -68,6 +68,21 @@ function formatAmount(value: number): string {
   box-shadow: none !important;
 }
 
+.apexcharts-legend-series {
+  display: inline-flex !important;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 5px;
+}
+
+.apexcharts-legend-marker {
+  margin: 0 !important;
+}
+
+.apexcharts-legend-text {
+  margin: 0 !important;
+}
+
 .income-chart-tooltip {
   min-width: 10rem;
   padding: 8px 10px;
@@ -97,7 +112,7 @@ function formatAmount(value: number): string {
 .income-chart-tooltip__name {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .income-chart-tooltip__swatch {
