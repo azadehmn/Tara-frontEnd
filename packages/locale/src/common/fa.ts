@@ -14,6 +14,9 @@ export const commonFa: MessageTree = {
     prev: 'قبلی',
     next: 'بعدی',
     back: 'بازگشت',
+    currency: {
+      rial: 'ریال',
+    },
   },
   errors: {
     unexpected: 'بروز خطا، لطفا دوباره امتحان کنید',

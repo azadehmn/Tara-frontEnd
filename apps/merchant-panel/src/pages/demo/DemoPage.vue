@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { TrButton, TrStatus, type TrButtonSize, type TrButtonVariant, type TrStatusType } from '@tara/ui';
+import {
+  TrButton,
+  TrLabel,
+  TrStatus,
+  type TrButtonSize,
+  type TrButtonVariant,
+  type TrLabelType,
+  type TrStatusType,
+} from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
 import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
 import TrDetailsIcon from '@tara/ui/icons/DetailsIcon.vue';
@@ -15,6 +23,16 @@ const statusTypes: TrStatusType[] = [
   'warning',
   'negative',
   'positive',
+];
+
+const labelTypes: TrLabelType[] = [
+  'neutral',
+  'informative',
+  'warning',
+  'negative',
+  'positive',
+  'primary',
+  'outlined',
 ];
 
 const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
@@ -63,6 +81,13 @@ const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
           </template>
         </TrButton>
       </div>
+    </section>
+
+    <p class="mb-6 text-sm opacity-70">TrLabel demo</p>
+    <section class="mb-10 flex flex-wrap items-center gap-3">
+      <TrLabel v-for="type in labelTypes" :key="type" :type="type" :text="type" />
+      <TrLabel type="positive" size="medium" radius="full" text="medium" />
+      <TrLabel type="neutral" :text="0" />
     </section>
 
     <p class="mb-6 text-sm opacity-70">TrStatus demo</p>

@@ -16,6 +16,14 @@ export type {
 } from './components/button';
 export { TrCard } from './components/card';
 export type { TrCardPadding, TrCardProps } from './components/card';
+export { TrLabel } from './components/label';
+export type {
+  TrLabelProps,
+  TrLabelRadius,
+  TrLabelSize,
+  TrLabelType,
+  TrLabelWidth,
+} from './components/label';
 export { TrTopBar } from './components/TopBar';
 export type { TrTopBarProps } from './components/TopBar';
 export { TrNavigationBar, useNavigationMode } from './components/NavigationBar';

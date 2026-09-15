@@ -3,6 +3,7 @@ import { TrAction } from './components/action';
 import { TrButton } from './components/button';
 import { TrCard } from './components/card';
 import { TrIcon } from './components/icon';
+import { TrLabel } from './components/label';
 import { TrNavigationBar } from './components/NavigationBar';
 import { TrStatus } from './components/status';
 import { TrTable } from './components/table';
@@ -18,6 +19,7 @@ export const taraUi: Plugin = {
     app.component('TrButton', TrButton);
     app.component('TrIcon', TrIcon);
     app.component('TrCard', TrCard);
+    app.component('TrLabel', TrLabel);
     app.component('TrNavigationBar', TrNavigationBar);
     app.component('TrStatus', TrStatus);
     app.component('TrTable', TrTable);

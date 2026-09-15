@@ -57,7 +57,7 @@ export const color = {
 
     text: {
       DEFAULT: '#FFFFFF',
-      dark: '#FFFFFF',
+      dark: '#0A0A0A',
     },
   },
   chart: {

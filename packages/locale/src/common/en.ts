@@ -14,6 +14,9 @@ export const commonEn: MessageTree = {
     prev: 'Previous',
     next: 'Next',
     back: 'Back',
+    currency: {
+      rial: 'IRR',
+    },
   },
   errors: {
     unexpected: 'Something went wrong. Please try again.',

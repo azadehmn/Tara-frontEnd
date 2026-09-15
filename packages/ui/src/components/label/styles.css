@@ -1,0 +1,67 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-label {
+  @apply inline-flex items-center justify-center text-center;
+}
+
+.tr-label--width-fit {
+  @apply w-fit;
+}
+
+.tr-label--width-full {
+  @apply w-full;
+}
+
+.tr-label--radius-sm {
+  @apply rounded-sm;
+}
+
+.tr-label--radius-md {
+  @apply rounded-md;
+}
+
+.tr-label--radius-full {
+  @apply rounded-full;
+}
+
+.tr-label--small {
+  @apply px-xs py-[2px] text-body-sm;
+}
+
+.tr-label--medium {
+  @apply px-xs py-2xs text-body-md;
+}
+
+.tr-label--neutral {
+  @apply bg-surface-pressed text-text dark:bg-surface-dark-pressed dark:text-text-dark;
+}
+
+.tr-label--informative {
+  @apply bg-text-information/15 text-text-information
+    dark:bg-text-dark-information/20 dark:text-text-dark-information;
+}
+
+.tr-label--negative {
+  @apply bg-text-danger/15 text-text-danger
+    dark:bg-text-dark-danger/20 dark:text-text-dark-danger;
+}
+
+.tr-label--warning {
+  @apply bg-text-warning/15 text-text-warning
+    dark:bg-text-dark-warning/20 dark:text-text-dark-warning;
+}
+
+.tr-label--positive {
+  @apply bg-surface-success text-text-success
+    dark:bg-text-dark-success/20 dark:text-text-dark-success;
+}
+
+.tr-label--primary {
+  @apply bg-primary text-text-onPrimary dark:bg-primary-dark dark:text-text-dark-onPrimary;
+}
+
+.tr-label--outlined {
+  @apply border border-border bg-surface text-text
+    dark:border-border-dark dark:bg-surface-dark dark:text-text-dark;
+}
