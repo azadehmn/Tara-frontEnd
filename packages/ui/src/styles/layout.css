@@ -10,6 +10,7 @@
 
 @media (min-width: 1200px) {
   .container-xl {
-    max-width: min(80vw, var(--tr-container-xl-max));
+    width: 80%;
+    max-width: var(--tr-container-xl-max);
   }
 }

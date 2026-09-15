@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import { TrButton, TrCard } from '@tara/ui';
 import { useIncomeChart } from '../composables/use-income-chart';
@@ -9,12 +9,41 @@ import { IncomeChartPeriod } from '../model/income-chart';
 const { t, locale } = useI18n();
 const { period, chart, pending, error, fetch, setPeriod } = useIncomeChart();
 const { series, options, rangeLabel } = useIncomeChartSeries(chart);
+const plotEl = ref<HTMLElement | null>(null);
+let plotObserver: ResizeObserver | undefined;
 
 onMounted(fetch);
 
 function formatAmount(value: number): string {
   return new Intl.NumberFormat(locale.value === 'fa' ? 'fa-IR' : 'en-US').format(value);
 }
+
+function fitPlot() {
+  const host = plotEl.value;
+  const canvas = host?.querySelector<HTMLElement>('.apexcharts-canvas');
+  if (!host || !canvas) return;
+
+  const drawn = canvas.offsetWidth;
+  const available = host.clientWidth;
+  if (!drawn) return;
+
+  const scale = available / drawn;
+  canvas.style.transform = Math.abs(scale - 1) < 0.01 ? 'none' : `scaleX(${scale})`;
+  canvas.style.transformOrigin = document.documentElement.dir === 'rtl' ? 'right top' : 'left top';
+}
+
+watch(plotEl, (el) => {
+  plotObserver?.disconnect();
+  if (!el) return;
+  plotObserver = new ResizeObserver(() => {
+    requestAnimationFrame(fitPlot);
+  });
+  plotObserver.observe(el);
+});
+
+onUnmounted(() => {
+  plotObserver?.disconnect();
+});
 </script>
 
 <template>
@@ -51,17 +80,24 @@ function formatAmount(value: number): string {
 
     <p v-if="pending && !chart" class="text-sm opacity-70">{{ t('income.chart.loading') }}</p>
     <p v-else-if="error" class="text-sm">{{ error.message }}</p>
-    <VueApexCharts
-      v-else-if="chart"
-      type="area"
-      height="310"
-      :options="options"
-      :series="series"
-    />
+    <div v-else-if="chart" ref="plotEl" class="income-chart-plot">
+      <VueApexCharts
+        type="area"
+        height="310"
+        :options="options"
+        :series="series"
+        @mounted="fitPlot"
+        @updated="fitPlot"
+      />
+    </div>
   </TrCard>
 </template>
 
 <style>
+.income-chart-plot {
+  overflow: hidden;
+}
+
 .apexcharts-tooltip {
   border: none !important;
   background: transparent !important;

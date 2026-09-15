@@ -136,6 +136,12 @@ function buildIncomeChartApexOptions(input: {
       zoom: { enabled: false },
       parentHeightOffset: 0,
       background: 'transparent',
+      animations: {
+        enabled: true,
+        dynamicAnimation: { enabled: false },
+      },
+      redrawOnWindowResize: true,
+      redrawOnParentResize: true,
     },
     colors: input.seriesColors,
     fill: {
