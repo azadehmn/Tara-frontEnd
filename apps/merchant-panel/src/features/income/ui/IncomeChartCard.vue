@@ -1,17 +1,43 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import { TrButton, TrCard } from '@tara/ui';
-import { formatAmount } from '@shared/utils/format';
+import { formatAmount, formatNumber } from '@shared/utils/format';
 import { useIncomeChart } from '../composables/use-income-chart';
 import { useIncomeChartSeries } from '../composables/use-income-chart-series';
 import { IncomeChartPeriod } from '../model/income-chart';
+
+const props = defineProps<{
+  todaySuccessfulTransactionsAmount?: number;
+  todaySuccessfulTransactionsCount?: number;
+  currentMonthSuccessfulTransactionsAmount?: number;
+  currentMonthSuccessfulTransactionsCount?: number;
+}>();
 
 const { t, locale } = useI18n();
 const { period, chart, pending, error, fetch, setPeriod } = useIncomeChart();
 const { series, options, rangeLabel } = useIncomeChartSeries(chart);
 const plotEl = ref<HTMLElement | null>(null);
 let plotObserver: ResizeObserver | undefined;
+
+const successfulTransactions = computed(() => {
+  const monthly = period.value === IncomeChartPeriod.Monthly;
+
+  return {
+    amount: monthly
+      ? props.currentMonthSuccessfulTransactionsAmount
+      : props.todaySuccessfulTransactionsAmount,
+    count: monthly
+      ? props.currentMonthSuccessfulTransactionsCount
+      : props.todaySuccessfulTransactionsCount,
+    amountLabel: monthly
+      ? 'summary.successfulCurrentMonth.amount'
+      : 'summary.successfulToday.amount',
+    countLabel: monthly
+      ? 'summary.successfulCurrentMonth.count'
+      : 'summary.successfulToday.count',
+  };
+});
 
 onMounted(fetch);
 
@@ -51,25 +77,45 @@ onUnmounted(() => {
           <h2 class="text-heading-md">{{ t('income.chart.title') }}</h2>
           <p v-if="rangeLabel" class="mt-1 text-sm text-text-soft">{{ rangeLabel }}</p>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
-          <p v-if="chart" class="text-heading-md">{{ formatAmount(chart.current.totalValue, locale) }}</p>
-          <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
-            <TrButton
-              size="small"
-              variant="outlined"
-              :text="t('income.chart.monthly')"
-              :selected="period === IncomeChartPeriod.Monthly"
-              :disabled="pending"
-              @click="setPeriod(IncomeChartPeriod.Monthly)"
-            />
-            <TrButton
-              size="small"
-              variant="outlined"
-              :text="t('income.chart.weekly')"
-              :selected="period === IncomeChartPeriod.Weekly"
-              :disabled="pending"
-              @click="setPeriod(IncomeChartPeriod.Weekly)"
-            />
+        <div class="flex flex-col items-end gap-sm">
+          <div class="flex flex-wrap items-center justify-end gap-3">
+           
+            <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
+              <TrButton
+                size="small"
+                variant="outlined"
+                :text="t('income.chart.monthly')"
+                :selected="period === IncomeChartPeriod.Monthly"
+                :disabled="pending"
+                @click="setPeriod(IncomeChartPeriod.Monthly)"
+              />
+              <TrButton
+                size="small"
+                variant="outlined"
+                :text="t('income.chart.weekly')"
+                :selected="period === IncomeChartPeriod.Weekly"
+                :disabled="pending"
+                @click="setPeriod(IncomeChartPeriod.Weekly)"
+              />
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-end gap-x-lg gap-y-xs text-sm">
+            <p v-if="successfulTransactions.amount !== undefined" class="flex gap-xs">
+              <span class="text-text-soft">
+                {{ t(successfulTransactions.amountLabel) }}
+              </span>
+              <span>
+                {{ formatAmount(successfulTransactions.amount, locale) }}
+              </span>
+            </p>
+            <p v-if="successfulTransactions.count !== undefined" class="flex gap-xs">
+              <span class="text-text-soft">
+                {{ t(successfulTransactions.countLabel) }}
+              </span>
+              <span>
+                {{ formatNumber(successfulTransactions.count, locale) }}
+              </span>
+            </p>
           </div>
         </div>
       </div>

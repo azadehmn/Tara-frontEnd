@@ -25,6 +25,14 @@ export const merchantPanelFa: MessageTree = {
   },
   summary: {
     loading: 'در حال بارگذاری...',
+    successfulToday: {
+      amount: 'مبلغ تراکنش‌های موفق امروز',
+      count: 'تعداد تراکنش‌های موفق امروز',
+    },
+    successfulCurrentMonth: {
+      amount: 'مبلغ تراکنش‌های موفق ماه جاری',
+      count: 'تعداد تراکنش‌های موفق ماه جاری',
+    },
     sales: {
       title: 'فروش',
       daily: 'فروش امروز',
