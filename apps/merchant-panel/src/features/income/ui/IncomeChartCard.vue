@@ -1,72 +1,54 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import { TrButton, TrCard } from '@tara/ui';
 import { formatAmount, formatNumber } from '@shared/utils/format';
+import { useApexChartResize } from '../composables/use-apex-chart-resize';
 import { useIncomeChart } from '../composables/use-income-chart';
 import { useIncomeChartSeries } from '../composables/use-income-chart-series';
 import { IncomeChartPeriod } from '../model/income-chart';
 
-const props = defineProps<{
-  todaySuccessfulTransactionsAmount?: number;
-  todaySuccessfulTransactionsCount?: number;
-  currentMonthSuccessfulTransactionsAmount?: number;
-  currentMonthSuccessfulTransactionsCount?: number;
-}>();
+interface SummaryMetrics {
+  todaySuccessfulTransactionsAmount: number;
+  todaySuccessfulTransactionsCount: number;
+  currentMonthSuccessfulTransactionsAmount: number;
+  currentMonthSuccessfulTransactionsCount: number;
+}
+
+const props = defineProps<{ summary?: SummaryMetrics | null }>();
 
 const { t, locale } = useI18n();
 const { period, chart, pending, error, fetch, setPeriod } = useIncomeChart();
 const { series, options, rangeLabel } = useIncomeChartSeries(chart);
 const plotEl = ref<HTMLElement | null>(null);
-let plotObserver: ResizeObserver | undefined;
+const { fit: fitPlot } = useApexChartResize(plotEl);
 
 const successfulTransactions = computed(() => {
+  if (!props.summary) return [];
+
   const monthly = period.value === IncomeChartPeriod.Monthly;
 
-  return {
-    amount: monthly
-      ? props.currentMonthSuccessfulTransactionsAmount
-      : props.todaySuccessfulTransactionsAmount,
-    count: monthly
-      ? props.currentMonthSuccessfulTransactionsCount
-      : props.todaySuccessfulTransactionsCount,
-    amountLabel: monthly
-      ? 'summary.successfulCurrentMonth.amount'
-      : 'summary.successfulToday.amount',
-    countLabel: monthly
-      ? 'summary.successfulCurrentMonth.count'
-      : 'summary.successfulToday.count',
-  };
+  const amount = monthly
+    ? props.summary.currentMonthSuccessfulTransactionsAmount
+    : props.summary.todaySuccessfulTransactionsAmount;
+  const count = monthly
+    ? props.summary.currentMonthSuccessfulTransactionsCount
+    : props.summary.todaySuccessfulTransactionsCount;
+  const labelGroup = monthly ? 'successfulCurrentMonth' : 'successfulToday';
+
+  return [
+    {
+      label: t(`summary.${labelGroup}.amount`),
+      value: formatAmount(amount, locale.value),
+    },
+    {
+      label: t(`summary.${labelGroup}.count`),
+      value: formatNumber(count, locale.value),
+    },
+  ];
 });
 
 onMounted(fetch);
-
-function fitPlot() {
-  const host = plotEl.value;
-  const canvas = host?.querySelector<HTMLElement>('.apexcharts-canvas');
-  if (!host || !canvas) return;
-
-  const drawn = canvas.offsetWidth;
-  const available = host.clientWidth;
-  if (!drawn) return;
-
-  const scale = available / drawn;
-  canvas.style.transform = Math.abs(scale - 1) < 0.01 ? 'none' : `scaleX(${scale})`;
-  canvas.style.transformOrigin = document.documentElement.dir === 'rtl' ? 'right top' : 'left top';
-}
-
-watch(plotEl, (el) => {
-  plotObserver?.disconnect();
-  if (!el) return;
-  plotObserver = new ResizeObserver(() => {
-    requestAnimationFrame(fitPlot);
-  });
-  plotObserver.observe(el);
-});
-
-onUnmounted(() => {
-  plotObserver?.disconnect();
-});
 </script>
 
 <template>
@@ -100,21 +82,9 @@ onUnmounted(() => {
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-end gap-x-lg gap-y-xs text-sm">
-            <p v-if="successfulTransactions.amount !== undefined" class="flex gap-xs">
-              <span class="text-text-soft">
-                {{ t(successfulTransactions.amountLabel) }}
-              </span>
-              <span>
-                {{ formatAmount(successfulTransactions.amount, locale) }}
-              </span>
-            </p>
-            <p v-if="successfulTransactions.count !== undefined" class="flex gap-xs">
-              <span class="text-text-soft">
-                {{ t(successfulTransactions.countLabel) }}
-              </span>
-              <span>
-                {{ formatNumber(successfulTransactions.count, locale) }}
-              </span>
+            <p v-for="item in successfulTransactions" :key="item.label" class="flex gap-xs">
+              <span class="text-text-soft">{{ item.label }}</span>
+              <span>{{ item.value }}</span>
             </p>
           </div>
         </div>

@@ -1,11 +1,6 @@
-import { onUnmounted, ref, watch } from 'vue';
+import { onUnmounted, watch, type Ref } from 'vue';
 
-/**
- * Keeps an ApexCharts canvas in sync while its container is being resized.
- * ApexCharts redraws after a delay, so the canvas is scaled until that redraw.
- */
-export function useApexChartResize() {
-  const container = ref<HTMLElement | null>(null);
+export function useApexChartResize(container: Ref<HTMLElement | null>) {
   let observer: ResizeObserver | undefined;
 
   function fit() {
@@ -29,5 +24,5 @@ export function useApexChartResize() {
 
   onUnmounted(() => observer?.disconnect());
 
-  return { container, fit };
+  return { fit };
 }

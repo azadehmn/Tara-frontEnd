@@ -15,14 +15,7 @@ onMounted(fetch);
     <div class="mt-lg grid grid-cols-1 gap-lg min-[992px]:grid-cols-12">
       <IncomeChartCard
         class="min-[992px]:col-span-7 xl:col-span-8"
-        :today-successful-transactions-amount="summary?.todaySuccessfulTransactionsAmount"
-        :today-successful-transactions-count="summary?.todaySuccessfulTransactionsCount"
-        :current-month-successful-transactions-amount="
-          summary?.currentMonthSuccessfulTransactionsAmount
-        "
-        :current-month-successful-transactions-count="
-          summary?.currentMonthSuccessfulTransactionsCount
-        "
+        :summary="summary"
       />
       <SummaryCards
         class="min-[992px]:col-span-5 xl:col-span-4"
