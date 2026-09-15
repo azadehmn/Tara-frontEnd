@@ -60,6 +60,10 @@ export const color = {
       dark: '#FFFFFF',
     },
   },
+  chart: {
+    current: '#1423BD',
+    previous: '#4D74F7',
+  },
   secondary: {
     DEFAULT: '#F0F7FF',
 
@@ -189,6 +193,10 @@ export const color = {
   secondary: TrPalette;
   outlined: TrOutlinePalette;
   white: string;
+  chart: {
+    current: string;
+    previous: string;
+  };
   surface: {
     DEFAULT: string;
     hover: string;

@@ -22,6 +22,9 @@
   --color-text-onPrimary: #ffffff;
   --color-text-dark-onPrimary: #ffffff;
 
+  --color-chart-current: #1423bd;
+  --color-chart-previous: #4d74f7;
+
   --color-secondary: #f0f7ff;
   --color-secondary-hover: #cce5ff;
   --color-secondary-focus: #d6ecff;

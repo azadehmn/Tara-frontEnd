@@ -7,12 +7,12 @@ describe('mapIncomeChart', () => {
     const mapped = mapIncomeChart(monthlyIncomeChartMock);
 
     expect(mapped.period).toBe('MONTHLY');
-    expect(mapped.current.from).toBe('2026-09-01');
+    expect(mapped.current.from).toBe('2026-08-23');
     expect(mapped.current.to).toBe('2026-09-15');
-    expect(mapped.current.totalValue).toBe(268_700_000);
-    expect(mapped.current.items).toHaveLength(15);
-    expect(mapped.previous.from).toBe('2026-08-01');
-    expect(mapped.previous.to).toBe('2026-08-31');
+    expect(mapped.current.totalValue).toBe(405_200_000);
+    expect(mapped.current.items).toHaveLength(24);
+    expect(mapped.previous.from).toBe('2026-07-23');
+    expect(mapped.previous.to).toBe('2026-08-22');
     expect(mapped.previous.items).toHaveLength(31);
   });
 
@@ -30,9 +30,9 @@ describe('mapIncomeChart', () => {
 
     expect(mapped.period).toBe('MONTHLY');
     expect(mapped.current.items[0]).toEqual({
-      date: '2026-09-01',
-      value: 12_500_000,
-      count: 34,
+      date: '2026-08-23',
+      value: 15_200_000,
+      count: 31,
     });
   });
 });

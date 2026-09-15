@@ -53,7 +53,7 @@ export function createMerchantViteConfig(mode: string): UserConfig {
     },
     optimizeDeps: {
       // Pre-bundle the external dependency for faster development startup.
-      include: ['vue-i18n'],
+      include: ['vue-i18n', 'apexcharts', 'vue3-apexcharts'],
       // Keep the workspace package as source for local development and HMR.
       exclude: ['@tara/locale'],
     },

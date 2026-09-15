@@ -16,6 +16,9 @@ importers:
       '@tara/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      apexcharts:
+        specifier: ^7.3.0
+        version: 7.3.0
       pinia:
         specifier: ^3.0.3
         version: 3.0.4(typescript@5.9.3)(vue@3.5.42(typescript@5.9.3))
@@ -28,6 +31,9 @@ importers:
       vue-router:
         specifier: ^4.5.1
         version: 4.6.4(vue@3.5.42(typescript@5.9.3))
+      vue3-apexcharts:
+        specifier: ^1.11.1
+        version: 1.11.1(apexcharts@7.3.0)(vue@3.5.42(typescript@5.9.3))
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.1.13
@@ -1038,6 +1044,13 @@ packages:
   ansi-styles@6.2.3:
     resolution: {integrity: sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg==}
     engines: {node: '>=12'}
+
+  apex-commons@0.7.0:
+    resolution: {integrity: sha512-cGspw4G0FV/hULrJy75Du301lFGSkMWph4c5B+/YX4CBImG8WFWRUZ5dTFKYcoK5Q8/Ax2jHAKWVVRzNZOWH7g==}
+
+  apexcharts@7.3.0:
+    resolution: {integrity: sha512-WCpubnhgwuNdhH0VZ/Wizj13NlKqDBAxUTYmhnd01pBnDsdiPKNuXFATvDS2t1sojOVuzDFpCvBOWGEvbSUi6g==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -2054,6 +2067,12 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
+  vue3-apexcharts@1.11.1:
+    resolution: {integrity: sha512-MbN3vg8bMG19wc0Lm1HkeQvODgLm56DgpIxtNUO0xpf/JCzYWVGE4jzXp2JISzy2s3Kul1yOxNQUYsLvKQ5L9g==}
+    peerDependencies:
+      apexcharts: '>=5.10.0'
+      vue: '>=3.0.0'
+
   vue@3.5.42:
     resolution: {integrity: sha512-4RyHQTbQvOPs3MfvUO1Sg0YRrKNnA0mAVtvpd12Tg1fKDN7OHBUl1IqSn8zGJjK9nI3NkNp8cgTpVrSZC5TTcA==}
     peerDependencies:
@@ -2904,6 +2923,12 @@ snapshots:
       color-convert: 2.0.1
 
   ansi-styles@6.2.3: {}
+
+  apex-commons@0.7.0: {}
+
+  apexcharts@7.3.0:
+    dependencies:
+      apex-commons: 0.7.0
 
   argparse@2.0.1: {}
 
@@ -3938,6 +3963,11 @@ snapshots:
       '@volar/typescript': 2.4.28
       '@vue/language-core': 3.3.11
       typescript: 5.9.3
+
+  vue3-apexcharts@1.11.1(apexcharts@7.3.0)(vue@3.5.42(typescript@5.9.3)):
+    dependencies:
+      apexcharts: 7.3.0
+      vue: 3.5.42(typescript@5.9.3)
 
   vue@3.5.42(typescript@5.9.3):
     dependencies:

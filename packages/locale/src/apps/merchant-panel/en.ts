@@ -29,6 +29,17 @@ export const merchantPanelEn: MessageTree = {
       monthly: 'Monthly',
       weekly: 'Weekly',
       loading: 'Loading...',
+      current: 'Current period',
+      previous: 'Previous period',
+      weekdays: {
+        sat: 'Sat',
+        sun: 'Sun',
+        mon: 'Mon',
+        tue: 'Tue',
+        wed: 'Wed',
+        thu: 'Thu',
+        fri: 'Fri',
+      },
     },
   },
   contracts: {

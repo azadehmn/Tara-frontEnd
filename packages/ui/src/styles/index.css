@@ -25,6 +25,8 @@
   --tr-color-primary-dark-disabled: var(--color-primary-dark-disabled);
   --tr-color-primary-dark-loading: var(--color-primary-dark-loading);
   --tr-color-primary-text-dark: var(--color-text-dark-onPrimary);
+  --tr-color-chart-current: var(--color-chart-current);
+  --tr-color-chart-previous: var(--color-chart-previous);
 
   --tr-color-secondary: var(--color-secondary);
   --tr-color-secondary-hover: var(--color-secondary-hover);

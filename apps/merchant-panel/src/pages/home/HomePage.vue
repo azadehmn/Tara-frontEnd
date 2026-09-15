@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { IncomeChartCard } from '@features/income';
 import { TrButton, TrStatus, type TrButtonSize, type TrButtonVariant, type TrStatusType } from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
 import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
@@ -29,6 +30,8 @@ const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
 <template>
   <div>
     <h1 class="m-2xs text-heading-lg">{{ t('app.name') }}</h1>
+    <IncomeChartCard class="mb-10" />
+
     <p class="mb-6 text-sm opacity-70">TrButton demo</p>
 
     <section v-for="variant in variants" :key="variant" class="mb-10">
