@@ -31,6 +31,13 @@ export type {
   TrNavigationBarProps,
   TrNavigationMode,
 } from './components/NavigationBar';
+export { TrSegmentedControl } from './components/segmented-control';
+export type {
+  TrSegmentedControlOption,
+  TrSegmentedControlProps,
+  TrSegmentedControlSize,
+  TrSegmentedControlValue,
+} from './components/segmented-control';
 export { TrStatus } from './components/status';
 export type { TrStatusProps, TrStatusType } from './components/status';
 export {

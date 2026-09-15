@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
-import { TrButton, TrCard, TrLabel } from '@tara/ui';
+import {
+  TrCard,
+  TrLabel,
+  TrSegmentedControl,
+  type TrSegmentedControlOption,
+  type TrSegmentedControlValue,
+} from '@tara/ui';
 import { formatAmount, formatNumber } from '@shared/utils/format';
 import { useApexChartResize } from '../composables/use-apex-chart-resize';
 import { useIncomeChart } from '../composables/use-income-chart';
@@ -22,6 +28,11 @@ const { period, chart, pending, error, fetch, setPeriod } = useIncomeChart();
 const { series, options, rangeLabel } = useIncomeChartSeries(chart);
 const plotEl = ref<HTMLElement | null>(null);
 const { fit: fitPlot } = useApexChartResize(plotEl);
+
+const periodOptions = computed<TrSegmentedControlOption[]>(() => [
+  { value: IncomeChartPeriod.Monthly, label: t('income.chart.monthly') },
+  { value: IncomeChartPeriod.Weekly, label: t('income.chart.weekly') },
+]);
 
 const successfulTransactions = computed(() => {
   if (!props.summary) return [];
@@ -48,6 +59,11 @@ const successfulTransactions = computed(() => {
   ];
 });
 
+function updatePeriod(value: TrSegmentedControlValue): void {
+  if (value !== IncomeChartPeriod.Monthly && value !== IncomeChartPeriod.Weekly) return;
+  void setPeriod(value);
+}
+
 onMounted(fetch);
 </script>
 
@@ -59,24 +75,13 @@ onMounted(fetch);
           <h2 class="text-heading-md">{{ t('income.chart.title') }}</h2>
           <p v-if="rangeLabel" class="mt-1 text-sm text-text-soft">{{ rangeLabel }}</p>
         </div>
-        <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
-          <TrButton
-            size="small"
-            variant="outlined"
-            :text="t('income.chart.monthly')"
-            :selected="period === IncomeChartPeriod.Monthly"
-            :disabled="pending"
-            @click="setPeriod(IncomeChartPeriod.Monthly)"
-          />
-          <TrButton
-            size="small"
-            variant="outlined"
-            :text="t('income.chart.weekly')"
-            :selected="period === IncomeChartPeriod.Weekly"
-            :disabled="pending"
-            @click="setPeriod(IncomeChartPeriod.Weekly)"
-          />
-        </div>
+        <TrSegmentedControl
+          :model-value="period"
+          :options="periodOptions"
+          :label="t('income.chart.period')"
+          :disabled="pending"
+          @update:model-value="updatePeriod"
+        />
       </div>
 
       <div

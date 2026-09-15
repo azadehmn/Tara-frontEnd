@@ -1,0 +1,35 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-segmented-control {
+  @apply inline-flex w-fit items-stretch rounded-md bg-background p-2xs
+    dark:bg-secondary-dark;
+}
+
+.tr-segmented-control__option {
+  @apply grow cursor-pointer rounded-sm border-0 bg-transparent text-center text-text
+    outline-none transition-colors
+    dark:text-text-dark;
+}
+
+.tr-segmented-control--small .tr-segmented-control__option {
+  @apply min-h-[28px] px-lg py-2xs text-button-sm;
+}
+
+.tr-segmented-control--medium .tr-segmented-control__option {
+  @apply min-h-[36px] px-xl py-xs text-button-md;
+}
+
+.tr-segmented-control__option:focus-visible {
+  @apply outline-2 outline-solid outline-offset-1 outline-primary-focus
+    dark:outline-primary-dark-focus;
+}
+
+.tr-segmented-control__option.is-selected {
+  @apply bg-surface text-text shadow-elevation-50
+    dark:bg-surface-dark dark:text-text-dark dark:shadow-elevation-dark-50;
+}
+
+.tr-segmented-control__option:disabled {
+  @apply cursor-not-allowed text-text-disabled opacity-60 dark:text-text-dark-disabled;
+}

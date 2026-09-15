@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import {
   TrButton,
   TrLabel,
+  TrSegmentedControl,
   TrStatus,
   type TrButtonSize,
   type TrButtonVariant,
   type TrLabelType,
+  type TrSegmentedControlOption,
   type TrStatusType,
 } from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
@@ -33,6 +36,12 @@ const labelTypes: TrLabelType[] = [
   'positive',
   'primary',
   'outlined',
+];
+
+const segmentValue = ref('monthly');
+const segmentOptions: TrSegmentedControlOption[] = [
+  { value: 'monthly', label: 'ماهانه' },
+  { value: 'weekly', label: 'هفتگی' },
 ];
 
 const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
@@ -81,6 +90,15 @@ const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
           </template>
         </TrButton>
       </div>
+    </section>
+
+    <p class="mb-6 text-sm opacity-70">TrSegmentedControl demo</p>
+    <section class="mb-10">
+      <TrSegmentedControl
+        v-model="segmentValue"
+        :options="segmentOptions"
+        label="بازه زمانی"
+      />
     </section>
 
     <p class="mb-6 text-sm opacity-70">TrLabel demo</p>
