@@ -59,34 +59,43 @@ onMounted(fetch);
           <h2 class="text-heading-md">{{ t('income.chart.title') }}</h2>
           <p v-if="rangeLabel" class="mt-1 text-sm text-text-soft">{{ rangeLabel }}</p>
         </div>
-        <div class="flex flex-col items-end gap-sm">
-          <div class="flex flex-wrap items-center justify-end gap-3">
-           
-            <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
-              <TrButton
-                size="small"
-                variant="outlined"
-                :text="t('income.chart.monthly')"
-                :selected="period === IncomeChartPeriod.Monthly"
-                :disabled="pending"
-                @click="setPeriod(IncomeChartPeriod.Monthly)"
-              />
-              <TrButton
-                size="small"
-                variant="outlined"
-                :text="t('income.chart.weekly')"
-                :selected="period === IncomeChartPeriod.Weekly"
-                :disabled="pending"
-                @click="setPeriod(IncomeChartPeriod.Weekly)"
-              />
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center justify-end gap-x-lg gap-y-xs text-sm">
-            <p v-for="item in successfulTransactions" :key="item.label" class="flex gap-xs">
-              <span class="text-text-soft">{{ item.label }}</span>
-              <span>{{ item.value }}</span>
-            </p>
-          </div>
+        <div class="flex gap-1" role="group" :aria-label="t('income.chart.period')">
+          <TrButton
+            size="small"
+            variant="outlined"
+            :text="t('income.chart.monthly')"
+            :selected="period === IncomeChartPeriod.Monthly"
+            :disabled="pending"
+            @click="setPeriod(IncomeChartPeriod.Monthly)"
+          />
+          <TrButton
+            size="small"
+            variant="outlined"
+            :text="t('income.chart.weekly')"
+            :selected="period === IncomeChartPeriod.Weekly"
+            :disabled="pending"
+            @click="setPeriod(IncomeChartPeriod.Weekly)"
+          />
+        </div>
+      </div>
+
+      <div
+        v-if="successfulTransactions.length"
+        class="mt-[24px] flex flex-wrap rounded-sm border border-border-divider dark:border-gray-800"
+      >
+        <div class="flex w-full flex-col items-center justify-center gap-xs p-md md:w-1/2">
+          <span class="text-body-400-b3 text-text-soft">
+            {{ successfulTransactions[0]?.label }}
+          </span>
+          <span class="text-display-700-d3">{{ successfulTransactions[0]?.value }}</span>
+        </div>
+        <div
+          class="flex w-full flex-col items-center justify-center gap-xs border-0 border-t border-border-divider p-md dark:border-gray-800 md:w-1/2 md:border-r md:border-t-0"
+        >
+          <span class="text-body-400-b3 text-text-soft">
+            {{ successfulTransactions[1]?.label }}
+          </span>
+          <span class="text-display-700-d3">{{ successfulTransactions[1]?.value }}</span>
         </div>
       </div>
     </template>

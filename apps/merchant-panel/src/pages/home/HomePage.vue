@@ -12,6 +12,8 @@ onMounted(fetch);
 <template>
   <div>
     <h1 class="m-2xs text-heading-lg">{{ t('layout.nav.dashboard') }}</h1>
+    
+        
     <div class="mt-lg grid grid-cols-1 gap-lg min-[992px]:grid-cols-12">
       <IncomeChartCard
         class="min-[992px]:col-span-7 xl:col-span-8"
