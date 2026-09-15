@@ -23,6 +23,8 @@ export type {
   TrNavigationBarProps,
   TrNavigationMode,
 } from './components/NavigationBar';
+export { TrStatus } from './components/status';
+export type { TrStatusProps, TrStatusType } from './components/status';
 export {
   TrTable,
   columnSlotName,

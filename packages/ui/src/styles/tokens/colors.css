@@ -22,22 +22,22 @@
   --color-text-onPrimary: #ffffff;
   --color-text-dark-onPrimary: #ffffff;
 
-  --color-secondary: #b30a84;
-  --color-secondary-hover: #c11b91;
-  --color-secondary-focus: #c92a9b;
-  --color-secondary-pressed: #8e0868;
-  --color-secondary-select: #b30a84;
-  --color-secondary-disabled: #e6b4d8;
-  --color-secondary-loading: #c92a9b;
-  --color-secondary-dark: #e36ac2;
-  --color-secondary-dark-hover: #ea79cc;
-  --color-secondary-dark-focus: #ec83d1;
-  --color-secondary-dark-pressed: #f09bdc;
-  --color-secondary-dark-select: #e36ac2;
-  --color-secondary-dark-disabled: #5e3653;
-  --color-secondary-dark-loading: #ec83d1;
-  --color-text-onSecondary: #ffffff;
-  --color-text-dark-onSecondary: #ffffff;
+  --color-secondary: #f0f7ff;
+  --color-secondary-hover: #cce5ff;
+  --color-secondary-focus: #d6ecff;
+  --color-secondary-pressed: #b8d9ff;
+  --color-secondary-select: #f0f7ff;
+  --color-secondary-disabled: #e8ecf2;
+  --color-secondary-loading: #fafcff;
+  --color-secondary-dark: #1e2a40;
+  --color-secondary-dark-hover: #2c4568;
+  --color-secondary-dark-focus: #253550;
+  --color-secondary-dark-pressed: #35547a;
+  --color-secondary-dark-select: #1e2a40;
+  --color-secondary-dark-disabled: #252a33;
+  --color-secondary-dark-loading: #1a2230;
+  --color-text-onSecondary: #004fa3;
+  --color-text-dark-onSecondary: #a7aff2;
 
   --color-outlined: #ffffff;
   --color-outlined-hover: #f5f7ff;
@@ -68,6 +68,7 @@
   --color-surface-pressed: #eeeef1;
   --color-surface-select: #f4f4f5;
   --color-surface-disabled: #efeff0;
+  --color-surface-success: #e0fff5;
   --color-surface-dark: #19191a;
   --color-surface-dark-hover: #28282a;
   --color-surface-dark-focus: #28282a;
@@ -78,9 +79,28 @@
   --color-text: #2e2e38;
   --color-text-soft: #747481;
   --color-text-disabled: #8c8c8c;
+  --color-text-information: #006bc9;
+  --color-text-warning: #9c6300;
+  --color-text-success: #248061;
+  --color-text-danger: #c93637;
   --color-text-dark: #ffffff;
   --color-text-dark-soft: #bdbdbd;
   --color-text-dark-disabled: #5e5e5e;
+  --color-text-dark-information: #33a0ff;
+  --color-text-dark-warning: #ffb333;
+  --color-text-dark-success: #00cc88;
+  --color-text-dark-danger: #ff5c5d;
+
+  --color-icon-disabled: #8c8c8c;
+  --color-icon-information: #006bc9;
+  --color-icon-warning: #9c6300;
+  --color-icon-success: #248061;
+  --color-icon-danger: #c93637;
+  --color-icon-dark-disabled: #5e5e5e;
+  --color-icon-dark-information: #33a0ff;
+  --color-icon-dark-warning: #ffb333;
+  --color-icon-dark-success: #00cc88;
+  --color-icon-dark-danger: #ff5c5d;
 
   --color-border: #dadbe1;
   --color-border-soft: #f4f4f6;

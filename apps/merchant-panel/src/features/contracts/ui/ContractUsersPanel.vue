@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
-import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
+import { TrAction, TrButton, TrCard, TrStatus, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
 import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
 import { useContractUsers } from '../composables/use-contract-users';
@@ -63,11 +63,15 @@ function rowActions(item: ContractUser): TrActionItem[] {
       :empty-text="t('common.empty')"
     >
       <template #item-contractaccountdeactivated="{ item }">
-        {{
-          !item.contractAccountDeactivated
-            ? t('contracts.status.active')
-            : t('contracts.status.inactive')
-        }}
+        <TrStatus
+          :type="item.contractAccountDeactivated ? 'negative' : 'positive'"
+          :text="
+            item.contractAccountDeactivated
+              ? t('contracts.status.inactive')
+              : t('contracts.status.active')
+          "
+          
+        />
       </template>
       <template #action="{ item }">
         <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />

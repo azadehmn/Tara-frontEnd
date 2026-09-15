@@ -1,0 +1,92 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-status {
+  @apply inline-flex w-fit items-center gap-2xs rounded-lg bg-surface-pressed px-xs py-[2px]
+    dark:bg-surface-dark-pressed;
+}
+
+.tr-status--compact {
+  @apply rounded-full p-[2px];
+}
+
+.tr-status__text {
+  @apply m-0 text-body-sm-medium text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-status__dot {
+  @apply size-2 shrink-0 rounded-full bg-icon-disabled dark:bg-icon-dark-disabled;
+}
+
+.tr-status__icon {
+  @apply inline-flex size-4 shrink-0 items-center justify-center text-icon-disabled
+    dark:text-icon-dark-disabled;
+}
+
+.tr-status__icon svg {
+  @apply block size-full;
+}
+
+.tr-status--informative {
+  @apply bg-text-information/15 dark:bg-text-dark-information/20;
+}
+
+.tr-status--informative .tr-status__text {
+  @apply text-text-information dark:text-text-dark-information;
+}
+
+.tr-status--informative .tr-status__dot {
+  @apply bg-icon-information dark:bg-icon-dark-information;
+}
+
+.tr-status--informative .tr-status__icon {
+  @apply text-icon-information dark:text-icon-dark-information;
+}
+
+.tr-status--warning {
+  @apply bg-text-warning/15 dark:bg-text-dark-warning/20;
+}
+
+.tr-status--warning .tr-status__text {
+  @apply text-text-warning dark:text-text-dark-warning;
+}
+
+.tr-status--warning .tr-status__dot {
+  @apply bg-icon-warning dark:bg-icon-dark-warning;
+}
+
+.tr-status--warning .tr-status__icon {
+  @apply text-icon-warning dark:text-icon-dark-warning;
+}
+
+.tr-status--negative {
+  @apply bg-text-danger/15 dark:bg-text-dark-danger/20;
+}
+
+.tr-status--negative .tr-status__text {
+  @apply text-text-danger dark:text-text-dark-danger;
+}
+
+.tr-status--negative .tr-status__dot {
+  @apply bg-icon-danger dark:bg-icon-dark-danger;
+}
+
+.tr-status--negative .tr-status__icon {
+  @apply text-icon-danger dark:text-icon-dark-danger;
+}
+
+.tr-status--positive {
+  @apply bg-surface-success;
+}
+
+.tr-status--positive .tr-status__text {
+  @apply text-text-success;
+}
+
+.tr-status--positive .tr-status__dot {
+  @apply bg-icon-success dark:bg-icon-dark-success;
+}
+
+.tr-status--positive .tr-status__icon {
+  @apply text-icon-success dark:text-icon-dark-success;
+}

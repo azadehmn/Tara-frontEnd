@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { TrAction, TrButton, TrCard, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
+import { TrAction, TrButton, TrCard, TrStatus, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
 import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
 import TrDetailsIcon from '@tara/ui/icons/DetailsIcon.vue';
@@ -141,7 +141,11 @@ function rowActions(item: ContractListItem): TrActionItem[] {
           {{ t(`contracts.types.${item.type}`) }}
         </template>
         <template #item-isenabled="{ item }">
-          {{ item.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive') }}
+          <TrStatus
+            :type="item.isEnabled ? 'positive' : 'negative'"
+            :text="item.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive')"
+            
+          />
         </template>
         <template #action="{ item }">
           <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />

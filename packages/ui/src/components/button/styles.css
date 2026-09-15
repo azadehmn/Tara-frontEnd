@@ -16,12 +16,12 @@
   @apply cursor-not-allowed;
 }
 
-.tr-button.is-loading {
-  @apply opacity-60;
-}
-
 .tr-button.is-loading .tr-button__body {
   @apply invisible;
+}
+
+.tr-button__body {
+  @apply inline-flex items-center justify-center gap-xs;
 }
 
 .tr-button--small {
@@ -148,6 +148,10 @@
 .tr-button__label,
 .tr-button__icon {
   @apply inline-flex items-center;
+}
+
+.tr-button__label {
+  @apply leading-none;
 }
 
 .tr-button__icon {

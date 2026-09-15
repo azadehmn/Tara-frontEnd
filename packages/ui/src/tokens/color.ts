@@ -61,28 +61,28 @@ export const color = {
     },
   },
   secondary: {
-    DEFAULT: '#B30A84',
+    DEFAULT: '#F0F7FF',
 
     dark: {
-      DEFAULT: '#E36AC2',
-      disabled: '#5E3653',
-      focus: '#EC83D1',
-      hover: '#EA79CC',
-      pressed: '#F09BDC',
-      select: '#E36AC2',
-      loading: '#EC83D1',
+      DEFAULT: '#1E2A40',
+      disabled: '#252A33',
+      focus: '#253550',
+      hover: '#2C4568',
+      pressed: '#35547A',
+      select: '#1E2A40',
+      loading: '#1A2230',
     },
 
-    disabled: '#E6B4D8',
-    focus: '#C92A9B',
-    hover: '#C11B91',
-    pressed: '#8E0868',
-    select: '#B30A84',
-    loading: '#C92A9B',
+    disabled: '#E8ECF2',
+    focus: '#D6ECFF',
+    hover: '#CCE5FF',
+    pressed: '#B8D9FF',
+    select: '#F0F7FF',
+    loading: '#FAFCFF',
 
     text: {
-      DEFAULT: '#FFFFFF',
-      dark: '#FFFFFF',
+      DEFAULT: '#004FA3',
+      dark: '#A7AFF2',
     },
   },
   outlined: {
@@ -124,6 +124,7 @@ export const color = {
     pressed: '#EEEEF1',
     select: '#F4F4F5',
     disabled: '#EFEFF0',
+    success: '#E0FFF5',
     dark: {
       DEFAULT: '#19191A',
       hover: '#28282A',
@@ -137,10 +138,32 @@ export const color = {
     DEFAULT: '#2E2E38',
     soft: '#747481',
     disabled: '#8C8C8C',
+    information: '#006BC9',
+    warning: '#9C6300',
+    success: '#248061',
+    danger: '#C93637',
     dark: {
       DEFAULT: '#FFFFFF',
       soft: '#BDBDBD',
       disabled: '#5E5E5E',
+      information: '#33A0FF',
+      warning: '#FFB333',
+      success: '#00CC88',
+      danger: '#FF5C5D',
+    },
+  },
+  icon: {
+    disabled: '#8C8C8C',
+    information: '#006BC9',
+    warning: '#9C6300',
+    danger: '#C93637',
+    success: '#248061',
+    dark: {
+      disabled: '#5E5E5E',
+      information: '#33A0FF',
+      warning: '#FFB333',
+      danger: '#FF5C5D',
+      success: '#00CC88',
     },
   },
   border: {
@@ -173,6 +196,7 @@ export const color = {
     pressed: string;
     select: string;
     disabled: string;
+    success: string;
     dark: {
       DEFAULT: string;
       hover: string;
@@ -186,7 +210,33 @@ export const color = {
     DEFAULT: string;
     soft: string;
     disabled: string;
-    dark: { DEFAULT: string; soft: string; disabled: string };
+    information: string;
+    warning: string;
+    success: string;
+    danger: string;
+    dark: {
+      DEFAULT: string;
+      soft: string;
+      disabled: string;
+      information: string;
+      warning: string;
+      success: string;
+      danger: string;
+    };
+  };
+  icon: {
+    disabled: string;
+    information: string;
+    warning: string;
+    success: string;
+    danger: string;
+    dark: {
+      disabled: string;
+      information: string;
+      warning: string;
+      success: string;
+      danger: string;
+    };
   };
   border: {
     DEFAULT: string;
