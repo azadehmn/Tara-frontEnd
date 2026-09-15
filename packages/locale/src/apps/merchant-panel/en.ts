@@ -25,9 +25,9 @@ export const merchantPanelEn: MessageTree = {
   },
   summary: {
     loading: 'Loading...',
-    successfulToday: {
-      amount: 'Successful transaction amount today',
-      count: 'Successful transaction count today',
+    successfulCurrentWeek: {
+      amount: 'Successful transaction amount this week',
+      count: 'Successful transaction count this week',
     },
     successfulCurrentMonth: {
       amount: 'Successful transaction amount this month',

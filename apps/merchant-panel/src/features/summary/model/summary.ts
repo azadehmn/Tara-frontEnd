@@ -2,8 +2,8 @@ export interface MerchantSummary {
   previousWeekSales: number;
   previousMonthSales: number;
   previousYearSales: number;
-  todaySuccessfulTransactionsAmount: number;
-  todaySuccessfulTransactionsCount: number;
+  currentWeekSuccessfulTransactionsAmount: number;
+  currentWeekSuccessfulTransactionsCount: number;
   currentMonthSuccessfulTransactionsAmount: number;
   currentMonthSuccessfulTransactionsCount: number;
   totalTransactions: number;

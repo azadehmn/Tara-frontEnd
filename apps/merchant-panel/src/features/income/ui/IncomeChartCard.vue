@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
-import { TrButton, TrCard } from '@tara/ui';
+import { TrButton, TrCard, TrLabel } from '@tara/ui';
 import { formatAmount, formatNumber } from '@shared/utils/format';
 import { useApexChartResize } from '../composables/use-apex-chart-resize';
 import { useIncomeChart } from '../composables/use-income-chart';
@@ -9,8 +9,8 @@ import { useIncomeChartSeries } from '../composables/use-income-chart-series';
 import { IncomeChartPeriod } from '../model/income-chart';
 
 interface SummaryMetrics {
-  todaySuccessfulTransactionsAmount: number;
-  todaySuccessfulTransactionsCount: number;
+  currentWeekSuccessfulTransactionsAmount: number;
+  currentWeekSuccessfulTransactionsCount: number;
   currentMonthSuccessfulTransactionsAmount: number;
   currentMonthSuccessfulTransactionsCount: number;
 }
@@ -30,11 +30,11 @@ const successfulTransactions = computed(() => {
 
   const amount = monthly
     ? props.summary.currentMonthSuccessfulTransactionsAmount
-    : props.summary.todaySuccessfulTransactionsAmount;
+    : props.summary.currentWeekSuccessfulTransactionsAmount;
   const count = monthly
     ? props.summary.currentMonthSuccessfulTransactionsCount
-    : props.summary.todaySuccessfulTransactionsCount;
-  const labelGroup = monthly ? 'successfulCurrentMonth' : 'successfulToday';
+    : props.summary.currentWeekSuccessfulTransactionsCount;
+  const labelGroup = monthly ? 'successfulCurrentMonth' : 'successfulCurrentWeek';
 
   return [
     {
@@ -84,15 +84,18 @@ onMounted(fetch);
         class="mt-[24px] flex flex-wrap rounded-sm border border-border-divider dark:border-gray-800"
       >
         <div class="flex w-full flex-col items-center justify-center gap-xs p-md md:w-1/2">
-          <span class="text-body-400-b3 text-text-soft">
+          <span class="text-body-sm text-text-soft">
             {{ successfulTransactions[0]?.label }}
           </span>
-          <span class="text-display-700-d3">{{ successfulTransactions[0]?.value }}</span>
+          <div class="flex items-center gap-xs">
+            <span class="text-display-700-d3">{{ successfulTransactions[0]?.value }}</span>
+            <TrLabel :text="t('common.currency.rial')" type="neutral" />
+          </div>
         </div>
         <div
           class="flex w-full flex-col items-center justify-center gap-xs border-0 border-t border-border-divider p-md dark:border-gray-800 md:w-1/2 md:border-r md:border-t-0"
         >
-          <span class="text-body-400-b3 text-text-soft">
+          <span class="text-body-sm text-text-soft">
             {{ successfulTransactions[1]?.label }}
           </span>
           <span class="text-display-700-d3">{{ successfulTransactions[1]?.value }}</span>

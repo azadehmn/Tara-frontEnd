@@ -14,7 +14,7 @@ describe('mapMerchantSummary', () => {
 
     expect(mapped.dailySales).toBe(18_500_000);
     expect(mapped.totalTransactions).toBe(1842);
-    expect(mapped.todaySuccessfulTransactionsCount).toBe(58);
+    expect(mapped.currentWeekSuccessfulTransactionsCount).toBe(58);
     expect(mapped.currentMonthSuccessfulTransactionsAmount).toBe(405_200_080);
   });
 
@@ -23,7 +23,7 @@ describe('mapMerchantSummary', () => {
 
     expect(mapped.dailySales).toBe(500);
     expect(mapped.withdrawableBalance).toBe(0);
-    expect(mapped.todaySuccessfulTransactionsAmount).toBe(0);
+    expect(mapped.currentWeekSuccessfulTransactionsAmount).toBe(0);
     expect(mapped.currentMonthSuccessfulTransactionsCount).toBe(0);
   });
 });

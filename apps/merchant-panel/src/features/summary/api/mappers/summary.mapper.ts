@@ -8,8 +8,12 @@ export function mapMerchantSummary(raw: unknown): MerchantSummary {
     previousWeekSales: toNumber(data.previousWeekSales),
     previousMonthSales: toNumber(data.previousMonthSales),
     previousYearSales: toNumber(data.previousYearSales),
-    todaySuccessfulTransactionsAmount: toNumber(data.todaySuccessfulTransactionsAmount),
-    todaySuccessfulTransactionsCount: toNumber(data.todaySuccessfulTransactionsCount),
+    currentWeekSuccessfulTransactionsAmount: toNumber(
+      data.currentWeekSuccessfulTransactionsAmount,
+    ),
+    currentWeekSuccessfulTransactionsCount: toNumber(
+      data.currentWeekSuccessfulTransactionsCount,
+    ),
     currentMonthSuccessfulTransactionsAmount: toNumber(
       data.currentMonthSuccessfulTransactionsAmount,
     ),
