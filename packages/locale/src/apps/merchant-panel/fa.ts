@@ -22,6 +22,15 @@ export const merchantPanelFa: MessageTree = {
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',
   },
+  income: {
+    chart: {
+      title: 'درآمد',
+      period: 'بازه زمانی',
+      monthly: 'ماهانه',
+      weekly: 'هفتگی',
+      loading: 'در حال بارگذاری...',
+    },
+  },
   contracts: {
     detail: { title: 'جزئیات قرارداد' },
     status: { active: 'فعال', inactive: 'غیرفعال' },

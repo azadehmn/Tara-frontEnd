@@ -22,6 +22,15 @@ export const merchantPanelEn: MessageTree = {
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',
   },
+  income: {
+    chart: {
+      title: 'Income',
+      period: 'Period',
+      monthly: 'Monthly',
+      weekly: 'Weekly',
+      loading: 'Loading...',
+    },
+  },
   contracts: {
     detail: { title: 'Contract details' },
     status: { active: 'Active', inactive: 'Inactive' },
