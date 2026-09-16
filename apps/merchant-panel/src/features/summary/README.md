@@ -79,8 +79,8 @@ summary.api → mapper → MerchantSummary → useSummary → PerformanceCard / 
 Numbers are formatted with `@shared/utils/format`.
 
 `calculateTrend` only reports the mathematical direction (`increase`, `decrease`, or `neutral`).
-`PerformanceCard` assigns business meaning: higher sales/count is positive, while a lower return
-rate is positive.
+`PerformanceCard` assigns business meaning. In the current product rules, an increase is green and
+a decrease is red for all three displayed metrics.
 
 ## Files
 
