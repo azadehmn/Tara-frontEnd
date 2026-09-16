@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatAmount, formatNumber, toIntlLocale } from './format';
+import { formatAmount, formatNumber, formatPercent, toIntlLocale } from './format';
 
 describe('formatAmount', () => {
   it('groups digits for the active locale', () => {
@@ -17,6 +17,12 @@ describe('formatAmount', () => {
 describe('formatNumber', () => {
   it('formats counts', () => {
     expect(formatNumber(1842, 'en')).toBe('1,842');
+  });
+});
+
+describe('formatPercent', () => {
+  it('formats percentage points without multiplying the displayed value', () => {
+    expect(formatPercent(12.75, 'en')).toBe('12.75%');
   });
 });
 

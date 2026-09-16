@@ -25,6 +25,14 @@ export const merchantPanelFa: MessageTree = {
   },
   summary: {
     loading: 'در حال بارگذاری...',
+    performance: {
+      title: 'عملکرد هفتگی',
+      sales: 'مبلغ فروش هفته جاری',
+      successfulTransactions: 'تراکنش‌های موفق هفته جاری',
+      returnRate: 'نرخ مرجوعی هفته جاری',
+      comparedToPreviousWeek: 'نسبت به هفته قبل',
+      new: 'جدید',
+    },
     successfulCurrentWeek: {
       amount: 'مبلغ تراکنش‌های موفق هفته جاری',
       count: 'تعداد تراکنش‌های موفق هفته جاری',

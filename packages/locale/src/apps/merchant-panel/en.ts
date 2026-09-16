@@ -25,6 +25,14 @@ export const merchantPanelEn: MessageTree = {
   },
   summary: {
     loading: 'Loading...',
+    performance: {
+      title: 'Weekly performance',
+      sales: 'Sales this week',
+      successfulTransactions: 'Successful transactions this week',
+      returnRate: 'Return rate this week',
+      comparedToPreviousWeek: 'versus previous week',
+      new: 'New',
+    },
     successfulCurrentWeek: {
       amount: 'Successful transaction amount this week',
       count: 'Successful transaction count this week',

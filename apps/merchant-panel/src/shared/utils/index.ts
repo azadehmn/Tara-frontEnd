@@ -1,1 +1,1 @@
-export { formatAmount, formatNumber, toIntlLocale } from './format';
+export { formatAmount, formatNumber, formatPercent, toIntlLocale } from './format';
