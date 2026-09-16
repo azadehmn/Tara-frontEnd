@@ -2,7 +2,7 @@
 import { TrCard } from '@tara/ui';
 import type { MerchantSummary } from '../model/summary';
 import BalanceCard from './BalanceCard.vue';
-import SalesCard from './SalesCard.vue';
+import PerformanceCard from './PerformanceCard.vue';
 
 defineProps<{
   summary: MerchantSummary | null;
@@ -22,7 +22,7 @@ const { t } = useI18n();
       <p class="text-sm">{{ errorMessage }}</p>
     </TrCard>
     <template v-else-if="summary">
-      <SalesCard :summary="summary" />
+      <PerformanceCard :summary="summary" />
       <BalanceCard :summary="summary" />
     </template>
   </div>
