@@ -22,9 +22,41 @@ GET /club/api/merchant/summary
     returnedTransactions: 37,
     dailySales: 18_500_000,
     withdrawableBalance: 325_000_000,
+    weeklyPerformance: {
+      current: {
+        from: '2026-09-12',
+        to: '2026-09-15',
+        salesAmount: 185_000_000,
+        successfulTransactionsCount: 1071,
+        returnedTransactionsCount: 22,
+        returnRate: 2.01,
+        items: [
+          {
+            date: '2026-09-12',
+            salesAmount: 42_000_000,
+            successfulTransactionsCount: 250,
+            returnRate: 2.4,
+          },
+          // One item per elapsed day of the current week.
+        ],
+      },
+      previous: {
+        from: '2026-09-05',
+        to: '2026-09-11',
+        salesAmount: 164_000_000,
+        successfulTransactionsCount: 980,
+        returnedTransactionsCount: 28,
+        returnRate: 2.78,
+      },
+    },
   },
 }
 ```
+
+`weeklyPerformance.current.items` is intentionally limited to at most seven rows. The backend
+should calculate the aggregates in grouped queries and may cache the response for 30–60 seconds.
+For a partial current week, compare against the same elapsed days from the previous week to avoid
+misleading trends.
 
 ## Mock
 
@@ -39,13 +71,16 @@ Set it to `false` to use the API.
 ## Flow
 
 ```text
-summary.api → mapper → MerchantSummary → useSummary → SalesCard / BalanceCard
+summary.api → mapper → MerchantSummary → useSummary → PerformanceCard / BalanceCard
 ```
 
-`useSummary` returns domain data only. Each card decides which fields it shows and builds its own
-rows. `SummaryCard` is the shared shell: title, one highlighted value, and a list of rows.
+`useSummary` returns domain data only. Each card decides which fields it displays.
 
 Numbers are formatted with `@shared/utils/format`.
+
+`calculateTrend` only reports the mathematical direction (`increase`, `decrease`, or `neutral`).
+`PerformanceCard` assigns business meaning: higher sales/count is positive, while a lower return
+rate is positive.
 
 ## Files
 
