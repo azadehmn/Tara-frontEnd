@@ -16,6 +16,8 @@ describe('mapMerchantSummary', () => {
     expect(mapped.totalTransactions).toBe(1842);
     expect(mapped.currentWeekSuccessfulTransactionsCount).toBe(58);
     expect(mapped.currentMonthSuccessfulTransactionsAmount).toBe(405_200_080);
+    expect(mapped.weeklyPerformance.current.items).toHaveLength(4);
+    expect(mapped.weeklyPerformance.previous.returnRate).toBe(2.78);
   });
 
   it('falls back to zero for missing fields', () => {
@@ -25,5 +27,33 @@ describe('mapMerchantSummary', () => {
     expect(mapped.withdrawableBalance).toBe(0);
     expect(mapped.currentWeekSuccessfulTransactionsAmount).toBe(0);
     expect(mapped.currentMonthSuccessfulTransactionsCount).toBe(0);
+    expect(mapped.weeklyPerformance.current.items).toEqual([]);
+    expect(mapped.weeklyPerformance.previous.salesAmount).toBe(0);
+  });
+
+  it('sorts weekly points and normalizes invalid numbers', () => {
+    const mapped = mapMerchantSummary({
+      data: {
+        weeklyPerformance: {
+          current: {
+            from: '2026-09-12',
+            to: '2026-09-14',
+            salesAmount: 'invalid',
+            items: [
+              { date: '2026-09-14', salesAmount: 20 },
+              { date: '2026-09-12', salesAmount: 10 },
+            ],
+          },
+        },
+      },
+    });
+
+    expect(mapped.weeklyPerformance.current.salesAmount).toBe(0);
+    expect(mapped.weeklyPerformance.current.items.map((item) => item.date)).toEqual([
+      '2026-09-12',
+      '2026-09-13',
+      '2026-09-14',
+    ]);
+    expect(mapped.weeklyPerformance.current.items[1]?.salesAmount).toBe(0);
   });
 });

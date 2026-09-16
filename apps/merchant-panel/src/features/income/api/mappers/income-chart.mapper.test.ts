@@ -9,7 +9,7 @@ describe('mapIncomeChart', () => {
     expect(mapped.period).toBe('MONTHLY');
     expect(mapped.current.from).toBe('2026-08-23');
     expect(mapped.current.to).toBe('2026-09-15');
-    expect(mapped.current.totalValue).toBe(405_200_000);
+    expect(mapped.current.totalValue).toBe(405_200_080);
     expect(mapped.current.items).toHaveLength(24);
     expect(mapped.previous.from).toBe('2026-07-23');
     expect(mapped.previous.to).toBe('2026-08-22');

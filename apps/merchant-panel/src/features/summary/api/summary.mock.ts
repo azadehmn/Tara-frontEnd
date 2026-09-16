@@ -13,5 +13,49 @@ export const summaryMock: MerchantSummaryEnvelopeDto = {
     returnedTransactions: 37,
     dailySales: 18_500_000,
     withdrawableBalance: 325_000_000,
+    weeklyPerformance: {
+      current: {
+        from: '2026-09-12',
+        to: '2026-09-15',
+        salesAmount: 185_000_000,
+        successfulTransactionsCount: 1071,
+        returnedTransactionsCount: 22,
+        returnRate: 2.01,
+        items: [
+          {
+            date: '2026-09-12',
+            salesAmount: 42_000_000,
+            successfulTransactionsCount: 250,
+            returnRate: 2.4,
+          },
+          {
+            date: '2026-09-13',
+            salesAmount: 47_000_000,
+            successfulTransactionsCount: 273,
+            returnRate: 2.2,
+          },
+          {
+            date: '2026-09-14',
+            salesAmount: 51_000_000,
+            successfulTransactionsCount: 281,
+            returnRate: 1.7,
+          },
+          {
+            date: '2026-09-15',
+            salesAmount: 45_000_000,
+            successfulTransactionsCount: 267,
+            returnRate: 1.8,
+          },
+        ],
+      },
+      previous: {
+        from: '2026-09-05',
+        to: '2026-09-11',
+        salesAmount: 164_000_000,
+        successfulTransactionsCount: 980,
+        returnedTransactionsCount: 28,
+        returnRate: 2.78,
+      },
+    },
   },
 };
