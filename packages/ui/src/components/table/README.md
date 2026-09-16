@@ -12,7 +12,7 @@ Type-safe data table for Tara UI. Pass `columns` and `items`; customize cells wi
 - Row click / hover, custom `rowKey` and `rowClass`
 - CSS Grid column widths
 - Keyboard: Enter and Space when `rowPointer` is set
-- Responsive cards below `md` (768px) by default, using the same columns and `#item-*` / `#action` slots
+- Responsive cards below `lg` (912px) by default, using the same columns and `#item-*` / `#action` slots
 
 ## Usage
 
@@ -66,7 +66,7 @@ const columns: TrTableColumn[] = [
 | `rowClass` | `(item: T) => string \| undefined` | — | Row class from the UI, not from the data model |
 | `actionWidth` | `string` | `'48px'` | Grid track for `#action` |
 | `layout` | `'auto' \| 'table' \| 'card'` | `'auto'` | `auto` switches to cards below `cardBreakpoint` |
-| `cardBreakpoint` | Tara breakpoint name | `'md'` | Token used when `layout` is `auto` (`md` = 768px) |
+| `cardBreakpoint` | Tara breakpoint name | `'lg'` | Token used when `layout` is `auto` (`lg` = 912px) |
 | `cardHeaderColumn` | `string` | first column | Column `name` shown in the card header |
 
 Below `cardBreakpoint`, each row becomes a `TrTableCard`: first column (or `cardHeaderColumn`) in the header, remaining columns as label/value rows, `#action` in the footer. Existing `#item-*` slots are reused. Override with `#card`, `#card-header`, `#card-main`, or `#card-footer`. Force a mode with `layout="table"` or `layout="card"`.
@@ -110,4 +110,5 @@ Without `#item-*`, the cell text comes from `name` via `resolvePathValue`.
 
 - Keep fetch, filters, and commands outside `TrTable`.
 - Prefer a stable `rowKey`.
+- Body and header cells truncate to one line; hover on desktop or tap on touch devices to see the full value.
 - Optional helpers from `@tara/ui`: `resolvePathValue`, `itemTextContent`, `getRowKey`, `columnSlotName`, `itemSlotName`.

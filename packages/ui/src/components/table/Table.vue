@@ -1,12 +1,14 @@
 <script setup lang="ts" generic="T extends TrTableRow">
-import { computed, useSlots } from 'vue';
+import { computed } from 'vue';
 import { useBreakpoint } from '../../composables/useBreakpoint';
+import { TrTooltip } from '../tooltip';
 import TrTableCard from './TableCard.vue';
 import {
   columnSlotName,
   itemSlotName,
   itemTextContent,
   getRowKey,
+  type TrTableColumn,
   type TrTableProps,
   type TrTableRow,
   type TrTableRowHoverPayload,
@@ -24,7 +26,7 @@ const props = withDefaults(defineProps<TrTableProps<T>>(), {
   rowKey: 'id',
   actionWidth: '48px',
   layout: 'auto',
-  cardBreakpoint: 'md',
+  cardBreakpoint: 'lg',
 });
 
 const emit = defineEmits<{
@@ -32,7 +34,36 @@ const emit = defineEmits<{
   rowHover: [payload: TrTableRowHoverPayload<T>];
 }>();
 
-const slots = useSlots();
+type TrTableSlotColumn = TrTableColumn & {
+  columnSlot: `column-${string}`;
+  itemSlot: `item-${string}`;
+};
+
+const slots = defineSlots<
+  {
+    action?: (props: { item: T; index: number }) => unknown;
+    loading?: () => unknown;
+    empty?: () => unknown;
+    card?: (props: { item: T; index: number }) => unknown;
+    'card-header'?: (props: { item: T; column: TrTableSlotColumn; index: number }) => unknown;
+    'card-main'?: (props: {
+      item: T;
+      columns: TrTableSlotColumn[];
+      index: number;
+    }) => unknown;
+    'card-footer'?: (props: { item: T; index: number }) => unknown;
+  }
+  & {
+    [name in `column-${string}`]?: (props: { column: TrTableSlotColumn }) => unknown;
+  }
+  & {
+    [name in `item-${string}`]?: (props: {
+      item: T;
+      column: TrTableSlotColumn;
+      index: number;
+    }) => unknown;
+  }
+>();
 const { isBelow } = useBreakpoint();
 
 const hasActionSlot = computed(() => Boolean(slots.action));
@@ -122,16 +153,22 @@ function onRowHover(item: T, index: number, hovering: boolean) {
         </template>
         <template v-if="!hasCardSlot && headerColumn" #header>
           <slot name="card-header" :item="item" :column="headerColumn" :index="index">
-            <slot
-              v-if="itemSlots.has(headerColumn.itemSlot)"
-              :name="headerColumn.itemSlot"
-              :item="item"
-              :column="headerColumn"
-              :index="index"
-            />
-            <div v-else class="truncate">
-              {{ itemTextContent(headerColumn.name, item) }}
-            </div>
+          <slot
+            v-if="itemSlots.has(headerColumn.itemSlot)"
+            :name="headerColumn.itemSlot"
+            :item="item"
+            :column="headerColumn"
+            :index="index"
+          />
+          <TrTooltip
+            v-else
+            class="tr-table__overflow-text"
+            :content="itemTextContent(headerColumn.name, item)"
+            only-when-truncated
+            stop-trigger-click
+          >
+            {{ itemTextContent(headerColumn.name, item) }}
+          </TrTooltip>
           </slot>
         </template>
         <template v-if="!hasCardSlot && fieldColumns.length > 0" #main>
@@ -150,9 +187,15 @@ function onRowHover(item: T, index: number, hovering: boolean) {
                   :column="column"
                   :index="index"
                 />
-                <div v-else class="truncate">
+                <TrTooltip
+                  v-else
+                  class="tr-table__overflow-text"
+                  :content="itemTextContent(column.name, item)"
+                  only-when-truncated
+                  stop-trigger-click
+                >
                   {{ itemTextContent(column.name, item) }}
-                </div>
+                </TrTooltip>
               </div>
             </div>
           </slot>
@@ -238,15 +281,23 @@ function onRowHover(item: T, index: number, hovering: boolean) {
           class="tr-table__cell"
           role="cell"
         >
-          <slot
-            v-if="itemSlots.has(column.itemSlot)"
-            :name="column.itemSlot"
-            :item="item"
-            :column="column"
-            :index="index"
-          />
-          <div v-else class="truncate">
-            {{ itemTextContent(column.name, item) }}
+          <div class="tr-table__cell-content">
+            <slot
+              v-if="itemSlots.has(column.itemSlot)"
+              :name="column.itemSlot"
+              :item="item"
+              :column="column"
+              :index="index"
+            />
+            <TrTooltip
+              v-else
+              class="tr-table__overflow-text"
+              :content="itemTextContent(column.name, item)"
+              only-when-truncated
+              stop-trigger-click
+            >
+              {{ itemTextContent(column.name, item) }}
+            </TrTooltip>
           </div>
         </div>
         <div

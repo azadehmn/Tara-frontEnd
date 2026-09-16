@@ -56,6 +56,13 @@ export type {
   TrTableRow,
   TrTableRowHoverPayload,
 } from './components/table';
+export { TrTooltip } from './components/tooltip';
+export type {
+  TrTooltipPlacement,
+  TrTooltipProps,
+  TrTooltipSize,
+  TrTooltipTrigger,
+} from './components/tooltip';
 export { useBreakpoint } from './composables/useBreakpoint';
 export type { TrBreakpointName } from './composables/useBreakpoint';
 export { color, radius, shadow, spacing, breakpoint, typography } from './tokens';

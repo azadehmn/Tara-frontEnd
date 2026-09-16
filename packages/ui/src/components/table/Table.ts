@@ -35,7 +35,7 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
    * Default `auto`.
    */
   layout?: TrTableLayout;
-  /** Switch to cards when width is below this Tara token. Default `md` (768px). */
+  /** Switch to cards when width is below this Tara token. Default `lg` (912px). */
   cardBreakpoint?: TrBreakpointName;
   /** Column `name` used as the card header. Defaults to the first column. */
   cardHeaderColumn?: string;
@@ -70,11 +70,11 @@ export function itemTextContent(column: string, item: TrTableRow): string {
   return String(content);
 }
 
-export function columnSlotName(column: TrTableColumn): string {
+export function columnSlotName(column: TrTableColumn): `column-${string}` {
   return `column-${column.name.toLowerCase()}`;
 }
 
-export function itemSlotName(column: TrTableColumn): string {
+export function itemSlotName(column: TrTableColumn): `item-${string}` {
   return `item-${column.name.toLowerCase()}`;
 }
 

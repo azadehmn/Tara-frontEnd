@@ -7,7 +7,7 @@
 }
 
 .tr-table-card__header {
-  @apply mb-xl text-body-md font-medium text-text dark:text-gray-200;
+  @apply mb-xl truncate text-body-md font-medium text-text dark:text-gray-200;
 }
 
 .tr-table-card__footer {
@@ -47,5 +47,5 @@
 }
 
 .tr-table-card__field-value {
-  @apply min-w-0 text-end text-body-md text-text dark:text-gray-200;
+  @apply min-w-0 truncate text-end text-body-md text-text dark:text-gray-200;
 }

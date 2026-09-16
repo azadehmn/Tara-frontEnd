@@ -1,0 +1,66 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-tooltip__trigger {
+  @apply inline-block min-w-0 max-w-full;
+}
+
+.tr-tooltip {
+  @apply pointer-events-auto fixed z-[200] rounded-sm bg-surface-dark
+    text-start font-normal text-text-dark shadow-elevation-100
+    dark:bg-surface dark:text-text dark:shadow-elevation-dark-100;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.tr-tooltip--medium {
+  @apply px-sm py-xs text-body-sm;
+}
+
+.tr-tooltip--small {
+  @apply px-xs py-2xs text-caption-regular;
+}
+
+.tr-tooltip__arrow {
+  @apply absolute size-2 rotate-45 bg-surface-dark dark:bg-surface;
+}
+
+.tr-tooltip--top .tr-tooltip__arrow {
+  @apply -bottom-1;
+  left: calc(50% - 0.25rem);
+}
+
+.tr-tooltip--bottom .tr-tooltip__arrow {
+  @apply -top-1;
+  left: calc(50% - 0.25rem);
+}
+
+.tr-tooltip--left .tr-tooltip__arrow {
+  @apply -right-1;
+  top: calc(50% - 0.25rem);
+}
+
+.tr-tooltip--right .tr-tooltip__arrow {
+  @apply -left-1;
+  top: calc(50% - 0.25rem);
+}
+
+.tr-tooltip-enter-active,
+.tr-tooltip-leave-active {
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.tr-tooltip-enter-from,
+.tr-tooltip-leave-to {
+  opacity: 0;
+  transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-tooltip-enter-active,
+  .tr-tooltip-leave-active {
+    transition: none;
+  }
+}

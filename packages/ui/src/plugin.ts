@@ -9,6 +9,7 @@ import { TrSegmentedControl } from './components/segmented-control';
 import { TrStatus } from './components/status';
 import { TrTable, TrTableCard } from './components/table';
 import { TrTopBar } from './components/TopBar';
+import { TrTooltip } from './components/tooltip';
 
 /**
  * Registers kit components for templates as TrButton, TrTopBar, etc.
@@ -27,5 +28,6 @@ export const taraUi: Plugin = {
     app.component('TrTable', TrTable);
     app.component('TrTableCard', TrTableCard);
     app.component('TrTopBar', TrTopBar);
+    app.component('TrTooltip', TrTooltip);
   },
 };

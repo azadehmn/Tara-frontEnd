@@ -12,8 +12,9 @@
 }
 
 .tr-table__head-cell {
-  @apply flex items-center justify-start border-none px-md py-md
+  @apply flex min-w-0 items-center justify-start overflow-hidden border-none px-md py-md
     text-body-md font-medium text-text
+    text-ellipsis whitespace-nowrap
     dark:text-gray-400;
 }
 
@@ -35,7 +36,15 @@
 }
 
 .tr-table__cell {
-  @apply grid min-w-0 items-center border-b border-solid border-border-divider px-md py-md;
+  @apply grid min-w-0 items-center overflow-hidden border-b border-solid border-border-divider px-md py-md;
+}
+
+.tr-table__cell-content {
+  @apply min-w-0 max-w-full;
+}
+
+.tr-table__overflow-text {
+  @apply block min-w-0 max-w-full truncate;
 }
 
 html[data-theme='dark'] .tr-table__cell {
