@@ -12,6 +12,7 @@ Type-safe data table for Tara UI. Pass `columns` and `items`; customize cells wi
 - Row click / hover, custom `rowKey` and `rowClass`
 - CSS Grid column widths
 - Keyboard: Enter and Space when `rowPointer` is set
+- Responsive cards below `md` (768px) by default, using the same columns and `#item-*` / `#action` slots
 
 ## Usage
 
@@ -64,6 +65,11 @@ const columns: TrTableColumn[] = [
 | `rowKey` | `string` | `'id'` | Vue `:key` field; falls back to index |
 | `rowClass` | `(item: T) => string \| undefined` | — | Row class from the UI, not from the data model |
 | `actionWidth` | `string` | `'48px'` | Grid track for `#action` |
+| `layout` | `'auto' \| 'table' \| 'card'` | `'auto'` | `auto` switches to cards below `cardBreakpoint` |
+| `cardBreakpoint` | Tara breakpoint name | `'md'` | Token used when `layout` is `auto` (`md` = 768px) |
+| `cardHeaderColumn` | `string` | first column | Column `name` shown in the card header |
+
+Below `cardBreakpoint`, each row becomes a `TrTableCard`: first column (or `cardHeaderColumn`) in the header, remaining columns as label/value rows, `#action` in the footer. Existing `#item-*` slots are reused. Override with `#card`, `#card-header`, `#card-main`, or `#card-footer`. Force a mode with `layout="table"` or `layout="card"`.
 
 ### Column
 
@@ -93,6 +99,10 @@ Slot names use `column.name` in lowercase (`isEnabled` → `#item-isenabled`).
 | `#action` | `{ item, index }` | Trailing actions |
 | `#loading` | — | Replace default loading rows |
 | `#empty` | — | Replace `emptyText` |
+| `#card` | `{ item, index }` | Replace the whole card body |
+| `#card-header` | `{ item, column, index }` | Replace the card header |
+| `#card-main` | `{ item, index, columns }` | Replace the card fields |
+| `#card-footer` | `{ item, index }` | Replace the card footer |
 
 Without `#item-*`, the cell text comes from `name` via `resolvePathValue`.
 

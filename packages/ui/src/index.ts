@@ -42,6 +42,7 @@ export { TrStatus } from './components/status';
 export type { TrStatusProps, TrStatusType } from './components/status';
 export {
   TrTable,
+  TrTableCard,
   columnSlotName,
   resolvePathValue,
   itemSlotName,
@@ -50,10 +51,13 @@ export {
 } from './components/table';
 export type {
   TrTableColumn,
+  TrTableLayout,
   TrTableProps,
   TrTableRow,
   TrTableRowHoverPayload,
 } from './components/table';
+export { useBreakpoint } from './composables/useBreakpoint';
+export type { TrBreakpointName } from './composables/useBreakpoint';
 export { color, radius, shadow, spacing, breakpoint, typography } from './tokens';
 export type {
   TrColorState,

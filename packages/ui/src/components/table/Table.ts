@@ -1,3 +1,5 @@
+import type { TrBreakpointName } from '../../composables/useBreakpoint';
+
 export type TrTableColumn = {
   /** Stable column id; falls back to `name`. */
   id?: number | string;
@@ -10,6 +12,8 @@ export type TrTableColumn = {
 };
 
 export type TrTableRow = Record<string, unknown>;
+
+export type TrTableLayout = 'auto' | 'table' | 'card';
 
 export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   columns: TrTableColumn[];
@@ -26,6 +30,15 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   rowClass?: (item: T) => string | undefined;
   /** Grid track for the built-in `#action` column. */
   actionWidth?: string;
+  /**
+   * Viewport layout. `auto` shows cards below `cardBreakpoint`.
+   * Default `auto`.
+   */
+  layout?: TrTableLayout;
+  /** Switch to cards when width is below this Tara token. Default `md` (768px). */
+  cardBreakpoint?: TrBreakpointName;
+  /** Column `name` used as the card header. Defaults to the first column. */
+  cardHeaderColumn?: string;
 };
 
 export type TrTableRowHoverPayload<T extends TrTableRow = TrTableRow> = {

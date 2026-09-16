@@ -1,4 +1,5 @@
 export { default as TrTable } from './Table.vue';
+export { default as TrTableCard } from './TableCard.vue';
 export {
   columnSlotName,
   resolvePathValue,
@@ -8,6 +9,7 @@ export {
 } from './Table';
 export type {
   TrTableColumn,
+  TrTableLayout,
   TrTableProps,
   TrTableRow,
   TrTableRowHoverPayload,

@@ -7,7 +7,7 @@ import { TrLabel } from './components/label';
 import { TrNavigationBar } from './components/NavigationBar';
 import { TrSegmentedControl } from './components/segmented-control';
 import { TrStatus } from './components/status';
-import { TrTable } from './components/table';
+import { TrTable, TrTableCard } from './components/table';
 import { TrTopBar } from './components/TopBar';
 
 /**
@@ -25,6 +25,7 @@ export const taraUi: Plugin = {
     app.component('TrSegmentedControl', TrSegmentedControl);
     app.component('TrStatus', TrStatus);
     app.component('TrTable', TrTable);
+    app.component('TrTableCard', TrTableCard);
     app.component('TrTopBar', TrTopBar);
   },
 };

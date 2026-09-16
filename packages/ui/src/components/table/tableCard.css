@@ -1,0 +1,51 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-table-card {
+  @apply rounded-sm border border-solid border-border-divider bg-surface p-md
+    dark:border-gray-800 dark:bg-[#1e2634];
+}
+
+.tr-table-card__header {
+  @apply mb-xl text-body-md font-medium text-text dark:text-gray-200;
+}
+
+.tr-table-card__footer {
+  @apply mt-xl flex justify-end;
+}
+
+.tr-table-card--pointer {
+  @apply cursor-pointer;
+}
+
+.tr-table-card--pointer:hover {
+  @apply bg-surface-hover dark:bg-surface-dark-hover;
+}
+
+.tr-table-card--pointer:active {
+  @apply bg-surface-pressed dark:bg-surface-dark-pressed;
+}
+
+.tr-table-card--pointer:focus-visible {
+  @apply bg-surface-focus outline-none dark:bg-surface-dark-focus;
+}
+
+.tr-table-cards {
+  @apply flex flex-col gap-md;
+}
+
+.tr-table-card__field {
+  @apply flex items-start justify-between gap-md py-sm;
+}
+
+.tr-table-card__field + .tr-table-card__field {
+  @apply border-t border-solid border-border-divider dark:border-gray-800;
+}
+
+.tr-table-card__field-label {
+  @apply shrink-0 text-body-sm font-medium text-text-soft dark:text-gray-400;
+}
+
+.tr-table-card__field-value {
+  @apply min-w-0 text-end text-body-md text-text dark:text-gray-200;
+}

@@ -1,5 +1,7 @@
 <script setup lang="ts" generic="T extends TrTableRow">
 import { computed, useSlots } from 'vue';
+import { useBreakpoint } from '../../composables/useBreakpoint';
+import TrTableCard from './TableCard.vue';
 import {
   columnSlotName,
   itemSlotName,
@@ -21,6 +23,8 @@ const props = withDefaults(defineProps<TrTableProps<T>>(), {
   emptyText: '',
   rowKey: 'id',
   actionWidth: '48px',
+  layout: 'auto',
+  cardBreakpoint: 'md',
 });
 
 const emit = defineEmits<{
@@ -29,10 +33,17 @@ const emit = defineEmits<{
 }>();
 
 const slots = useSlots();
+const { isBelow } = useBreakpoint();
 
 const hasActionSlot = computed(() => Boolean(slots.action));
-
 const itemSlots = computed(() => new Set(Object.keys(slots)));
+const hasCardSlot = computed(() => itemSlots.value.has('card'));
+
+const showCards = computed(() => {
+  if (props.layout === 'card') return true;
+  if (props.layout === 'table') return false;
+  return isBelow(props.cardBreakpoint);
+});
 
 const normalizedColumns = computed(() =>
   props.columns.map((column) => ({
@@ -40,6 +51,20 @@ const normalizedColumns = computed(() =>
     columnSlot: columnSlotName(column),
     itemSlot: itemSlotName(column),
   })),
+);
+
+const headerColumn = computed(() => {
+  if (props.cardHeaderColumn) {
+    return (
+      normalizedColumns.value.find((column) => column.name === props.cardHeaderColumn) ??
+      normalizedColumns.value[0]
+    );
+  }
+  return normalizedColumns.value[0];
+});
+
+const fieldColumns = computed(() =>
+  normalizedColumns.value.filter((column) => column.name !== headerColumn.value?.name),
 );
 
 const gridColumns = computed(() => {
@@ -62,7 +87,92 @@ function onRowHover(item: T, index: number, hovering: boolean) {
 </script>
 
 <template>
-  <div class="tr-table" role="table">
+  <div v-if="showCards" class="tr-table-cards" role="list">
+    <template v-if="loading">
+      <slot name="loading">
+        <TrTableCard v-for="rowIndex in loadingRows" :key="`skeleton-card-${rowIndex}`" role="listitem">
+          <template #header>
+            <span class="tr-table__skeleton" aria-hidden="true" />
+          </template>
+          <template #main>
+            <div v-for="column in fieldColumns" :key="column.id ?? column.name" class="tr-table-card__field">
+              <span class="tr-table-card__field-label">{{ column.label }}</span>
+              <span class="tr-table__skeleton" aria-hidden="true" />
+            </div>
+          </template>
+        </TrTableCard>
+      </slot>
+    </template>
+
+    <template v-else-if="items.length > 0">
+      <TrTableCard
+        v-for="(item, index) in items"
+        :key="getRowKey(item, index, rowKey)"
+        role="listitem"
+        :class="[rowClass?.(item), { 'tr-table-card--pointer': rowPointer }]"
+        :tabindex="rowPointer ? 0 : undefined"
+        @click="onRowClick(item)"
+        @keydown.enter.prevent="onRowClick(item)"
+        @keydown.space.prevent="onRowClick(item)"
+        @mouseenter="onRowHover(item, index, true)"
+        @mouseleave="onRowHover(item, index, false)"
+      >
+        <template v-if="hasCardSlot">
+          <slot name="card" :item="item" :index="index" />
+        </template>
+        <template v-if="!hasCardSlot && headerColumn" #header>
+          <slot name="card-header" :item="item" :column="headerColumn" :index="index">
+            <slot
+              v-if="itemSlots.has(headerColumn.itemSlot)"
+              :name="headerColumn.itemSlot"
+              :item="item"
+              :column="headerColumn"
+              :index="index"
+            />
+            <div v-else class="truncate">
+              {{ itemTextContent(headerColumn.name, item) }}
+            </div>
+          </slot>
+        </template>
+        <template v-if="!hasCardSlot && fieldColumns.length > 0" #main>
+          <slot name="card-main" :item="item" :index="index" :columns="fieldColumns">
+            <div
+              v-for="column in fieldColumns"
+              :key="column.id ?? column.name"
+              class="tr-table-card__field"
+            >
+              <span class="tr-table-card__field-label">{{ column.label }}</span>
+              <div class="tr-table-card__field-value">
+                <slot
+                  v-if="itemSlots.has(column.itemSlot)"
+                  :name="column.itemSlot"
+                  :item="item"
+                  :column="column"
+                  :index="index"
+                />
+                <div v-else class="truncate">
+                  {{ itemTextContent(column.name, item) }}
+                </div>
+              </div>
+            </div>
+          </slot>
+        </template>
+        <template v-if="!hasCardSlot && hasActionSlot" #footer>
+          <slot name="card-footer" :item="item" :index="index">
+            <div @click.stop>
+              <slot name="action" :item="item" :index="index" />
+            </div>
+          </slot>
+        </template>
+      </TrTableCard>
+    </template>
+
+    <div v-else class="tr-table__empty" role="status">
+      <slot name="empty">{{ emptyText }}</slot>
+    </div>
+  </div>
+
+  <div v-else class="tr-table" role="table">
     <div
       v-if="!hideHeader"
       class="tr-table__head"
