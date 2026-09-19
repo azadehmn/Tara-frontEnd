@@ -1,18 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import { RouterView } from 'vue-router';
-import { TrButton } from '@tara/ui';
-
-const { t } = useI18n();
-// const year = new Date().getFullYear();
-const isDark = ref(document.documentElement.dataset.theme === 'dark');
-
-function toggleTheme() {
-  isDark.value = !isDark.value;
-  document.documentElement.dataset.theme = isDark.value ? 'dark' : 'light';
-}
-</script>
-
 <template>
   <div
     class="relative flex min-h-screen flex-col bg-white text-text dark:bg-background-dark dark:text-text-dark"
@@ -38,3 +23,24 @@ function toggleTheme() {
     </p>
   </div>
 </template>
+
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { RouterView } from 'vue-router';
+import { TrButton } from '@tara/ui';
+import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/ui';
+
+const { t } = useI18n();
+const { show: showAppLoading } = useAppLoading();
+// const year = new Date().getFullYear();
+const isDark = ref(document.documentElement.dataset.theme === 'dark');
+
+onMounted(() => {
+  showAppLoading(APP_LOADING_SPLASH_MS);
+});
+
+function toggleTheme() {
+  isDark.value = !isDark.value;
+  document.documentElement.dataset.theme = isDark.value ? 'dark' : 'light';
+}
+</script>

@@ -55,17 +55,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import type { SupportedLocale } from '@tara/locale';
 import { TrButton, TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo-persion.svg';
+import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/ui';
 
 const { locale, t } = useI18n();
 const route = useRoute();
 const { mode: viewportMode } = useNavigationMode();
+const { show: showAppLoading } = useAppLoading();
+
+onMounted(() => {
+  showAppLoading(APP_LOADING_SPLASH_MS);
+});
 
 const isDark = ref(document.documentElement.dataset.theme === 'dark');
 const isOverlayOpen = ref(false);
