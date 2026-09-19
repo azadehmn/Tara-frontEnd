@@ -215,15 +215,6 @@ defineExpose({
       }"
       :dir="direction"
     >
-      <Transition name="tr-text-field-label">
-        <span
-          v-if="showFloatingLabel"
-          class="tr-text-field__label"
-          aria-hidden="true"
-        >
-          {{ accessibleLabel }}
-        </span>
-      </Transition>
 
       <span v-if="showBefore" class="tr-text-field__adornment">
         <TrIcon>
@@ -301,6 +292,16 @@ defineExpose({
         {{ words }}
       </div>
     </div>
+
+    <Transition name="tr-text-field-label">
+      <span
+        v-if="showFloatingLabel"
+        class="tr-text-field__label"
+        aria-hidden="true"
+      >
+        {{ accessibleLabel }}
+      </span>
+    </Transition>
 
     <div v-if="showHelper || showLimit" class="tr-text-field__footer">
       <p

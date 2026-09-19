@@ -23,7 +23,7 @@ const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'passwor
 
 <template>
   <div
-    class="flex h-auto w-[90%] max-w-[90%] flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_8px_48px_rgba(0,0,0,0.10)] min-[567px]:w-[450px] min-[567px]:max-w-[450px] min-[992px]:min-h-[560px] min-[992px]:max-h-[88vh] min-[992px]:w-full min-[992px]:max-w-[900px] min-[992px]:flex-row-reverse xl:max-w-[90%] dark:border-border-dark dark:bg-surface-dark dark:shadow-[0_8px_48px_rgba(0,0,0,0.40)]"
+    class="flex h-auto w-[90%] max-w-[90%] flex-col overflow-hidden rounded-2xl border border-transparent bg-surface shadow-[0_8px_48px_rgba(0,0,0,0.10)] min-[567px]:w-[450px] min-[567px]:max-w-[450px] min-[992px]:min-h-[560px] min-[992px]:max-h-[88vh] min-[992px]:w-full min-[992px]:max-w-[900px] min-[992px]:flex-row-reverse xl:max-w-[90%] dark:border-gray-800 dark:bg-surface-dark dark:shadow-[0_8px_48px_rgba(0,0,0,0.40)]"
   >
     <div
       class="relative hidden min-h-0 min-[992px]:block min-[992px]:flex-1"

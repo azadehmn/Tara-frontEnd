@@ -15,7 +15,7 @@ function toggleTheme() {
 
 <template>
   <div
-    class="relative flex min-h-screen flex-col bg-background text-text dark:bg-background-dark dark:text-text-dark"
+    class="relative flex min-h-screen flex-col bg-white text-text dark:bg-background-dark dark:text-text-dark"
   >
     <div class="absolute end-xl top-xl z-10">
       <TrButton

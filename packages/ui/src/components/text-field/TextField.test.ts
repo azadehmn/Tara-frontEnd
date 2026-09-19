@@ -88,6 +88,23 @@ describe('TrTextField', () => {
     expect(wrapper.emitted('action')).toHaveLength(1);
   });
 
+  it('floats the label above the border on focus with a surface background', async () => {
+    const wrapper = mount(TrTextField, {
+      props: {
+        modelValue: '',
+        placeholder: 'نام کاربری',
+      },
+    });
+
+    expect(wrapper.find('.tr-text-field__label').exists()).toBe(false);
+
+    await wrapper.get('input').trigger('focus');
+
+    const label = wrapper.get('.tr-text-field__label');
+    expect(label.text()).toBe('نام کاربری');
+    expect(label.element.closest('.tr-text-field__control')).toBeNull();
+  });
+
   it('uses current/max order for the character counter', () => {
     const wrapper = mount(TrTextField, {
       props: {
