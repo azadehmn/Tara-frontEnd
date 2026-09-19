@@ -22,7 +22,7 @@ Copy env from the example if you don’t have one:
 cp apps/merchant-panel/.env.example apps/merchant-panel/.env.development
 ```
 
-`VITE_API_BASE_URL` is the Club/stage host. Dev requests go through the Vite proxy. `VITE_DEV_ACCESS_TOKEN` is optional (local only — don’t commit a real token).
+`VITE_API_BASE_URL` is the Club/stage host. Dev requests go through the Vite proxy. Access tokens come from login and are stored in the browser; do not put them in env.
 
 ## Test / lint / build
 

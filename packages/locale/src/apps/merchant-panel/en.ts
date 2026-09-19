@@ -140,6 +140,7 @@ export const merchantPanelEn: MessageTree = {
       showPassword: 'Show password',
       hidePassword: 'Hide password',
       bannerAlt: 'Tara service banner {n}',
+      required: 'Username and password are required.',
     },
   },
 };

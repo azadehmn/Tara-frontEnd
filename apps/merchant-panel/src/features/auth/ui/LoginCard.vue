@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { TrButton, TrTextField } from '@tara/ui';
+import { ApiError } from '@shared/api/errors/api-error';
 import { ImageSlider } from '@shared/ui';
 import taraLogo from '@assets/images/logo-persion.svg';
+import { useLogin } from '../composables/use-login';
 import { serviceBanners } from '../config/service-banners';
 
 const { t } = useI18n();
+const { pending, error, submit } = useLogin();
 
 const username = ref('');
 const password = ref('');
@@ -19,6 +22,15 @@ const slides = computed(() =>
 );
 
 const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'password'));
+
+async function onSubmit() {
+  if (!username.value.trim() || !password.value) {
+    error.value = new ApiError(t('auth.login.required'));
+    return;
+  }
+
+  await submit(username.value, password.value);
+}
 </script>
 
 <template>
@@ -56,7 +68,7 @@ const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'passwor
         {{ t('auth.login.description') }}
       </p>
 
-      <form class="mt-xl flex flex-col gap-lg" @submit.prevent>
+      <form class="mt-xl flex flex-col gap-lg" @submit.prevent="onSubmit">
         <TrTextField
           v-model="username"
           name="username"
@@ -102,7 +114,21 @@ const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'passwor
           </template>
         </TrTextField>
 
-        <TrButton class="w-full" html-type="submit" size="large" :text="t('auth.login.submit')" />
+        <p
+          v-if="error"
+          class="m-0 text-body-sm text-text-danger dark:text-text-dark-danger"
+          role="alert"
+        >
+          {{ error.message }}
+        </p>
+
+        <TrButton
+          class="w-full"
+          html-type="submit"
+          size="large"
+          :loading="pending"
+          :text="t('auth.login.submit')"
+        />
       </form>
     </section>
   </div>

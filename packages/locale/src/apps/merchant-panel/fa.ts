@@ -140,6 +140,7 @@ export const merchantPanelFa: MessageTree = {
       showPassword: 'نمایش رمز عبور',
       hidePassword: 'پنهان کردن رمز عبور',
       bannerAlt: 'بنر سرویس تارا {n}',
+      required: 'نام کاربری و رمز عبور را وارد کنید.',
     },
   },
 };
