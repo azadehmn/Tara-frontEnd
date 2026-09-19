@@ -68,8 +68,10 @@ const columns: TrTableColumn[] = [
 | `layout` | `'auto' \| 'table' \| 'card'` | `'auto'` | `auto` switches to cards below `cardBreakpoint` |
 | `cardBreakpoint` | Tara breakpoint name | `'lg'` | Token used when `layout` is `auto` (`lg` = 912px) |
 | `cardHeaderColumn` | `string` | first column | Column `name` shown in the card header |
+| `showCardHeaderLabel` | `boolean` | `false` | Prefix the card header value with the column `label` (inline title, e.g. `شماره قرارداد 1134`) |
+| `cardHeaderAddonColumn` | `string` | — | Extra column (usually status) on the start/right of the card header; hidden from field rows |
 
-Below `cardBreakpoint`, each row becomes a `TrTableCard`: first column (or `cardHeaderColumn`) in the header, remaining columns as label/value rows, `#action` in the footer. Existing `#item-*` slots are reused. Override with `#card`, `#card-header`, `#card-main`, or `#card-footer`. Force a mode with `layout="table"` or `layout="card"`.
+Below `cardBreakpoint`, each row becomes a `TrTableCard`: first column (or `cardHeaderColumn`) in the header, remaining columns as label/value rows. `#action` sits on the end/left of the header so cards stay shorter. Existing `#item-*` slots are reused. Set `showCardHeaderLabel` to prefix the header value with its column title, and `cardHeaderAddonColumn` to pin another column (for example status) next to that title. Override with `#card`, `#card-header`, `#card-main`, or `#card-footer`. Force a mode with `layout="table"` or `layout="card"`.
 
 ### Column
 
@@ -96,13 +98,13 @@ Slot names use `column.name` in lowercase (`isEnabled` → `#item-isenabled`).
 | --- | --- | --- |
 | `#column-{name}` | `{ column }` | Custom header |
 | `#item-{name}` | `{ item, column, index }` | Custom cell |
-| `#action` | `{ item, index }` | Trailing actions |
+| `#action` | `{ item, index }` | Trailing actions (header end/left on cards) |
 | `#loading` | — | Replace default loading rows |
 | `#empty` | — | Replace `emptyText` |
 | `#card` | `{ item, index }` | Replace the whole card body |
-| `#card-header` | `{ item, column, index }` | Replace the card header |
+| `#card-header` | `{ item, column, addonColumn, index }` | Replace the card header title area |
 | `#card-main` | `{ item, index, columns }` | Replace the card fields |
-| `#card-footer` | `{ item, index }` | Replace the card footer |
+| `#card-footer` | `{ item, index }` | Optional card footer |
 
 Without `#item-*`, the cell text comes from `name` via `resolvePathValue`.
 

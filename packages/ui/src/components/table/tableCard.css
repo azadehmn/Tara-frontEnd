@@ -7,7 +7,31 @@
 }
 
 .tr-table-card__header {
-  @apply mb-xl truncate text-body-md font-medium text-text dark:text-gray-200;
+  @apply mb-xl text-body-md font-medium text-text dark:text-gray-200;
+}
+
+.tr-table-card__header-row {
+  @apply flex min-w-0 items-center justify-between gap-sm;
+}
+
+.tr-table-card__header-main {
+  @apply flex min-w-0 items-center gap-sm;
+}
+
+.tr-table-card__header-title {
+  @apply min-w-0 truncate;
+}
+
+.tr-table-card__header-prefix {
+  @apply me-2xs;
+}
+
+.tr-table-card__header-addon {
+  @apply shrink-0;
+}
+
+.tr-table-card__header-action {
+  @apply shrink-0;
 }
 
 .tr-table-card__footer {

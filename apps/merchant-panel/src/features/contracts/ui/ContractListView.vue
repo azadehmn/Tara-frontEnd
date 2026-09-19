@@ -1,7 +1,89 @@
+<template>
+  <div class="flex flex-col gap-4">
+    <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
+    <form class="flex flex-wrap items-end gap-3 mb-2xl" @submit.prevent="applyFilters">
+      <label class="flex flex-col gap-1 text-sm">
+        <span>{{ t('contracts.fields.id') }}</span>
+        <input
+          v-model="filters.id"
+          class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
+        />
+      </label>
+      <label class="flex flex-col gap-1 text-sm">
+        <span>{{ t('contracts.fields.title') }}</span>
+        <input
+          v-model="filters.title"
+          class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
+        />
+      </label>
+      <label class="flex flex-col gap-1 text-sm">
+        <span>{{ t('contracts.fields.profileTitle') }}</span>
+        <input
+          v-model="filters.profileTitle"
+          class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
+        />
+      </label>
+      <TrButton variant="primary" size="small" html-type="submit" :text="t('common.search')" />
+    </form>
+    <TrCard>
+      <TrTable
+        :columns="columns"
+        :items="contracts"
+        :loading="pending"
+        :empty-text="t('common.empty')"
+        show-card-header-label
+        card-header-addon-column="isEnabled"
+        
+      >
+      
+        <template #item-type="{ item }">
+          {{ t(`contracts.types.${item.type}`) }}
+        </template>
+        <template #item-isenabled="{ item }">
+
+          <TrStatus
+            :type="item.isEnabled ? 'positive' : 'negative'"
+            :text="item.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive')"
+          />
+        </template>
+        <template #action="{ item }">
+          <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />
+        </template>
+      </TrTable>
+      <template #footer>
+        <div class="flex items-center gap-3">
+          <TrButton
+            variant="outlined"
+            size="small"
+            :text="t('common.prev')"
+            :disabled="page <= 1"
+            @click="goToPreviousPage"
+          />
+          <span>{{ page }} / {{ pageCount }}</span>
+          <TrButton
+            variant="outlined"
+            size="small"
+            :text="t('common.next')"
+            :disabled="page >= pageCount"
+            @click="goToNextPage"
+          />
+        </div>
+      </template>
+    </TrCard>
+  </div>
+</template>
 <script setup lang="ts">
 import { onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { TrAction, TrButton, TrCard, TrStatus, TrTable, type TrActionItem, type TrTableColumn } from '@tara/ui';
+import {
+  TrAction,
+  TrButton,
+  TrCard,
+  TrStatus,
+  TrTable,
+  type TrActionItem,
+  type TrTableColumn,
+} from '@tara/ui';
 import TrCircleCheckIcon from '@tara/ui/icons/CircleCheckIcon.vue';
 import TrCircleSlashIcon from '@tara/ui/icons/CircleSlashIcon.vue';
 import TrDetailsIcon from '@tara/ui/icons/DetailsIcon.vue';
@@ -85,9 +167,7 @@ function rowActions(item: ContractListItem): TrActionItem[] {
     const isInactive = Boolean(item.deactivatedByOrg) || !item.isEnabled;
     items.push({
       id: 'toggle-status',
-      label: isInactive
-        ? t('contracts.actions.activate')
-        : t('contracts.actions.deactivate'),
+      label: isInactive ? t('contracts.actions.activate') : t('contracts.actions.deactivate'),
       icon: isInactive ? TrCircleCheckIcon : TrCircleSlashIcon,
       tone: isInactive ? 'success' : 'danger',
       command: () => {
@@ -99,77 +179,3 @@ function rowActions(item: ContractListItem): TrActionItem[] {
   return items;
 }
 </script>
-
-<template>
-  <div class="flex flex-col gap-4">
-
-
-    <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-
-    <TrCard>
-       <form class="flex flex-wrap items-end gap-3 mb-2xl" @submit.prevent="applyFilters">
-        <label class="flex flex-col gap-1 text-sm">
-          <span>{{ t('contracts.fields.id') }}</span>
-          <input
-            v-model="filters.id"
-            class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
-          />
-        </label>
-        <label class="flex flex-col gap-1 text-sm">
-          <span>{{ t('contracts.fields.title') }}</span>
-          <input
-            v-model="filters.title"
-            class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
-          />
-        </label>
-        <label class="flex flex-col gap-1 text-sm">
-          <span>{{ t('contracts.fields.profileTitle') }}</span>
-          <input
-            v-model="filters.profileTitle"
-            class="rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
-          />
-        </label>
-        <TrButton variant="primary" size="small" html-type="submit" :text="t('common.search')" />
-      </form>
-      <TrTable
-        :columns="columns"
-        :items="contracts"
-        :loading="pending"
-        :empty-text="t('common.empty')"
-      >
-        <template #item-type="{ item }">
-          {{ t(`contracts.types.${item.type}`) }}
-        </template>
-        <template #item-isenabled="{ item }">
-          <TrStatus
-            :type="item.isEnabled ? 'positive' : 'negative'"
-            :text="item.isEnabled ? t('contracts.status.active') : t('contracts.status.inactive')"
-            
-          />
-        </template>
-        <template #action="{ item }">
-          <TrAction :aria-label="t('common.actions')" :items="rowActions(item)" />
-        </template>
-      </TrTable>
-      <template #footer>
-        <div class="flex items-center gap-3">
-          <TrButton
-            variant="outlined"
-            size="small"
-            :text="t('common.prev')"
-            :disabled="page <= 1"
-            @click="goToPreviousPage"
-          />
-          <span>{{ page }} / {{ pageCount }}</span>
-          <TrButton
-            variant="outlined"
-            size="small"
-            :text="t('common.next')"
-            :disabled="page >= pageCount"
-            @click="goToNextPage"
-          />
-        </div>
-      </template>
-    </TrCard>
-  </div>
-</template>

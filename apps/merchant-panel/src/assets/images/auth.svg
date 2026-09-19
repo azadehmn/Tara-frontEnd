@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 500" width="720" height="500">
+  <defs>
+    <radialGradient id="bgG" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#0BA5C2" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#060D1B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      @keyframes nodeFloat1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes nodeFloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes nodeFloat3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes nodeFloat4 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes nodeFloat5 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes nodeFloat6 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+      @keyframes edgeDash   { to { stroke-dashoffset: -20 } }
+
+      .nf1 { animation: nodeFloat1  7s ease-in-out infinite;       transform-origin: inherit; }
+      .nf2 { animation: nodeFloat2  9s ease-in-out infinite 1.2s;  transform-origin: inherit; }
+      .nf3 { animation: nodeFloat3  6s ease-in-out infinite 0.4s;  transform-origin: inherit; }
+      .nf4 { animation: nodeFloat4  8s ease-in-out infinite 1.8s;  transform-origin: inherit; }
+      .nf5 { animation: nodeFloat5 10s ease-in-out infinite 0.9s;  transform-origin: inherit; }
+      .nf6 { animation: nodeFloat6  7s ease-in-out infinite 2.3s;  transform-origin: inherit; }
+      .el  { animation: edgeDash   1.8s linear infinite; }
+    </style>
+  </defs>
+
+  <!-- Background glow -->
+  <rect width="720" height="500" fill="url(#bgG)"/>
+
+  <!-- ── Dim static edges ── -->
+  <line x1="90"  y1="70"  x2="240" y2="150" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="420" y1="60"  x2="580" y2="150" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="580" y1="150" x2="680" y2="60"  stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="240" y1="150" x2="140" y2="300" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="310" y1="370" x2="500" y2="320" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="500" y1="320" x2="650" y2="390" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="90"  y1="70"  x2="140" y2="300" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="580" y1="150" x2="500" y2="320" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="680" y1="60"  x2="650" y2="390" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+  <line x1="60"  y1="430" x2="140" y2="300" stroke="rgba(11,165,194,0.12)" stroke-width="1"/>
+
+  <!-- ── Live dashed animated edges ── -->
+  <line x1="240" y1="150" x2="420" y2="60"  stroke="rgba(11,165,194,0.40)" stroke-width="1.5" stroke-dasharray="5 5" class="el"/>
+  <line x1="140" y1="300" x2="310" y2="370" stroke="rgba(11,165,194,0.40)" stroke-width="1.5" stroke-dasharray="5 5" class="el" style="animation-delay:.4s"/>
+  <line x1="420" y1="60"  x2="500" y2="320" stroke="rgba(11,165,194,0.40)" stroke-width="1.5" stroke-dasharray="5 5" class="el" style="animation-delay:.8s"/>
+
+  <!-- ── Hub spokes ── -->
+  <line x1="360" y1="220" x2="240" y2="150" stroke="rgba(11,165,194,0.35)" stroke-width="1" stroke-dasharray="4 6" class="el" style="animation-delay:.3s"/>
+  <line x1="360" y1="220" x2="420" y2="60"  stroke="rgba(11,165,194,0.35)" stroke-width="1" stroke-dasharray="4 6" class="el" style="animation-delay:.6s"/>
+  <line x1="360" y1="220" x2="580" y2="150" stroke="rgba(11,165,194,0.35)" stroke-width="1" stroke-dasharray="4 6" class="el" style="animation-delay:.9s"/>
+  <line x1="360" y1="220" x2="310" y2="370" stroke="rgba(11,165,194,0.35)" stroke-width="1" stroke-dasharray="4 6" class="el" style="animation-delay:1.2s"/>
+  <line x1="360" y1="220" x2="500" y2="320" stroke="rgba(11,165,194,0.35)" stroke-width="1" stroke-dasharray="4 6" class="el" style="animation-delay:1.5s"/>
+
+  <!-- ── Nodes ── -->
+  <!-- Node 0: 90,70 -->
+  <g class="nf1" style="transform-origin:90px 70px">
+    <circle cx="90"  cy="70"  r="11" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="90"  cy="70"  r="4"  fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 1: 240,150 accent -->
+  <g class="nf2" style="transform-origin:240px 150px">
+    <circle cx="240" cy="150" r="13" fill="#0BA5C2" opacity="0.07"/>
+    <circle cx="240" cy="150" r="6"  fill="#0BA5C2" filter="url(#glow)"/>
+  </g>
+  <!-- Node 2: 420,60 -->
+  <g class="nf3" style="transform-origin:420px 60px">
+    <circle cx="420" cy="60"  r="10" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="420" cy="60"  r="3.5" fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 3: 580,150 accent -->
+  <g class="nf4" style="transform-origin:580px 150px">
+    <circle cx="580" cy="150" r="12" fill="#0BA5C2" opacity="0.07"/>
+    <circle cx="580" cy="150" r="5"  fill="#0BA5C2" filter="url(#glow)"/>
+  </g>
+  <!-- Node 4: 680,60 -->
+  <g class="nf5" style="transform-origin:680px 60px">
+    <circle cx="680" cy="60"  r="9"  fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="680" cy="60"  r="3"  fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 5: 140,300 -->
+  <g class="nf1" style="transform-origin:140px 300px">
+    <circle cx="140" cy="300" r="11" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="140" cy="300" r="4.5" fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 6: 310,370 -->
+  <g class="nf6" style="transform-origin:310px 370px">
+    <circle cx="310" cy="370" r="12" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="310" cy="370" r="5"  fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 7: 500,320 -->
+  <g class="nf2" style="transform-origin:500px 320px">
+    <circle cx="500" cy="320" r="11" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="500" cy="320" r="4"  fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 8: 650,390 -->
+  <g class="nf4" style="transform-origin:650px 390px">
+    <circle cx="650" cy="390" r="10" fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="650" cy="390" r="3.5" fill="rgba(13,31,69,0.55)"/>
+  </g>
+  <!-- Node 9: 60,430 -->
+  <g class="nf3" style="transform-origin:60px 430px">
+    <circle cx="60"  cy="430" r="9"  fill="rgba(13,31,69,0.45)" opacity="0.07"/>
+    <circle cx="60"  cy="430" r="3"  fill="rgba(13,31,69,0.55)"/>
+  </g>
+
+  <!-- ── Central hub ── -->
+  <g class="nf2" style="transform-origin:360px 220px">
+    <circle cx="360" cy="220" r="26" fill="#0BA5C2" opacity="0.06"/>
+    <circle cx="360" cy="220" r="14" fill="#0BA5C2" opacity="0.12"/>
+    <circle cx="360" cy="220" r="6"  fill="#0BA5C2" filter="url(#glowStrong)"/>
+  </g>
+</svg>

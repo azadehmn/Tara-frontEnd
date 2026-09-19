@@ -39,6 +39,13 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   cardBreakpoint?: TrBreakpointName;
   /** Column `name` used as the card header. Defaults to the first column. */
   cardHeaderColumn?: string;
+  /** Prefix the card header value with the column `label` (inline, not a field row). Default `false`. */
+  showCardHeaderLabel?: boolean;
+  /**
+   * Extra column `name` rendered on the start/right of the card header (typically status).
+   * That column is omitted from the card field rows.
+   */
+  cardHeaderAddonColumn?: string;
 };
 
 export type TrTableRowHoverPayload<T extends TrTableRow = TrTableRow> = {

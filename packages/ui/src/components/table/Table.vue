@@ -27,6 +27,7 @@ const props = withDefaults(defineProps<TrTableProps<T>>(), {
   actionWidth: '48px',
   layout: 'auto',
   cardBreakpoint: 'lg',
+  showCardHeaderLabel: false,
 });
 
 const emit = defineEmits<{
@@ -45,7 +46,12 @@ const slots = defineSlots<
     loading?: () => unknown;
     empty?: () => unknown;
     card?: (props: { item: T; index: number }) => unknown;
-    'card-header'?: (props: { item: T; column: TrTableSlotColumn; index: number }) => unknown;
+    'card-header'?: (props: {
+      item: T;
+      column: TrTableSlotColumn;
+      addonColumn?: TrTableSlotColumn;
+      index: number;
+    }) => unknown;
     'card-main'?: (props: {
       item: T;
       columns: TrTableSlotColumn[];
@@ -69,6 +75,7 @@ const { isBelow } = useBreakpoint();
 const hasActionSlot = computed(() => Boolean(slots.action));
 const itemSlots = computed(() => new Set(Object.keys(slots)));
 const hasCardSlot = computed(() => itemSlots.value.has('card'));
+const hasCardFooterSlot = computed(() => itemSlots.value.has('card-footer'));
 
 const showCards = computed(() => {
   if (props.layout === 'card') return true;
@@ -94,8 +101,18 @@ const headerColumn = computed(() => {
   return normalizedColumns.value[0];
 });
 
+const headerAddonColumn = computed(() => {
+  if (!props.cardHeaderAddonColumn) return undefined;
+  if (props.cardHeaderAddonColumn === headerColumn.value?.name) return undefined;
+  return normalizedColumns.value.find((column) => column.name === props.cardHeaderAddonColumn);
+});
+
 const fieldColumns = computed(() =>
-  normalizedColumns.value.filter((column) => column.name !== headerColumn.value?.name),
+  normalizedColumns.value.filter((column) => {
+    if (column.name === headerColumn.value?.name) return false;
+    if (column.name === headerAddonColumn.value?.name) return false;
+    return true;
+  }),
 );
 
 const gridColumns = computed(() => {
@@ -115,15 +132,32 @@ function onRowClick(item: T) {
 function onRowHover(item: T, index: number, hovering: boolean) {
   emit('rowHover', { item, index, hovering });
 }
+
+function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
+  const value = itemTextContent(column.name, item);
+  if (!props.showCardHeaderLabel || !column.label) return value;
+  if (!value) return column.label;
+  return `${column.label} ${value}`;
+}
 </script>
 
 <template>
   <div v-if="showCards" class="tr-table-cards" role="list">
     <template v-if="loading">
       <slot name="loading">
-        <TrTableCard v-for="rowIndex in loadingRows" :key="`skeleton-card-${rowIndex}`" role="listitem">
+        <TrTableCard
+          v-for="rowIndex in loadingRows"
+          :key="`skeleton-card-${rowIndex}`"
+          role="listitem"
+        >
           <template #header>
-            <span class="tr-table__skeleton" aria-hidden="true" />
+            <div class="tr-table-card__header-row">
+              <div class="tr-table-card__header-main">
+                <span class="tr-table__skeleton" aria-hidden="true" />
+                <span v-if="headerAddonColumn" class="tr-table__skeleton" aria-hidden="true" />
+              </div>
+              <span v-if="hasActionSlot" class="tr-table__skeleton" aria-hidden="true" />
+            </div>
           </template>
           <template #main>
             <div v-for="column in fieldColumns" :key="column.id ?? column.name" class="tr-table-card__field">
@@ -152,24 +186,60 @@ function onRowHover(item: T, index: number, hovering: boolean) {
           <slot name="card" :item="item" :index="index" />
         </template>
         <template v-if="!hasCardSlot && headerColumn" #header>
-          <slot name="card-header" :item="item" :column="headerColumn" :index="index">
-          <slot
-            v-if="itemSlots.has(headerColumn.itemSlot)"
-            :name="headerColumn.itemSlot"
-            :item="item"
-            :column="headerColumn"
-            :index="index"
-          />
-          <TrTooltip
-            v-else
-            class="tr-table__overflow-text"
-            :content="itemTextContent(headerColumn.name, item)"
-            only-when-truncated
-            stop-trigger-click
-          >
-            {{ itemTextContent(headerColumn.name, item) }}
-          </TrTooltip>
-          </slot>
+          <div class="tr-table-card__header-row">
+            <div class="tr-table-card__header-main">
+              <slot
+                name="card-header"
+                :item="item"
+                :column="headerColumn"
+                :addon-column="headerAddonColumn"
+                :index="index"
+              >
+                <div class="tr-table-card__header-title">
+                  <span v-if="showCardHeaderLabel && itemSlots.has(headerColumn.itemSlot)" class="tr-table-card__header-prefix">
+                    {{ headerColumn.label }}
+                  </span>
+                  <slot
+                    v-if="itemSlots.has(headerColumn.itemSlot)"
+                    :name="headerColumn.itemSlot"
+                    :item="item"
+                    :column="headerColumn"
+                    :index="index"
+                  />
+                  <TrTooltip
+                    v-else
+                    class="tr-table__overflow-text"
+                    :content="cardHeaderTitle(headerColumn, item)"
+                    only-when-truncated
+                    stop-trigger-click
+                  >
+                    {{ cardHeaderTitle(headerColumn, item) }}
+                  </TrTooltip>
+                </div>
+                <div v-if="headerAddonColumn" class="tr-table-card__header-addon">
+                  <slot
+                    v-if="itemSlots.has(headerAddonColumn.itemSlot)"
+                    :name="headerAddonColumn.itemSlot"
+                    :item="item"
+                    :column="headerAddonColumn"
+                    :index="index"
+                  />
+                  <TrTooltip
+                    v-else
+                    class="tr-table__overflow-text"
+                    :content="itemTextContent(headerAddonColumn.name, item)"
+                    only-when-truncated
+                    stop-trigger-click
+                  >
+                    {{ itemTextContent(headerAddonColumn.name, item) }}
+                  </TrTooltip>
+                </div>
+              </slot>
+            </div>
+            <div v-if="hasActionSlot" class="tr-table-card__header-action" @click.stop>
+              <slot name="action" :item="item" :index="index" />
+            </div>
+          </div>
         </template>
         <template v-if="!hasCardSlot && fieldColumns.length > 0" #main>
           <slot name="card-main" :item="item" :index="index" :columns="fieldColumns">
@@ -200,12 +270,8 @@ function onRowHover(item: T, index: number, hovering: boolean) {
             </div>
           </slot>
         </template>
-        <template v-if="!hasCardSlot && hasActionSlot" #footer>
-          <slot name="card-footer" :item="item" :index="index">
-            <div @click.stop>
-              <slot name="action" :item="item" :index="index" />
-            </div>
-          </slot>
+        <template v-if="!hasCardSlot && hasCardFooterSlot" #footer>
+          <slot name="card-footer" :item="item" :index="index" />
         </template>
       </TrTableCard>
     </template>
