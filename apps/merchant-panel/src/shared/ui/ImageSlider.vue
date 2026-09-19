@@ -14,7 +14,7 @@ const props = withDefaults(
     nextLabel?: string;
   }>(),
   {
-    intervalMs: 5000,
+    intervalMs: 10000,
     autoplay: true,
     fit: 'cover',
     prevLabel: 'Previous',

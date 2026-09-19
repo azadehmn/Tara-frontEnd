@@ -32,5 +32,5 @@ for (const item of modules) {
 }
 
 export const serviceBanners: ImageSlide[] = [...unique.values()]
-  .sort((a, b) => a.id - b.id)
+  .sort((a, b) => b.id - a.id)
   .map((item) => ({ src: item.src, alt: '' }));

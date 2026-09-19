@@ -31,6 +31,7 @@ const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'passwor
       <ImageSlider
         class="absolute inset-0"
         fit="cover"
+        :interval-ms="10000"
         :slides="slides"
         :prev-label="t('common.prev')"
         :next-label="t('common.next')"
