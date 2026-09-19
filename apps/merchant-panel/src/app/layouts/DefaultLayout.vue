@@ -16,7 +16,7 @@
             <TrMenuIcon />
           </TrIcon>
         </div>
-        <img :src="taraLogo" alt="Tara" width="61" height="25" />
+        <img :src="taraLogo" alt="Tara" width="61" height="25" class="h-[40px]" />
       </template>
       <template #end>
         <TrButton variant="primary" size="small" text="fa" @click="setLocale('fa')" />

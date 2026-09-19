@@ -4,6 +4,7 @@ import {
   TrButton,
   TrLabel,
   TrSegmentedControl,
+  TrOtpField,
   TrStatus,
   TrTextField,
   type TrButtonSize,
@@ -65,6 +66,11 @@ const buttonValue = ref('');
 const ltrValue = ref('IR120540000000000000000000');
 const iconValue = ref('');
 const actionCount = ref(0);
+const otpValue = ref('');
+const otpShort = ref('');
+const otpError = ref('');
+const otpSuccess = ref('123456');
+const otpComplete = ref('');
 </script>
 
 <template>
@@ -175,6 +181,43 @@ const actionCount = ref(0);
           is-number
           @action="actionCount += 1"
         />
+      </div>
+    </section>
+
+    <p class="mb-6 text-sm opacity-70">TrOtpField demo</p>
+    <section class="mb-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">default 6 digits ({{ otpValue || 'empty' }})</span>
+        <TrOtpField v-model="otpValue" name="otp" aria-label="کد تایید" @complete="otpComplete = $event" />
+        <span v-if="otpComplete" class="text-xs opacity-60">complete: {{ otpComplete }}</span>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">4 digits</span>
+        <TrOtpField v-model="otpShort" :code-length="4" aria-label="کد ۴ رقمی" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">error helper</span>
+        <TrOtpField
+          v-model="otpError"
+          aria-label="کد تایید"
+          :helper="{ type: 'error', message: 'کد وارد شده صحیح نیست' }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">success helper</span>
+        <TrOtpField
+          v-model="otpSuccess"
+          aria-label="کد تایید"
+          :helper="{ type: 'success', message: 'کد معتبر است' }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">disabled</span>
+        <TrOtpField model-value="123456" disabled aria-label="کد تایید" />
       </div>
     </section>
 

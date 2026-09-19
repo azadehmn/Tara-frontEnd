@@ -11,6 +11,7 @@ import { TrTable, TrTableCard } from './components/table';
 import { TrTextField } from './components/text-field';
 import { TrTopBar } from './components/TopBar';
 import { TrTooltip } from './components/tooltip';
+import { TrOtpField } from './components/otp-field';
 
 /**
  * Registers kit components for templates as TrButton, TrTopBar, etc.
@@ -29,6 +30,7 @@ export const taraUi: Plugin = {
     app.component('TrTable', TrTable);
     app.component('TrTableCard', TrTableCard);
     app.component('TrTextField', TrTextField);
+    app.component('TrOtpField', TrOtpField);
     app.component('TrTopBar', TrTopBar);
     app.component('TrTooltip', TrTooltip);
   },
