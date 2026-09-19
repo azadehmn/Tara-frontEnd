@@ -10,7 +10,7 @@
 }
 
 .tr-otp-field__input {
-  @apply h-3xl w-[54px] rounded-sm border border-solid border-border bg-surface
+  @apply h-3xl min-w-0 flex-1 max-w-[54px] rounded-sm border border-solid border-border bg-surface
     text-center text-body-md text-text outline-none
     transition-[border-color,box-shadow] duration-200
     dark:border-border-dark dark:bg-surface-dark dark:text-text-dark;

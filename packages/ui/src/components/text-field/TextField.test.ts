@@ -105,6 +105,38 @@ describe('TrTextField', () => {
     expect(label.element.closest('.tr-text-field__control')).toBeNull();
   });
 
+  it('emits autofilled native value on focus', async () => {
+    const wrapper = mount(TrTextField, {
+      props: {
+        modelValue: '',
+        placeholder: 'نام کاربری',
+      },
+    });
+
+    const input = wrapper.get('input');
+    (input.element as HTMLInputElement).value = 'tara_panel_test';
+    await input.trigger('focus');
+
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['tara_panel_test']);
+  });
+
+  it('emits autofill when the webkit autofill animation starts', async () => {
+    const wrapper = mount(TrTextField, {
+      props: {
+        modelValue: '',
+        placeholder: 'نام کاربری',
+      },
+    });
+
+    const input = wrapper.get('input');
+    Object.defineProperty(input.element, 'matches', {
+      value: (selector: string) => selector === ':autofill' || selector === ':-webkit-autofill',
+    });
+    await input.trigger('animationstart', { animationName: 'tr-text-field-autofill' });
+
+    expect(wrapper.emitted('autofill')).toHaveLength(1);
+  });
+
   it('uses current/max order for the character counter', () => {
     const wrapper = mount(TrTextField, {
       props: {

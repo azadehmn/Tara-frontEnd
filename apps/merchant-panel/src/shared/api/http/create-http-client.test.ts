@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createHttpClient } from './create-http-client';
+import { setUnauthorizedHandler } from '@shared/auth/unauthorized';
 
 describe('createHttpClient', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
+    setUnauthorizedHandler(undefined);
   });
 
   it('POSTs JSON to the service base path and returns the body', async function postJson() {
@@ -50,5 +52,31 @@ describe('createHttpClient', () => {
       status: 403,
       message: 'no access',
     });
+  });
+
+  it('notifies unauthorized on 401 except credential login requests', async function unauthorized() {
+    const onUnauthorized = vi.fn();
+    setUnauthorizedHandler(onUnauthorized);
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockImplementation(() => Promise.resolve(new Response('{}', { status: 401 }))),
+    );
+
+    const client = createHttpClient({
+      service: 'club',
+      basePath: '/club/api/',
+      origin: 'https://api.test',
+    });
+
+    await expect(client.get('bo/contract/limited/v1/list')).rejects.toMatchObject({ status: 401 });
+    expect(onUnauthorized).toHaveBeenCalledTimes(1);
+
+    onUnauthorized.mockClear();
+    await expect(
+      client.post('auth/user/panel/v1/login/backoffice', { principal: 'a', password: 'b' }),
+    ).rejects.toMatchObject({ status: 401 });
+    expect(onUnauthorized).not.toHaveBeenCalled();
+
+    setUnauthorizedHandler(undefined);
   });
 });

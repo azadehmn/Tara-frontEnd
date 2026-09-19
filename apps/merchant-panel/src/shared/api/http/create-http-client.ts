@@ -15,6 +15,7 @@ createHttpClient
 
 import { ApiError } from '../errors/api-error';
 import { normalizeError } from '../errors/normalize-error';
+import { handleUnauthorized, isCredentialAuthPath } from '@shared/auth/unauthorized';
 import { applyAuthHeader } from './interceptors/auth.interceptor';
 import { joinUrl, withQuery } from './url';
 
@@ -56,10 +57,14 @@ export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
 
       if (!response.ok) {
         const payload = await readErrorPayload(response);
-        throw normalizeError({
+        const error = normalizeError({
           status: response.status,
           payload,
         });
+        if (error.status === 401 && !isCredentialAuthPath(config.path)) {
+          handleUnauthorized();
+        }
+        throw error;
       }
 
       return (await parseSuccess<T>(response, config.responseType ?? 'json')) as T;

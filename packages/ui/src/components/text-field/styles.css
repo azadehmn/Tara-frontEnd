@@ -41,6 +41,10 @@
     outline-none dark:text-text-dark;
 }
 
+.tr-text-field__input:-webkit-autofill {
+  animation: tr-text-field-autofill 0.01s;
+}
+
 .tr-text-field__input::placeholder {
   @apply text-text-soft dark:text-text-dark-soft;
 }
@@ -157,6 +161,16 @@ html[data-theme='dark'] .tr-text-field:has(.is-disabled) .tr-text-field__label {
 .tr-text-field-label-enter-from,
 .tr-text-field-label-leave-to {
   @apply translate-y-0 opacity-0;
+}
+
+@keyframes tr-text-field-autofill {
+  from {
+    opacity: 0.999;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes tr-text-field-shimmer {

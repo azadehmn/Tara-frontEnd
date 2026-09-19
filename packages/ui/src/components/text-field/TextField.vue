@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   computed,
+  onBeforeUnmount,
   onMounted,
   ref,
   toRaw,
@@ -44,6 +45,7 @@ const emit = defineEmits<{
   change: [event: Event];
   focus: [event: FocusEvent];
   blur: [event: FocusEvent];
+  autofill: [];
 }>();
 
 const attrs = useAttrs();
@@ -162,6 +164,7 @@ function onInput(event: Event) {
 }
 
 function onChange(event: Event) {
+  syncNativeValue();
   emit('change', event);
 }
 
@@ -172,12 +175,53 @@ function onKeydown(event: KeyboardEvent) {
 
 function onFocus(event: FocusEvent) {
   focused.value = true;
+  syncNativeValue();
   emit('focus', event);
 }
 
 function onBlur(event: FocusEvent) {
   focused.value = false;
   emit('blur', event);
+}
+
+function syncNativeValue() {
+  const native = inputRef.value?.value ?? '';
+  if (native === props.modelValue) return;
+  commit(native);
+}
+
+function isAutofilled() {
+  const input = inputRef.value;
+  if (!input) return false;
+  try {
+    return input.matches(':autofill') || input.matches(':-webkit-autofill');
+  } catch {
+    return false;
+  }
+}
+
+const autofillEmitted = ref(false);
+let autofillTimer: ReturnType<typeof setInterval> | undefined;
+
+function markAutofilled() {
+  syncNativeValue();
+  if (autofillEmitted.value) return;
+  autofillEmitted.value = true;
+  emit('autofill');
+}
+
+function detectAutofill() {
+  if (isAutofilled()) markAutofilled();
+  else syncNativeValue();
+}
+
+function onAnimationStart(event: AnimationEvent) {
+  if (event.animationName !== 'tr-text-field-autofill') return;
+  markAutofilled();
+}
+
+function nativeValue() {
+  return inputRef.value?.value ?? props.modelValue;
 }
 
 function onAction() {
@@ -191,11 +235,21 @@ function focus() {
 
 onMounted(() => {
   if (props.autoFocus) focus();
+  detectAutofill();
+  autofillTimer = window.setInterval(detectAutofill, 100);
+  window.setTimeout(() => {
+    if (autofillTimer) window.clearInterval(autofillTimer);
+  }, 2500);
+});
+
+onBeforeUnmount(() => {
+  if (autofillTimer) window.clearInterval(autofillTimer);
 });
 
 defineExpose({
   inputRef,
   focus,
+  nativeValue,
 });
 </script>
 
@@ -233,7 +287,7 @@ defineExpose({
           class="tr-text-field__input"
           :class="inputClass"
           :name="name"
-          :value="displayValue"
+          :value="autofillEmitted && !modelValue ? undefined : displayValue"
           :type="inputType"
           :disabled="disabled"
           :readonly="isReadonly || undefined"
@@ -250,6 +304,7 @@ defineExpose({
           @keydown="onKeydown"
           @focus="onFocus"
           @blur="onBlur"
+          @animationstart="onAnimationStart"
         />
       </div>
 
