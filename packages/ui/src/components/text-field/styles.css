@@ -1,0 +1,148 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-text-field {
+  @apply relative w-full;
+}
+
+.tr-text-field__control {
+  @apply relative flex min-h-[48px] items-center overflow-visible rounded-sm border border-solid border-border
+    bg-surface transition-[border-color,box-shadow,background-color] duration-200
+    dark:border-border-dark dark:bg-surface-dark;
+}
+
+.tr-text-field__control:hover:not(.is-disabled):not(.is-error) {
+  @apply shadow-elevation-50 dark:shadow-elevation-dark-50;
+}
+
+.tr-text-field__control:focus-within:not(.is-disabled):not(.is-error) {
+  @apply border-primary shadow-elevation-50 dark:border-primary-dark dark:shadow-elevation-dark-50;
+}
+
+.tr-text-field__control.is-error {
+  @apply border-text-danger dark:border-text-dark-danger;
+}
+
+.tr-text-field__control.is-disabled {
+  @apply cursor-not-allowed border-border bg-surface-disabled
+    dark:border-border-dark dark:bg-surface-dark-disabled;
+}
+
+.tr-text-field__field {
+  @apply relative min-w-0 flex-1;
+}
+
+.tr-text-field__input {
+  @apply w-full min-w-0 bg-transparent px-sm py-sm text-start text-body-md text-text
+    outline-none dark:text-text-dark;
+}
+
+.tr-text-field__input::placeholder {
+  @apply text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-text-field__input:disabled,
+.tr-text-field__control.is-disabled .tr-text-field__input {
+  @apply cursor-not-allowed text-text-disabled dark:text-text-dark-disabled;
+}
+
+.tr-text-field__control.is-loading .tr-text-field__input {
+  @apply text-transparent caret-transparent;
+}
+
+.tr-text-field__label {
+  @apply pointer-events-none absolute -top-[10px] start-xs z-10 whitespace-nowrap bg-surface
+    px-2xs leading-none text-caption-medium text-text-soft
+    dark:bg-surface-dark dark:text-text-dark-soft;
+}
+
+.tr-text-field__adornment {
+  @apply inline-flex shrink-0 items-center self-stretch px-xs text-text-soft
+    dark:text-text-dark-soft;
+}
+
+.tr-text-field__adornment--action {
+  @apply appearance-none cursor-pointer border-0 bg-transparent p-0 px-xs;
+}
+
+.tr-text-field__adornment--action:disabled {
+  @apply cursor-not-allowed;
+}
+
+.tr-text-field__unit {
+  @apply mx-2xs shrink-0 rounded-sm bg-surface-pressed px-xs py-2xs text-body-md text-text
+    dark:bg-surface-dark-pressed dark:text-text-dark;
+}
+
+.tr-text-field__button {
+  @apply mx-2xs shrink-0;
+}
+
+.tr-text-field__skeleton {
+  @apply pointer-events-none absolute inset-y-1/2 start-sm h-3 w-24 -translate-y-1/2
+    rounded-xs bg-skeleton dark:bg-skeleton-dark;
+  animation: tr-text-field-shimmer 1.5s ease-in-out infinite;
+}
+
+.tr-text-field__amount-hint {
+  @apply pointer-events-none absolute bottom-full z-20 mb-2xs hidden max-w-full truncate
+    rounded-sm bg-gray-900 px-sm py-xs text-body-sm text-white shadow-elevation-100
+    start-0 dark:bg-gray-800 dark:shadow-elevation-dark-100;
+}
+
+.tr-text-field__control:focus-within .tr-text-field__amount-hint {
+  @apply block;
+}
+
+.tr-text-field__footer {
+  @apply mt-2xs flex items-start justify-between gap-sm;
+}
+
+.tr-text-field__helper {
+  @apply m-0 inline-flex min-w-0 items-center gap-2xs text-body-sm;
+}
+
+.tr-text-field__helper-icon {
+  @apply inline-flex size-4 shrink-0 items-center justify-center;
+}
+
+.tr-text-field__helper-icon svg {
+  @apply block size-full;
+}
+
+.tr-text-field__helper--error {
+  @apply text-text-danger dark:text-text-dark-danger;
+}
+
+.tr-text-field__helper--success {
+  @apply text-text-success dark:text-text-dark-success;
+}
+
+.tr-text-field__helper--info {
+  @apply text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-text-field__limit {
+  @apply m-0 ms-auto shrink-0 text-body-sm text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-text-field-label-enter-active,
+.tr-text-field-label-leave-active {
+  @apply transition duration-75 ease-in-out;
+}
+
+.tr-text-field-label-enter-from,
+.tr-text-field-label-leave-to {
+  @apply translate-y-sm opacity-0;
+}
+
+@keyframes tr-text-field-shimmer {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

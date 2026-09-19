@@ -56,6 +56,20 @@ export type {
   TrTableRow,
   TrTableRowHoverPayload,
 } from './components/table';
+export { TrTextField } from './components/text-field';
+export type {
+  TrTextFieldHelper,
+  TrTextFieldHelperType,
+  TrTextFieldProps,
+  TrTextFieldSanitizeOptions,
+} from './components/text-field';
+export {
+  amountInWords,
+  formatAmount,
+  sanitizeTextFieldValue,
+  toEnNumber,
+  toPersianWords,
+} from './components/text-field';
 export { TrTooltip } from './components/tooltip';
 export type {
   TrTooltipPlacement,

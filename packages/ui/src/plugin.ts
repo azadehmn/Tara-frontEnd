@@ -8,6 +8,7 @@ import { TrNavigationBar } from './components/NavigationBar';
 import { TrSegmentedControl } from './components/segmented-control';
 import { TrStatus } from './components/status';
 import { TrTable, TrTableCard } from './components/table';
+import { TrTextField } from './components/text-field';
 import { TrTopBar } from './components/TopBar';
 import { TrTooltip } from './components/tooltip';
 
@@ -27,6 +28,7 @@ export const taraUi: Plugin = {
     app.component('TrStatus', TrStatus);
     app.component('TrTable', TrTable);
     app.component('TrTableCard', TrTableCard);
+    app.component('TrTextField', TrTextField);
     app.component('TrTopBar', TrTopBar);
     app.component('TrTooltip', TrTooltip);
   },

@@ -5,6 +5,7 @@ import {
   TrLabel,
   TrSegmentedControl,
   TrStatus,
+  TrTextField,
   type TrButtonSize,
   type TrButtonVariant,
   type TrLabelType,
@@ -51,11 +52,130 @@ const statusIcons: Record<TrStatusType, typeof TrCircleCheckIcon> = {
   negative: TrCircleSlashIcon,
   positive: TrCircleCheckIcon,
 };
+
+const emptyValue = ref('');
+const filledValue = ref('قرارداد سازمانی');
+const searchValue = ref('');
+const errorValue = ref('');
+const successValue = ref('قرارداد سازمانی');
+const numberValue = ref('09120000000');
+const amountValue = ref('1500000');
+const limitedValue = ref('تارا');
+const buttonValue = ref('');
+const ltrValue = ref('IR120540000000000000000000');
+const iconValue = ref('');
+const actionCount = ref(0);
 </script>
 
 <template>
   <div>
     <h1 class="m-2xs text-heading-lg">{{ t('layout.nav.demo') }}</h1>
+
+    <p class="mb-6 text-sm opacity-70">TrTextField demo</p>
+    <section class="mb-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">default + floating label</span>
+        <TrTextField v-model="emptyValue" name="title" placeholder="عنوان قرارداد" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">filled</span>
+        <TrTextField v-model="filledValue" name="filled" placeholder="عنوان قرارداد" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">placeholder only (no floating label)</span>
+        <TrTextField v-model="searchValue" :label="false" placeholder="جستجو" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">disabled</span>
+        <TrTextField model-value="غیرفعال" placeholder="عنوان" disabled />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">loading</span>
+        <TrTextField placeholder="عنوان قرارداد" loading />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">error helper</span>
+        <TrTextField
+          v-model="errorValue"
+          placeholder="کد ملی"
+          is-number
+          :helper="{ type: 'error', message: 'کد ملی را وارد کنید' }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">success helper</span>
+        <TrTextField
+          v-model="successValue"
+          placeholder="عنوان قرارداد"
+          :helper="{ type: 'success', message: 'عنوان معتبر است' }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">info helper</span>
+        <TrTextField
+          v-model="numberValue"
+          placeholder="شماره موبایل"
+          is-number
+          :helper="{ type: 'info', message: 'با صفر شروع شود' }"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">maxLength counter</span>
+        <TrTextField v-model="limitedValue" placeholder="نام کوتاه" :max-length="12" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">isNumber</span>
+        <TrTextField v-model="numberValue" placeholder="شماره موبایل" is-number />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">amount + unit + words on focus</span>
+        <TrTextField
+          v-model="amountValue"
+          placeholder="مبلغ"
+          amount
+          is-ltr
+          unit="ریال"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">isLtr (IBAN)</span>
+        <TrTextField v-model="ltrValue" placeholder="شماره شبا" is-ltr />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">before / after icons</span>
+        <TrTextField
+          v-model="iconValue"
+          placeholder="جستجو"
+          :before-icon="TrDetailsIcon"
+          :after-icon="TrCircleSlashIcon"
+          @action="actionCount += 1"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <span class="text-xs opacity-60 mb-md">inline button (clicked: {{ actionCount }})</span>
+        <TrTextField
+          v-model="buttonValue"
+          placeholder="کد تایید"
+          button="ارسال"
+          :max-length="6"
+          is-number
+          @action="actionCount += 1"
+        />
+      </div>
+    </section>
 
     <p class="mb-6 text-sm opacity-70">TrButton demo</p>
 
