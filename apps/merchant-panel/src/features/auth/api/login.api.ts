@@ -1,21 +1,21 @@
 import { ApiError } from '@shared/api/errors/api-error';
 import { clubClient } from '@shared/api/clients/club.client';
-import type { LoginBackofficeResponse, LoginCredentials } from '../model/login';
+import type { LoginBackofficeResponse, LoginPayload } from '../model/login';
 import { authEndpoints } from './endpoints';
 
 export async function loginBackoffice(
-  credentials: LoginCredentials,
+  payload: LoginPayload,
 ): Promise<LoginBackofficeResponse> {
-  const payload = await clubClient.post<LoginBackofficeResponse>(
+  const response = await clubClient.post<LoginBackofficeResponse>(
     authEndpoints.loginBackoffice,
-    credentials,
+    payload,
   );
 
-  if (!payload?.success || !payload.accessCode || payload.userId == null) {
-    throw new ApiError(payload?.message || 'login failed', 200);
+  if (!response?.success || !response.accessCode || response.userId == null) {
+    throw new ApiError(response?.message || 'login failed', 200);
   }
 
-  return payload;
+  return response;
 }
 
 export async function getUserAuthorities(userId: number | string): Promise<unknown> {

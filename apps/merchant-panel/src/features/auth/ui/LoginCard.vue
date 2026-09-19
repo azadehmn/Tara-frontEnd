@@ -1,45 +1,8 @@
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-import { TrButton, TrTextField } from '@tara/ui';
-import { ApiError } from '@shared/api/errors/api-error';
-import { ImageSlider } from '@shared/ui';
-import taraLogo from '@assets/images/logo-persion.svg';
-import { useLogin } from '../composables/use-login';
-import { serviceBanners } from '../config/service-banners';
-
-const { t } = useI18n();
-const { pending, error, submit } = useLogin();
-
-const username = ref('');
-const password = ref('');
-const isPasswordVisible = ref(false);
-
-const slides = computed(() =>
-  serviceBanners.map((slide, index) => ({
-    ...slide,
-    alt: t('auth.login.bannerAlt', { n: index + 1 }),
-  })),
-);
-
-const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'password'));
-
-async function onSubmit() {
-  if (!username.value.trim() || !password.value) {
-    error.value = new ApiError(t('auth.login.required'));
-    return;
-  }
-
-  await submit(username.value, password.value);
-}
-</script>
-
 <template>
   <div
     class="flex h-auto w-[90%] max-w-[90%] flex-col overflow-hidden rounded-2xl border border-transparent bg-surface shadow-[0_8px_48px_rgba(0,0,0,0.10)] min-[567px]:w-[450px] min-[567px]:max-w-[450px] min-[992px]:min-h-[560px] min-[992px]:max-h-[88vh] min-[992px]:w-full min-[992px]:max-w-[900px] min-[992px]:flex-row-reverse xl:max-w-[90%] dark:border-gray-800 dark:bg-surface-dark dark:shadow-[0_8px_48px_rgba(0,0,0,0.40)]"
   >
-    <div
-      class="relative hidden min-h-0 min-[992px]:block min-[992px]:flex-1"
-    >
+    <div class="relative hidden min-h-0 min-[992px]:block min-[992px]:flex-1">
       <ImageSlider
         class="absolute inset-0"
         fit="cover"
@@ -68,15 +31,15 @@ async function onSubmit() {
         {{ t('auth.login.description') }}
       </p>
 
-      <form class="mt-xl flex flex-col gap-lg" @submit.prevent="onSubmit">
+      <form class="mt-xl flex flex-col gap-lg" @submit.prevent="handleSubmit">
         <TrTextField
-          v-model="username"
+          v-model="form.principal"
           name="username"
           autocomplete="username"
           :placeholder="t('auth.login.username')"
         />
         <TrTextField
-          v-model="password"
+          v-model="form.password"
           name="password"
           :type="passwordType"
           autocomplete="current-password"
@@ -121,15 +84,47 @@ async function onSubmit() {
         >
           {{ error.message }}
         </p>
-
         <TrButton
           class="w-full"
           html-type="submit"
           size="large"
           :loading="pending"
+          :disabled="!form.principal.trim() || !form.password.trim()"
           :text="t('auth.login.submit')"
         />
       </form>
     </section>
   </div>
 </template>
+<script setup lang="ts">
+import { computed, reactive, ref } from 'vue';
+import { TrButton, TrTextField } from '@tara/ui';
+import { ImageSlider } from '@shared/ui';
+import taraLogo from '@assets/images/logo-persion.svg';
+import { useLogin } from '../composables/use-login';
+import { serviceBanners } from '../config/service-banners';
+import type { LoginPayload } from '../model/login';
+
+const { t } = useI18n();
+const { pending, error, submit } = useLogin();
+
+const form = reactive<LoginPayload>({
+  principal: '',
+  password: '',
+});
+const isPasswordVisible = ref(false);
+
+const slides = computed(() =>
+  serviceBanners.map((slide, index) => ({
+    ...slide,
+    alt: t('auth.login.bannerAlt', { n: index + 1 }),
+  })),
+);
+
+const passwordType = computed(() => (isPasswordVisible.value ? 'text' : 'password'));
+
+async function handleSubmit() {
+  if (!form.principal.trim() || !form.password.trim()) return;
+  await submit(form);
+}
+</script>

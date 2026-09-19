@@ -1,4 +1,4 @@
-export type LoginCredentials = {
+export type LoginPayload = {
   principal: string;
   password: string;
 };
