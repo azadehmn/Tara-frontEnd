@@ -68,13 +68,15 @@ function threeDigitToWords(value: number): string {
 
 /** Convert an integer (or numeric string) to Persian words. */
 export function toPersianWords(input: number | string): string {
-  const raw = String(input).replace(/[^0-9.-]/g, '');
-  const numeric = Number.parseFloat(raw);
-  if (!Number.isFinite(numeric)) return ZERO;
-  if (numeric === 0) return ZERO;
+  if (typeof input === 'number' && !Number.isFinite(input)) return ZERO;
 
-  const negative = numeric < 0;
-  const integer = Math.round(Math.abs(numeric)).toString();
+  const raw = String(input).trim().replaceAll(',', '');
+  const negative = raw.startsWith('-');
+  const integerPart = raw.replace(/^[+-]/, '').split('.')[0] ?? '';
+  const digits = integerPart.replace(/\D/g, '');
+  if (!digits || /^0+$/.test(digits)) return ZERO;
+
+  const integer = digits.replace(/^0+/, '');
   if (integer.length > 24) return 'خارج از محدوده';
 
   const padded = integer.padStart(Math.ceil(integer.length / 3) * 3, '0');

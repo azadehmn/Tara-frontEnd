@@ -58,6 +58,7 @@ export type {
 } from './components/table';
 export { TrTextField } from './components/text-field';
 export type {
+  TrTextFieldDirection,
   TrTextFieldHelper,
   TrTextFieldHelperType,
   TrTextFieldProps,

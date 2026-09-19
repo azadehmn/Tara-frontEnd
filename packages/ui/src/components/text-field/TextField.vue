@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useAttrs, useId, useSlots } from 'vue';
+import {
+  computed,
+  onMounted,
+  ref,
+  toRaw,
+  useAttrs,
+  useId,
+  useSlots,
+  type InputHTMLAttributes,
+} from 'vue';
 import { TrButton } from '../button';
 import { TrIcon } from '../icon';
 import {
@@ -31,6 +40,10 @@ const props = withDefaults(defineProps<TrTextFieldProps>(), {
 const emit = defineEmits<{
   'update:modelValue': [value: string];
   action: [];
+  input: [event: Event];
+  change: [event: Event];
+  focus: [event: FocusEvent];
+  blur: [event: FocusEvent];
 }>();
 
 const attrs = useAttrs();
@@ -50,33 +63,74 @@ const inputAttrs = computed(() => {
   const {
     class: _class,
     style: _style,
-    onFocus: _onFocus,
-    onBlur: _onBlur,
+    type: _type,
+    inputmode: _inputmode,
+    readonly: _readonly,
+    spellcheck: _spellcheck,
     ...rest
   } = attrs;
   return rest;
 });
 
 const isDisabled = computed(() => props.disabled || props.loading);
-const isReadonly = computed(() => props.loading || Boolean(attrs.readonly));
-const hasError = computed(() => props.helper?.type === 'error' && Boolean(props.helper.message));
+const isReadonly = computed(
+  () =>
+    props.loading ||
+    attrs.readonly === '' ||
+    attrs.readonly === true ||
+    attrs.readonly === 'readonly',
+);
+const hasError = computed(() => props.helper?.type === 'error');
 const helperMessage = computed(() => props.helper?.message?.trim() ?? '');
 const showHelper = computed(() => Boolean(helperMessage.value && props.helper?.type));
 const showLimit = computed(() => props.maxLength > 0 && !props.amount);
-const hasValue = computed(() => props.modelValue.length > 0);
+const accessibleLabel = computed(() => props.labelText || props.placeholder);
+const direction = computed(() => props.dir ?? (props.isLtr ? 'ltr' : undefined));
+const restrictToDigits = computed(() => props.isNumber || props.amount);
+const inputType = computed(() =>
+  restrictToDigits.value
+    ? 'text'
+    : typeof attrs.type === 'string'
+      ? attrs.type
+      : 'text',
+);
+const inputMode = computed<InputHTMLAttributes['inputmode']>(() =>
+  restrictToDigits.value
+    ? 'numeric'
+    : (attrs.inputmode as InputHTMLAttributes['inputmode']),
+);
+const nativeSpellcheck = computed<InputHTMLAttributes['spellcheck']>(
+  () =>
+    attrs.spellcheck === '' ||
+    attrs.spellcheck === true ||
+    attrs.spellcheck === 'true',
+);
+const displayValue = computed(() =>
+  sanitizeTextFieldValue(props.modelValue, {
+    amount: props.amount,
+    isNumber: props.isNumber,
+    maxLength: props.maxLength,
+  }),
+);
+const hasValue = computed(() => displayValue.value.length > 0);
 const showFloatingLabel = computed(
   () =>
-    Boolean(props.label && props.placeholder) &&
+    Boolean(props.label && accessibleLabel.value) &&
     !props.loading &&
     (focused.value || hasValue.value),
 );
 const showBefore = computed(() => Boolean(slots.before || props.beforeIcon));
 const showAfter = computed(() => Boolean(slots.after || props.afterIcon));
+const beforeIconComponent = computed(() =>
+  props.beforeIcon ? toRaw(props.beforeIcon) : undefined,
+);
+const afterIconComponent = computed(() =>
+  props.afterIcon ? toRaw(props.afterIcon) : undefined,
+);
 const showUnit = computed(() => !showAfter.value && Boolean(slots.unit || props.unit));
 const showButton = computed(() => !showAfter.value && !showUnit.value && Boolean(props.button));
-const restrictToDigits = computed(() => props.isNumber || props.amount);
-const displayValue = computed(() =>
-  props.amount ? sanitizeTextFieldValue(props.modelValue, { amount: true, maxLength: props.maxLength }) : props.modelValue,
+const actionLabel = computed(
+  () => props.actionAriaLabel || props.button || accessibleLabel.value || undefined,
 );
 const words = computed(() => (props.amount ? amountInWords(props.modelValue) : ''));
 const describedBy = computed(() => {
@@ -90,25 +144,25 @@ const inputPlaceholder = computed(() =>
   showFloatingLabel.value || props.loading ? '' : props.placeholder,
 );
 
-function commit(value: string) {
+function commit(value: string): string {
   const next = sanitizeTextFieldValue(value, {
     amount: props.amount,
     isNumber: props.isNumber,
     maxLength: props.maxLength,
   });
   if (next !== props.modelValue) emit('update:modelValue', next);
+  return next;
 }
 
 function onInput(event: Event) {
   const target = event.target as HTMLInputElement;
-  commit(target.value);
-  if (props.amount || props.isNumber) {
-    void nextTick(() => {
-      if (inputRef.value && inputRef.value.value !== displayValue.value) {
-        inputRef.value.value = displayValue.value;
-      }
-    });
-  }
+  const next = commit(target.value);
+  if (target.value !== next) target.value = next;
+  emit('input', event);
+}
+
+function onChange(event: Event) {
+  emit('change', event);
 }
 
 function onKeydown(event: KeyboardEvent) {
@@ -118,14 +172,12 @@ function onKeydown(event: KeyboardEvent) {
 
 function onFocus(event: FocusEvent) {
   focused.value = true;
-  const handler = inputAttrs.value.onFocus;
-  if (typeof handler === 'function') handler(event);
+  emit('focus', event);
 }
 
 function onBlur(event: FocusEvent) {
   focused.value = false;
-  const handler = inputAttrs.value.onBlur;
-  if (typeof handler === 'function') handler(event);
+  emit('blur', event);
 }
 
 function onAction() {
@@ -149,30 +201,34 @@ defineExpose({
 
 <template>
   <div class="tr-text-field" :class="rootClass" :style="rootStyle">
+    <label v-if="accessibleLabel" class="tr-text-field__accessible-label" :for="fieldId">
+      {{ accessibleLabel }}
+    </label>
+
     <div
       class="tr-text-field__control"
       :class="{
         'is-disabled': isDisabled,
         'is-error': hasError,
         'is-loading': loading,
-        'is-ltr': isLtr,
+        'is-ltr': direction === 'ltr',
       }"
-      :dir="isLtr ? 'ltr' : undefined"
+      :dir="direction"
     >
       <Transition name="tr-text-field-label">
-        <label
+        <span
           v-if="showFloatingLabel"
           class="tr-text-field__label"
-          :for="fieldId"
+          aria-hidden="true"
         >
-          {{ placeholder }}
-        </label>
+          {{ accessibleLabel }}
+        </span>
       </Transition>
 
       <span v-if="showBefore" class="tr-text-field__adornment">
         <TrIcon>
           <slot name="before">
-            <component :is="beforeIcon" />
+            <component :is="beforeIconComponent" />
           </slot>
         </TrIcon>
       </span>
@@ -187,17 +243,19 @@ defineExpose({
           :class="inputClass"
           :name="name"
           :value="displayValue"
-          :type="restrictToDigits ? 'text' : undefined"
+          :type="inputType"
           :disabled="disabled"
           :readonly="isReadonly || undefined"
           :placeholder="inputPlaceholder"
-          :inputmode="restrictToDigits ? 'numeric' : undefined"
+          :inputmode="inputMode"
           :maxlength="maxLength > 0 && !amount ? maxLength : undefined"
-          :spellcheck="false"
+          :spellcheck="nativeSpellcheck"
           :aria-invalid="hasError || undefined"
           :aria-busy="loading || undefined"
           :aria-describedby="describedBy"
+          :aria-errormessage="hasError && showHelper ? helperId : undefined"
           @input="onInput"
+          @change="onChange"
           @keydown="onKeydown"
           @focus="onFocus"
           @blur="onBlur"
@@ -209,11 +267,12 @@ defineExpose({
         type="button"
         class="tr-text-field__adornment tr-text-field__adornment--action"
         :disabled="isDisabled"
+        :aria-label="actionLabel"
         @click="onAction"
       >
         <TrIcon>
           <slot name="after">
-            <component :is="afterIcon" />
+            <component :is="afterIconComponent" />
           </slot>
         </TrIcon>
       </button>
@@ -236,6 +295,7 @@ defineExpose({
         v-if="words"
         :id="amountHintId"
         class="tr-text-field__amount-hint"
+        dir="rtl"
         role="status"
       >
         {{ words }}
@@ -248,6 +308,7 @@ defineExpose({
         :id="helperId"
         class="tr-text-field__helper"
         :class="`tr-text-field__helper--${helper?.type}`"
+        :role="helper?.type === 'error' ? 'alert' : 'status'"
       >
         <span v-if="helper?.type === 'error'" class="tr-text-field__helper-icon" aria-hidden="true">
           <svg viewBox="0 0 16 16" fill="currentColor">
@@ -271,7 +332,7 @@ defineExpose({
         {{ helperMessage }}
       </p>
       <p v-if="showLimit" :id="limitId" class="tr-text-field__limit">
-        {{ maxLength }}/{{ modelValue.length }}
+        {{ displayValue.length }}/{{ maxLength }}
       </p>
     </div>
   </div>

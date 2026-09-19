@@ -2,6 +2,7 @@ import type { Component } from 'vue';
 import { toPersianWords } from './toPersianWords';
 
 export type TrTextFieldHelperType = 'error' | 'success' | 'info';
+export type TrTextFieldDirection = 'ltr' | 'rtl' | 'auto';
 
 export type TrTextFieldHelper = {
   type?: TrTextFieldHelperType;
@@ -14,6 +15,8 @@ export type TrTextFieldProps = {
   name?: string;
   id?: string;
   placeholder?: string;
+  /** Accessible and floating label. Falls back to `placeholder`. */
+  labelText?: string;
   /**
    * When true, `placeholder` floats above the field on focus or when it has a value.
    * Default `true`.
@@ -26,8 +29,10 @@ export type TrTextFieldProps = {
   isNumber?: boolean;
   /** Group digits with commas (amounts). */
   amount?: boolean;
-  /** Force LTR on the control (cards, IBAN, amount, …). */
+  /** @deprecated Prefer `dir="ltr"`. */
   isLtr?: boolean;
+  /** Text direction for the control and native input. */
+  dir?: TrTextFieldDirection;
   /** Extra class on the native input. */
   inputClass?: string;
   maxLength?: number;
@@ -38,6 +43,8 @@ export type TrTextFieldProps = {
   button?: string;
   beforeIcon?: Component;
   afterIcon?: Component;
+  /** Required when `afterIcon` or `#after` creates an icon-only action. */
+  actionAriaLabel?: string;
 };
 
 export type TrTextFieldSanitizeOptions = {
@@ -59,7 +66,8 @@ export function formatAmount(value: string, maxLength = 0): string {
   const digits = toEnNumber(value).replace(/\D/g, '');
   if (!digits) return '';
   const clipped = maxLength > 0 ? digits.slice(0, maxLength) : digits;
-  return new Intl.NumberFormat('en-US').format(Number(clipped));
+  const normalized = clipped.replace(/^0+(?=\d)/, '');
+  return normalized.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 export function sanitizeTextFieldValue(
@@ -77,13 +85,12 @@ export function sanitizeTextFieldValue(
 
 export function amountInWords(value: string): string {
   const digits = toEnNumber(value).replace(/\D/g, '');
-  if (!digits) return '';
-  const numeric = Number(digits);
-  if (!Number.isFinite(numeric) || numeric === 0) return '';
-  return toPersianWords(numeric);
+  if (!digits || /^0+$/.test(digits)) return '';
+  return toPersianWords(digits);
 }
 
 export function isDigitKey(event: KeyboardEvent): boolean {
+  if (event.isComposing) return true;
   if (event.ctrlKey || event.metaKey || event.altKey) return true;
   if (event.key.length !== 1) return true;
   return /^\d$/.test(toEnNumber(event.key));

@@ -7,6 +7,7 @@ export {
   toPersianWords,
 } from './TextField';
 export type {
+  TrTextFieldDirection,
   TrTextFieldHelper,
   TrTextFieldHelperType,
   TrTextFieldProps,
