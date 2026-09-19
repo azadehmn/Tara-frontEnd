@@ -87,9 +87,9 @@ onBeforeUnmount(stopTimer);
         :key="slide.src"
         :src="slide.src"
         :alt="slide.alt || ''"
-        class="absolute inset-0 size-full object-right transition-opacity duration-500"
+        class="absolute inset-0 size-full object-center transition-opacity duration-500"
         :class="[
-          fit === 'cover' ? 'object-cover' : 'object-contain',
+          fit === 'cover' ? 'object-contain' : 'object-contain',
           index === activeIndex ? 'opacity-100' : 'pointer-events-none opacity-0',
         ]"
         draggable="false"

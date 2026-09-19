@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router';
 import { TrButton } from '@tara/ui';
 
 const { t } = useI18n();
-const year = new Date().getFullYear();
+// const year = new Date().getFullYear();
 const isDark = ref(document.documentElement.dataset.theme === 'dark');
 
 function toggleTheme() {
@@ -27,12 +27,14 @@ function toggleTheme() {
       />
     </div>
 
-    <div class="flex flex-1 items-center justify-center p-xl">
+    <div class="flex flex-1 items-center justify-center p-0 min-[992px]:p-xl">
       <RouterView />
     </div>
 
-    <p class="pb-xl text-center text-caption-regular text-text-soft dark:text-text-dark-soft">
-      {{ t('auth.copyright', { year }) }}
+    <p
+      class="pointer-events-none absolute inset-x-0 bottom-xl text-center text-caption-regular text-text-soft dark:text-text-dark-soft"
+    >
+      <!-- {{ t('auth.copyright', { year }) }} -->
     </p>
   </div>
 </template>
