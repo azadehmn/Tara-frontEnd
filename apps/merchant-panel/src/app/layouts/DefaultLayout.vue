@@ -61,7 +61,7 @@ import type { SupportedLocale } from '@tara/locale';
 import { TrButton, TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import AppSidebar from './AppSidebar.vue';
-import taraLogo from '@assets/images/logo.svg';
+import taraLogo from '@assets/images/logo-persion.svg';
 
 const { locale, t } = useI18n();
 const route = useRoute();

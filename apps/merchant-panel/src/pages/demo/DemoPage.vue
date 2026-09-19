@@ -143,14 +143,14 @@ const actionCount = ref(0);
           v-model="amountValue"
           placeholder="مبلغ"
           amount
-          is-ltr
+          dir="ltr"
           unit="ریال"
         />
       </div>
 
       <div class="flex flex-col gap-2">
-        <span class="text-xs opacity-60 mb-md">isLtr (IBAN)</span>
-        <TrTextField v-model="ltrValue" placeholder="شماره شبا" is-ltr />
+        <span class="text-xs opacity-60 mb-md">dir=ltr (IBAN)</span>
+        <TrTextField v-model="ltrValue" placeholder="شماره شبا" dir="ltr" />
       </div>
 
       <div class="flex flex-col gap-2">
@@ -160,6 +160,7 @@ const actionCount = ref(0);
           placeholder="جستجو"
           :before-icon="TrDetailsIcon"
           :after-icon="TrCircleSlashIcon"
+          action-aria-label="پاک کردن جستجو"
           @action="actionCount += 1"
         />
       </div>

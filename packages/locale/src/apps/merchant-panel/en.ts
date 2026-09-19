@@ -127,4 +127,19 @@ export const merchantPanelEn: MessageTree = {
       pause: 'Pause',
     },
   },
+  auth: {
+    themeToggle: 'Toggle theme',
+    copyright: 'Tara Trade Development Organization {year} ©',
+    login: {
+      title: 'Merchant panel sign in',
+      description: 'Sign in to your account to use the panel.',
+      logoAlt: 'Tara',
+      username: 'Username',
+      password: 'Password',
+      submit: 'Sign in',
+      showPassword: 'Show password',
+      hidePassword: 'Hide password',
+      bannerAlt: 'Tara service banner {n}',
+    },
+  },
 };

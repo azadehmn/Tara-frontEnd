@@ -127,4 +127,19 @@ export const merchantPanelFa: MessageTree = {
       pause: 'توقف',
     },
   },
+  auth: {
+    themeToggle: 'تغییر پوسته',
+    copyright: 'سازمان توسعه تجارت تارا {year} ©',
+    login: {
+      title: 'ورود به پنل پذیرندگان',
+      description: 'برای استفاده از خدمات پنل، وارد حساب کاربری خود شوید.',
+      logoAlt: 'تارا',
+      username: 'نام کاربری',
+      password: 'رمز عبور',
+      submit: 'ورود',
+      showPassword: 'نمایش رمز عبور',
+      hidePassword: 'پنهان کردن رمز عبور',
+      bannerAlt: 'بنر سرویس تارا {n}',
+    },
+  },
 };
