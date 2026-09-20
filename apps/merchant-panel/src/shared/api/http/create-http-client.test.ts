@@ -34,6 +34,47 @@ describe('createHttpClient', () => {
     expect(init.method).toBe('POST');
   });
 
+  it('attaches a stored access token by default', async function implicitAuth() {
+    window.localStorage.setItem('id_token', 'stored-access');
+    const fetchMock = vi.fn().mockResolvedValue(new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const client = createHttpClient({
+      service: 'bnpl',
+      basePath: '/bnpl/api/',
+      origin: 'https://api.test',
+    });
+
+    await client.get('v2/installment/panel/report');
+
+    const headers = new Headers(
+      (fetchMock.mock.calls[0] as [string, RequestInit])[1].headers,
+    );
+    expect(headers.get('Authorization')).toBe('Bearer stored-access');
+    window.localStorage.removeItem('id_token');
+  });
+
+  it('skips the access token when attachAuth is false', async function publicClient() {
+    window.localStorage.setItem('id_token', 'leftover-access');
+    const fetchMock = vi.fn().mockResolvedValue(new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const client = createHttpClient({
+      service: 'club',
+      basePath: '/club/api/',
+      origin: 'https://api.test',
+      attachAuth: false,
+    });
+
+    await client.post('auth/user/panel/v1/login/backoffice', { principal: 'a', password: 'b' });
+
+    const headers = new Headers(
+      (fetchMock.mock.calls[0] as [string, RequestInit])[1].headers,
+    );
+    expect(headers.has('Authorization')).toBe(false);
+    window.localStorage.removeItem('id_token');
+  });
+
   it('normalizes a failed response into ApiError', async function failedResponse() {
     vi.stubGlobal(
       'fetch',

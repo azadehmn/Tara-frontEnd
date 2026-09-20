@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { AuthLayout, DefaultLayout } from './layouts';
+import { installAuthGuard } from './guards/auth.guard';
+import { installUnauthorizedHandler } from './guards/unauthorized-handler';
+import { AuthLayout, DefaultLayout } from '../layouts';
 
 /** App routes. Feature pages live under `src/pages` / `src/features`. */
 export const router = createRouter({
@@ -8,6 +10,7 @@ export const router = createRouter({
     {
       path: '/',
       component: DefaultLayout,
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',
@@ -104,9 +107,18 @@ export const router = createRouter({
           path: 'login',
           name: 'login',
           component: () => import('@pages/auth/LoginPage.vue'),
-          meta: { titleKey: 'auth.login.title' },
+          meta: { titleKey: 'auth.login.title', guestOnly: true },
+        },
+        {
+          path: 'otp',
+          name: 'otp',
+          component: () => import('@pages/auth/OtpPage.vue'),
+          meta: { titleKey: 'auth.otp.title', requiresOtpChallenge: true },
         },
       ],
     },
   ],
 });
+
+installAuthGuard(router);
+installUnauthorizedHandler(router);

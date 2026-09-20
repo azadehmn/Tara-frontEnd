@@ -39,6 +39,8 @@ export interface CreateHttpClientOptions {
   requestInterceptors?: RequestInterceptor[];
   defaultHeaders?: Record<string, string>;
   timeoutMs?: number;
+  /** Defaults to true. Set false for public endpoints such as login. */
+  attachAuth?: boolean;
 }
 /**----------------------------------------------------------
  *  PUBLIC CONTRACT

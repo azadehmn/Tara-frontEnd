@@ -25,7 +25,10 @@ const DEFAULT_TIMEOUT_MS = 30_000;
 
 export function createHttpClient(options: CreateHttpClientOptions): HttpClient {
   const origin = options.origin ?? '';
-  const interceptors = [applyAuthHeader, ...(options.requestInterceptors ?? [])];
+  const interceptors = [
+    ...(options.attachAuth === false ? [] : [applyAuthHeader]),
+    ...(options.requestInterceptors ?? []),
+  ];
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
 
   async function request<T>(config: HttpRequestConfig): Promise<T> {

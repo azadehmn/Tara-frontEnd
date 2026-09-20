@@ -22,42 +22,49 @@ export interface ClubClient {
   delete<T>(path: string, config?: ClubCallConfig): Promise<T>;
 }
 
-function createClubHttpClient(basePath: string): HttpClient {
+function createClubHttpClient(basePath: string, attachAuth = true): HttpClient {
   return createHttpClient({
     service: 'club',
     origin: getApiOrigin(),
     basePath,
+    attachAuth,
     requestInterceptors: [applyDeviceHeader(PANEL_DEVICE_TYPE)],
   });
 }
 
-const defaultClient = createClubHttpClient(API_BASE_PATHS.club.default);
-const v1Client = createClubHttpClient(API_BASE_PATHS.club.v1);
+function createClubClient(options: { attachAuth?: boolean } = {}): ClubClient {
+  const { attachAuth = true } = options;
+  const defaultClient = createClubHttpClient(API_BASE_PATHS.club.default, attachAuth);
+  const v1Client = createClubHttpClient(API_BASE_PATHS.club.v1, attachAuth);
 
-function pick(version: ClubApiVersion = 'default'): HttpClient {
-  return version === 'v1' ? v1Client : defaultClient;
+  function pick(version: ClubApiVersion = 'default'): HttpClient {
+    return version === 'v1' ? v1Client : defaultClient;
+  }
+
+  return {
+    request: ({ version, ...config }) => pick(version).request(config),
+    get: (path, config) => {
+      const { version, ...requestConfig } = config ?? {};
+      return pick(version).get(path, requestConfig);
+    },
+    post: (path, body, config) => {
+      const { version, ...requestConfig } = config ?? {};
+      return pick(version).post(path, body, requestConfig);
+    },
+    put: (path, body, config) => {
+      const { version, ...requestConfig } = config ?? {};
+      return pick(version).put(path, body, requestConfig);
+    },
+    patch: (path, body, config) => {
+      const { version, ...requestConfig } = config ?? {};
+      return pick(version).patch(path, body, requestConfig);
+    },
+    delete: (path, config) => {
+      const { version, ...requestConfig } = config ?? {};
+      return pick(version).delete(path, requestConfig);
+    },
+  };
 }
 
-export const clubClient: ClubClient = {
-  request: ({ version, ...config }) => pick(version).request(config),
-  get: (path, config) => {
-    const { version, ...requestConfig } = config ?? {};
-    return pick(version).get(path, requestConfig);
-  },
-  post: (path, body, config) => {
-    const { version, ...requestConfig } = config ?? {};
-    return pick(version).post(path, body, requestConfig);
-  },
-  put: (path, body, config) => {
-    const { version, ...requestConfig } = config ?? {};
-    return pick(version).put(path, body, requestConfig);
-  },
-  patch: (path, body, config) => {
-    const { version, ...requestConfig } = config ?? {};
-    return pick(version).patch(path, body, requestConfig);
-  },
-  delete: (path, config) => {
-    const { version, ...requestConfig } = config ?? {};
-    return pick(version).delete(path, requestConfig);
-  },
-};
+export const clubClient = createClubClient();  // normal authenticated client
+export const publicClubClient = createClubClient({ attachAuth: false }); // exceptional public client

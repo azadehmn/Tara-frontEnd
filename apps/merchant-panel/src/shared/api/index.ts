@@ -1,4 +1,4 @@
-export { clubClient } from './clients/club.client';
+export { clubClient, publicClubClient } from './clients/club.client';
 export { bnplClient } from './clients/bnpl.client';
 export { settingsClient } from './clients/settings.client';
 export { reportClient } from './clients/report.client';
