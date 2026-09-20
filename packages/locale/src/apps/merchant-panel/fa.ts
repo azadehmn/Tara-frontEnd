@@ -4,6 +4,7 @@ import type { MessageTree } from '../../types';
 export const merchantPanelFa: MessageTree = {
   app: {
     name: 'پذیرندگان | تارا',
+    loading: 'در حال بارگذاری',
   },
   layout: {
     nav: {
@@ -141,6 +142,12 @@ export const merchantPanelFa: MessageTree = {
       hidePassword: 'پنهان کردن رمز عبور',
       bannerAlt: 'بنر سرویس تارا {n}',
       required: 'نام کاربری و رمز عبور را وارد کنید.',
+    },
+    otp: {
+      title: 'تایید شماره همراه',
+      description: 'رمز یکبار مصرف ۶ رقمی پیامک شده برای کاربر یا شناسه {userId} را وارد کنید',
+      submit: 'تایید',
+      editNumber: 'ویرایش شماره',
     },
   },
 };

@@ -4,3 +4,34 @@
 @import 'tailwindcss';
 @import 'tailwindcss';
 @import 'tailwindcss';
+
+.app-loading-overlay__bar {
+  position: relative;
+  height: 100%;
+  width: 50%;
+  border-radius: 9999px;
+  animation: app-loading-bar 1.5s infinite ease;
+}
+
+@keyframes app-loading-bar {
+  0%,
+  10% {
+    width: 15%;
+    inset-inline-start: 0;
+    background-color: #000;
+  }
+
+  40%,
+  60% {
+    width: 100%;
+    inset-inline-start: 0;
+    background-color: var(--color-primary);
+  }
+
+  90%,
+  100% {
+    width: 15%;
+    inset-inline-start: 85%;
+    background-color: var(--color-primary);
+  }
+}
