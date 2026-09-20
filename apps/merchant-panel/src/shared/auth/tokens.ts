@@ -3,23 +3,34 @@ const REFRESH_TOKEN_KEY = 'refresh_token';
 
 let pendingAccessToken: string | null = null;
 let pendingRefreshToken: string | null = null;
+ 
+/**----------------------------------------------------------
+ * Use the accessCode directly when 2FA is off; 
+otherwise keep it pending only for OTP verification.
+--------------------------- */
 
 export function getAccessToken(): string | null {
   if (typeof window === 'undefined') return null;
   return window.localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
+/** Get only the persisted access token. */
 export function getAccessTokenForRequest(): string | null {
   return getAccessToken() ?? pendingAccessToken;
 }
 
+/** check persisted token   */
 export function hasAccessToken(): boolean {
   return Boolean(getAccessToken()?.trim());
 }
 
 export function getRefreshToken(): string | null {
   if (typeof window === 'undefined') return null;
-  return window.localStorage.getItem(REFRESH_TOKEN_KEY) ?? pendingRefreshToken;
+  return window.localStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
+export function getRefreshTokenForRequest(): string | null {
+  return getRefreshToken() ?? pendingRefreshToken;
 }
 
 export function setPendingTokens(accessToken: string, refreshToken?: string): void {
