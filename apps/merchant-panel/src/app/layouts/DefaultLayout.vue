@@ -62,7 +62,7 @@ import { TrButton, TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo-persion.svg';
-import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/ui';
+import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
 
 const { locale, t } = useI18n();
 const route = useRoute();

@@ -1,74 +1,3 @@
-<script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import type { ImageSlide, ImageSliderFit } from './ImageSlider';
-
-defineOptions({ name: 'ImageSlider' });
-
-const props = withDefaults(
-  defineProps<{
-    slides: ImageSlide[];
-    intervalMs?: number;
-    autoplay?: boolean;
-    fit?: ImageSliderFit;
-    prevLabel?: string;
-    nextLabel?: string;
-  }>(),
-  {
-    intervalMs: 10000,
-    autoplay: true,
-    fit: 'cover',
-    prevLabel: 'Previous',
-    nextLabel: 'Next',
-  },
-);
-
-const activeIndex = ref(0);
-const paused = ref(false);
-let timer: number | undefined;
-
-const hasMultiple = computed(() => props.slides.length > 1);
-const activeSlide = computed(() => props.slides[activeIndex.value]);
-
-function goTo(index: number) {
-  const total = props.slides.length;
-  if (!total) return;
-  activeIndex.value = ((index % total) + total) % total;
-}
-
-function next() {
-  goTo(activeIndex.value + 1);
-}
-
-function prev() {
-  goTo(activeIndex.value - 1);
-}
-
-function stopTimer() {
-  if (timer === undefined) return;
-  window.clearInterval(timer);
-  timer = undefined;
-}
-
-function startTimer() {
-  stopTimer();
-  if (!props.autoplay || !hasMultiple.value) return;
-  timer = window.setInterval(() => {
-    if (!paused.value) next();
-  }, props.intervalMs);
-}
-
-watch(
-  () => [props.autoplay, props.intervalMs, props.slides.length] as const,
-  () => {
-    if (activeIndex.value >= props.slides.length) activeIndex.value = 0;
-    startTimer();
-  },
-);
-
-onMounted(startTimer);
-onBeforeUnmount(stopTimer);
-</script>
-
 <template>
   <div
     class="relative h-full w-full overflow-hidden bg-[#1d0735]"
@@ -97,10 +26,7 @@ onBeforeUnmount(stopTimer);
       />
     </div>
 
-    <div
-      v-if="hasMultiple"
-      class="absolute inset-x-md bottom-md z-10 flex items-center gap-xs"
-    >
+    <div v-if="hasMultiple" class="absolute inset-x-md bottom-md z-10 flex items-center gap-xs">
       <button
         type="button"
         class="inline-flex size-8 items-center justify-center rounded-full bg-white/90 text-[#2e2e38] shadow-sm transition hover:bg-white"
@@ -149,3 +75,28 @@ onBeforeUnmount(stopTimer);
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { useImageSlider, type ImageSlide, type ImageSliderFit } from './ImageSlider';
+
+defineOptions({ name: 'ImageSlider' });
+
+const props = withDefaults(
+  defineProps<{
+    slides: ImageSlide[];
+    intervalMs?: number;
+    autoplay?: boolean;
+    fit?: ImageSliderFit;
+    prevLabel?: string;
+    nextLabel?: string;
+  }>(),
+  {
+    intervalMs: 10000,
+    autoplay: true,
+    fit: 'cover',
+    prevLabel: 'Previous',
+    nextLabel: 'Next',
+  },
+);
+
+const { activeIndex, paused, hasMultiple, activeSlide, goTo, prev, next } = useImageSlider(props);
+</script>

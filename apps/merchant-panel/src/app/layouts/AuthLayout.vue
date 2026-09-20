@@ -28,7 +28,7 @@
 import { onMounted, ref } from 'vue';
 import { RouterView } from 'vue-router';
 import { TrButton } from '@tara/ui';
-import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/ui';
+import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
 
 const { t } = useI18n();
 const { show: showAppLoading } = useAppLoading();

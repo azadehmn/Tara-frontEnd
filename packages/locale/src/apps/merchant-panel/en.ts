@@ -4,6 +4,7 @@ import type { MessageTree } from '../../types';
 export const merchantPanelEn: MessageTree = {
   app: {
     name: 'Merchants | Tara',
+    loading: 'Loading',
   },
   layout: {
     nav: {
@@ -141,6 +142,12 @@ export const merchantPanelEn: MessageTree = {
       hidePassword: 'Hide password',
       bannerAlt: 'Tara service banner {n}',
       required: 'Username and password are required.',
+    },
+    otp: {
+      title: 'Confirm mobile number',
+      description: 'Enter the 6-digit code sent for user or ID {userId}',
+      submit: 'Confirm',
+      editNumber: 'Edit number',
     },
   },
 };
