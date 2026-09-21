@@ -1,8 +1,10 @@
-import type {
-  PaginationMeta,
-  Ticket,
-  TicketListResponse,
-  TicketUser,
+import {
+  isTicketStatus,
+  TicketStatus,
+  type PaginationMeta,
+  type Ticket,
+  type TicketListResponse,
+  type TicketUser,
 } from '../../model/ticket';
 
 export function mapTicketListResponse(raw: unknown): TicketListResponse {
@@ -25,11 +27,16 @@ export function mapTicket(raw: unknown): Ticket {
   return {
     id: String(row.id ?? ''),
     title: String(row.title ?? ''),
-    status: String(row.status ?? ''),
+    status: mapTicketStatus(row.status),
     updatedAt: String(row.updatedAt ?? ''),
     feedbackValue: toNullableNumber(row.feedbackValue),
     user: mapTicketUser(row.user),
   };
+}
+
+function mapTicketStatus(value: unknown): TicketStatus {
+  if (typeof value === 'string' && isTicketStatus(value)) return value;
+  return TicketStatus.NEW;
 }
 
 function mapTicketUser(raw: unknown): TicketUser | null {
@@ -39,6 +46,7 @@ function mapTicketUser(raw: unknown): TicketUser | null {
   return {
     id: String(row.id ?? ''),
     fullName: String(row.fullName ?? ''),
+    avatar: asOptionalString(row.avatar),
   };
 }
 
@@ -49,6 +57,11 @@ function mapPagination(raw: Record<string, unknown> | undefined, itemCount: numb
   const totalPages = toPositiveInt(raw?.totalPages, Math.max(1, Math.ceil(totalItems / pageSize)));
 
   return { page, pageSize, totalItems, totalPages };
+}
+
+function asOptionalString(value: unknown): string | null {
+  if (value == null || value === '') return null;
+  return String(value);
 }
 
 function toNullableNumber(value: unknown): number | null {

@@ -159,7 +159,8 @@ export const merchantPanelFa: MessageTree = {
   },
   ticket: {
     title: 'تیکت‌ها',
-    description: 'از این صفحه می‌توانید درخواست‌های پشتیبانی را ثبت کنید و وضعیت آن‌ها را پیگیری کنید.',
+    description:
+      'از این صفحه می‌توانید درخواست‌های پشتیبانی را ثبت کنید و وضعیت آن‌ها را پیگیری کنید.',
     create: 'ارسال تیکت',
     fields: {
       id: 'شناسه',
@@ -168,10 +169,10 @@ export const merchantPanelFa: MessageTree = {
       status: 'وضعیت',
     },
     statuses: {
-      CLOSED: 'بسته',
-      OPEN: 'باز',
+      NEW: 'جدید',
       IN_PROGRESS: 'در حال بررسی',
-      PENDING: 'در انتظار',
+      SUPPORT_RESPONSE: 'پاسخ پشتیبانی',
+      CLOSED: 'بسته',
     },
   },
   transactions: {

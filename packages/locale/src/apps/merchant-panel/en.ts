@@ -168,10 +168,10 @@ export const merchantPanelEn: MessageTree = {
       status: 'Status',
     },
     statuses: {
-      CLOSED: 'Closed',
-      OPEN: 'Open',
+      NEW: 'New',
       IN_PROGRESS: 'In progress',
-      PENDING: 'Pending',
+      SUPPORT_RESPONSE: 'Support response',
+      CLOSED: 'Closed',
     },
   },
   transactions: {

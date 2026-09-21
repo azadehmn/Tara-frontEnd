@@ -11,7 +11,7 @@ describe('mapTicketListResponse', () => {
       title: 'توقف قابلیت لینک پرداخت برای درگاه‌های غیراختصاصی',
       status: 'CLOSED',
       feedbackValue: 5,
-      user: { id: '356089', fullName: 'کاربر تست' },
+      user: { id: '356089', fullName: 'کاربر تست', avatar: null },
     });
     expect(result.meta.pagination).toEqual({
       page: 1,
@@ -27,7 +27,7 @@ describe('mapTicketListResponse', () => {
         {
           id: '1',
           title: 'Sample',
-          status: 'OPEN',
+          status: 'NEW',
           updatedAt: '2026-09-21T11:31:18+03:30',
           feedbackValue: null,
           user: null,
@@ -38,5 +38,23 @@ describe('mapTicketListResponse', () => {
 
     expect(result.data[0]?.user).toBeNull();
     expect(result.data[0]?.feedbackValue).toBeNull();
+  });
+
+  it('maps an unknown status to NEW', () => {
+    const result = mapTicketListResponse({
+      data: [
+        {
+          id: '1',
+          title: 'Sample',
+          status: 'OPEN',
+          updatedAt: '2026-09-21T11:31:18+03:30',
+          feedbackValue: null,
+          user: null,
+        },
+      ],
+      meta: { pagination: { page: 1, pageSize: 15, totalItems: 1, totalPages: 1 } },
+    });
+
+    expect(result.data[0]?.status).toBe('NEW');
   });
 });
