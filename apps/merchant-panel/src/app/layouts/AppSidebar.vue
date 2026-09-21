@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch, type Component } from 'vue';
+import { computed, reactive, watch, type Component } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { TrIcon } from '@tara/ui';
 import TrContractsIcon from '@tara/ui/icons/ContractsIcon.vue';
@@ -7,43 +7,114 @@ import TrGridLayoutIcon from '@tara/ui/icons/GridLayoutIcon.vue';
 import TrInvoicesIcon from '@tara/ui/icons/InvoicesIcon.vue';
 import TrReportsIcon from '@tara/ui/icons/ReportsIcon.vue';
 import TrTransactionIcon from '@tara/ui/icons/TransactionIcon.vue';
+import { useAuthoritiesStore } from '@features/auth';
 
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const authorities = useAuthoritiesStore();
 
-type NavChild = { to: string; key: string };
+type NavPermission = string | string[];
+
+type NavChild = { to: string; key: string; permission?: NavPermission };
 
 type NavItem = {
   to?: string;
   key: string;
   icon: Component;
   exact?: boolean;
+  permission?: NavPermission;
+  titleKey?: string;
   children?: NavChild[];
 };
 
-const items: NavItem[] = [
-  { to: '/', key: 'dashboard', icon: TrGridLayoutIcon, exact: true },
+const allItems: NavItem[] = [
+  { to: '/', key: 'dashboard', icon: TrGridLayoutIcon, exact: true, permission: 'user-panel' },
   {
     key: 'contracts',
     icon: TrContractsIcon,
     children: [
-      { to: '/contracts/organization', key: 'contractsOrganization' },
-      { to: '/contracts/acceptor', key: 'contractsAcceptor' },
+      { to: '/contracts/organization', key: 'contractsOrganization', permission: 'contractsGuarantor' },
+      { to: '/contracts/acceptor', key: 'contractsAcceptor', permission: 'contractsMerchant' },
     ],
   },
-  { to: '/transactions', key: 'transactions', icon: TrTransactionIcon },
+  {
+    to: '/transactions',
+    key: 'transactions',
+    icon: TrTransactionIcon,
+    permission: ['purchaseReportBusinessPartner', 'org_transactions'],
+  },
   {
     key: 'reports',
     icon: TrReportsIcon,
     children: [
-      { to: '/reports/summary', key: 'reportsSummary' },
-      { to: '/reports/purchase-detail', key: 'reportsPurchaseDetail' },
-      { to: '/reports/returns', key: 'reportsReturns' },
+      { to: '/reports/summary', key: 'reportsSummary', permission: 'buysBusinessPartner' },
+      {
+        to: '/reports/purchase-detail',
+        key: 'reportsPurchaseDetail',
+        permission: 'buysBusinessPartner',
+      },
+      { to: '/reports/returns', key: 'reportsReturns', permission: 'refunds_merchant' },
+      {
+        to: '/reports/charge-discharge-report',
+        key: 'reportsChargeDischarge',
+        permission: 'guarantor_charge_and_decharge',
+      },
+      {
+        to: '/reports/users-consume-report',
+        key: 'reportsUsersConsume',
+        permission: 'consumptionReportGuarantor',
+      },
+      {
+        to: '/reports/account-balance-report',
+        key: 'reportsAccountBalance',
+        permission: 'org_balance_report',
+      },
     ],
   },
-  { to: '/invoices', key: 'invoices', icon: TrInvoicesIcon },
+  {
+    to: '/invoices',
+    key: 'invoices',
+    icon: TrInvoicesIcon,
+    permission: 'chekout_acceptor_merchant',
+  },
+  {
+    to: '/installments',
+    key: 'installments',
+    icon: TrInvoicesIcon,
+    permission: 'bnpl_installment',
+  },
 ];
+
+function isAllowed(permission?: NavPermission) {
+  if (!permission) return true;
+  const keys = Array.isArray(permission) ? permission : [permission];
+  return keys.some((key) => authorities.has(key));
+}
+
+function reportsTitleKey() {
+  if (authorities.has('org_transactions')) return 'reportsOrg';
+  if (authorities.has('purchaseReportBusinessPartner')) return 'reportsAcceptor';
+  return 'reports';
+}
+
+const items = computed(() => {
+  void authorities.items;
+  return allItems.flatMap((item) => {
+    if (!item.children) return isAllowed(item.permission) ? [item] : [];
+
+    const children = item.children.filter((child) => isAllowed(child.permission));
+    if (!children.length) return [];
+
+    return [
+      {
+        ...item,
+        children,
+        titleKey: item.key === 'reports' ? reportsTitleKey() : item.key,
+      },
+    ];
+  });
+});
 
 const openMenus = reactive<Record<string, boolean>>({});
 
@@ -52,7 +123,7 @@ function toggleMenu(key: string, event: MouseEvent) {
     (event.currentTarget as HTMLElement).closest('.tr-nav-bar.is-collapsed'),
   );
   if (inCollapsedRail) {
-    const firstChild = items.find((item) => item.key === key)?.children?.[0];
+    const firstChild = items.value.find((item) => item.key === key)?.children?.[0];
     if (firstChild) router.push(firstChild.to);
     return;
   }
@@ -70,9 +141,9 @@ function isChildRouteActive(children: NavChild[] | undefined) {
 }
 
 watch(
-  () => route.path,
-  (path) => {
-    for (const item of items) {
+  [() => route.path, items],
+  ([path]) => {
+    for (const item of items.value) {
       if (item.children?.some((child) => path === child.to || path.startsWith(`${child.to}/`))) {
         openMenus[item.key] = true;
       }
@@ -100,7 +171,7 @@ watch(
             <component :is="item.icon" />
           </TrIcon>
           <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
-            {{ t(`layout.nav.${item.key}`) }}
+            {{ t(`layout.nav.${item.titleKey ?? item.key}`) }}
           </span>
           <span
             class="tr-nav-bar__chevron ms-auto inline-flex size-6 shrink-0 items-center justify-center"
@@ -141,13 +212,13 @@ watch(
         <a
           :href="href"
           :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
-          :aria-label="t(`layout.nav.${item.key}`)"
+          :aria-label="t(`layout.nav.${item.titleKey ?? item.key}`)"
           @click="navigate"
         >
           <TrIcon size="md">
             <component :is="item.icon" />
           </TrIcon>
-          <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.key}`) }}</span>
+          <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.titleKey ?? item.key}`) }}</span>
         </a>
       </RouterLink>
     </template>
