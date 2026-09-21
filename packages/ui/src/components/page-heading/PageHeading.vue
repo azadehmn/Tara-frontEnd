@@ -122,6 +122,9 @@ watch(rootRef, bind);
               :text="status.text"
             />
             <slot v-if="!loading" name="content" />
+            <div v-if="slots.action" class="tr-page-heading__action">
+              <slot name="action" />
+            </div>
           </div>
 
           <p
@@ -135,10 +138,6 @@ watch(rootRef, bind);
             class="tr-page-heading__skeleton tr-page-heading__skeleton--description"
             aria-hidden="true"
           />
-        </div>
-
-        <div v-if="slots.action" class="tr-page-heading__action">
-          <slot name="action" />
         </div>
       </div>
     </div>

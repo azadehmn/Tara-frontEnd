@@ -15,7 +15,7 @@
 }
 
 .tr-table-card__header-main {
-  @apply flex min-w-0 items-center gap-sm;
+  @apply flex min-w-0 flex-1 items-center gap-sm;
 }
 
 .tr-table-card__header-title {
@@ -72,4 +72,33 @@
 
 .tr-table-card__field-value {
   @apply min-w-0 truncate text-end text-body-md text-text dark:text-gray-200;
+}
+
+.tr-table--row-disabled {
+  color: var(--color-text-disabled);
+}
+
+.tr-table--row-disabled .tr-table-card__header,
+.tr-table--row-disabled .tr-table-card__header-title,
+.tr-table--row-disabled .tr-table-card__field-label,
+.tr-table--row-disabled .tr-table-card__field-value,
+.tr-table--row-disabled .tr-status .tr-status__text {
+  color: var(--color-text-disabled);
+}
+
+.tr-table--row-disabled .tr-status {
+  background-color: var(--color-surface-pressed);
+}
+
+html[data-theme='dark'] .tr-table--row-disabled,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table-card__header,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table-card__header-title,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table-card__field-label,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table-card__field-value,
+html[data-theme='dark'] .tr-table--row-disabled .tr-status .tr-status__text {
+  color: var(--color-text-dark-disabled);
+}
+
+html[data-theme='dark'] .tr-table--row-disabled .tr-status {
+  background-color: var(--color-surface-dark-pressed);
 }

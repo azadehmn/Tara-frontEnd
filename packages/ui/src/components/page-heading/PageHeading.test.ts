@@ -73,6 +73,21 @@ describe('TrPageHeading', () => {
 
     expect(wrapper.text()).toContain('فعال');
     expect(wrapper.text()).toContain('ثبت تیکت');
+    expect(wrapper.get('.tr-page-heading__action').element.parentElement?.classList.contains('tr-page-heading__title-row')).toBe(true);
+  });
+
+  it('puts description on the line below the title', () => {
+    const wrapper = mount(TrPageHeading, {
+      props: {
+        title: 'تیکت‌ها',
+        description: 'از این صفحه می‌توانید درخواست‌های پشتیبانی را ثبت کنید و وضعیت آن‌ها را پیگیری کنید.',
+      },
+      slots: { action: '<button type="button">ارسال تیکت</button>' },
+    });
+
+    const description = wrapper.get('.tr-page-heading__description');
+    expect(description.element.parentElement?.classList.contains('tr-page-heading__main')).toBe(true);
+    expect(description.element.previousElementSibling?.classList.contains('tr-page-heading__title-row')).toBe(true);
   });
 
   it('shows a title skeleton while loading', () => {

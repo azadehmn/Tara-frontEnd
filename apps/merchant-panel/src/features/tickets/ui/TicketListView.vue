@@ -8,18 +8,13 @@
         :loading="pending"
         :title="t('common.empty')"
         vector="NoResult"
-        show-card-header-label
         card-header-column="id"
         card-header-addon-column="status"
+        :row-class="ticketRowClass"
       >
         <template #item-id="{ item }">
           <span class="inline-flex min-w-0 items-center gap-sm">
-            <TrAvatar
-              v-if="item.status === TicketStatus.CLOSED"
-              shape="square"
-              size="sm"
-              class-icon="!text-primary"
-            >
+            <TrAvatar v-if="isClosed(item)" shape="square" size="sm">
               <LetterIcon />
             </TrAvatar>
             <TrAvatar v-else shape="square" size="sm">
@@ -65,7 +60,7 @@ import LetterIcon from '@tara/ui/icons/LetterIcon.vue';
 import LetterOpenIcon from '@tara/ui/icons/LetterOpenIcon.vue';
 import { useTicketList } from '../composables/use-ticket-list';
 import { ticketStatusLabelKey, ticketStatusType } from '../lib/ticket-status';
-import { TicketStatus } from '../model/ticket';
+import { TicketStatus, type Ticket } from '../model/ticket';
 
 const { t } = useI18n();
 const { tickets, pagination, page, pending, error, fetch } = useTicketList();
@@ -84,6 +79,14 @@ function goToNextPage() {
   if (page.value >= pagination.value.totalPages) return;
   page.value += 1;
   void fetch();
+}
+
+function isClosed(item: Ticket): boolean {
+  return item.status === TicketStatus.CLOSED;
+}
+
+function ticketRowClass(item: Ticket): string | undefined {
+  return isClosed(item) ? 'tr-table--row-disabled' : undefined;
 }
 
 const columns = computed<TrTableColumn[]>(() => [

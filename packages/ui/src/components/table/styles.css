@@ -68,6 +68,33 @@ html[data-theme='dark'] .tr-table__cell {
   @apply cursor-default;
 }
 
+.tr-table--row-disabled {
+  color: var(--color-text-disabled);
+}
+
+.tr-table--row-disabled .tr-table__cell,
+.tr-table--row-disabled .tr-table__cell-content,
+.tr-table--row-disabled .tr-table__overflow-text,
+.tr-table--row-disabled .tr-status .tr-status__text {
+  color: var(--color-text-disabled);
+}
+
+.tr-table--row-disabled .tr-status {
+  background-color: var(--color-surface-pressed);
+}
+
+html[data-theme='dark'] .tr-table--row-disabled,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table__cell,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table__cell-content,
+html[data-theme='dark'] .tr-table--row-disabled .tr-table__overflow-text,
+html[data-theme='dark'] .tr-table--row-disabled .tr-status .tr-status__text {
+  color: var(--color-text-dark-disabled);
+}
+
+html[data-theme='dark'] .tr-table--row-disabled .tr-status {
+  background-color: var(--color-surface-dark-pressed);
+}
+
 .tr-table__empty {
   @apply px-md py-2xl ;
 }

@@ -51,7 +51,7 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   /** Prefix the card header value with the column `label` (inline, not a field row). Default `false`. */
   showCardHeaderLabel?: boolean;
   /**
-   * Extra column `name` rendered on the start/right of the card header (typically status).
+   * Extra column `name` rendered on the end/left of the card header in RTL (typically status).
    * That column is omitted from the card field rows.
    */
   cardHeaderAddonColumn?: string;
