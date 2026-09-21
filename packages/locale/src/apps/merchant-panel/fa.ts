@@ -22,6 +22,7 @@ export const merchantPanelFa: MessageTree = {
       reportsAccountBalance: 'گزارش مانده حساب',
       invoices: 'صورتحساب‌های پذیرندگان',
       installments: 'وصول مطالبات',
+      ticket: 'تیکت‌ها',
       contracts: 'قراردادها',
       contractsOrganization: 'قراردادهای سازمانی',
       contractsAcceptor: 'قراردادهای پذیرندگی',
@@ -155,5 +156,10 @@ export const merchantPanelFa: MessageTree = {
       submit: 'تایید',
       editNumber: 'ویرایش شماره',
     },
+  },
+  ticket: {
+    title: 'تیکت‌ها',
+    description: 'از این صفحه می‌توانید درخواست‌های پشتیبانی را ثبت کنید و وضعیت آن‌ها را پیگیری کنید.',
+    body: 'این بخش به‌زودی فعال می‌شود. متن فعلی صرفاً برای نمایش ساختار صفحه است و داده‌ی واقعی ندارد.',
   },
 };

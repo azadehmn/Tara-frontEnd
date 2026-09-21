@@ -6,6 +6,7 @@ import TrContractsIcon from '@tara/ui/icons/ContractsIcon.vue';
 import TrGridLayoutIcon from '@tara/ui/icons/GridLayoutIcon.vue';
 import TrInvoicesIcon from '@tara/ui/icons/InvoicesIcon.vue';
 import TrReportsIcon from '@tara/ui/icons/ReportsIcon.vue';
+import TrTicketIcon from '@tara/ui/icons/TicketIcon.vue';
 import TrTransactionIcon from '@tara/ui/icons/TransactionIcon.vue';
 import { useAuthoritiesStore } from '@features/auth';
 
@@ -25,6 +26,7 @@ type NavItem = {
   exact?: boolean;
   permission?: NavPermission;
   titleKey?: string;
+  separated?: boolean;
   children?: NavChild[];
 };
 
@@ -84,6 +86,12 @@ const allItems: NavItem[] = [
     icon: TrInvoicesIcon,
     permission: 'bnpl_installment',
   },
+  {
+    to: '/ticket',
+    key: 'ticket',
+    icon: TrTicketIcon,
+    separated: true,
+  },
 ];
 
 function isAllowed(permission?: NavPermission) {
@@ -133,6 +141,7 @@ function toggleMenu(key: string, event: MouseEvent) {
 const linkClass =
   'flex items-center gap-2 rounded-md px-3 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
 const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark';
+const separatorClass = 'mt-1 border-t border-solid border-[#e4e7ec] pt-1 dark:border-gray-800';
 
 function isChildRouteActive(children: NavChild[] | undefined) {
   return Boolean(
@@ -156,7 +165,11 @@ watch(
 <template>
   <nav class="flex flex-col gap-1" :aria-label="t('layout.nav.label')">
     <template v-for="item in items" :key="item.key">
-      <div v-if="item.children?.length" class="flex flex-col gap-1">
+      <div
+        v-if="item.children?.length"
+        class="flex flex-col gap-1"
+        :class="item.separated && separatorClass"
+      >
         <button
           type="button"
           :class="[
@@ -208,19 +221,21 @@ watch(
         </div>
       </div>
 
-      <RouterLink v-else v-slot="{ href, navigate, isActive, isExactActive }" :to="item.to!" custom>
-        <a
-          :href="href"
-          :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
-          :aria-label="t(`layout.nav.${item.titleKey ?? item.key}`)"
-          @click="navigate"
-        >
-          <TrIcon size="md">
-            <component :is="item.icon" />
-          </TrIcon>
-          <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.titleKey ?? item.key}`) }}</span>
-        </a>
-      </RouterLink>
+      <div v-else :class="item.separated && separatorClass">
+        <RouterLink v-slot="{ href, navigate, isActive, isExactActive }" :to="item.to!" custom>
+          <a
+            :href="href"
+            :class="[linkClass, (item.exact ? isExactActive : isActive) && activeClass]"
+            :aria-label="t(`layout.nav.${item.titleKey ?? item.key}`)"
+            @click="navigate"
+          >
+            <TrIcon size="md">
+              <component :is="item.icon" />
+            </TrIcon>
+            <span class="tr-nav-bar__label">{{ t(`layout.nav.${item.titleKey ?? item.key}`) }}</span>
+          </a>
+        </RouterLink>
+      </div>
     </template>
   </nav>
 </template>

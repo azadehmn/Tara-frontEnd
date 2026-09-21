@@ -22,6 +22,7 @@ export const merchantPanelEn: MessageTree = {
       reportsAccountBalance: 'Account balance report',
       invoices: 'Merchant invoices',
       installments: 'Collections',
+      ticket: 'Tickets',
       contracts: 'Contracts',
       contractsOrganization: 'Organization contracts',
       contractsAcceptor: 'Acceptor contracts',
@@ -155,5 +156,10 @@ export const merchantPanelEn: MessageTree = {
       submit: 'Confirm',
       editNumber: 'Edit number',
     },
+  },
+  ticket: {
+    title: 'Tickets',
+    description: 'Use this page to submit support requests and track their status.',
+    body: 'This section will be available soon. The current copy is placeholder text and does not include real data.',
   },
 };

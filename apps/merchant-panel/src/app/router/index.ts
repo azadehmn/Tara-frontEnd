@@ -91,6 +91,12 @@ export const router = createRouter({
           meta: { titleKey: 'layout.nav.installments', permission: 'bnpl_installment' },
         },
         {
+          path: 'ticket',
+          name: 'ticket',
+          component: () => import('@pages/ticket/TicketPage.vue'),
+          meta: { titleKey: 'layout.nav.ticket' },
+        },
+        {
           path: 'contracts',
           redirect: { name: 'contracts-organization' },
         },
