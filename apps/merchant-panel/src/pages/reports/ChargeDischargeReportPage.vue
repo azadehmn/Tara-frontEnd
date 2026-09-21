@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { TrCard, TrPageHeading, TrTable, type TrTableColumn } from '@tara/ui';
+import { TrCard, TrLabel, TrPageHeading, TrTable, type TrTableColumn } from '@tara/ui';
 import { chargeDischargeRows } from '@features/reports';
 import { formatAmount } from '@shared/utils/format';
 
@@ -33,10 +33,17 @@ const columns = computed<TrTableColumn[]>(() => [
       <TrTable
         :columns="columns"
         :items="chargeDischargeRows"
-        :empty-text="t('common.empty')"
+        :title="t('common.empty')"
+        vector="Transactions"
         show-card-header-label
         card-header-column="contractTitle"
       >
+        <template #column-aggregatedamountrial="{ column }">
+          <span class="inline-flex items-center">
+            {{ column.label }}
+            <TrLabel :text="t('common.currency.rial')" type="neutral" class="mx-xs" />
+          </span>
+        </template>
         <template #item-aggregatedamountrial="{ item }">
           {{ formatAmount(item.aggregatedAmountRial, locale) }}
         </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { TrCard, TrPageHeading, TrTable, type TrTableColumn } from '@tara/ui';
+import { TrCard, TrLabel, TrPageHeading, TrTable, type TrTableColumn } from '@tara/ui';
 import { usersConsumeRows } from '@features/reports';
 import { formatAmount, formatNumber } from '@shared/utils/format';
 
@@ -39,7 +39,8 @@ const columns = computed<TrTableColumn[]>(() => [
       <TrTable
         :columns="columns"
         :items="usersConsumeRows"
-        :empty-text="t('common.empty')"
+        :title="t('common.empty')"
+        vector="EmptyPaper"
         show-card-header-label
         card-header-column="contractNumber"
       >
@@ -48,6 +49,12 @@ const columns = computed<TrTableColumn[]>(() => [
         </template>
         <template #item-purchasecount="{ item }">
           {{ formatNumber(item.purchaseCount, locale) }}
+        </template>
+        <template #column-consumeamountrial="{ column }">
+          <span class="inline-flex items-center">
+            {{ column.label }}
+            <TrLabel :text="t('common.currency.rial')" type="neutral" class="mx-xs" />
+          </span>
         </template>
         <template #item-consumeamountrial="{ item }">
           {{ formatAmount(item.consumeAmountRial, locale) }}

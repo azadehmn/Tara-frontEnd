@@ -21,7 +21,7 @@ export const router = createRouter({
         {
           path: 'transactions',
           name: 'transactions',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/transactions/TransactionsPage.vue'),
           meta: {
             titleKey: 'layout.nav.transactions',
             permission: ['purchaseReportBusinessPartner', 'org_transactions'],

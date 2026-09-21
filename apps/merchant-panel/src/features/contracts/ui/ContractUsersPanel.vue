@@ -60,7 +60,8 @@ function rowActions(item: ContractUser): TrActionItem[] {
       :columns="columns"
       :items="users"
       :loading="pending"
-      :empty-text="t('common.empty')"
+      :title="t('common.empty')"
+      vector="EmptyPaper"
     >
       <template #item-contractaccountdeactivated="{ item }">
         <TrStatus

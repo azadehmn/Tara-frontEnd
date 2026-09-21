@@ -30,7 +30,8 @@
         :columns="columns"
         :items="contracts"
         :loading="pending"
-        :empty-text="t('common.empty')"
+        :title="t('common.empty')"
+        vector="EmptyPaper"
         show-card-header-label
         card-header-addon-column="isEnabled"
         

@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import {
   TrAction,
   TrCard,
+  TrLabel,
   TrPageHeading,
   TrTable,
   type TrActionItem,
@@ -52,12 +53,19 @@ function rowActions(_item: SummaryReportRow): TrActionItem[] {
       <TrTable
         :columns="columns"
         :items="summaryReportRows"
-        :empty-text="t('common.empty')"
+        :title="t('common.empty')"
+        vector="EmptyPaper"
         show-card-header-label
         card-header-column="merchantContractNumber"
       >
         <template #item-purchasecount="{ item }">
           {{ formatNumber(item.purchaseCount, locale) }}
+        </template>
+        <template #column-purchaseamountrial="{ column }">
+          <span class="inline-flex items-center">
+            {{ column.label }}
+            <TrLabel :text="t('common.currency.rial')" type="neutral" class="mx-xs" />
+          </span>
         </template>
         <template #item-purchaseamountrial="{ item }">
           {{ formatAmount(item.purchaseAmountRial, locale) }}

@@ -66,7 +66,8 @@ function rowActions(item: ContractBatch): TrActionItem[] {
       :columns="columns"
       :items="batches"
       :loading="pending"
-      :empty-text="t('common.empty')"
+      :title="t('common.empty')"
+      vector="EmptyPaper"
     >
       <template #item-state="{ item }">
         {{ item.state ?? '—' }}

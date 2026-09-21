@@ -1,0 +1,45 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-empty-state {
+  @apply mx-auto flex max-w-[328px] flex-col items-center bg-transparent px-md;
+}
+
+.tr-empty-state__media {
+  @apply flex items-center justify-center;
+}
+
+.tr-empty-state__illustration {
+  display: block;
+  width: 128px;
+  height: 128px;
+  flex-shrink: 0;
+}
+
+.tr-empty-state__illustration--dark {
+  display: none;
+}
+
+html[data-theme='dark'] .tr-empty-state__illustration--light {
+  display: none;
+}
+
+html[data-theme='dark'] .tr-empty-state__illustration--dark {
+  display: block;
+}
+
+.tr-empty-state__title {
+  @apply mt-2xl m-0 text-center text-body-md text-text dark:text-text-dark;
+}
+
+.tr-empty-state__description {
+  @apply mt-2xl m-0 text-center text-body-sm text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-empty-state__title + .tr-empty-state__description {
+  @apply mt-sm;
+}
+
+.tr-empty-state__action {
+  @apply mt-2xl flex justify-center;
+}

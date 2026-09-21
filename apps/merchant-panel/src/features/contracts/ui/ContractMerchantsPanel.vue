@@ -38,7 +38,8 @@ const columns = computed<TrTableColumn[]>(() => [
       :columns="columns"
       :items="merchants"
       :loading="pending"
-      :empty-text="t('common.empty')"
+      :title="t('common.empty')"
+      vector="EmptyPaper"
     >
       <template #item-provincename="{ item }">
         {{ item.provinceName ?? '—' }}

@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="T extends TrTableRow">
 import { computed } from 'vue';
 import { useBreakpoint } from '../../composables/useBreakpoint';
+import { TrEmptyState } from '../empty-state';
 import { TrTooltip } from '../tooltip';
 import TrTableCard from './TableCard.vue';
 import {
@@ -22,7 +23,9 @@ const props = withDefaults(defineProps<TrTableProps<T>>(), {
   loadingRowCount: 5,
   hideHeader: false,
   rowPointer: false,
-  emptyText: '',
+  title: '',
+  emptyDescription: '',
+  vector: 'EmptyPaper',
   rowKey: 'id',
   actionWidth: '48px',
   layout: 'auto',
@@ -125,6 +128,9 @@ const loadingRows = computed(() =>
   Array.from({ length: Math.max(1, props.loadingRowCount) }, (_, index) => index),
 );
 
+const displayItems = computed(() => props.items ?? []);
+const hasRows = computed(() => displayItems.value.length > 0);
+
 function onRowClick(item: T) {
   emit('rowClick', item);
 }
@@ -169,9 +175,9 @@ function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
       </slot>
     </template>
 
-    <template v-else-if="items.length > 0">
+    <template v-else-if="hasRows">
       <TrTableCard
-        v-for="(item, index) in items"
+        v-for="(item, index) in displayItems"
         :key="getRowKey(item, index, rowKey)"
         role="listitem"
         :class="[rowClass?.(item), { 'tr-table-card--pointer': rowPointer }]"
@@ -277,7 +283,13 @@ function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
     </template>
 
     <div v-else class="tr-table__empty" role="status">
-      <slot name="empty">{{ emptyText }}</slot>
+      <slot name="empty">
+        <TrEmptyState
+          :vector="vector"
+          :title="title"
+          :description="emptyDescription"
+        />
+      </slot>
     </div>
   </div>
 
@@ -326,9 +338,9 @@ function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
       </slot>
     </div>
 
-    <template v-else-if="items.length > 0">
+    <template v-else-if="hasRows">
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in displayItems"
         :key="getRowKey(item, index, rowKey)"
         class="tr-table__row"
         :class="[rowClass?.(item), { 'tr-table__row--pointer': rowPointer }]"
@@ -378,7 +390,13 @@ function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
     </template>
 
     <div v-else class="tr-table__empty" role="status">
-      <slot name="empty">{{ emptyText }}</slot>
+      <slot name="empty">
+        <TrEmptyState
+          :vector="vector"
+          :title="title"
+          :description="emptyDescription"
+        />
+      </slot>
     </div>
   </div>
 </template>

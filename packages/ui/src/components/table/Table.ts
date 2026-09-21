@@ -23,7 +23,11 @@ export type TrTableProps<T extends TrTableRow = TrTableRow> = {
   loadingRowCount?: number;
   hideHeader?: boolean;
   rowPointer?: boolean;
-  emptyText?: string;
+  /** Empty-state heading. */
+  title?: string;
+  emptyDescription?: string;
+  /** Vector filename for the default empty state. Default `EmptyPaper`. */
+  vector?: string;
   /** Property used as Vue key; defaults to `id`, then row index. */
   rowKey?: string;
   /** Optional class for a row; decided by the UI, not the data model. */

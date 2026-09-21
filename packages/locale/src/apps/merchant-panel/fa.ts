@@ -163,10 +163,15 @@ export const merchantPanelFa: MessageTree = {
     body: 'این بخش به‌زودی فعال می‌شود. متن فعلی صرفاً برای نمایش ساختار صفحه است و داده‌ی واقعی ندارد.',
     create: 'ارسال تیکت',
   },
+  transactions: {
+    trackingCode: 'کد پیگیری',
+    amountRial: 'مبلغ',
+    dateTime: 'تاریخ و ساعت',
+  },
   reports: {
     chargeDischarge: {
       contractTitle: 'عنوان قرارداد',
-      aggregatedAmountRial: 'مبلغ شارژ/ دشارژ تجمیعی (ریال)',
+      aggregatedAmountRial: 'مبلغ شارژ/ دشارژ تجمیعی',
       aggregatedAmount: 'مبلغ شارژ/ دشارژ تجمیعی',
       type: 'نوع شارژ/ دشارژ تجمیعی',
       types: {
@@ -180,24 +185,24 @@ export const merchantPanelFa: MessageTree = {
       companyName: 'نام شرکت',
       contractType: 'نوع قرارداد',
       purchaseCount: 'تعداد کل خرید',
-      consumeAmountRial: 'کل مبلغ مصرف (ریال)',
+      consumeAmountRial: 'کل مبلغ مصرف',
     },
     accountBalance: {
       mobile: 'شماره موبایل',
       nationalCode: 'کد ملی',
-      balanceRial: 'مبلغ موجودی حساب (ریال)',
+      balanceRial: 'مبلغ موجودی حساب',
     },
     summary: {
       merchantContractNumber: 'شماره قرارداد فروشندگی',
       merchantContractTitle: 'عنوان قرارداد فروشندگی',
-      purchaseCount: 'کل تعداد خریدها (از همه حساب‌ها)',
-      purchaseAmountRial: 'کل مبلغ خریدها از همه حساب‌ها (ریال)',
+      purchaseCount: 'تعداد کل خریدها',
+      purchaseAmountRial: 'مبلغ کل خریدها',
       details: 'جزئیات',
     },
     purchaseDetail: {
       trackingCode: 'کد پیگیری',
       referenceNumber: 'شماره مرجع',
-      amountRial: 'مبلغ (ریال)',
+      amountRial: 'مبلغ',
       dateTime: 'تاریخ و ساعت',
       acceptorType: 'نوع پذیرنده',
       branchCode: 'کد شعبه',
@@ -218,7 +223,7 @@ export const merchantPanelFa: MessageTree = {
       storeTitle: 'عنوان فروشگاه',
       returnDate: 'تاریخ مرجوعی',
       returnAmount: 'مبلغ مرجوعی',
-      purchaseAmountRial: 'مبلغ کل خرید (ریال)',
+      purchaseAmountRial: 'مبلغ کل خرید',
       status: 'وضعیت',
       referenceNumber: 'شماره مرجع',
       statuses: {

@@ -163,10 +163,15 @@ export const merchantPanelEn: MessageTree = {
     body: 'This section will be available soon. The current copy is placeholder text and does not include real data.',
     create: 'Send ticket',
   },
+  transactions: {
+    trackingCode: 'Tracking code',
+    amountRial: 'Amount',
+    dateTime: 'Date and time',
+  },
   reports: {
     chargeDischarge: {
       contractTitle: 'Contract title',
-      aggregatedAmountRial: 'Aggregated charge/discharge amount (IRR)',
+      aggregatedAmountRial: 'Aggregated charge/discharge amount',
       aggregatedAmount: 'Aggregated charge/discharge amount',
       type: 'Aggregated charge/discharge type',
       types: {
@@ -180,24 +185,24 @@ export const merchantPanelEn: MessageTree = {
       companyName: 'Company name',
       contractType: 'Contract type',
       purchaseCount: 'Total purchases',
-      consumeAmountRial: 'Total consumption amount (IRR)',
+      consumeAmountRial: 'Total consumption amount',
     },
     accountBalance: {
       mobile: 'Mobile number',
       nationalCode: 'National ID',
-      balanceRial: 'Account balance (IRR)',
+      balanceRial: 'Account balance',
     },
     summary: {
       merchantContractNumber: 'Merchant contract number',
       merchantContractTitle: 'Merchant contract title',
-      purchaseCount: 'Total purchases (all accounts)',
-      purchaseAmountRial: 'Total purchase amount from all accounts (IRR)',
+      purchaseCount: 'Total purchases',
+      purchaseAmountRial: 'Total purchase amount',
       details: 'Details',
     },
     purchaseDetail: {
       trackingCode: 'Tracking code',
       referenceNumber: 'Reference number',
-      amountRial: 'Amount (IRR)',
+      amountRial: 'Amount',
       dateTime: 'Date and time',
       acceptorType: 'Acceptor type',
       branchCode: 'Branch code',
@@ -218,7 +223,7 @@ export const merchantPanelEn: MessageTree = {
       storeTitle: 'Store title',
       returnDate: 'Return date',
       returnAmount: 'Return amount',
-      purchaseAmountRial: 'Total purchase amount (IRR)',
+      purchaseAmountRial: 'Total purchase amount',
       status: 'Status',
       referenceNumber: 'Reference number',
       statuses: {

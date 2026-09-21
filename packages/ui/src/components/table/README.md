@@ -8,7 +8,7 @@ Type-safe data table for Tara UI. Pass `columns` and `items`; customize cells wi
 - Nested fields (`wallet.title`)
 - Custom header and cell slots
 - Optional action column
-- Loading rows and empty state
+- Loading rows and empty state (`items.length === 0`)
 - Row click / hover, custom `rowKey` and `rowClass`
 - CSS Grid column widths
 - Keyboard: Enter and Space when `rowPointer` is set
@@ -33,7 +33,8 @@ const columns: TrTableColumn[] = [
     :columns="columns"
     :items="items"
     :loading="pending"
-    empty-text="No rows"
+    title="No rows"
+    vector="EmptyPaper"
     row-key="id"
     row-pointer
     :row-class="(item) => (item.disabled ? 'is-disabled' : undefined)"
@@ -61,7 +62,9 @@ const columns: TrTableColumn[] = [
 | `loadingRowCount` | `number` | `5` | Loading row count |
 | `hideHeader` | `boolean` | `false` | Hide header row |
 | `rowPointer` | `boolean` | `false` | Pointer cursor, `tabindex`, Enter/Space → `rowClick` |
-| `emptyText` | `string` | `''` | Fallback when `items` is empty |
+| `title` | `string` | `''` | Empty-state title |
+| `emptyDescription` | `string` | `''` | Empty-state supporting copy |
+| `vector` | `string` | `'EmptyPaper'` | Vector filename passed to `TrEmptyState` |
 | `rowKey` | `string` | `'id'` | Vue `:key` field; falls back to index |
 | `rowClass` | `(item: T) => string \| undefined` | — | Row class from the UI, not from the data model |
 | `actionWidth` | `string` | `'48px'` | Grid track for `#action` |
@@ -100,7 +103,7 @@ Slot names use `column.name` in lowercase (`isEnabled` → `#item-isenabled`).
 | `#item-{name}` | `{ item, column, index }` | Custom cell |
 | `#action` | `{ item, index }` | Trailing actions (header end/left on cards) |
 | `#loading` | — | Replace default loading rows |
-| `#empty` | — | Replace `emptyText` |
+| `#empty` | — | Replace the default `TrEmptyState` |
 | `#card` | `{ item, index }` | Replace the whole card body |
 | `#card-header` | `{ item, column, addonColumn, index }` | Replace the card header title area |
 | `#card-main` | `{ item, index, columns }` | Replace the card fields |
