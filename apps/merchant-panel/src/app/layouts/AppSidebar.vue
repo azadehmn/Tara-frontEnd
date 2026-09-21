@@ -56,7 +56,7 @@ const allItems: NavItem[] = [
         key: 'reportsPurchaseDetail',
         permission: 'buysBusinessPartner',
       },
-      { to: '/reports/returns', key: 'reportsReturns', permission: 'refunds_merchant' },
+      { to: '/reports/refund', key: 'reportsReturns', permission: 'refunds_merchant' },
       {
         to: '/reports/charge-discharge-report',
         key: 'reportsChargeDischarge',

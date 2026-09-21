@@ -36,25 +36,25 @@ export const router = createRouter({
         {
           path: 'reports/summary',
           name: 'reports-summary',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/reports/SummaryReportPage.vue'),
           meta: { titleKey: 'layout.nav.reportsSummary', permission: 'buysBusinessPartner' },
         },
         {
           path: 'reports/purchase-detail',
           name: 'reports-purchase-detail',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/reports/PurchaseDetailReportPage.vue'),
           meta: { titleKey: 'layout.nav.reportsPurchaseDetail', permission: 'buysBusinessPartner' },
         },
         {
-          path: 'reports/returns',
-          name: 'reports-returns',
-          component: () => import('@pages/section/SectionPage.vue'),
+          path: 'reports/refund',
+          name: 'refund',
+          component: () => import('@pages/reports/ReturnsReportPage.vue'),
           meta: { titleKey: 'layout.nav.reportsReturns', permission: 'refunds_merchant' },
         },
         {
           path: 'reports/charge-discharge-report',
           name: 'reports-charge-discharge',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/reports/ChargeDischargeReportPage.vue'),
           meta: {
             titleKey: 'layout.nav.reportsChargeDischarge',
             permission: 'guarantor_charge_and_decharge',
@@ -63,7 +63,7 @@ export const router = createRouter({
         {
           path: 'reports/users-consume-report',
           name: 'reports-users-consume',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/reports/UsersConsumeReportPage.vue'),
           meta: {
             titleKey: 'layout.nav.reportsUsersConsume',
             permission: 'consumptionReportGuarantor',
@@ -72,7 +72,7 @@ export const router = createRouter({
         {
           path: 'reports/account-balance-report',
           name: 'reports-account-balance',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/reports/AccountBalanceReportPage.vue'),
           meta: {
             titleKey: 'layout.nav.reportsAccountBalance',
             permission: 'org_balance_report',
