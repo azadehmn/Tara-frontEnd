@@ -5,6 +5,9 @@
 export { taraUi } from './plugin';
 export { TrAction } from './components/action';
 export type { TrActionItem, TrActionProps, TrActionTone } from './components/action';
+export { TrAvatar } from './components/avatar';
+export type { TrAvatarProps, TrAvatarShape, TrAvatarSize, TrAvatarType } from './components/avatar';
+export { TrAvatarType } from './components/avatar';
 export { TrButton } from './components/button';
 export { TrIcon } from './components/icon';
 export type { TrIconProps, TrIconSize } from './components/icon';

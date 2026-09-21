@@ -1,5 +1,6 @@
 import type { App, Plugin } from 'vue';
 import { TrAction } from './components/action';
+import { TrAvatar } from './components/avatar';
 import { TrButton } from './components/button';
 import { TrCard } from './components/card';
 import { TrIcon } from './components/icon';
@@ -22,6 +23,7 @@ import { TrPageHeading } from './components/page-heading';
 export const taraUi: Plugin = {
   install(app: App) {
     app.component('TrAction', TrAction);
+    app.component('TrAvatar', TrAvatar);
     app.component('TrButton', TrButton);
     app.component('TrIcon', TrIcon);
     app.component('TrCard', TrCard);
