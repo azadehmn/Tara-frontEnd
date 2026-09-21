@@ -25,9 +25,7 @@ export function getScrollParent(el: HTMLElement | null): HTMLElement | Window {
   let node: HTMLElement | null = el.parentElement;
   while (node) {
     const { overflowY } = window.getComputedStyle(node);
-    if (SCROLLABLE.test(overflowY) && node.scrollHeight > node.clientHeight) {
-      return node;
-    }
+    if (SCROLLABLE.test(overflowY)) return node;
     node = node.parentElement;
   }
 

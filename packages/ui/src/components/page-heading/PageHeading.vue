@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
-import { TrButton } from '../button';
 import { TrIcon } from '../icon';
 import { TrStatus } from '../status';
+import ArrowRightIcon from '../../icons/ArrowRightIcon.vue';
 import { TR_PAGE_BACK } from './pageBack';
 import {
   getScrollParent,
@@ -44,11 +44,10 @@ function handleBack() {
   injectedBack?.();
 }
 
-let scrollTarget: HTMLElement | Window | null = null;
+let scrollTargets: Array<HTMLElement | Window> = [];
 
 function onScroll() {
-  if (!scrollTarget) return;
-  const top = scrollTopOf(scrollTarget);
+  const top = Math.max(0, ...scrollTargets.map(scrollTopOf));
   if (compact.value) {
     if (top <= EXPAND_AT) compact.value = false;
     return;
@@ -57,22 +56,28 @@ function onScroll() {
 }
 
 function unbind() {
-  scrollTarget?.removeEventListener('scroll', onScroll);
-  scrollTarget = null;
+  for (const target of scrollTargets) {
+    target.removeEventListener('scroll', onScroll);
+  }
+  scrollTargets = [];
 }
 
 function bind() {
   unbind();
   compact.value = false;
   if (!props.sticky || !rootRef.value) return;
-  scrollTarget = getScrollParent(rootRef.value);
-  scrollTarget.addEventListener('scroll', onScroll, { passive: true });
+  const parent = getScrollParent(rootRef.value);
+  scrollTargets = parent === window ? [window] : [parent, window];
+  for (const target of scrollTargets) {
+    target.addEventListener('scroll', onScroll, { passive: true });
+  }
   onScroll();
 }
 
 onMounted(bind);
 onBeforeUnmount(unbind);
 watch(() => props.sticky, bind);
+watch(rootRef, bind);
 </script>
 
 <template>
@@ -89,27 +94,16 @@ watch(() => props.sticky, bind);
       <div class="tr-page-heading__row">
         <div v-if="showBack" class="tr-page-heading__back">
           <slot name="back">
-            <TrButton variant="outlined" :ariaLabel="backAriaLabel" @click="handleBack">
-              <template #icon>
-                <TrIcon size="md">
-                  <svg
-                    class="tr-page-heading__chevron"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M9 6L15 12L9 18"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </TrIcon>
-              </template>
-            </TrButton>
+            <a
+              class="tr-page-heading__back-link"
+              href="#"
+              :aria-label="backAriaLabel"
+              @click.prevent="handleBack"
+            >
+              <TrIcon size="md" class="tr-page-heading__chevron">
+                <ArrowRightIcon />
+              </TrIcon>
+            </a>
           </slot>
         </div>
 

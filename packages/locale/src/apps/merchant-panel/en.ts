@@ -161,6 +161,6 @@ export const merchantPanelEn: MessageTree = {
     title: 'Tickets',
     description: 'Use this page to submit support requests and track their status.',
     body: 'This section will be available soon. The current copy is placeholder text and does not include real data.',
-    create: 'New ticket',
+    create: 'Send ticket',
   },
 };

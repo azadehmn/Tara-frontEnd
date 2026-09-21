@@ -11,6 +11,16 @@ describe('getScrollParent', () => {
     expect(getScrollParent(el)).toBe(window);
     el.remove();
   });
+
+  it('uses an overflow auto ancestor even when it is not overflowing yet', () => {
+    const parent = document.createElement('div');
+    parent.style.overflowY = 'auto';
+    const el = document.createElement('div');
+    parent.appendChild(el);
+    document.body.appendChild(parent);
+    expect(getScrollParent(el)).toBe(parent);
+    parent.remove();
+  });
 });
 
 describe('scrollTopOf', () => {
@@ -36,7 +46,7 @@ describe('TrPageHeading', () => {
       props: { title: 'جزئیات', hasBack: true, backAriaLabel: 'بازگشت', onBack: () => undefined },
     });
 
-    await wrapper.get('button').trigger('click');
+    await wrapper.get('a').trigger('click');
     expect(wrapper.emitted('back')).toHaveLength(1);
   });
 
@@ -47,7 +57,7 @@ describe('TrPageHeading', () => {
       global: { provide: { [TR_PAGE_BACK as symbol]: goBack } },
     });
 
-    await wrapper.get('button').trigger('click');
+    await wrapper.get('a').trigger('click');
     expect(goBack).toHaveBeenCalledOnce();
     expect(wrapper.emitted('back')).toBeUndefined();
   });

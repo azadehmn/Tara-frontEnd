@@ -13,7 +13,7 @@ import { TrButton, TrPageHeading } from '@tara/ui';
     description="درخواست‌های پشتیبانی را ثبت و پیگیری کنید."
   >
     <template #action>
-      <TrButton text="ثبت تیکت" />
+      <TrButton text="ارسال تیکت" />
     </template>
   </TrPageHeading>
 </template>

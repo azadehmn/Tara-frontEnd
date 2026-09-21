@@ -84,7 +84,7 @@ const otpComplete = ref('');
         <span class="mb-md block text-xs opacity-60">title + description + action</span>
         <TrPageHeading title="تیکت‌ها" description="درخواست‌های پشتیبانی را ثبت و پیگیری کنید." :sticky="false">
           <template #action>
-            <TrButton text="ثبت تیکت" />
+            <TrButton text="ارسال تیکت" />
           </template>
         </TrPageHeading>
       </div>

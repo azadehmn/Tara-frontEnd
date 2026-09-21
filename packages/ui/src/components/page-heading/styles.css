@@ -2,19 +2,23 @@
 @reference '../../styles/index.css';
 
 .tr-page-heading {
-  @apply block;
+  @apply block px-sm;
 }
 
-.tr-page-heading.is-sticky .tr-page-heading__bar {
+.tr-page-heading.is-sticky {
   @apply sticky top-0 z-50 py-md
     bg-background dark:bg-background-dark;
   transition:
     box-shadow 0.2s ease,
-    padding 0.2s ease;
+    padding 0.2s ease,
+    top 0.2s ease;
 }
 
-.tr-page-heading.is-compact .tr-page-heading__bar {
-  @apply py-sm shadow-elevation-100 dark:shadow-elevation-dark-100;
+.tr-page-heading.is-compact {
+  /* Sit flush under the top bar; offsets `main` `py-xl` (24px). */
+  top: calc(var(--spacing-xl) * -1);
+  @apply bg-white py-sm shadow-elevation-100
+    dark:bg-background-dark dark:shadow-elevation-dark-100;
 }
 
 .tr-page-heading__row {
@@ -25,8 +29,19 @@
   @apply shrink-0;
 }
 
+.tr-page-heading__back-link {
+  @apply inline-flex size-10 items-center justify-center rounded-md no-underline
+    border border-solid border-[#e4e7ec]
+    bg-white text-text
+    dark:border-gray-800 dark:bg-background-dark dark:text-text-dark;
+}
+
+.tr-page-heading__back-link:hover {
+  @apply bg-slate-50 dark:bg-slate-800;
+}
+
 .tr-page-heading__chevron {
-  @apply size-5;
+  @apply size-5 text-inherit;
 }
 
 [dir='ltr'] .tr-page-heading__chevron {
