@@ -50,7 +50,7 @@ import { useRouter } from 'vue-router';
 import { TrButton, TrOtpField } from '@tara/ui';
 import EditIcon from '@tara/ui/icons/EditIcon.vue';
 import taraLogo from '@assets/images/logo-persion.svg';
-import { clearTokens } from '@shared/auth/token-storage';
+import { clearAuthStorage } from '@shared/auth/auth-storage';
 import { useVerifyOtp } from '../composables/use-verify-otp';
 import { clearLoginSession, loginSession } from '../model/login-session';
 import AuthShell from './AuthShell.vue';
@@ -78,7 +78,7 @@ async function handleSubmit() {
 }
 
 function editNumber() {
-  clearTokens();
+  clearAuthStorage();
   clearLoginSession();
   void router.push({ name: 'login' });
 }

@@ -1,4 +1,4 @@
-import { getAccessTokenForRequest } from '@shared/auth/token-storage';
+import { getAccessTokenForRequest } from '@shared/auth/tokens';
 import type { RequestInterceptor } from '../types';
 
 export const applyAuthHeader: RequestInterceptor = ({ headers }) => {
