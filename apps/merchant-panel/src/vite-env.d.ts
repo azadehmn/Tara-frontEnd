@@ -15,6 +15,7 @@ declare global {
     readonly VITE_DOC_ORIGIN?: string;
     readonly VITE_INCOME_CHART_USE_MOCK?: string;
     readonly VITE_SUMMARY_USE_MOCK?: string;
+    readonly VITE_TICKETS_USE_MOCK?: string;
   }
 
   interface ImportMeta {

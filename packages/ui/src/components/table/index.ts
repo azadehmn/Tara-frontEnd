@@ -6,6 +6,7 @@ export {
   itemSlotName,
   itemTextContent,
   getRowKey,
+  toTableSlotColumn,
 } from './Table';
 export type {
   TrTableColumn,
@@ -13,4 +14,5 @@ export type {
   TrTableProps,
   TrTableRow,
   TrTableRowHoverPayload,
+  TrTableSlotColumn,
 } from './Table';

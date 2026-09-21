@@ -48,6 +48,7 @@ export {
   itemSlotName,
   itemTextContent,
   getRowKey,
+  toTableSlotColumn,
 } from './components/table';
 export type {
   TrTableColumn,
@@ -55,6 +56,7 @@ export type {
   TrTableProps,
   TrTableRow,
   TrTableRowHoverPayload,
+  TrTableSlotColumn,
 } from './components/table';
 export { TrTextField } from './components/text-field';
 export type {

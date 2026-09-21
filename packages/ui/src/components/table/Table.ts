@@ -11,6 +11,11 @@ export type TrTableColumn = {
   class?: string;
 };
 
+export type TrTableSlotColumn = TrTableColumn & {
+  columnSlot: `column-${string}`;
+  itemSlot: `item-${string}`;
+};
+
 export type TrTableRow = Record<string, unknown>;
 
 export type TrTableLayout = 'auto' | 'table' | 'card';
@@ -87,6 +92,14 @@ export function columnSlotName(column: TrTableColumn): `column-${string}` {
 
 export function itemSlotName(column: TrTableColumn): `item-${string}` {
   return `item-${column.name.toLowerCase()}`;
+}
+
+export function toTableSlotColumn(column: TrTableColumn): TrTableSlotColumn {
+  return {
+    ...column,
+    columnSlot: columnSlotName(column),
+    itemSlot: itemSlotName(column),
+  };
 }
 
 export function getRowKey(item: TrTableRow, index: number, rowKey = 'id'): string | number {

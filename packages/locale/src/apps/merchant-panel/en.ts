@@ -160,8 +160,19 @@ export const merchantPanelEn: MessageTree = {
   ticket: {
     title: 'Tickets',
     description: 'Use this page to submit support requests and track their status.',
-    body: 'This section will be available soon. The current copy is placeholder text and does not include real data.',
     create: 'Send ticket',
+    fields: {
+      id: 'ID',
+      title: 'Title',
+      updatedAt: 'Last update',
+      status: 'Status',
+    },
+    statuses: {
+      CLOSED: 'Closed',
+      OPEN: 'Open',
+      IN_PROGRESS: 'In progress',
+      PENDING: 'Pending',
+    },
   },
   transactions: {
     trackingCode: 'Tracking code',

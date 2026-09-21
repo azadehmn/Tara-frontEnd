@@ -160,8 +160,19 @@ export const merchantPanelFa: MessageTree = {
   ticket: {
     title: 'تیکت‌ها',
     description: 'از این صفحه می‌توانید درخواست‌های پشتیبانی را ثبت کنید و وضعیت آن‌ها را پیگیری کنید.',
-    body: 'این بخش به‌زودی فعال می‌شود. متن فعلی صرفاً برای نمایش ساختار صفحه است و داده‌ی واقعی ندارد.',
     create: 'ارسال تیکت',
+    fields: {
+      id: 'شناسه',
+      title: 'عنوان',
+      updatedAt: 'آخرین بروزرسانی',
+      status: 'وضعیت',
+    },
+    statuses: {
+      CLOSED: 'بسته',
+      OPEN: 'باز',
+      IN_PROGRESS: 'در حال بررسی',
+      PENDING: 'در انتظار',
+    },
   },
   transactions: {
     trackingCode: 'کد پیگیری',

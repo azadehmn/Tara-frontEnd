@@ -5,14 +5,13 @@ import { TrEmptyState } from '../empty-state';
 import { TrTooltip } from '../tooltip';
 import TrTableCard from './TableCard.vue';
 import {
-  columnSlotName,
-  itemSlotName,
   itemTextContent,
   getRowKey,
-  type TrTableColumn,
+  toTableSlotColumn,
   type TrTableProps,
   type TrTableRow,
   type TrTableRowHoverPayload,
+  type TrTableSlotColumn,
 } from './Table';
 
 defineOptions({ name: 'TrTable' });
@@ -37,11 +36,6 @@ const emit = defineEmits<{
   rowClick: [item: T];
   rowHover: [payload: TrTableRowHoverPayload<T>];
 }>();
-
-type TrTableSlotColumn = TrTableColumn & {
-  columnSlot: `column-${string}`;
-  itemSlot: `item-${string}`;
-};
 
 const slots = defineSlots<
   {
@@ -86,32 +80,31 @@ const showCards = computed(() => {
   return isBelow(props.cardBreakpoint);
 });
 
-const normalizedColumns = computed(() =>
-  props.columns.map((column) => ({
-    ...column,
-    columnSlot: columnSlotName(column),
-    itemSlot: itemSlotName(column),
-  })),
+const normalizedColumns = computed((): TrTableSlotColumn[] =>
+  props.columns.map(toTableSlotColumn),
 );
 
-const headerColumn = computed(() => {
+const headerColumn = computed((): TrTableSlotColumn | undefined => {
   if (props.cardHeaderColumn) {
     return (
-      normalizedColumns.value.find((column) => column.name === props.cardHeaderColumn) ??
-      normalizedColumns.value[0]
+      normalizedColumns.value.find(
+        (column: TrTableSlotColumn) => column.name === props.cardHeaderColumn,
+      ) ?? normalizedColumns.value[0]
     );
   }
   return normalizedColumns.value[0];
 });
 
-const headerAddonColumn = computed(() => {
+const headerAddonColumn = computed((): TrTableSlotColumn | undefined => {
   if (!props.cardHeaderAddonColumn) return undefined;
   if (props.cardHeaderAddonColumn === headerColumn.value?.name) return undefined;
-  return normalizedColumns.value.find((column) => column.name === props.cardHeaderAddonColumn);
+  return normalizedColumns.value.find(
+    (column: TrTableSlotColumn) => column.name === props.cardHeaderAddonColumn,
+  );
 });
 
-const fieldColumns = computed(() =>
-  normalizedColumns.value.filter((column) => {
+const fieldColumns = computed((): TrTableSlotColumn[] =>
+  normalizedColumns.value.filter((column: TrTableSlotColumn) => {
     if (column.name === headerColumn.value?.name) return false;
     if (column.name === headerAddonColumn.value?.name) return false;
     return true;
@@ -119,7 +112,9 @@ const fieldColumns = computed(() =>
 );
 
 const gridColumns = computed(() => {
-  const tracks = normalizedColumns.value.map((column) => column.width ?? 'minmax(100px, 1fr)');
+  const tracks = normalizedColumns.value.map(
+    (column: TrTableSlotColumn) => column.width ?? 'minmax(100px, 1fr)',
+  );
   if (hasActionSlot.value) tracks.push(props.actionWidth);
   return tracks.join(' ');
 });
