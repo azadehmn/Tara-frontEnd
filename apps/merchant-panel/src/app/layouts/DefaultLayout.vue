@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen flex-col bg-background text-text dark:bg-background-dark dark:text-text-dark">
+  <div class="flex h-dvh flex-col overflow-hidden bg-background text-text dark:bg-background-dark dark:text-text-dark">
     <TrTopBar>
       <template #start>
         <div
@@ -45,7 +45,7 @@
         <AppSidebar />
       </TrNavigationBar>
 
-      <main class="min-w-0 flex-1 overflow-auto py-xl">
+      <main class="min-h-0 min-w-0 flex-1 overflow-y-auto py-xl">
         <div class="container-xl">
           <RouterView />
         </div>

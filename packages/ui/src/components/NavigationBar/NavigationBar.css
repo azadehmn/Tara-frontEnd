@@ -10,7 +10,7 @@
   --tr-nav-bar-width: 16rem;
   --tr-nav-bar-collapsed: 3.5rem;
 
-  @apply flex flex-col shrink-0 min-h-0 overflow-hidden
+  @apply flex h-full flex-col shrink-0 min-h-0 overflow-hidden
     bg-outlined border-e border-solid border-[#e4e7ec]
     dark:bg-background-dark dark:border-gray-800;
   width: var(--tr-nav-bar-width);
