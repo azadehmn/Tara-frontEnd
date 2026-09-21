@@ -6,6 +6,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const useAppBack: typeof import('@shared/lib/use-app-back').useAppBack
   const useI18n: typeof import('vue-i18n').useI18n
 }
 
@@ -14,6 +15,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
+    readonly useAppBack: UnwrapRef<typeof import('@shared/lib/use-app-back')['useAppBack']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
   }
 }

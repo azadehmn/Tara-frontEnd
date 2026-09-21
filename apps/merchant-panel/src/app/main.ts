@@ -6,6 +6,7 @@ import { taraUi } from '@tara/ui';
 
 import App from './App.vue';
 import { router } from './router';
+import { installAppBack } from '@shared/lib/use-app-back';
 
 import '@assets/styles.css';
 
@@ -13,6 +14,7 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
+app.use(installAppBack(router));
 app.use(taraUi);
 
 // Loads merchant-panel + common dictionaries from @tara/locale.

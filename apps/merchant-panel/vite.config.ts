@@ -20,7 +20,10 @@ export function createMerchantViteConfig(mode: string): UserConfig {
       vue(),
       tailwindcss(),
       AutoImport({
-        imports: [{ 'vue-i18n': ['useI18n'] }],
+        imports: [
+          { 'vue-i18n': ['useI18n'] },
+          { '@shared/lib/use-app-back': ['useAppBack'] },
+        ],
         dts: 'src/auto-imports.d.ts',
         vueTemplate: true,
       }),

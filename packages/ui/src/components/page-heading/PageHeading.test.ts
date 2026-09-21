@@ -1,7 +1,8 @@
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import TrPageHeading from './PageHeading.vue';
 import { getScrollParent, scrollTopOf } from './PageHeading';
+import { TR_PAGE_BACK } from './pageBack';
 
 describe('getScrollParent', () => {
   it('falls back to window when no scrollable ancestor exists', () => {
@@ -30,13 +31,25 @@ describe('TrPageHeading', () => {
     expect(wrapper.get('p').text()).toBe('توضیحات صفحه');
   });
 
-  it('emits back from the default back button', async () => {
+  it('emits back when the parent listens for it', async () => {
     const wrapper = mount(TrPageHeading, {
-      props: { title: 'جزئیات', hasBack: true, backAriaLabel: 'بازگشت' },
+      props: { title: 'جزئیات', hasBack: true, backAriaLabel: 'بازگشت', onBack: () => undefined },
     });
 
     await wrapper.get('button').trigger('click');
     expect(wrapper.emitted('back')).toHaveLength(1);
+  });
+
+  it('uses the injected back handler when @back is omitted', async () => {
+    const goBack = vi.fn();
+    const wrapper = mount(TrPageHeading, {
+      props: { title: 'جزئیات', hasBack: true },
+      global: { provide: { [TR_PAGE_BACK as symbol]: goBack } },
+    });
+
+    await wrapper.get('button').trigger('click');
+    expect(goBack).toHaveBeenCalledOnce();
+    expect(wrapper.emitted('back')).toBeUndefined();
   });
 
   it('shows status and action slot', () => {

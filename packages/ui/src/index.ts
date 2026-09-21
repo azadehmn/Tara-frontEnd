@@ -74,7 +74,7 @@ export {
 export { TrOtpField } from './components/otp-field';
 export type { TrOtpFieldHelper, TrOtpFieldProps } from './components/otp-field';
 export { sanitizeOtpValue } from './components/otp-field';
-export { TrPageHeading } from './components/page-heading';
+export { TrPageHeading, TR_PAGE_BACK } from './components/page-heading';
 export type { TrPageHeadingProps, TrPageHeadingStatus } from './components/page-heading';
 export { TrTooltip } from './components/tooltip';
 export type {

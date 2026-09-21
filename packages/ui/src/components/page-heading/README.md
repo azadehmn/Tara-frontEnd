@@ -19,7 +19,7 @@ import { TrButton, TrPageHeading } from '@tara/ui';
 </template>
 ```
 
-With back:
+With back (`has-back`):
 
 ```vue
 <TrPageHeading
@@ -27,9 +27,10 @@ With back:
   has-back
   :back-aria-label="t('common.back')"
   :status="{ type: 'positive', text: 'فعال' }"
-  @back="goBack"
 />
 ```
+
+The default back button uses the app-provided handler (`TR_PAGE_BACK`). Pass `@back` only to override it.
 
 ## Props
 
@@ -47,7 +48,7 @@ With back:
 
 | Event | Description |
 | --- | --- |
-| `back` | Default back button |
+| `back` | Overrides the injected handler when the parent listens |
 
 ## Slots
 

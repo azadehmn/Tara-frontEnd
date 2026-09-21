@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { TrButton, TrCard, TrPageHeading } from '@tara/ui';
 import { useContractDetail } from '../composables/use-contract-detail';
 import type { ContractScope } from '../model/contract';
@@ -14,7 +14,6 @@ const props = defineProps<{
 
 const { t } = useI18n();
 const route = useRoute();
-const router = useRouter();
 const contractId = computed(() => String(route.params.id ?? ''));
 const { contractDetail, pending, error, fetch } = useContractDetail(props.scope);
 const tab = ref<'children' | 'batches'>('children');
@@ -26,12 +25,6 @@ onMounted(() => {
 watch(contractId, (id) => {
   if (id) void fetch(id);
 });
-
-function goBack() {
-  void router.push({
-    name: props.scope === 'organization' ? 'contracts-organization' : 'contracts-acceptor',
-  });
-}
 </script>
 
 <template>
@@ -41,7 +34,6 @@ function goBack() {
       :loading="pending && !contractDetail"
       has-back
       :back-aria-label="t('common.back')"
-      @back="goBack"
     />
 
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
+import { computed, getCurrentInstance, inject, onBeforeUnmount, onMounted, ref, useSlots, watch } from 'vue';
 import { TrButton } from '../button';
 import { TrIcon } from '../icon';
 import { TrStatus } from '../status';
+import { TR_PAGE_BACK } from './pageBack';
 import {
   getScrollParent,
   scrollTopOf,
@@ -28,10 +29,20 @@ const emit = defineEmits<{
 }>();
 
 const slots = useSlots();
+const instance = getCurrentInstance();
+const injectedBack = inject(TR_PAGE_BACK, undefined);
 const rootRef = ref<HTMLElement | null>(null);
 const compact = ref(false);
 
 const showBack = computed(() => props.hasBack || Boolean(slots.back));
+
+function handleBack() {
+  if (typeof instance?.vnode.props?.onBack === 'function') {
+    emit('back');
+    return;
+  }
+  injectedBack?.();
+}
 
 let scrollTarget: HTMLElement | Window | null = null;
 
@@ -78,7 +89,7 @@ watch(() => props.sticky, bind);
       <div class="tr-page-heading__row">
         <div v-if="showBack" class="tr-page-heading__back">
           <slot name="back">
-            <TrButton variant="outlined" :ariaLabel="backAriaLabel" @click="emit('back')">
+            <TrButton variant="outlined" :ariaLabel="backAriaLabel" @click="handleBack">
               <template #icon>
                 <TrIcon size="md">
                   <svg

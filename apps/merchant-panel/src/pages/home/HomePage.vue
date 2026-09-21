@@ -12,7 +12,7 @@ onMounted(fetch);
 
 <template>
   <div>
-    <TrPageHeading :title="t('layout.nav.dashboard')" />
+    <TrPageHeading :title="t('layout.nav.dashboard')" has-back />
     
         
     <div class="mt-lg grid grid-cols-1 gap-lg min-[992px]:grid-cols-12">
