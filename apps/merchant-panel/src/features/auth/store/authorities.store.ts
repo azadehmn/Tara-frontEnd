@@ -23,20 +23,18 @@ let abortController: AbortController | null = null;
 
 export const useAuthoritiesStore = defineStore('authorities', {
   state: () => ({
-    
-    items: [] as UserAuthoritiesResponse,// current uthority
+    items: [] as UserAuthoritiesResponse, // current uthority
     pending: false,
     loaded: false,
     error: null as ApiError | null,
   }),
   actions: {
-    
     has(key: string): boolean {
-      return this.items.some((item) => item.key === key && isGranted(item));//authorities.has('org_balance_report')
+      return this.items.some((item) => item.key === key && isGranted(item)); //authorities.has('org_balance_report')
     },
     hasAny(keys: string | readonly string[]): boolean {
       const list = typeof keys === 'string' ? [keys] : keys;
-      return list.some((key) => this.has(key));//permission: ['contractsMerchant','contractsGuarantor',]
+      return list.some((key) => this.has(key)); //permission: ['contractsMerchant','contractsGuarantor',]
     },
     setItems(items: UserAuthoritiesResponse): void {
       this.items = items;
@@ -44,7 +42,7 @@ export const useAuthoritiesStore = defineStore('authorities', {
       this.error = null;
     },
     reset(): void {
-      fetchGeneration += 1;
+      fetchGeneration += 1; // Ignore results from requests started before the latest reset.
       abortController?.abort();
       abortController = null;
       inFlight = null;
@@ -82,10 +80,11 @@ export const useAuthoritiesStore = defineStore('authorities', {
           this.error = error;
           this.loaded = false;
         } finally {
-          if (generation !== fetchGeneration) return;
-          this.pending = false;
-          inFlight = null;
-          abortController = null;
+          if (generation === fetchGeneration) {
+            this.pending = false;
+            inFlight = null;
+            abortController = null;
+          }
         }
       })();
 

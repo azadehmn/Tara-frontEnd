@@ -51,7 +51,9 @@ describe('useAuthoritiesStore', () => {
 
     await store.fetch();
 
-    expect(getUserAuthoritiesMock).toHaveBeenCalledWith('64');
+    expect(getUserAuthoritiesMock).toHaveBeenCalledWith('64', {
+      signal: expect.any(AbortSignal),
+    });
     expect(store.loaded).toBe(true);
     expect(store.has('user-panel')).toBe(true);
   });
@@ -70,7 +72,9 @@ describe('useAuthoritiesStore', () => {
     getUserAuthoritiesMock.mockResolvedValue([{ key: 'user-panel' }]);
     await store.fetch();
 
-    expect(getUserAuthoritiesMock).toHaveBeenCalledWith('64');
+    expect(getUserAuthoritiesMock).toHaveBeenCalledWith('64', {
+      signal: expect.any(AbortSignal),
+    });
     expect(store.loaded).toBe(true);
     expect(store.has('user-panel')).toBe(true);
   });

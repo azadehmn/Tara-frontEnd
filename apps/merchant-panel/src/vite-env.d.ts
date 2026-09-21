@@ -28,5 +28,6 @@ declare module 'vue-router' {
     requiresAuth?: boolean;
     guestOnly?: boolean;
     requiresOtpChallenge?: boolean;
+    permission?: string | string[];
   }
 }
