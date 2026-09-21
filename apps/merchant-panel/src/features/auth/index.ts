@@ -2,6 +2,7 @@ export { default as LoginCard } from './ui/LoginCard.vue';
 export { default as OtpCard } from './ui/OtpCard.vue';
 export { serviceBanners } from './config/service-banners';
 export { loginSession, hasOtpChallenge, clearLoginSession } from './model/login-session';
+export { useAuthoritiesStore } from './store/authorities.store';
 export type {
   LoginBackofficeResponse,
   LoginPayload,

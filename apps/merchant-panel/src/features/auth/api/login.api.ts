@@ -26,9 +26,11 @@ export async function loginBackoffice(
 
 export async function getUserAuthorities(
   userId: number | string,
+  config?: { signal?: AbortSignal },
 ): Promise<UserAuthoritiesResponse> {
   const response = await clubClient.get<UserAuthoritiesResponse>(
     authEndpoints.userAuthorities(userId),
+    config,
   );
 
   return Array.isArray(response) ? response : [];
