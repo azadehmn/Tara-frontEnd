@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { TrPageHeading } from '@tara/ui';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -8,7 +9,5 @@ const title = computed(() => t(String(route.meta.titleKey ?? 'layout.nav.dashboa
 </script>
 
 <template>
-  <div>
-    <h1 class="text-heading-lg">{{ title }}</h1>
-  </div>
+  <TrPageHeading :title="title" />
 </template>

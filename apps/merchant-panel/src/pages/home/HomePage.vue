@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import { IncomeChartCard } from '@features/income';
 import { SummaryCards, useSummary } from '@features/summary';
+import { TrPageHeading } from '@tara/ui';
 
 const { t } = useI18n();
 const { summary, pending, error, fetch } = useSummary();
@@ -11,7 +12,7 @@ onMounted(fetch);
 
 <template>
   <div>
-    <h1 class="m-2xs text-heading-lg">{{ t('layout.nav.dashboard') }}</h1>
+    <TrPageHeading :title="t('layout.nav.dashboard')" />
     
         
     <div class="mt-lg grid grid-cols-1 gap-lg min-[992px]:grid-cols-12">

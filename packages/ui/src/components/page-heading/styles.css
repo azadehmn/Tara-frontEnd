@@ -1,0 +1,66 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-page-heading {
+  @apply block;
+}
+
+.tr-page-heading.is-sticky .tr-page-heading__bar {
+  @apply sticky top-0 z-50 py-md
+    bg-background dark:bg-background-dark;
+  transition:
+    box-shadow 0.2s ease,
+    padding 0.2s ease;
+}
+
+.tr-page-heading.is-compact .tr-page-heading__bar {
+  @apply py-sm shadow-elevation-100 dark:shadow-elevation-dark-100;
+}
+
+.tr-page-heading__row {
+  @apply flex items-start gap-md;
+}
+
+.tr-page-heading__back {
+  @apply shrink-0;
+}
+
+.tr-page-heading__chevron {
+  @apply size-5;
+}
+
+[dir='ltr'] .tr-page-heading__chevron {
+  transform: scaleX(-1);
+}
+
+.tr-page-heading__main {
+  @apply flex min-w-0 flex-1 flex-col gap-2xs;
+}
+
+.tr-page-heading__title-row {
+  @apply flex min-w-0 items-center gap-xs;
+}
+
+.tr-page-heading__title {
+  @apply m-0 min-w-0 truncate text-heading-lg text-text dark:text-text-dark;
+}
+
+.tr-page-heading__description {
+  @apply m-0 text-body-sm text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-page-heading__action {
+  @apply shrink-0;
+}
+
+.tr-page-heading__skeleton {
+  @apply inline-block max-w-full rounded-xs bg-skeleton dark:bg-skeleton-dark;
+}
+
+.tr-page-heading__skeleton--title {
+  @apply h-6 w-40;
+}
+
+.tr-page-heading__skeleton--description {
+  @apply mt-2xs h-4 w-[180px];
+}

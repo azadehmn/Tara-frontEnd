@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import {
   TrButton,
   TrLabel,
+  TrPageHeading,
   TrSegmentedControl,
   TrOtpField,
   TrStatus,
@@ -75,7 +76,33 @@ const otpComplete = ref('');
 
 <template>
   <div>
-    <h1 class="m-2xs text-heading-lg">{{ t('layout.nav.demo') }}</h1>
+    <TrPageHeading :title="t('layout.nav.demo')" />
+
+    <p class="mb-6 text-sm opacity-70">TrPageHeading demo</p>
+    <section class="mb-12 flex flex-col gap-8">
+      <div>
+        <span class="mb-md block text-xs opacity-60">title + description + action</span>
+        <TrPageHeading title="تیکت‌ها" description="درخواست‌های پشتیبانی را ثبت و پیگیری کنید." :sticky="false">
+          <template #action>
+            <TrButton text="ثبت تیکت" />
+          </template>
+        </TrPageHeading>
+      </div>
+      <div>
+        <span class="mb-md block text-xs opacity-60">with back and status</span>
+        <TrPageHeading
+          title="جزئیات تیکت"
+          description="وضعیت درخواست را ببینید."
+          has-back
+          :sticky="false"
+          :status="{ type: 'positive', text: 'فعال' }"
+        />
+      </div>
+      <div>
+        <span class="mb-md block text-xs opacity-60">loading</span>
+        <TrPageHeading title="تیکت‌ها" description="در حال بارگذاری" loading :sticky="false" />
+      </div>
+    </section>
 
     <p class="mb-6 text-sm opacity-70">TrTextField demo</p>
     <section class="mb-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import ContractListView from '@features/contracts/ui/ContractListView.vue';
+import { TrPageHeading } from '@tara/ui';
 
 const { t } = useI18n();
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
-    <h1 class="text-heading-lg">{{ t('layout.nav.contractsAcceptor') }}</h1>
+    <TrPageHeading :title="t('layout.nav.contractsAcceptor')" />
     <ContractListView scope="acceptor" detail-route="contracts-acceptor-detail" />
   </div>
 </template>
