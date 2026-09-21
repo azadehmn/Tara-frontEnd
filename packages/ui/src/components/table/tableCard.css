@@ -15,7 +15,7 @@
 }
 
 .tr-table-card__header-main {
-  @apply flex min-w-0 flex-1 items-center gap-sm;
+  @apply flex min-w-0 items-center gap-sm;
 }
 
 .tr-table-card__header-title {

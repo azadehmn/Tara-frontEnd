@@ -220,25 +220,25 @@ function cardHeaderTitle(column: TrTableSlotColumn, item: T): string {
                     {{ cardHeaderTitle(headerColumn, item) }}
                   </TrTooltip>
                 </div>
+                <div v-if="headerAddonColumn" class="tr-table-card__header-addon">
+                  <slot
+                    v-if="itemSlots.has(headerAddonColumn.itemSlot)"
+                    :name="headerAddonColumn.itemSlot"
+                    :item="item"
+                    :column="headerAddonColumn"
+                    :index="index"
+                  />
+                  <TrTooltip
+                    v-else
+                    class="tr-table__overflow-text"
+                    :content="itemTextContent(headerAddonColumn.name, item)"
+                    only-when-truncated
+                    stop-trigger-click
+                  >
+                    {{ itemTextContent(headerAddonColumn.name, item) }}
+                  </TrTooltip>
+                </div>
               </slot>
-            </div>
-            <div v-if="headerAddonColumn" class="tr-table-card__header-addon">
-              <slot
-                v-if="itemSlots.has(headerAddonColumn.itemSlot)"
-                :name="headerAddonColumn.itemSlot"
-                :item="item"
-                :column="headerAddonColumn"
-                :index="index"
-              />
-              <TrTooltip
-                v-else
-                class="tr-table__overflow-text"
-                :content="itemTextContent(headerAddonColumn.name, item)"
-                only-when-truncated
-                stop-trigger-click
-              >
-                {{ itemTextContent(headerAddonColumn.name, item) }}
-              </TrTooltip>
             </div>
             <div v-if="hasActionSlot" class="tr-table-card__header-action" @click.stop>
               <slot name="action" :item="item" :index="index" />

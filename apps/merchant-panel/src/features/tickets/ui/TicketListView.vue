@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="ticket-list flex flex-col gap-4">
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
     <TrCard>
       <TrTable
@@ -96,3 +96,15 @@ const columns = computed<TrTableColumn[]>(() => [
   { name: 'status', label: t('ticket.fields.status'), width: 'minmax(120px, 0.5fr)' },
 ]);
 </script>
+
+<style scoped>
+.ticket-list :deep(.tr-table-card__header-main) {
+  flex: 1;
+  justify-content: space-between;
+}
+
+.ticket-list :deep(.tr-table-card__header-title) {
+  min-width: 0;
+}
+</style>
+
