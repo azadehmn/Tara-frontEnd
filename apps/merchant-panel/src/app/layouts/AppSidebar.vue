@@ -107,11 +107,7 @@ const allItems: NavItem[] = [
       },
     ],
   },
-  {
-    to: '/ticket',
-    key: 'ticket',
-    icon: TrTicketIcon,
-  },
+  { to: '/ticket', key: 'ticket', icon: TrTicketIcon },
 ];
 
 function isAllowed(permission?: NavPermission) {
