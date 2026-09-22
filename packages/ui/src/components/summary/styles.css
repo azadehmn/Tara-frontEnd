@@ -1,0 +1,80 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-summary {
+  @apply w-full space-y-md rounded-sm border border-solid border-[#e4e7ec] bg-surface-pressed p-sm
+    dark:border-gray-800 dark:bg-surface-dark-pressed;
+}
+
+.tr-summary__row {
+  direction: ltr;
+  @apply flex w-full items-center;
+}
+
+.tr-summary__title {
+  direction: rtl;
+  @apply flex shrink-0 items-center gap-xs text-body-sm font-medium text-text-soft
+    dark:text-text-dark-soft;
+}
+
+.tr-summary__value {
+  direction: rtl;
+  @apply flex shrink-0 items-center gap-xs text-body-sm font-medium text-text
+    dark:text-text-dark;
+}
+
+.tr-summary__value--rest {
+  @apply font-normal;
+}
+
+.tr-summary__rule {
+  display: block;
+  flex: 1 1 0%;
+  min-width: 12px;
+  height: 1px;
+  margin-inline: 8px;
+  border: 0;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #98a2b3 0,
+    #98a2b3 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-repeat: repeat-x;
+  background-size: 8px 1px;
+  background-position: center;
+}
+
+.tr-summary__rule--solid {
+  background-image: none;
+  background-color: #98a2b3;
+}
+
+html[data-theme='dark'] .tr-summary__rule {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #667085 0,
+    #667085 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+html[data-theme='dark'] .tr-summary__rule--solid {
+  background-image: none;
+  background-color: #667085;
+}
+
+.tr-summary__skeleton {
+  @apply block h-3 animate-pulse rounded-sm bg-border-divider dark:bg-gray-800;
+}
+
+.tr-summary__skeleton--title {
+  @apply w-20;
+}
+
+.tr-summary__skeleton--value {
+  @apply w-16;
+}

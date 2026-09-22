@@ -95,6 +95,10 @@ export { TrAccordion } from './components/accordion';
 export type { TrAccordionIconPosition, TrAccordionProps } from './components/accordion';
 export { TrNavLink } from './components/nav-link';
 export type { TrNavLinkProps } from './components/nav-link';
+export { TrModal } from './components/modal';
+export type { TrModalProps, TrModalSize } from './components/modal';
+export { TrSummary } from './components/summary';
+export type { TrSummaryDivider, TrSummaryItem, TrSummaryProps, TrSummaryStatus } from './components/summary';
 export { TrTooltip } from './components/tooltip';
 export type {
   TrTooltipPlacement,
