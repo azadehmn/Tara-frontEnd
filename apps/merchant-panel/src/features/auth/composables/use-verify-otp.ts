@@ -5,11 +5,13 @@ import { useAppLoading } from '@shared/lib';
 import { verifyLogin } from '../api/login.api';
 import { loginSession } from '../model/login-session';
 import { useAuthoritiesStore } from '../store/authorities.store';
+import { useUserStore } from '../store/user.store';
 
 export function useVerifyOtp() {
   const pending = ref(false);
   const error = ref<ApiError | null>(null);
   const authoritiesStore = useAuthoritiesStore();
+  const userStore = useUserStore();
   const { show: showAppLoading, hide: hideAppLoading } = useAppLoading();
 
   async function submit(otp: string): Promise<boolean> {
@@ -24,7 +26,7 @@ export function useVerifyOtp() {
 
       showAppLoading();
       try {
-        await authoritiesStore.fetch();
+        await Promise.all([authoritiesStore.fetch(), userStore.fetch()]);
       } catch (cause) {
         hideAppLoading();
         throw cause;

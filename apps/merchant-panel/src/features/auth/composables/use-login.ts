@@ -7,12 +7,14 @@ import { loginBackoffice } from '../api/login.api';
 import { clearLoginSession, loginSession } from '../model/login-session';
 import type { LoginBackofficeResponse, LoginPayload } from '../model/login';
 import { useAuthoritiesStore } from '../store/authorities.store';
+import { useUserStore } from '../store/user.store';
 
 export function useLogin() {
   const pending = ref(false);
   const error = ref<ApiError | null>(null);
   const login = ref<LoginBackofficeResponse | null>(null);
   const authoritiesStore = useAuthoritiesStore();
+  const userStore = useUserStore();
   const { show: showAppLoading, hide: hideAppLoading } = useAppLoading();
 
   async function submit(payload: LoginPayload): Promise<LoginBackofficeResponse | null> {
@@ -40,7 +42,7 @@ export function useLogin() {
       saveTokens(result.accessCode, result.refresh);
       showAppLoading();
       try {
-        await authoritiesStore.fetch();
+        await Promise.all([authoritiesStore.fetch(), userStore.fetch()]);
       } catch (cause) {
         hideAppLoading();
         throw cause;

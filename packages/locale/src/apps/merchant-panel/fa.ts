@@ -37,6 +37,13 @@ export const merchantPanelFa: MessageTree = {
     },
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',
+    userMenu: {
+      open: 'حساب کاربری',
+      settings: 'تنظیمات',
+      affiliate: 'همکاری در فروش',
+      logout: 'خروج',
+      version: 'نسخه {version}',
+    },
   },
   summary: {
     loading: 'در حال بارگذاری...',

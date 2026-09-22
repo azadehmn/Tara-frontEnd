@@ -2,10 +2,11 @@ import { defineComponent } from 'vue';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { createPinia, setActivePinia } from 'pinia';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { clearLoginSession, loginSession, useAuthoritiesStore } from '@features/auth';
+import { clearLoginSession, loginSession, useAuthoritiesStore, useUserStore } from '@features/auth';
 import { clearAuthStorage, saveUserId } from '@shared/auth/auth-storage';
 import { hasAccessToken, saveTokens } from '@shared/auth/tokens';
 import { getUserAuthorities } from '@features/auth/api/login.api';
+import { getMe } from '@features/auth/api/user.api';
 import { ApiError } from '@shared/api/errors/api-error';
 import { installAuthGuard } from './auth.guard';
 
@@ -13,7 +14,12 @@ vi.mock('@features/auth/api/login.api', () => ({
   getUserAuthorities: vi.fn(),
 }));
 
+vi.mock('@features/auth/api/user.api', () => ({
+  getMe: vi.fn(),
+}));
+
 const getUserAuthoritiesMock = vi.mocked(getUserAuthorities);
+const getMeMock = vi.mocked(getMe);
 const Blank = defineComponent({ template: '<div />' });
 
 function createGuardedRouter() {
@@ -74,6 +80,16 @@ describe('authRouteMiddleware', () => {
     setActivePinia(createPinia());
     getUserAuthoritiesMock.mockReset();
     getUserAuthoritiesMock.mockResolvedValue([{ key: 'user-panel' }]);
+    getMeMock.mockReset();
+    getMeMock.mockResolvedValue({
+      id: '12',
+      username: 'azadeh',
+      firstName: '',
+      lastName: '',
+      fullName: 'tara_panel_test',
+      mobile: '09121234567',
+      avatar: 'https://cdn.example/avatar.png',
+    });
   });
 
   afterEach(() => {
@@ -148,6 +164,8 @@ describe('authRouteMiddleware', () => {
     await router.push('/demo');
     expect(router.currentRoute.value.path).toBe('/demo');
     expect(getUserAuthoritiesMock).not.toHaveBeenCalled();
+    expect(getMeMock).toHaveBeenCalled();
+    expect(useUserStore().avatar).toBe('https://cdn.example/avatar.png');
     expect(hasAccessToken()).toBe(true);
   });
 
@@ -160,5 +178,16 @@ describe('authRouteMiddleware', () => {
     expect(router.currentRoute.value.path).toBe('/demo');
     expect(hasAccessToken()).toBe(true);
     expect(useAuthoritiesStore().error?.status).toBe(500);
+  });
+
+  it('loads me into user state on an authenticated refresh', async () => {
+    saveTokens('access-token');
+    saveUserId(12);
+    const router = createGuardedRouter();
+    await router.push('/demo');
+
+    expect(getMeMock).toHaveBeenCalledTimes(1);
+    expect(useUserStore().avatar).toBe('https://cdn.example/avatar.png');
+    expect(useUserStore().me?.fullName).toBe('tara_panel_test');
   });
 });

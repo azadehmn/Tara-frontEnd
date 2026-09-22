@@ -1,5 +1,6 @@
 import { getActivePinia } from 'pinia';
 import { useAuthoritiesStore } from '../store/authorities.store';
+import { useUserStore } from '../store/user.store';
 import type { LoginBackofficeResponse } from './login';
 
 export type LoginSession = {
@@ -18,5 +19,8 @@ export function clearLoginSession(): void {
   loginSession.login = null;
 
   const pinia = getActivePinia();
-  if (pinia) useAuthoritiesStore(pinia).reset();
+  if (pinia) {
+    useAuthoritiesStore(pinia).reset();
+    useUserStore(pinia).reset();
+  }
 }

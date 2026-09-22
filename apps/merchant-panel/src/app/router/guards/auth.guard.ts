@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized, Router } from 'vue-router';
-import { hasOtpChallenge, useAuthoritiesStore } from '@features/auth';
+import { hasOtpChallenge, useAuthoritiesStore, useUserStore } from '@features/auth';
 import { hasAccessToken } from '@shared/auth/tokens';
 
 export const DEFAULT_AUTHED_ROUTE = '/dashboard';
@@ -46,7 +46,7 @@ export async function authRouteMiddleware(to: RouteLocationNormalized) {
       ↓
     No token? → Login
       ↓
-    Load authorities
+    Load authorities + me
       ↓
     Check permission
       ↓
@@ -59,7 +59,11 @@ export async function authRouteMiddleware(to: RouteLocationNormalized) {
     if (!authenticated) return { path: LOGIN_ROUTE, replace: true };
 
     const authorities = useAuthoritiesStore();
-    if (!authorities.loaded) await authorities.fetch();
+    const user = useUserStore();
+    await Promise.all([
+      authorities.loaded ? Promise.resolve() : authorities.fetch(),
+      user.loaded ? Promise.resolve() : user.fetch(),
+    ]);
 
     const permission = requiredPermission(to);
     // `/` is the forbidden-route fallback until a dedicated no-access page exists.

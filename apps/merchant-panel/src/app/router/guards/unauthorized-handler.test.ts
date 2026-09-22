@@ -2,7 +2,7 @@ import { defineComponent } from 'vue';
 import { createMemoryHistory, createRouter } from 'vue-router';
 import { createPinia, setActivePinia } from 'pinia';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { clearLoginSession, loginSession, useAuthoritiesStore } from '@features/auth';
+import { clearLoginSession, loginSession, useAuthoritiesStore, useUserStore } from '@features/auth';
 import { getUserId, saveUserId } from '@shared/auth/auth-storage';
 import { getAccessToken, saveTokens } from '@shared/auth/tokens';
 import { handleUnauthorized, setUnauthorizedHandler } from '@shared/auth/unauthorized';
@@ -56,6 +56,15 @@ describe('installUnauthorizedHandler', () => {
       twofactorActive: true,
     };
     useAuthoritiesStore().setItems([{ key: 'user-panel' }]);
+    useUserStore().setMe({
+      id: '12',
+      username: 'azadeh',
+      firstName: '',
+      lastName: '',
+      fullName: 'tara_panel_test',
+      mobile: null,
+      avatar: 'https://cdn.example/avatar.png',
+    });
 
     const router = createHandledRouter();
     await router.push('/demo');
@@ -66,6 +75,7 @@ describe('installUnauthorizedHandler', () => {
     expect(loginSession.login).toBeNull();
     expect(useAuthoritiesStore().loaded).toBe(false);
     expect(useAuthoritiesStore().has('user-panel')).toBe(false);
+    expect(useUserStore().me).toBeNull();
     await vi.waitFor(() => {
       expect(router.currentRoute.value.path).toBe('/auth/login');
     });

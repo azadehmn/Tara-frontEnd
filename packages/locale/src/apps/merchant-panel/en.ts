@@ -37,6 +37,13 @@ export const merchantPanelEn: MessageTree = {
     },
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',
+    userMenu: {
+      open: 'Account menu',
+      settings: 'Settings',
+      affiliate: 'Affiliate',
+      logout: 'Log out',
+      version: 'Version {version}',
+    },
   },
   summary: {
     loading: 'Loading...',
