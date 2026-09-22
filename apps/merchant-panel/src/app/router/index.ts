@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { installAuthGuard } from './guards/auth.guard';
 import { installUnauthorizedHandler } from './guards/unauthorized-handler';
-import { AuthLayout, DefaultLayout } from '../layouts';
+import { AuthLayout, DefaultLayout, SimpleLayout } from '../layouts';
 
 /** App routes. Feature pages live under `src/pages` / `src/features`. */
 export const router = createRouter({
@@ -14,6 +14,10 @@ export const router = createRouter({
       children: [
         {
           path: '',
+          redirect: { name: 'dashboard' },
+        },
+        {
+          path: 'dashboard',
           name: 'dashboard',
           component: () => import('@pages/home/HomePage.vue'),
           meta: { titleKey: 'layout.nav.dashboard', permission: 'user-panel' },
@@ -119,20 +123,20 @@ export const router = createRouter({
         {
           path: 'campaign/banner-ads',
           name: 'campaign-banner-ads',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/campaign/CampaignPage.vue'),
           meta: { titleKey: 'layout.nav.campaignBannerAds' },
         },
         {
           path: 'campaign/click-ads',
           name: 'campaign-click-ads',
-          component: () => import('@pages/section/SectionPage.vue'),
+          component: () => import('@pages/campaign/CampaignPage.vue'),
           meta: { titleKey: 'layout.nav.campaignClickAds' },
         },
         {
           path: 'ticket',
           name: 'ticket',
           component: () => import('@pages/ticket/TicketPage.vue'),
-          meta: { titleKey: 'layout.nav.ticket' },
+          meta: { titleKey: 'layout.nav.ticketList' },
         },
         {
           path: 'contracts',
@@ -178,6 +182,32 @@ export const router = createRouter({
           path: 'fonts',
           name: 'fonts-preview',
           component: () => import('@pages/fonts/FontsPreviewPage.vue'),
+        },
+      ],
+    },
+    {
+      path: '/ticket/faq',
+      component: SimpleLayout,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'ticket-faq',
+          component: () => import('@pages/ticket/FaqPage.vue'),
+          meta: { titleKey: 'faq.title' },
+        },
+      ],
+    },
+    {
+      path: '/ticket/add',
+      component: SimpleLayout,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'ticket-add',
+          component: () => import('@pages/ticket/AddTicketPage.vue'),
+          meta: { titleKey: 'ticket.addTitle' },
         },
       ],
     },

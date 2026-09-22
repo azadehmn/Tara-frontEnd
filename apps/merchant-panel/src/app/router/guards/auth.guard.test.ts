@@ -98,7 +98,7 @@ describe('authRouteMiddleware', () => {
     saveUserId(12);
     const router = createGuardedRouter();
     await router.push('/auth/login');
-    expect(router.currentRoute.value.path).toBe('/');
+    expect(router.currentRoute.value.path).toBe('/dashboard');
   });
 
   it('keeps an otp challenge off protected routes until verify completes', async () => {
@@ -120,7 +120,7 @@ describe('authRouteMiddleware', () => {
     saveUserId(12);
     const router = createGuardedRouter();
     await router.push('/invoices');
-    expect(router.currentRoute.value.path).toBe('/');
+    expect(router.currentRoute.value.path).toBe('/dashboard');
     expect(useAuthoritiesStore().has('chekout_acceptor_merchant')).toBe(false);
   });
 
@@ -139,7 +139,7 @@ describe('authRouteMiddleware', () => {
     getUserAuthoritiesMock.mockResolvedValue([{ key: 'user-panel' }, { key: 'contractsMerchant' }]);
     const router = createGuardedRouter();
     await router.push('/contracts/organization');
-    expect(router.currentRoute.value.path).toBe('/');
+    expect(router.currentRoute.value.path).toBe('/dashboard');
   });
 
   it('keeps a token session without a user id', async () => {

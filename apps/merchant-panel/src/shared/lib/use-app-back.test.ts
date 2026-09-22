@@ -31,7 +31,7 @@ describe('createAppBack', () => {
     const router = createTestRouter();
     const { goBack } = createAppBack(router);
 
-    await router.push('/');
+    await router.push('/dashboard');
     await router.push({ name: 'contracts-organization', query: { q: 'acme' } });
     await router.push({ name: 'contracts-organization-detail', params: { id: '9' } });
 
@@ -44,9 +44,9 @@ describe('createAppBack', () => {
     const router = createTestRouter();
     const { goBack } = createAppBack(router);
 
-    await router.push('/');
+    await router.push('/dashboard');
     await goBack();
 
-    expect(router.currentRoute.value.fullPath).toBe('/');
+    expect(router.currentRoute.value.fullPath).toBe('/dashboard');
   });
 });
