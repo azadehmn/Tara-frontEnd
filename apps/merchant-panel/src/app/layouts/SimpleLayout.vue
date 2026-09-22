@@ -7,6 +7,7 @@
         </RouterLink>
       </template>
       <template #end>
+        <!--
         <TrButton variant="primary" size="small" text="fa" @click="setLocale('fa')" />
         <TrButton variant="secondary" size="small" text="en" @click="setLocale('en')" />
         <TrButton
@@ -15,6 +16,8 @@
           :text="isDark ? 'light' : 'dark'"
           @click="toggleTheme"
         />
+        -->
+        <UserMenu />
       </template>
     </TrTopBar>
 
@@ -27,29 +30,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import type { SupportedLocale } from '@tara/locale';
-import { TrButton, TrTopBar } from '@tara/ui';
+import { onMounted } from 'vue';
+import { TrTopBar } from '@tara/ui';
+import UserMenu from '@features/auth/ui/UserMenu.vue';
 import taraLogo from '@assets/images/logo-persion.svg';
 import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
 
-const { locale } = useI18n();
 const { isLoading, show: showAppLoading } = useAppLoading();
-const isDark = ref(document.documentElement.dataset.theme === 'dark');
 
 onMounted(() => {
   if (!isLoading.value) return;
   showAppLoading(APP_LOADING_SPLASH_MS);
 });
-
-function setLocale(next: SupportedLocale) {
-  locale.value = next;
-  document.documentElement.lang = next;
-  document.documentElement.dir = next === 'fa' ? 'rtl' : 'ltr';
-}
-
-function toggleTheme() {
-  isDark.value = !isDark.value;
-  document.documentElement.dataset.theme = isDark.value ? 'dark' : 'light';
-}
 </script>
