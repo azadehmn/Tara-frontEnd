@@ -1,0 +1,91 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-inline-message {
+  @apply flex w-full items-start gap-md rounded-sm border border-solid border-border
+    bg-surface-pressed p-md text-text
+    dark:border-border-dark dark:bg-surface-dark-pressed dark:text-text-dark;
+}
+
+.tr-inline-message__icon {
+  @apply mt-2xs shrink-0 text-icon-disabled dark:text-icon-dark-disabled;
+}
+
+.tr-inline-message__main {
+  @apply min-w-0 flex-1;
+}
+
+.tr-inline-message__header {
+  @apply flex items-start gap-sm;
+}
+
+.tr-inline-message__title {
+  @apply m-0 min-w-0 flex-1 text-body-md-medium text-text dark:text-text-dark;
+}
+
+.tr-inline-message__title-spacer {
+  @apply min-w-0 flex-1;
+}
+
+.tr-inline-message__description {
+  @apply m-0 text-body-sm leading-7 text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-inline-message__title + .tr-inline-message__description {
+  @apply mt-xs;
+}
+
+.tr-inline-message__dismiss {
+  @apply inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-sm
+    border-0 bg-transparent p-0 text-icon-disabled
+    hover:bg-surface-hover
+    dark:text-icon-dark-disabled dark:hover:bg-surface-dark-hover;
+}
+
+.tr-inline-message__skeleton {
+  @apply inline-block max-w-full rounded-xs bg-skeleton dark:bg-skeleton-dark;
+}
+
+.tr-inline-message__skeleton--title {
+  @apply h-4 w-16;
+}
+
+.tr-inline-message__skeleton--description {
+  @apply mt-2xs h-4 w-[204px];
+}
+
+.tr-inline-message--informative {
+  @apply border-text-information/25 bg-text-information/10
+    dark:border-text-dark-information/30 dark:bg-text-dark-information/15;
+}
+
+.tr-inline-message--informative .tr-inline-message__icon {
+  @apply text-icon-information dark:text-icon-dark-information;
+}
+
+.tr-inline-message--warning {
+  @apply border-text-warning/25 bg-text-warning/10
+    dark:border-text-dark-warning/30 dark:bg-text-dark-warning/15;
+}
+
+.tr-inline-message--warning .tr-inline-message__icon {
+  @apply text-icon-warning dark:text-icon-dark-warning;
+}
+
+.tr-inline-message--negative {
+  @apply border-text-danger/25 bg-text-danger/10
+    dark:border-text-dark-danger/30 dark:bg-text-dark-danger/15;
+}
+
+.tr-inline-message--negative .tr-inline-message__icon {
+  @apply text-icon-danger dark:text-icon-dark-danger;
+}
+
+.tr-inline-message--positive {
+  @apply border-text-success/25 bg-surface-success
+    dark:border-text-dark-success/30 dark:bg-text-dark-success/15;
+}
+
+.tr-inline-message--positive .tr-inline-message__icon {
+  @apply text-icon-success dark:text-icon-dark-success;
+}

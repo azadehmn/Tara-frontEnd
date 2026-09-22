@@ -11,6 +11,8 @@ export { TrAvatarType } from './components/avatar';
 export { TrButton } from './components/button';
 export { TrIcon } from './components/icon';
 export type { TrIconProps, TrIconSize } from './components/icon';
+export { TrInlineMessage } from './components/inline-message';
+export type { TrInlineMessageProps, TrInlineMessageType } from './components/inline-message';
 export type {
   TrButtonHtmlType,
   TrButtonProps,

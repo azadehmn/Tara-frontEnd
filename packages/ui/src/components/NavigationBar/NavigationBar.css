@@ -158,6 +158,10 @@
   padding-inline-start: calc(0.75rem + 1.5rem + 0.5rem);
 }
 
+.tr-nav-bar__subitem--nested {
+  padding-inline-start: calc(0.75rem + 1.5rem + 0.5rem + 0.75rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tr-nav-bar,
   .tr-nav-bar a,

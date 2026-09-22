@@ -14,6 +14,7 @@ import { TrTopBar } from './components/TopBar';
 import { TrTooltip } from './components/tooltip';
 import { TrOtpField } from './components/otp-field';
 import { TrEmptyState } from './components/empty-state';
+import { TrInlineMessage } from './components/inline-message';
 import { TrPageHeading } from './components/page-heading';
 
 /**
@@ -36,6 +37,7 @@ export const taraUi: Plugin = {
     app.component('TrTextField', TrTextField);
     app.component('TrOtpField', TrOtpField);
     app.component('TrEmptyState', TrEmptyState);
+    app.component('TrInlineMessage', TrInlineMessage);
     app.component('TrPageHeading', TrPageHeading);
     app.component('TrTopBar', TrTopBar);
     app.component('TrTooltip', TrTooltip);
