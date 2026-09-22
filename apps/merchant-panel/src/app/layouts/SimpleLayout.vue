@@ -2,7 +2,7 @@
   <div class="flex h-dvh flex-col overflow-hidden bg-background text-text dark:bg-background-dark dark:text-text-dark">
     <TrTopBar>
       <template #start>
-        <RouterLink to="/" class="inline-flex">
+        <RouterLink to="/dashboard" class="inline-flex">
           <img :src="taraLogo" alt="Tara" width="61" height="25" class="h-[40px]" />
         </RouterLink>
       </template>

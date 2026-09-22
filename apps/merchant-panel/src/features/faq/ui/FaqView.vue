@@ -6,7 +6,7 @@ import InfoFillIcon from '@tara/ui/icons/InfoFillIcon.vue';
 import { faqItems, faqItemAnswerKey, faqItemQuestionKey, type FaqSection } from '../config/faq-items';
 
 const { t } = useI18n();
-const section = ref<FaqSection>('faq');
+const section = ref<FaqSection>('videos');
 
 const visibleItems = computed(() => faqItems.filter((item) => item.section === section.value));
 

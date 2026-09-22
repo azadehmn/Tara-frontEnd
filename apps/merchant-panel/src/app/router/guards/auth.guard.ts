@@ -2,7 +2,7 @@ import type { RouteLocationNormalized, Router } from 'vue-router';
 import { hasOtpChallenge, useAuthoritiesStore } from '@features/auth';
 import { hasAccessToken } from '@shared/auth/tokens';
 
-export const DEFAULT_AUTHED_ROUTE = '/';
+export const DEFAULT_AUTHED_ROUTE = '/dashboard';
 const LOGIN_ROUTE = '/auth/login';
 
 /**Check whether the route or any parent route has the given meta flag.*/

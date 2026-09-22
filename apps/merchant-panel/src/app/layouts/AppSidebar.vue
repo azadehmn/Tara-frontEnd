@@ -37,7 +37,7 @@ type NavItem = {
 };
 
 const allItems: NavItem[] = [
-  { to: '/', key: 'dashboard', icon: TrGridLayoutIcon, exact: true, permission: 'user-panel' },
+  { to: '/dashboard', key: 'dashboard', icon: TrGridLayoutIcon, exact: true, permission: 'user-panel' },
   {
     key: 'contracts',
     icon: TrContractsIcon,

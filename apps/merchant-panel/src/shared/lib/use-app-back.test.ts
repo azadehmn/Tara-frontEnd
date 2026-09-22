@@ -9,7 +9,7 @@ function createTestRouter() {
   return createRouter({
     history: createMemoryHistory(),
     routes: [
-      { path: '/', name: 'dashboard', component: Blank },
+      { path: '/dashboard', name: 'dashboard', component: Blank },
       { path: '/contracts/organization', name: 'contracts-organization', component: Blank },
       { path: '/contracts/organization/:id', name: 'contracts-organization-detail', component: Blank },
     ],

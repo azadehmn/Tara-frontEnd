@@ -25,7 +25,8 @@ function createGuardedRouter() {
         component: Blank,
         meta: { requiresAuth: true },
         children: [
-          { path: '', name: 'dashboard', component: Blank, meta: { permission: 'user-panel' } },
+          { path: '', redirect: { name: 'dashboard' } },
+          { path: 'dashboard', name: 'dashboard', component: Blank, meta: { permission: 'user-panel' } },
           { path: 'demo', name: 'demo', component: Blank },
           {
             path: 'invoices',
