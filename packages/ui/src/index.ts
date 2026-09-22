@@ -85,6 +85,10 @@ export { TrEmptyState, emptyVectorNames } from './components/empty-state';
 export type { TrEmptyStateProps, TrEmptyVectorName } from './components/empty-state';
 export { TrPageHeading, TR_PAGE_BACK } from './components/page-heading';
 export type { TrPageHeadingProps, TrPageHeadingStatus } from './components/page-heading';
+export { TrAccordion } from './components/accordion';
+export type { TrAccordionIconPosition, TrAccordionProps } from './components/accordion';
+export { TrNavLink } from './components/nav-link';
+export type { TrNavLinkProps } from './components/nav-link';
 export { TrTooltip } from './components/tooltip';
 export type {
   TrTooltipPlacement,

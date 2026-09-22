@@ -1,0 +1,46 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-nav-link {
+  @apply flex w-full cursor-pointer items-center gap-sm rounded-sm border-0 bg-surface px-sm py-sm
+    text-start text-body-md-medium text-text no-underline
+    hover:bg-surface-hover
+    dark:bg-surface-dark dark:text-text-dark dark:hover:bg-surface-dark-hover;
+}
+
+.tr-nav-link.is-active {
+  @apply bg-surface-pressed text-primary dark:bg-surface-dark-pressed dark:text-primary-dark;
+}
+
+.tr-nav-link.is-active .tr-nav-link__chevron,
+.tr-nav-link.is-active .tr-nav-link__count {
+  @apply text-inherit;
+}
+
+.tr-nav-link__copy {
+  @apply flex min-w-0 flex-1 flex-col items-start;
+}
+
+.tr-nav-link__label {
+  @apply min-w-0 max-w-full truncate;
+}
+
+.tr-nav-link__subtext {
+  @apply mt-2xs text-body-sm font-normal text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-nav-link__count {
+  @apply shrink-0 text-body-sm font-normal text-text-soft dark:text-text-dark-soft;
+}
+
+.tr-nav-link__chevron {
+  @apply shrink-0 text-text-soft dark:text-text-dark-soft;
+}
+
+[dir='ltr'] .tr-nav-link__chevron {
+  transform: scaleX(-1);
+}
+
+.tr-nav-link__skeleton {
+  @apply inline-block h-4 w-36 rounded-xs bg-skeleton dark:bg-skeleton-dark;
+}

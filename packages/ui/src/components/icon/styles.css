@@ -2,8 +2,7 @@
 @reference '../../styles/index.css';
 
 .tr-icon {
-  @apply inline-flex items-center justify-center shrink-0 size-[1em]
-    text-text dark:text-text-dark;
+  @apply inline-flex items-center justify-center shrink-0 size-[1em];
 }
 
 .tr-icon svg {

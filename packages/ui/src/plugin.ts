@@ -16,6 +16,8 @@ import { TrOtpField } from './components/otp-field';
 import { TrEmptyState } from './components/empty-state';
 import { TrInlineMessage } from './components/inline-message';
 import { TrPageHeading } from './components/page-heading';
+import { TrAccordion } from './components/accordion';
+import { TrNavLink } from './components/nav-link';
 
 /**
  * Registers kit components for templates as TrButton, TrTopBar, etc.
@@ -39,6 +41,8 @@ export const taraUi: Plugin = {
     app.component('TrEmptyState', TrEmptyState);
     app.component('TrInlineMessage', TrInlineMessage);
     app.component('TrPageHeading', TrPageHeading);
+    app.component('TrAccordion', TrAccordion);
+    app.component('TrNavLink', TrNavLink);
     app.component('TrTopBar', TrTopBar);
     app.component('TrTooltip', TrTooltip);
   },

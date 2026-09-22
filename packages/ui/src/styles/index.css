@@ -156,6 +156,7 @@
   --tr-screen-lg: var(--breakpoint-lg);
   --tr-screen-xl: var(--breakpoint-xl);
   --tr-screen-2xl: var(--breakpoint-2xl);
+  --tr-container-lg: 912px;
   --tr-container-xl: var(--breakpoint-xl);
   --tr-container-xl-max: 1200px;
 }
