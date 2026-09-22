@@ -1,0 +1,72 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-modal {
+  @apply fixed inset-0 z-[1000] flex items-end justify-center bg-gray-900/40 lg:items-center;
+}
+
+.tr-modal__dialog {
+  @apply relative flex max-h-[88vh] w-full flex-col rounded-t-md bg-surface text-text
+    shadow-elevation-100 outline-none
+    dark:bg-surface-dark dark:text-text-dark dark:shadow-elevation-dark-100
+    lg:rounded-md;
+}
+
+.tr-modal__dialog--sm {
+  @apply lg:w-[400px];
+}
+
+.tr-modal__dialog--md {
+  @apply lg:w-[32rem];
+}
+
+.tr-modal__dialog--lg {
+  @apply lg:w-[45rem];
+}
+
+.tr-modal__dialog--custom {
+  @apply lg:w-[var(--tr-modal-width)];
+}
+
+.tr-modal__header {
+  @apply flex shrink-0 items-center justify-between gap-md p-md;
+}
+
+.tr-modal__header--bordered {
+  @apply border-b border-solid border-border-divider dark:border-gray-800;
+}
+
+.tr-modal__title {
+  @apply m-0 min-w-0 flex-1 truncate text-heading-sm;
+}
+
+.tr-modal__title-spacer {
+  @apply min-w-0 flex-1;
+}
+
+.tr-modal__close {
+  @apply inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-sm
+    border-0 bg-transparent p-0 text-text
+    dark:text-text-dark;
+}
+
+.tr-modal__body {
+  @apply min-h-0 flex-1 overflow-auto p-md;
+}
+
+.tr-modal__footer {
+  @apply flex shrink-0 items-center justify-between gap-md p-md;
+}
+
+.tr-modal__footer--bordered {
+  @apply border-t border-solid border-border-divider dark:border-gray-800;
+}
+
+.tr-modal__footer-start,
+.tr-modal__footer-end {
+  @apply flex items-center gap-xs;
+}
+
+.tr-modal__footer-start {
+  @apply ms-auto;
+}

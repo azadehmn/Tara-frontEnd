@@ -238,6 +238,10 @@ export const merchantPanelEn: MessageTree = {
       edit: 'Edit',
       pause: 'Pause',
     },
+    details: {
+      title: 'Campaign details',
+      close: 'Close',
+    },
   },
   ticket: {
     title: 'Tickets',

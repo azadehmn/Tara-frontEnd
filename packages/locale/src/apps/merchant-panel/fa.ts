@@ -197,7 +197,7 @@ export const merchantPanelFa: MessageTree = {
       clicks: 'کلیک',
       ctr: 'CTR',
       active: 'کمپین فعال',
-      toman: 'تومان',
+      toman: 'ریال',
     },
     fields: {
       name: 'نام کمپین',
@@ -238,6 +238,10 @@ export const merchantPanelFa: MessageTree = {
       view: 'مشاهده',
       edit: 'ویرایش',
       pause: 'توقف',
+    },
+    details: {
+      title: 'جزئیات کمپین',
+      close: 'بستن',
     },
   },
   ticket: {
