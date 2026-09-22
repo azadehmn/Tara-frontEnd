@@ -68,20 +68,23 @@ onMounted(fetch);
 </script>
 
 <template>
-  <TrCard>
+  <div data-tour="income">
+    <TrCard>
     <template #header>
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h2 class="text-heading-md">{{ t('income.chart.title') }}</h2>
           <p v-if="rangeLabel" class="mt-1 text-sm text-text-soft">{{ rangeLabel }}</p>
         </div>
-        <TrSegmentedControl
-          :model-value="period"
-          :options="periodOptions"
-          :label="t('income.chart.period')"
-          :disabled="pending"
-          @update:model-value="updatePeriod"
-        />
+        <div data-tour="income-period">
+          <TrSegmentedControl
+            :model-value="period"
+            :options="periodOptions"
+            :label="t('income.chart.period')"
+            :disabled="pending"
+            @update:model-value="updatePeriod"
+          />
+        </div>
       </div>
 
       <div
@@ -120,7 +123,8 @@ onMounted(fetch);
         @updated="fitPlot"
       />
     </div>
-  </TrCard>
+    </TrCard>
+  </div>
 </template>
 
 <style>

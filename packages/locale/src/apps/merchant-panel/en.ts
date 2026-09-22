@@ -335,6 +335,49 @@ export const merchantPanelEn: MessageTree = {
       },
     },
   },
+  onboarding: {
+    actions: {
+      next: 'Next',
+      prev: 'Back',
+      done: 'Got it',
+    },
+    dashboard: {
+      profile: {
+        title: 'Account',
+        intro: 'Open this menu to view your account details.',
+      },
+      tickets: {
+        title: 'Tickets',
+        intro: 'Follow support requests and replies from this section.',
+      },
+      navigation: {
+        title: 'Quick access',
+        intro: 'Use this menu to reach the rest of the panel.',
+      },
+      income: {
+        title: 'Income',
+        intro: 'See current-period income here. The previous period is plotted alongside it for comparison.',
+      },
+      incomePeriod: {
+        title: 'Weekly and monthly range',
+        intro: 'Switch between weekly and monthly to compare this week with last week, or this month with last month.',
+      },
+      summary: {
+        title: 'Performance summary',
+        intro: 'These cards summarize what changed versus last week, including sales, successful transactions, and return rate.',
+      },
+      contracts: {
+        title: 'Contracts',
+        intro: 'Open Tara organization and acceptor contracts from this menu. Each contract detail also shows its Tara serial.',
+      },
+    },
+    contracts: {
+      list: {
+        title: 'Tara contracts',
+        intro: 'Manage this section’s contracts here. Open a contract to see its Tara serial and Tara-side status.',
+      },
+    },
+  },
   faq: {
     title: 'Frequently asked questions',
     description: 'You can find your answer on this page.',

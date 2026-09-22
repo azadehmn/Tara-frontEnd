@@ -191,6 +191,15 @@ function toggleMenu(key: string, event: MouseEvent) {
   openMenus[key] = !openMenus[key];
 }
 
+const tourTargetByKey: Record<string, string> = {
+  ticket: 'tickets',
+  contracts: 'contracts',
+};
+
+function tourTarget(key: string): string | undefined {
+  return tourTargetByKey[key];
+}
+
 const linkClass =
   'flex items-center gap-2 rounded-md px-3 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
 const activeClass = 'tr-nav-bar__item-active';
@@ -213,12 +222,17 @@ watch(
 </script>
 
 <template>
-  <nav class="flex flex-col gap-1" :aria-label="t('layout.nav.label')">
+  <nav
+    class="flex flex-col gap-1"
+    data-tour="navigation"
+    :aria-label="t('layout.nav.label')"
+  >
     <template v-for="item in items" :key="item.key">
       <div
         v-if="item.children?.length"
         class="flex flex-col gap-1"
         :class="item.separated && separatorClass"
+        :data-tour="tourTarget(item.key)"
       >
         <button
           type="button"
@@ -324,7 +338,7 @@ watch(
         </div>
       </div>
 
-      <div v-else :class="item.separated && separatorClass">
+      <div v-else :class="item.separated && separatorClass" :data-tour="tourTarget(item.key)">
         <RouterLink v-slot="{ href, navigate, isActive, isExactActive }" :to="item.to!" custom>
           <a
             :href="href"

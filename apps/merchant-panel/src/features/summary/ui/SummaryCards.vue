@@ -14,7 +14,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="flex flex-col gap-lg">
+  <div class="flex flex-col gap-lg" data-tour="summary">
     <TrCard v-if="pending && !summary">
       <p class="text-sm opacity-70">{{ t('summary.loading') }}</p>
     </TrCard>

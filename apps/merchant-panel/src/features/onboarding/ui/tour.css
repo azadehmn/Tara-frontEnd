@@ -1,0 +1,98 @@
+.tara-tour-popover {
+  max-width: 22rem;
+  padding: 16px;
+  border: 1px solid #e4e7ec;
+  border-radius: 12px;
+  background: #fff;
+  color: #1f2937;
+  box-shadow: 0 12px 32px rgb(16 24 40 / 16%);
+  font-family: inherit;
+}
+
+.tara-tour-popover .driver-popover-title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.tara-tour-popover .driver-popover-description {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.tara-tour-popover .driver-popover-close-btn {
+  top: 8px;
+}
+
+.tara-tour-popover .driver-popover-footer {
+  margin-top: 16px;
+}
+
+.tara-tour-popover .driver-popover-progress-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.tara-tour-popover .driver-popover-prev-btn,
+.tara-tour-popover .driver-popover-next-btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  text-shadow: none;
+}
+
+.tara-tour-popover .driver-popover-prev-btn {
+  background: transparent;
+  color: #4b5563;
+}
+
+.tara-tour-popover .driver-popover-next-btn {
+  background: var(--color-primary, #1423bd);
+  color: #fff;
+}
+
+html[dir='rtl'] .tara-tour-popover {
+  text-align: right;
+}
+
+html[dir='rtl'] .tara-tour-popover .driver-popover-close-btn {
+  right: auto;
+  left: 8px;
+}
+
+html[dir='rtl'] .tara-tour-popover .driver-popover-title {
+  padding-left: 2rem;
+}
+
+html[dir='rtl'] .tara-tour-popover .driver-popover-footer {
+  direction: ltr;
+}
+
+html[dir='rtl'] .tara-tour-popover .driver-popover-navigation-btns {
+  flex-grow: 0;
+  margin-left: auto;
+  flex-direction: row-reverse;
+  gap: 4px;
+}
+
+html[dir='rtl'] .tara-tour-popover .driver-popover-navigation-btns button + button {
+  margin-left: 0;
+}
+
+html[data-theme='dark'] .tara-tour-popover {
+  border-color: #1d2939;
+  background: #1e2634;
+  color: #fff;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 35%);
+}
+
+html[data-theme='dark'] .tara-tour-popover .driver-popover-description,
+html[data-theme='dark'] .tara-tour-popover .driver-popover-progress-text,
+html[data-theme='dark'] .tara-tour-popover .driver-popover-prev-btn {
+  color: #d0d5dd;
+}

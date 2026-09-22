@@ -19,7 +19,7 @@
         <img :src="taraLogo" alt="Tara" width="61" height="25" class="h-[40px]" />
       </template>
       <template #end>
-        <!--
+        
         <TrButton variant="primary" size="small" text="fa" @click="setLocale('fa')" />
         <TrButton variant="secondary" size="small" text="en" @click="setLocale('en')" />
         <TrButton
@@ -28,13 +28,8 @@
           :text="isDark ? 'light' : 'dark'"
           @click="toggleTheme"
         />
-        -->
-         <TrButton
-          variant="outlined"
-          size="small"
-          :text="isDark ? 'light' : 'dark'"
-          @click="toggleTheme"
-        />
+       
+        
         <UserMenu />
       </template>
     </TrTopBar>
@@ -69,9 +64,11 @@ import { useRoute } from 'vue-router';
 import { TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import UserMenu from '@features/auth/ui/UserMenu.vue';
+import { usePanelTour } from '@features/onboarding';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo-persion.svg';
-import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';import type { SupportedLocale } from '@tara/locale';
+import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
+import type { SupportedLocale } from '@tara/locale';
 
 const { locale, t } = useI18n();
 
@@ -121,4 +118,11 @@ function toggleNavigation() {
   }
   isOverlayOpen.value = !isOverlayOpen.value;
 }
+
+usePanelTour({
+  prepare() {
+    if (viewportMode.value === 'overlay') isOverlayOpen.value = true;
+    if (viewportMode.value === 'collapsed') isRailExpanded.value = true;
+  },
+});
 </script>

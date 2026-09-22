@@ -13,3 +13,4 @@ coverage
 !.vscode/settings.json
 !.vscode/css-custom-data.json
 *.tsbuildinfo
+.pnpm-store/

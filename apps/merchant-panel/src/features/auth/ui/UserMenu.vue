@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootRef" class="relative inline-flex">
+  <div ref="rootRef" class="relative inline-flex" data-tour="profile">
     <button
       type="button"
       class="inline-flex cursor-pointer rounded-full border-none bg-transparent p-0"

@@ -9,6 +9,8 @@ import { router } from './router';
 import { installAppBack } from '@shared/lib/use-app-back';
 
 import '@assets/styles.css';
+import 'driver.js/dist/driver.css';
+import '@features/onboarding/ui/tour.css';
 
 const app = createApp(App);
 
