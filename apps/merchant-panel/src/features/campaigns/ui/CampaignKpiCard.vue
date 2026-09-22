@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { TrCard } from '@tara/ui';
+import { TrCard, TrLabel } from '@tara/ui';
 import { formatAmount, formatNumber, formatPercent } from '@shared/utils/format';
 import { campaignKpiSamples } from '../config/sample-kpis';
 import type { CampaignKind } from '../model/campaign-kpi';
@@ -18,7 +18,8 @@ const items = computed(() => {
     {
       key: 'spend',
       label: t('campaign.kpi.spend'),
-      value: `${formatAmount(data.spendToman, locale.value)} ${t('campaign.kpi.toman')}`,
+      value: formatAmount(data.spendToman, locale.value),
+      unit: t('campaign.kpi.toman'),
     },
     {
       key: 'impressions',
@@ -49,7 +50,10 @@ const items = computed(() => {
     <dl class="campaign-kpi">
       <div v-for="item in items" :key="item.key" class="campaign-kpi__cell">
         <dt class="campaign-kpi__label">{{ item.label }}</dt>
-        <dd class="campaign-kpi__value">{{ item.value }}</dd>
+        <dd class="campaign-kpi__value">
+          <span>{{ item.value }}</span>
+          <TrLabel v-if="item.unit" :text="item.unit" type="neutral" />
+        </dd>
       </div>
       <div class="campaign-kpi__cell is-empty" aria-hidden="true" />
     </dl>
@@ -125,6 +129,9 @@ html[data-theme='dark'] .campaign-kpi__label {
 }
 
 .campaign-kpi__value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
   color: var(--color-text);
   font-size: var(--text-body-md);
