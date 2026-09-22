@@ -91,6 +91,44 @@ export const router = createRouter({
           meta: { titleKey: 'layout.nav.installments', permission: 'bnpl_installment' },
         },
         {
+          path: 'ads',
+          redirect: { name: 'ads-search' },
+        },
+        {
+          path: 'ads/search-ads',
+          name: 'ads-search',
+          component: () => import('@pages/ads/SearchAdsPage.vue'),
+          meta: { titleKey: 'layout.nav.adsSearch' },
+        },
+        {
+          path: 'ads/banner-ads',
+          redirect: { name: 'campaign-banner-ads' },
+        },
+        {
+          path: 'ads/click-ads',
+          redirect: { name: 'campaign-click-ads' },
+        },
+        {
+          path: 'campaign',
+          redirect: { name: 'campaign-banner-ads' },
+        },
+        {
+          path: 'campaign/banner-click-ads',
+          redirect: { name: 'campaign-banner-ads' },
+        },
+        {
+          path: 'campaign/banner-ads',
+          name: 'campaign-banner-ads',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.campaignBannerAds' },
+        },
+        {
+          path: 'campaign/click-ads',
+          name: 'campaign-click-ads',
+          component: () => import('@pages/section/SectionPage.vue'),
+          meta: { titleKey: 'layout.nav.campaignClickAds' },
+        },
+        {
           path: 'ticket',
           name: 'ticket',
           component: () => import('@pages/ticket/TicketPage.vue'),

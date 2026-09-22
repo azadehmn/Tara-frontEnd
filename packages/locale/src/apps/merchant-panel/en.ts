@@ -22,6 +22,11 @@ export const merchantPanelEn: MessageTree = {
       reportsAccountBalance: 'Account balance report',
       invoices: 'Merchant invoices',
       installments: 'Collections',
+      adsAndPromotions: 'Ads & promotions',
+      adsSearch: 'Search ads',
+      campaigns: 'Campaigns',
+      campaignBannerAds: 'Banner ads',
+      campaignClickAds: 'Click ads',
       ticket: 'Tickets',
       contracts: 'Contracts',
       contractsOrganization: 'Organization contracts',
@@ -155,6 +160,22 @@ export const merchantPanelEn: MessageTree = {
       description: 'Enter the 6-digit code sent for user or ID {userId}',
       submit: 'Confirm',
       editNumber: 'Edit number',
+    },
+  },
+  ads: {
+    search: {
+      title: 'Search-based advertising',
+      intro:
+        'Use this panel to promote a product or category from your store in Tara credit search results. The selected item appears at the top of search for Tara users and increases the likelihood of a sale.',
+      banner: {
+        aria: 'Tara search ads introduction',
+        headline: 'Put your store products at the top of Tara search',
+        body: 'With Search Ads in Tara credit shopping, your item appears before organic results.',
+        stageLabel: 'Placement in search results',
+        resultSponsored: 'Your product — top placement',
+        resultOrganic: 'Other store results',
+        resultOrganicAlt: 'Organic search results',
+      },
     },
   },
   ticket: {

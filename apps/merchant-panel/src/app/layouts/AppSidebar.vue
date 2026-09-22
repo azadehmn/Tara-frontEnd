@@ -5,6 +5,7 @@ import { TrIcon } from '@tara/ui';
 import TrContractsIcon from '@tara/ui/icons/ContractsIcon.vue';
 import TrGridLayoutIcon from '@tara/ui/icons/GridLayoutIcon.vue';
 import TrInvoicesIcon from '@tara/ui/icons/InvoicesIcon.vue';
+import TrMegaphoneIcon from '@tara/ui/icons/MegaphoneIcon.vue';
 import TrReportsIcon from '@tara/ui/icons/ReportsIcon.vue';
 import TrTicketIcon from '@tara/ui/icons/TicketIcon.vue';
 import TrTransactionIcon from '@tara/ui/icons/TransactionIcon.vue';
@@ -17,7 +18,12 @@ const authorities = useAuthoritiesStore();
 
 type NavPermission = string | string[];
 
-type NavChild = { to: string; key: string; permission?: NavPermission };
+type NavChild = {
+  to?: string;
+  key: string;
+  permission?: NavPermission;
+  children?: NavChild[];
+};
 
 type NavItem = {
   to?: string;
@@ -87,10 +93,24 @@ const allItems: NavItem[] = [
     permission: 'bnpl_installment',
   },
   {
+    key: 'adsAndPromotions',
+    icon: TrMegaphoneIcon,
+    separated: true,
+    children: [
+      { to: '/ads/search-ads', key: 'adsSearch' },
+      {
+        key: 'campaigns',
+        children: [
+          { to: '/campaign/banner-ads', key: 'campaignBannerAds' },
+          { to: '/campaign/click-ads', key: 'campaignClickAds' },
+        ],
+      },
+    ],
+  },
+  {
     to: '/ticket',
     key: 'ticket',
     icon: TrTicketIcon,
-    separated: true,
   },
 ];
 
@@ -106,12 +126,49 @@ function reportsTitleKey() {
   return 'reports';
 }
 
+function filterChildren(children?: NavChild[]): NavChild[] {
+  if (!children?.length) return [];
+  return children.flatMap((child) => {
+    if (child.children?.length) {
+      const nested = filterChildren(child.children);
+      return nested.length ? [{ ...child, children: nested }] : [];
+    }
+    return isAllowed(child.permission) ? [child] : [];
+  });
+}
+
+function isPathActive(to: string | undefined, path: string) {
+  return Boolean(to && (path === to || path.startsWith(`${to}/`)));
+}
+
+function isChildRouteActive(children: NavChild[] | undefined, path = route.path): boolean {
+  return Boolean(
+    children?.some(
+      (child) => isPathActive(child.to, path) || isChildRouteActive(child.children, path),
+    ),
+  );
+}
+
+function firstLeafTo(children: NavChild[] | undefined): string | undefined {
+  if (!children?.length) return;
+  const child = children[0];
+  return child.to ?? firstLeafTo(child.children);
+}
+
+function findChildrenByKey(key: string, nodes: Array<NavItem | NavChild> = items.value): NavChild[] | undefined {
+  for (const node of nodes) {
+    if (node.key === key) return node.children;
+    const nested = node.children ? findChildrenByKey(key, node.children) : undefined;
+    if (nested) return nested;
+  }
+}
+
 const items = computed(() => {
   void authorities.items;
   return allItems.flatMap((item) => {
     if (!item.children) return isAllowed(item.permission) ? [item] : [];
 
-    const children = item.children.filter((child) => isAllowed(child.permission));
+    const children = filterChildren(item.children);
     if (!children.length) return [];
 
     return [
@@ -131,8 +188,8 @@ function toggleMenu(key: string, event: MouseEvent) {
     (event.currentTarget as HTMLElement).closest('.tr-nav-bar.is-collapsed'),
   );
   if (inCollapsedRail) {
-    const firstChild = items.value.find((item) => item.key === key)?.children?.[0];
-    if (firstChild) router.push(firstChild.to);
+    const to = firstLeafTo(findChildrenByKey(key));
+    if (to) router.push(to);
     return;
   }
   openMenus[key] = !openMenus[key];
@@ -140,21 +197,18 @@ function toggleMenu(key: string, event: MouseEvent) {
 
 const linkClass =
   'flex items-center gap-2 rounded-md px-3 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800';
-const activeClass = 'bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-dark';
+const activeClass = 'tr-nav-bar__item-active';
 const separatorClass = 'mt-1 border-t border-solid border-[#e4e7ec] pt-1 dark:border-gray-800';
-
-function isChildRouteActive(children: NavChild[] | undefined) {
-  return Boolean(
-    children?.some((child) => route.path === child.to || route.path.startsWith(`${child.to}/`)),
-  );
-}
 
 watch(
   [() => route.path, items],
   ([path]) => {
     for (const item of items.value) {
-      if (item.children?.some((child) => path === child.to || path.startsWith(`${child.to}/`))) {
-        openMenus[item.key] = true;
+      if (isChildRouteActive(item.children, path)) openMenus[item.key] = true;
+      for (const child of item.children ?? []) {
+        if (child.children && isChildRouteActive(child.children, path)) {
+          openMenus[child.key] = true;
+        }
       }
     }
   },
@@ -202,21 +256,74 @@ watch(
         </button>
         <div class="tr-nav-bar__submenu" :class="{ 'is-open': openMenus[item.key] }">
           <div class="tr-nav-bar__submenu-inner">
-            <RouterLink
-              v-for="child in item.children"
-              :key="child.key"
-              v-slot="{ href, navigate, isActive }"
-              :to="child.to"
-              custom
-            >
-              <a
-                :href="href"
-                :class="[linkClass, 'tr-nav-bar__subitem', isActive && activeClass]"
-                @click="navigate"
+            <template v-for="child in item.children" :key="child.key">
+              <div v-if="child.children?.length" class="flex flex-col gap-2xs">
+                <button
+                  type="button"
+                  :class="[
+                    linkClass,
+                    'tr-nav-bar__subitem w-full',
+                    isChildRouteActive(child.children) && [activeClass, 'tr-nav-bar__parent-active'],
+                  ]"
+                  :aria-expanded="Boolean(openMenus[child.key])"
+                  @click="toggleMenu(child.key, $event)"
+                >
+                  <span class="tr-nav-bar__label min-w-0 flex-1 text-start">
+                    {{ t(`layout.nav.${child.key}`) }}
+                  </span>
+                  <span
+                    class="tr-nav-bar__chevron ms-auto inline-flex size-6 shrink-0 items-center justify-center"
+                  >
+                    <svg class="size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path
+                        :d="openMenus[child.key] ? 'M4 10l4-4 4 4' : 'M4 6l4 4 4-4'"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div class="tr-nav-bar__submenu" :class="{ 'is-open': openMenus[child.key] }">
+                  <div class="tr-nav-bar__submenu-inner">
+                    <RouterLink
+                      v-for="leaf in child.children"
+                      :key="leaf.key"
+                      v-slot="{ href, navigate, isActive }"
+                      :to="leaf.to!"
+                      custom
+                    >
+                      <a
+                        :href="href"
+                        :class="[
+                          linkClass,
+                          'tr-nav-bar__subitem tr-nav-bar__subitem--nested',
+                          isActive && activeClass,
+                        ]"
+                        @click="navigate"
+                      >
+                        <span class="tr-nav-bar__label">{{ t(`layout.nav.${leaf.key}`) }}</span>
+                      </a>
+                    </RouterLink>
+                  </div>
+                </div>
+              </div>
+              <RouterLink
+                v-else
+                v-slot="{ href, navigate, isActive }"
+                :to="child.to!"
+                custom
               >
-                <span class="tr-nav-bar__label">{{ t(`layout.nav.${child.key}`) }}</span>
-              </a>
-            </RouterLink>
+                <a
+                  :href="href"
+                  :class="[linkClass, 'tr-nav-bar__subitem', isActive && activeClass]"
+                  @click="navigate"
+                >
+                  <span class="tr-nav-bar__label">{{ t(`layout.nav.${child.key}`) }}</span>
+                </a>
+              </RouterLink>
+            </template>
           </div>
         </div>
       </div>
