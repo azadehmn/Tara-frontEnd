@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { TrAccordion, TrCard, TrIcon, TrNavLink, TrPageHeading } from '@tara/ui';
 import InfoFillIcon from '@tara/ui/icons/InfoFillIcon.vue';
-import { faqItems, type FaqSection } from '../config/faq-items';
+import { faqItems, faqItemAnswerKey, faqItemQuestionKey, type FaqSection } from '../config/faq-items';
 
 const { t } = useI18n();
 const section = ref<FaqSection>('faq');
@@ -29,16 +29,16 @@ function sectionCount(key: FaqSection) {
       <aside class="flex flex-col gap-4 lg:col-span-1">
         <TrCard padding="sm" class="flex flex-col gap-2xs">
           <TrNavLink
-            :label="t('faq.nav.questions')"
-            :active="section === 'faq'"
-            :count="sectionCount('faq')"
-            @click="section = 'faq'"
-          />
-          <TrNavLink
             :label="t('faq.nav.videos')"
             :active="section === 'videos'"
             :count="sectionCount('videos')"
             @click="section = 'videos'"
+          />
+          <TrNavLink
+            :label="t('faq.nav.questions')"
+            :active="section === 'faq'"
+            :count="sectionCount('faq')"
+            @click="section = 'faq'"
           />
           <TrNavLink
             :label="t('faq.nav.support')"
@@ -66,14 +66,18 @@ function sectionCount(key: FaqSection) {
             <h2 class="m-0 text-heading-md">{{ t(sectionTitleKey) }}</h2>
           </template>
           <div class="overflow-hidden rounded-sm">
-            <TrAccordion v-for="item in visibleItems" :key="item.id" :title="item.question">
-              <div v-html="item.answerHtml" />
+            <TrAccordion
+              v-for="item in visibleItems"
+              :key="item.id"
+              :title="t(faqItemQuestionKey(item))"
+            >
+              <div v-html="t(faqItemAnswerKey(item))" />
             </TrAccordion>
           </div>
         </TrCard>
 
         <p class="m-0 flex items-start gap-sm text-body-sm text-text-soft dark:text-text-dark-soft">
-          <TrIcon size="md" class="mt-2xs shrink-0 text-[#451d9a]">
+          <TrIcon size="md" class="shrink-0 text-[#451d9a]">
             <InfoFillIcon />
           </TrIcon>
           <span>

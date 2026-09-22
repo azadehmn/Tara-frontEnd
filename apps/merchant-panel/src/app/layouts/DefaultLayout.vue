@@ -67,9 +67,10 @@ import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
 const { locale, t } = useI18n();
 const route = useRoute();
 const { mode: viewportMode } = useNavigationMode();
-const { show: showAppLoading } = useAppLoading();
+const { isLoading, show: showAppLoading } = useAppLoading();
 
 onMounted(() => {
+  if (!isLoading.value) return;
   showAppLoading(APP_LOADING_SPLASH_MS);
 });
 

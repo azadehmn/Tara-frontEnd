@@ -34,10 +34,11 @@ import taraLogo from '@assets/images/logo-persion.svg';
 import { APP_LOADING_SPLASH_MS, useAppLoading } from '@shared/lib';
 
 const { locale } = useI18n();
-const { show: showAppLoading } = useAppLoading();
+const { isLoading, show: showAppLoading } = useAppLoading();
 const isDark = ref(document.documentElement.dataset.theme === 'dark');
 
 onMounted(() => {
+  if (!isLoading.value) return;
   showAppLoading(APP_LOADING_SPLASH_MS);
 });
 
