@@ -10,6 +10,7 @@ import { TrSegmentedControl } from './components/segmented-control';
 import { TrStatus } from './components/status';
 import { TrTable, TrTableCard } from './components/table';
 import { TrTextField } from './components/text-field';
+import { TrTextarea } from './components/textarea';
 import { TrTopBar } from './components/TopBar';
 import { TrTooltip } from './components/tooltip';
 import { TrOtpField } from './components/otp-field';
@@ -37,6 +38,7 @@ export const taraUi: Plugin = {
     app.component('TrTable', TrTable);
     app.component('TrTableCard', TrTableCard);
     app.component('TrTextField', TrTextField);
+    app.component('TrTextarea', TrTextarea);
     app.component('TrOtpField', TrOtpField);
     app.component('TrEmptyState', TrEmptyState);
     app.component('TrInlineMessage', TrInlineMessage);

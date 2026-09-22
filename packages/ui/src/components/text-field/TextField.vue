@@ -143,7 +143,7 @@ const describedBy = computed(() => {
   return ids.join(' ') || undefined;
 });
 const inputPlaceholder = computed(() =>
-  showFloatingLabel.value || props.loading ? '' : props.placeholder,
+  showFloatingLabel.value || props.loading ? '' : props.placeholder || props.labelText,
 );
 
 function commit(value: string): string {

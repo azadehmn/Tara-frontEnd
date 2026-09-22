@@ -14,7 +14,7 @@ function readWidth(): number {
 
 /**
  * Viewport width against Tara layout tokens (min-width).
- * Flags are true when the viewport is *below* that token, matching neo `useSize`.
+ * Flags are true when the viewport is *below* that token, matching  `useSize`.
  */
 export function useBreakpoint() {
   const width = ref(px('xl'));

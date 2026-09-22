@@ -235,12 +235,19 @@ export const merchantPanelEn: MessageTree = {
     description: 'Use this page to submit support requests and track their status.',
     create: 'Send ticket',
     addTitle: 'New ticket',
-    addDescription: 'Write the subject and details of your request for support to review.',
+    addIntro: 'Complete the form below to send a new ticket to tara support.',
     submit: 'Send ticket',
+    sla: {
+      title: 'Response time',
+      withinHours: 'You will receive a reply within 24 hours of sending the ticket.',
+      reviewedBy: 'All submitted tickets are reviewed by customer affairs experts.',
+      longerCases:
+        'Response time for tickets that need more review or follow-up may be a little longer.',
+    },
     fields: {
       id: 'ID',
-      title: 'Title',
-      message: 'Request details',
+      title: 'Ticket title',
+      message: 'Ticket text',
       updatedAt: 'Last update',
       status: 'Status',
     },

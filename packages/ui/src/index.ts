@@ -64,6 +64,12 @@ export type {
   TrTableSlotColumn,
 } from './components/table';
 export { TrTextField } from './components/text-field';
+export { TrTextarea } from './components/textarea';
+export type {
+  TrTextareaHelper,
+  TrTextareaHelperType,
+  TrTextareaProps,
+} from './components/textarea';
 export type {
   TrTextFieldDirection,
   TrTextFieldHelper,
