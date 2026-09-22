@@ -47,23 +47,12 @@
             type="button"
             class="flex w-full cursor-pointer items-center gap-xs border-none bg-transparent py-xs text-start text-body-md text-[#1F2937] dark:text-text-dark"
             role="menuitem"
-            :aria-expanded="settingsOpen"
-            @click.stop="toggleSettings"
+            @click="onSettings"
           >
             <TrIcon size="sm" class="shrink-0 text-[#6C44FF]">
               <TrSettingIcon />
             </TrIcon>
             {{ t('layout.userMenu.settings') }}
-          </button>
-
-          <button
-            v-if="settingsOpen"
-            type="button"
-            class="flex w-full cursor-pointer items-center gap-xs border-none bg-transparent py-xs ps-xl text-start text-body-md text-[#1F2937] dark:text-text-dark"
-            role="menuitem"
-            @click="onAffiliate"
-          >
-            {{ t('layout.userMenu.affiliate') }}
           </button>
 
           <button
@@ -94,6 +83,8 @@
         </div>
       </div>
     </Transition>
+
+    <AppearanceSettingsModal :open="settingsOpen" @close="settingsOpen = false" />
   </div>
 </template>
 
@@ -102,6 +93,7 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { TrAvatar, TrIcon } from '@tara/ui';
 import TrSettingIcon from '@tara/ui/icons/SettingIcon.vue';
+import { AppearanceSettingsModal } from '@features/settings';
 import { useUserStore } from '../store/user.store';
 import { handleUnauthorized } from '@shared/auth/unauthorized';
 import defaultAvatar from '@assets/images/default-avatar.png';
@@ -119,17 +111,16 @@ const displayMobile = computed(() => userStore.me?.mobile?.trim() || '');
 
 function closeMenu() {
   open.value = false;
-  settingsOpen.value = false;
 }
 
-function toggleSettings() {
-  settingsOpen.value = !settingsOpen.value;
+function onSettings() {
+  closeMenu();
+  settingsOpen.value = true;
 }
 
 function toggleMenu(event: MouseEvent) {
   event.stopPropagation();
   open.value = !open.value;
-  if (!open.value) settingsOpen.value = false;
 }
 
 function onDocumentPointer(event: MouseEvent) {

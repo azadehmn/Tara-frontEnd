@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-4" data-tour="contract-list">
     <p v-if="error" class="text-sm text-red-600">{{ error.message }}</p>
-    <form class="flex flex-wrap items-end gap-3 mb-2xl" @submit.prevent="applyFilters">
+    <!-- <form class="flex flex-wrap items-end gap-3 mb-2xl" @submit.prevent="applyFilters">
       <label class="flex flex-col gap-1 text-sm">
         <span>{{ t('contracts.fields.id') }}</span>
         <input
@@ -24,7 +24,7 @@
         />
       </label>
       <TrButton variant="primary" size="small" html-type="submit" :text="t('common.search')" />
-    </form>
+    </form> -->
     <TrCard>
       <TrTable
         :columns="columns"

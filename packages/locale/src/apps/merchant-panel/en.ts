@@ -40,9 +40,25 @@ export const merchantPanelEn: MessageTree = {
     userMenu: {
       open: 'Account menu',
       settings: 'Settings',
-      affiliate: 'Affiliate',
       logout: 'Log out',
       version: 'Version {version}',
+    },
+    settings: {
+      title: 'Panel appearance settings',
+      intro: 'Choose your preferred theme. This setting is saved for next time.',
+      note: 'You can change this setting whenever you like.',
+      close: 'Close',
+      theme: {
+        light: {
+          title: 'Light mode',
+        },
+        dark: {
+          title: 'Dark mode',
+        },
+        system: {
+          title: 'Match system',
+        },
+      },
     },
   },
   summary: {
