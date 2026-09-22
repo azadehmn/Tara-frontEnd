@@ -207,6 +207,7 @@ export const merchantPanelFa: MessageTree = {
       period: 'بازه اجرا',
       budget: 'بودجه',
       spent: 'هزینه‌شده',
+      actions: 'عملیات',
       impressions: 'نمایش',
       clicks: 'کلیک',
       ctr: 'CTR',
@@ -233,6 +234,7 @@ export const merchantPanelFa: MessageTree = {
       REJECTED: 'ردشده',
     },
     actions: {
+      details: 'جزئیات',
       view: 'مشاهده',
       edit: 'ویرایش',
       pause: 'توقف',

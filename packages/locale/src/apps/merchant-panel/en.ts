@@ -206,6 +206,7 @@ export const merchantPanelEn: MessageTree = {
       period: 'Schedule',
       budget: 'Budget',
       spent: 'Spent',
+      actions: 'Actions',
       impressions: 'Impressions',
       clicks: 'Clicks',
       ctr: 'CTR',
@@ -232,6 +233,7 @@ export const merchantPanelEn: MessageTree = {
       REJECTED: 'Rejected',
     },
     actions: {
+      details: 'Details',
       view: 'View',
       edit: 'Edit',
       pause: 'Pause',

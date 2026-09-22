@@ -16,7 +16,7 @@
 }
 
 .tr-action__menu {
-  @apply absolute end-0 top-full z-20 min-w-[160px] pt-2xs;
+  @apply absolute end-0 top-full z-50 min-w-[160px] pt-2xs;
 }
 
 .tr-action__menu .tr-card {
