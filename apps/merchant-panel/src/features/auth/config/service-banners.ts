@@ -7,7 +7,7 @@ type BannerFile = {
 };
 
 const modules = Object.entries(
-  import.meta.glob('../../../assets/images/services/*.svg', {
+  import.meta.glob('../../../assets/images/services/*.png', {
     eager: true,
     import: 'default',
   }) as Record<string, string>,
