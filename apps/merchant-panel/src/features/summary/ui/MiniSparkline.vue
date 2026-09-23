@@ -70,8 +70,8 @@ const areaPath = computed(() => {
 
 <style scoped>
 .mini-sparkline {
-  width: 6rem;
-  height: 2rem;
+  width: 7.5rem;
+  height: 3rem;
 }
 
 .mini-sparkline--success {

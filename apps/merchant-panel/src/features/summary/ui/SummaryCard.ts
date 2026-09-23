@@ -1,6 +1,7 @@
 export interface SummaryCardRow {
   label: string;
   value: string;
+  currency?: boolean;
 }
 
 export interface SummaryCardProps {

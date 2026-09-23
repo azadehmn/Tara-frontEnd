@@ -37,6 +37,10 @@ export const merchantPanelEn: MessageTree = {
     },
     sidebarToggle: 'Toggle menu',
     sidebarClose: 'Close menu',
+    themeToggle: {
+      toLight: 'Switch to light mode',
+      toDark: 'Switch to dark mode',
+    },
     userMenu: {
       open: 'Account menu',
       settings: 'Settings',
@@ -288,6 +292,8 @@ export const merchantPanelEn: MessageTree = {
     },
   },
   transactions: {
+    recent: 'Recent transactions',
+    viewAll: 'View all',
     trackingCode: 'Tracking code',
     amountRial: 'Amount',
     dateTime: 'Date and time',

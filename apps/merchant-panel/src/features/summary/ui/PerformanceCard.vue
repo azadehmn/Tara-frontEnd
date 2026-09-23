@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { TrCard, TrLabel, type TrLabelType } from '@tara/ui';
+import { TrCard, TrLabel } from '@tara/ui';
 import { formatAmount, formatNumber, formatPercent } from '@shared/utils/format';
 import {
   calculateTrend,
@@ -116,41 +116,30 @@ function resolveTone(
   return improved ? 'success' : 'danger';
 }
 
-function toLabelType(tone: PerformanceTone): TrLabelType {
-  if (tone === 'success') return 'positive';
-  if (tone === 'danger') return 'negative';
-  return 'neutral';
+function toneClass(tone: PerformanceTone): string {
+  if (tone === 'success') return 'text-text-success dark:text-text-dark-success';
+  if (tone === 'danger') return 'text-text-danger dark:text-text-dark-danger';
+  return 'text-text-soft dark:text-text-dark-soft';
 }
 </script>
 
 <template>
-  <TrCard>
-    <template #header>
-      <h2 class="text-heading-sm">{{ t('summary.performance.title') }}</h2>
-    </template>
-
-    <ul>
-      <li
-        v-for="metric in metrics"
-        :key="metric.key"
-        class="flex items-center justify-between gap-md border-b border-border-divider py-md first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-800"
-      >
+  <div class="grid grid-cols-1 gap-lg min-[992px]:grid-cols-3" data-tour="summary">
+    <TrCard v-for="metric in metrics" :key="metric.key" padding="lg">
+      <p class="whitespace-nowrap text-body-md text-text-soft dark:text-text-dark-soft">{{ metric.label }}</p>
+      <div class="mt-md flex items-center justify-between gap-md">
         <div class="min-w-0">
-          <p class="text-body-sm text-text-soft">{{ metric.label }}</p>
-          <div class="mt-2xs flex items-center gap-xs">
-            <strong class="text-heading-md">{{ metric.value }}</strong>
-            <span v-if="metric.unit" class="text-body-sm text-text-soft">{{ metric.unit }}</span>
+          <div class="flex items-center gap-xs">
+            <strong class="text-display-sm min-[992px]:text-heading-lg min-[1536px]:text-display-sm">{{ metric.value }}</strong>
+            <TrLabel v-if="metric.unit" :text="metric.unit" type="neutral" />
           </div>
-          <div class="mt-xs flex flex-wrap items-center gap-xs">
-            <TrLabel :text="metric.trendLabel" :type="toLabelType(metric.tone)" />
-            <span class="text-caption-regular text-text-soft">
-              {{ t('summary.performance.comparedToPreviousWeek') }}
-            </span>
-          </div>
+          <p class="mt-xs flex flex-wrap items-center gap-xs text-body-sm">
+            <span :class="toneClass(metric.tone)">{{ metric.trendLabel }}</span>
+            <span class="text-text-soft">{{ t('summary.performance.comparedToPreviousWeek') }}</span>
+          </p>
         </div>
-
-        <MiniSparkline :values="metric.points" :tone="metric.tone" />
-      </li>
-    </ul>
-  </TrCard>
+        <MiniSparkline class="shrink-0" :values="metric.points" :tone="metric.tone" />
+      </div>
+    </TrCard>
+  </div>
 </template>

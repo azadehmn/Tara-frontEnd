@@ -37,9 +37,13 @@ export const merchantPanelFa: MessageTree = {
     },
     sidebarToggle: 'باز و بسته کردن منو',
     sidebarClose: 'بستن منو',
+    themeToggle: {
+      toLight: 'تغییر به حالت روشن',
+      toDark: 'تغییر به حالت تاریک',
+    },
     userMenu: {
       open: 'حساب کاربری',
-      settings:  'تنظیمات ظاهری پنل',
+      settings: 'تنظیمات ظاهری پنل',
       logout: 'خروج',
       version: 'نسخه {version}',
     },
@@ -72,12 +76,12 @@ export const merchantPanelFa: MessageTree = {
       new: 'جدید',
     },
     successfulCurrentWeek: {
-      amount: 'مبلغ تراکنش‌های موفق هفته جاری',
-      count: 'تعداد تراکنش‌های موفق هفته جاری',
+      amount: 'مبلغ تراکنش‌های هفته جاری',
+      count: 'تعداد تراکنش‌های هفته جاری',
     },
     successfulCurrentMonth: {
-      amount: 'مبلغ تراکنش‌های موفق ماه جاری',
-      count: 'تعداد تراکنش‌های موفق ماه جاری',
+      amount: 'مبلغ تراکنش‌های ماه جاری',
+      count: 'تعداد تراکنش‌های ماه جاری',
     },
     sales: {
       title: 'فروش',
@@ -290,6 +294,8 @@ export const merchantPanelFa: MessageTree = {
     },
   },
   transactions: {
+    recent: 'تراکنش‌های اخیر',
+    viewAll: 'مشاهده همه',
     trackingCode: 'کد پیگیری',
     amountRial: 'مبلغ',
     dateTime: 'تاریخ و ساعت',
