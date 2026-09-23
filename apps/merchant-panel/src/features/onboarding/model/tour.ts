@@ -4,6 +4,10 @@ export type TourStep = {
   intro: string;
   side?: 'top' | 'right' | 'bottom' | 'left';
   align?: 'start' | 'center' | 'end';
+  /** Routes where this step's target is rendered. The tour navigates before showing it. */
+  routeNames?: readonly string[];
+  /** Clicking the highlighted element advances the tour, same as Next. */
+  advanceOnClick?: boolean;
 };
 
 // Translation function for tour texts

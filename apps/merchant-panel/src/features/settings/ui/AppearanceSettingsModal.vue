@@ -10,20 +10,8 @@
   >
     <template #header>
       <div class="flex min-w-0 flex-1 items-start gap-sm">
-        <span
-          class="mt-2xs inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-[#EEF1FF] text-[#6B7CFF] dark:bg-[#2A3160] dark:text-[#A5B0FF]"
-          aria-hidden="true"
-        >
-          <svg class="size-5" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M7 9.5c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5c0 1.7-1 3.2-2.6 4l-.4 3.2c0 .5-.5.8-1 .6l-2-.8c-.3-.1-.5-.4-.5-.7l.3-2.3C8 12.7 7 11.2 7 9.5Z"
-              fill="currentColor"
-            />
-            <circle cx="10.2" cy="9.2" r="0.9" fill="#fff" />
-            <circle cx="13.8" cy="9.2" r="0.9" fill="#fff" />
-            <circle cx="12" cy="11.4" r="0.7" fill="#fff" />
-          </svg>
-        </span>
+        
+       
         <div class="min-w-0 flex-1 text-start">
           <h2 class="tr-modal__title">{{ t('layout.settings.title') }}</h2>
           <p class="mb-0 mt-2xs text-body-sm leading-6 text-[#6B7280] dark:text-text-dark-soft">

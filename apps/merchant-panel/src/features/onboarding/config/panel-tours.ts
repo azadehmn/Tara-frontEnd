@@ -3,7 +3,7 @@ import { tourVersionLabel } from '../model/tour';
 
 export const dashboardTour = {
   id: 'dashboard',
-  version: 'v1',
+  version: 'v2',
   routeNames: ['dashboard'],
   steps: (t) => [
     {
@@ -49,24 +49,24 @@ export const dashboardTour = {
       title: t('onboarding.dashboard.contracts.title'),
       intro: t('onboarding.dashboard.contracts.intro'),
       side: 'left',
+      advanceOnClick: true,
     },
-  ],
-} as const satisfies TourDefinition;
-
-export const contractsTour = {
-  id: 'contracts',
-  version: 'v1',
-  routeNames: ['contracts-organization', 'contracts-acceptor'],
-  steps: (t) => [
     {
       element: '[data-tour="contract-list"]',
       title: t('onboarding.contracts.list.title'),
       intro: t('onboarding.contracts.list.intro'),
       side: 'bottom',
+      routeNames: ['contracts-organization', 'contracts-acceptor'],
     },
   ],
 } as const satisfies TourDefinition;
 
-export const panelTours: readonly TourDefinition[] = [dashboardTour, contractsTour];
+/** Permission required before the tour may open that route. */
+export const tourRoutePermissions: Record<string, string> = {
+  'contracts-organization': 'contractsGuarantor',
+  'contracts-acceptor': 'contractsMerchant',
+};
+
+export const panelTours: readonly TourDefinition[] = [dashboardTour];
 
 export const TOUR_VERSION = tourVersionLabel(dashboardTour);

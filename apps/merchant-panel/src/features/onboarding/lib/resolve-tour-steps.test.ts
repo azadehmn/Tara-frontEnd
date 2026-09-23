@@ -22,6 +22,22 @@ describe('resolveTourSteps', () => {
     expect(steps.map((step) => step.element)).toEqual(['[data-tour="profile"]']);
   });
 
+  it('keeps a step that is shown after navigation', () => {
+    document.body.innerHTML = '';
+
+    const steps = resolveTourSteps([
+      { element: '[data-tour="missing"]', title: 'Missing', intro: 'Gone' },
+      {
+        element: '[data-tour="contract-list"]',
+        title: 'Contracts',
+        intro: 'List',
+        routeNames: ['contracts-organization'],
+      },
+    ]);
+
+    expect(steps.map((step) => step.element)).toEqual(['[data-tour="contract-list"]']);
+  });
+
   it('prefers a visible duplicate over a hidden one', () => {
     document.body.innerHTML = `
       <div data-tour="navigation" hidden style="width: 40px; height: 40px"></div>

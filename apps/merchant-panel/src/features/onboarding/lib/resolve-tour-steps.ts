@@ -21,7 +21,9 @@ export function firstVisibleTourTarget(selector: string, root: ParentNode = docu
   }
   return null;
 }
-// Remove steps with hidden or missing targets
+// Drop hidden targets. Keep steps that appear only after a route change.
 export function resolveTourSteps(steps: TourStep[], root: ParentNode = document): TourStep[] {
-  return steps.filter((step) => Boolean(firstVisibleTourTarget(step.element, root)));
+  return steps.filter(
+    (step) => Boolean(step.routeNames?.length) || Boolean(firstVisibleTourTarget(step.element, root)),
+  );
 }
