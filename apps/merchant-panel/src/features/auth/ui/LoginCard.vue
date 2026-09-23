@@ -1,11 +1,11 @@
 <template>
   <AuthShell>
-    <img :src="taraLogo" :alt="t('auth.login.logoAlt')" class="mb-xl h-8 w-auto self-start" />
+    <img :src="taraLogo" :alt="t('auth.login.logoAlt')" class="mb-xl h-8 w-auto self-center" />
 
-    <h1 class="text-heading-lg text-text dark:text-text-dark">
+    <h1 class="text-center text-heading-lg text-text dark:text-text-dark">
       {{ t('auth.login.title') }}
     </h1>
-    <p class="mt-2xs text-body-sm text-text-soft dark:text-text-dark-soft">
+    <p class="mt-2xs text-center text-body-sm text-text-soft dark:text-text-dark-soft">
       {{ t('auth.login.description') }}
     </p>
 

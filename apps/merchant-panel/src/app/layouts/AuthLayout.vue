@@ -2,7 +2,7 @@
   <div
     class="relative flex min-h-screen flex-col bg-white text-text dark:bg-background-dark dark:text-text-dark"
   >
-    <div class="flex flex-1 items-center justify-center p-0 min-[992px]:p-xl">
+    <div class="flex flex-1 items-center justify-center p-0 min-[992px]:py-xl">
       <RouterView />
     </div>
 
