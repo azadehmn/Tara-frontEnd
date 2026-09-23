@@ -3,6 +3,7 @@
     class="appearance-modal"
     :open="open"
     width="34rem"
+    height="400px"
     :title="t('layout.settings.title')"
     :close-aria-label="t('layout.settings.close')"
     :header-border="false"
@@ -10,8 +11,6 @@
   >
     <template #header>
       <div class="flex min-w-0 flex-1 items-start gap-sm">
-        
-       
         <div class="min-w-0 flex-1 text-start">
           <h2 class="tr-modal__title">{{ t('layout.settings.title') }}</h2>
           <p class="mb-0 mt-2xs text-body-sm leading-6 text-[#6B7280] dark:text-text-dark-soft">
@@ -64,10 +63,7 @@
           "
           aria-hidden="true"
         >
-          <span
-            v-if="themeStore.mode === option.mode"
-            class="size-1.5 rounded-full bg-white"
-          />
+          <span v-if="themeStore.mode === option.mode" class="size-1.5 rounded-full bg-white" />
         </span>
       </button>
     </div>
