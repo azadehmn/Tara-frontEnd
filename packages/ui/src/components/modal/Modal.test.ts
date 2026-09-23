@@ -58,6 +58,14 @@ describe('TrModal', () => {
     wrapper.unmount();
   });
 
+  it('applies an optional height on the dialog', () => {
+    const wrapper = mountModal({ height: '32rem' });
+    const dialog = document.querySelector<HTMLElement>('.tr-modal__dialog');
+    expect(dialog?.classList.contains('tr-modal__dialog--height')).toBe(true);
+    expect(dialog?.style.getPropertyValue('--tr-modal-height')).toBe('32rem');
+    wrapper.unmount();
+  });
+
   it('hides the header when showHeader is false', () => {
     const wrapper = mountModal({ showHeader: false });
     expect(document.querySelector('.tr-modal__header')).toBeNull();

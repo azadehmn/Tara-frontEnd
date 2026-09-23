@@ -2,7 +2,16 @@
 @reference '../../styles/index.css';
 
 .tr-modal {
-  @apply fixed inset-0 z-[1000] flex items-end justify-center bg-gray-900/40 lg:items-center;
+  @apply fixed inset-0 z-[1000] flex items-end justify-center lg:items-center;
+  background: rgba(152, 162, 179, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.tr-modal:where([data-theme='dark'], [data-theme='dark'] *) {
+  background-color: rgb(152 162 179 / 50%);
+  -webkit-backdrop-filter: blur(32px);
+  backdrop-filter: blur(12px);
 }
 
 .tr-modal__dialog {
@@ -26,6 +35,10 @@
 
 .tr-modal__dialog--custom {
   @apply lg:w-[var(--tr-modal-width)];
+}
+
+.tr-modal__dialog--height {
+  @apply lg:h-[var(--tr-modal-height)] lg:max-h-[var(--tr-modal-height)];
 }
 
 .tr-modal__header {

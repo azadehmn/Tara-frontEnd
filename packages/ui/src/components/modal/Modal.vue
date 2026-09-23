@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<TrModalProps>(), {
   footerBorder: true,
   bodyClass: '',
   width: '',
+  height: '',
   size: 'sm',
   closeAriaLabel: 'Close',
 });
@@ -38,8 +39,10 @@ const hasFooter = computed(
 );
 
 const dialogStyle = computed(() => {
-  if (!props.width) return undefined;
-  return { '--tr-modal-width': props.width } as Record<string, string>;
+  const style: Record<string, string> = {};
+  if (props.width) style['--tr-modal-width'] = props.width;
+  if (props.height) style['--tr-modal-height'] = props.height;
+  return Object.keys(style).length ? style : undefined;
 });
 
 function close() {
@@ -100,7 +103,10 @@ onBeforeUnmount(() => {
       <div
         ref="dialogRef"
         class="tr-modal__dialog"
-        :class="[`tr-modal__dialog--${size}`, { 'tr-modal__dialog--custom': Boolean(width) }]"
+        :class="[
+          `tr-modal__dialog--${size}`,
+          { 'tr-modal__dialog--custom': Boolean(width), 'tr-modal__dialog--height': Boolean(height) },
+        ]"
         :style="dialogStyle"
         role="dialog"
         aria-modal="true"

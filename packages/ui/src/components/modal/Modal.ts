@@ -13,6 +13,8 @@ export type TrModalProps = {
   bodyClass?: string;
   /** Desktop width. Empty keeps the `size` track. */
   width?: string;
+  /** Desktop height. Empty keeps the default max height. */
+  height?: string;
   size?: TrModalSize;
   closeAriaLabel?: string;
 };
