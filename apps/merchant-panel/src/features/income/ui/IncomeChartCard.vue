@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import {
   TrCard,
@@ -11,9 +11,15 @@ import { useApexChartResize } from '../composables/use-apex-chart-resize';
 import { useIncomeChart } from '../composables/use-income-chart';
 import { useIncomeChartSeries } from '../composables/use-income-chart-series';
 import { IncomeChartPeriod } from '../model/income-chart';
+import SuccessfulPeriodStats from './SuccessfulPeriodStats.vue';
 
-const emit = defineEmits<{
-  'update:period': [period: IncomeChartPeriod];
+defineProps<{
+  summary?: {
+    currentWeekSuccessfulTransactionsAmount: number;
+    currentWeekSuccessfulTransactionsCount: number;
+    currentMonthSuccessfulTransactionsAmount: number;
+    currentMonthSuccessfulTransactionsCount: number;
+  } | null;
 }>();
 
 const { t } = useI18n();
@@ -21,8 +27,6 @@ const { period, chart, pending, error, fetch, setPeriod } = useIncomeChart();
 const { series, options, rangeLabel } = useIncomeChartSeries(chart);
 const plotEl = ref<HTMLElement | null>(null);
 const { fit: fitPlot } = useApexChartResize(plotEl);
-
-watch(period, (value) => emit('update:period', value), { immediate: true });
 
 const periodOptions = computed<TrSegmentedControlOption[]>(() => [
   { value: IncomeChartPeriod.Monthly, label: t('income.chart.monthly') },
@@ -39,7 +43,7 @@ onMounted(fetch);
 
 <template>
   <div data-tour="income">
-    <TrCard>
+    <TrCard class="h-full">
     <template #header>
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div>
@@ -56,6 +60,8 @@ onMounted(fetch);
           />
         </div>
       </div>
+
+      <SuccessfulPeriodStats class="mt-[24px]" :summary="summary" :period="period" />
     </template>
 
     <p v-if="pending && !chart" class="text-sm opacity-70">{{ t('income.chart.loading') }}</p>

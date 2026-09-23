@@ -9,7 +9,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <TrCard>
+  <TrCard class="h-full">
     <template #header>
       <div class="flex items-center gap-xs">
         <TrIcon size="lg">
@@ -20,7 +20,7 @@ const { t } = useI18n();
     </template>
 
     <div
-      class="flex flex-col items-center justify-center gap-xs rounded-sm border border-border-divider p-md dark:border-gray-800"
+      class="flex flex-col items-center justify-center gap-xs my-2xl rounded-sm border border-border-divider p-md dark:border-gray-800"
     >
       <span class="text-body-sm text-text-soft">{{ heroLabel }}</span>
       <div class="flex items-center gap-xs">

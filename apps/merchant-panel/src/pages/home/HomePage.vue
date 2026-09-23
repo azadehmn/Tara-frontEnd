@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { IncomeChartCard, IncomeChartPeriod, SuccessfulPeriodStats } from '@features/income';
+import { onMounted } from 'vue';
+import { IncomeChartCard } from '@features/income';
 import { PerformanceCard, SummaryCards, useSummary } from '@features/summary';
 import { RecentTransactionsCard } from '@features/transactions';
-import { TrCard, TrPageHeading } from '@tara/ui';
+import { TrPageHeading } from '@tara/ui';
 
 const { t } = useI18n();
 const { summary, pending, error, fetch } = useSummary();
-const period = ref<IncomeChartPeriod>(IncomeChartPeriod.Monthly);
 
 onMounted(fetch);
 </script>
@@ -16,15 +15,12 @@ onMounted(fetch);
   <div>
     <TrPageHeading :title="t('layout.nav.dashboard')"/>
     <PerformanceCard v-if="summary" class="mt-lg" :summary="summary" />
-    <div class="mt-lg grid grid-cols-1 gap-lg min-[992px]:grid-cols-12">
+    <div class="mt-lg grid grid-cols-12 items-stretch gap-md">
       <IncomeChartCard
-        class="min-[992px]:col-span-7 xl:col-span-8"
-        @update:period="period = $event"
+        class="col-span-full min-[992px]:col-span-7 xl:col-span-8"
+        :summary="summary"
       />
-      <div class="flex flex-col gap-lg min-[992px]:col-span-5 xl:col-span-4">
-        <TrCard v-if="summary">
-          <SuccessfulPeriodStats :summary="summary" :period="period" />
-        </TrCard>
+      <div class="col-span-full flex min-[992px]:col-span-5 xl:col-span-4">
         <SummaryCards
           :summary="summary"
           :pending="pending"

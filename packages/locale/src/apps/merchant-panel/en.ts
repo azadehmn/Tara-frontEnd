@@ -294,8 +294,10 @@ export const merchantPanelEn: MessageTree = {
   transactions: {
     recent: 'Recent transactions',
     viewAll: 'View all',
-    trackingCode: 'Tracking code',
-    amountRial: 'Amount',
+    acceptorType: 'Acceptor type',
+    acceptorTitle: 'Acceptor title',
+    lastStatus: 'Latest status',
+    totalAmount: 'Total amount',
     dateTime: 'Date and time',
   },
   reports: {

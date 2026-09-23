@@ -9,10 +9,10 @@ const props = defineProps<{ summary: MerchantSummary }>();
 const { t, locale } = useI18n();
 
 const rows = computed(() => [
-  // {
-  //   label: t('summary.balance.totalTransactions'),
-  //   value: formatNumber(props.summary.totalTransactions, locale.value),
-  // },
+  {
+    label: t('summary.balance.totalTransactions'),
+    value: formatNumber(props.summary.totalTransactions, locale.value),
+  },
   {
     label: t('summary.balance.returned'),
     value: formatNumber(props.summary.returnedTransactions, locale.value),

@@ -56,20 +56,20 @@ const metrics = computed<PerformanceMetric[]>(() => {
       points: current.items.map((item) => item.salesAmount),
     }),
     createMetric({
-      key: 'successfulTransactions',
-      label: t('summary.performance.successfulTransactions'),
-      value: formatNumber(current.successfulTransactionsCount, locale.value),
-      current: current.successfulTransactionsCount,
-      previous: previous.successfulTransactionsCount,
-      points: current.items.map((item) => item.successfulTransactionsCount),
-    }),
-    createMetric({
       key: 'returnRate',
       label: t('summary.performance.returnRate'),
       value: formatPercent(current.returnRate, locale.value),
       current: current.returnRate,
       previous: previous.returnRate,
       points: current.items.map((item) => item.returnRate),
+    }),
+    createMetric({
+      key: 'successfulTransactions',
+      label: t('summary.performance.successfulTransactions'),
+      value: formatNumber(current.successfulTransactionsCount, locale.value),
+      current: current.successfulTransactionsCount,
+      previous: previous.successfulTransactionsCount,
+      points: current.items.map((item) => item.successfulTransactionsCount),
     }),
   ];
 });

@@ -19,6 +19,7 @@
         <img :src="taraLogo" alt="Tara" width="61" height="25" class="h-[40px]" />
       </template>
       <template #end>
+        <ThemeToggle />
         <UserMenu />
       </template>
     </TrTopBar>
@@ -53,6 +54,7 @@ import { useRoute } from 'vue-router';
 import { TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import UserMenu from '@features/auth/ui/UserMenu.vue';
+import { ThemeToggle } from '@features/settings';
 import { usePanelTour } from '@features/onboarding';
 import AppSidebar from './AppSidebar.vue';
 import taraLogo from '@assets/images/logo-persion.svg';

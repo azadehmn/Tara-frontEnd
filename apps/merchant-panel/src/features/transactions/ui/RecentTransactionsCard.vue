@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { TrButton, TrCard, TrEmptyState } from '@tara/ui';
+import { TrButton, TrCard } from '@tara/ui';
+import TransactionTable from './TransactionTable.vue';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -24,6 +25,6 @@ function openTransactions() {
       </div>
     </template>
 
-    <TrEmptyState vector="Transactions" :title="t('common.empty')" />
+    <TransactionTable />
   </TrCard>
 </template>

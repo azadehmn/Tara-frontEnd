@@ -296,8 +296,10 @@ export const merchantPanelFa: MessageTree = {
   transactions: {
     recent: 'تراکنش‌های اخیر',
     viewAll: 'مشاهده همه',
-    trackingCode: 'کد پیگیری',
-    amountRial: 'مبلغ',
+    acceptorType: 'نوع پذیرنده',
+    acceptorTitle: 'عنوان پذیرنده',
+    lastStatus: 'آخرین وضعیت',
+    totalAmount: 'مبلغ کل',
     dateTime: 'تاریخ و ساعت',
   },
   reports: {
