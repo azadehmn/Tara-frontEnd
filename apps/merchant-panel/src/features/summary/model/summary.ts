@@ -32,8 +32,11 @@ export interface MerchantSummary {
   currentMonthSuccessfulTransactionsAmount: number;
   currentMonthSuccessfulTransactionsCount: number;
   totalTransactions: number;
+  transactionsAmount: number;
   returnedTransactions: number;
+  returnedTransactionsAmount: number;
   dailySales: number;
+  currentYearSales: number;
   withdrawableBalance: number;
   weeklyPerformance: WeeklyPerformance;
 }

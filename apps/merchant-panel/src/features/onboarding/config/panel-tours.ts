@@ -57,6 +57,7 @@ export const dashboardTour = {
       intro: t('onboarding.contracts.list.intro'),
       side: 'bottom',
       routeNames: ['contracts-organization', 'contracts-acceptor'],
+      doneOnly: true,
     },
   ],
 } as const satisfies TourDefinition;

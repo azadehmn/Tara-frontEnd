@@ -10,8 +10,11 @@ export const summaryMock: MerchantSummaryEnvelopeDto = {
     currentMonthSuccessfulTransactionsAmount: 405_200_080,
     currentMonthSuccessfulTransactionsCount: 1071,
     totalTransactions: 1842,
+    transactionsAmount: 860_000_000,
     returnedTransactions: 37,
+    returnedTransactionsAmount: 45_200_000,
     dailySales: 18_500_000,
+    currentYearSales: 814_800_000_000,
     withdrawableBalance: 325_000_000,
     weeklyPerformance: {
       current: {

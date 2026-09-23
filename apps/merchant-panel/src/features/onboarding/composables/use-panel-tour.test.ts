@@ -7,6 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useAuthoritiesStore } from '@features/auth';
 import { useAppLoading } from '@shared/lib';
 import type { TourStep } from '../model/tour';
+import { tourReplayNonce } from '../lib/tour-request';
 import { usePanelTour } from './use-panel-tour';
 
 const startTour = vi.fn();
@@ -82,6 +83,7 @@ describe('usePanelTour', () => {
     startTour.mockImplementation((options: { steps?: TourStep[] }) => options.steps ?? null);
     hasCompletedOnboarding.mockReturnValue(false);
     alwaysShowTour.value = false;
+    tourReplayNonce.value = 0;
     useAppLoading().hide();
     vi.stubGlobal(
       'requestAnimationFrame',
@@ -147,9 +149,9 @@ describe('usePanelTour', () => {
     wrapper.unmount();
   });
 
-  it('replays a completed tour when ALWAYS_SHOW is enabled', async () => {
+  it('does not replay after the done button, even when ALWAYS_SHOW is enabled', async () => {
     alwaysShowTour.value = true;
-    hasCompletedOnboarding.mockReturnValue(true);
+    hasCompletedOnboarding.mockReturnValue(false);
     const router = createTestRouter();
     await router.push('/dashboard');
     const wrapper = mountTour(router);
@@ -157,10 +159,35 @@ describe('usePanelTour', () => {
     await nextTick();
 
     expect(startTour).toHaveBeenCalledTimes(1);
-
     startTour.mock.calls[0]?.[0].onComplete();
-    expect(markOnboardingCompleted).not.toHaveBeenCalled();
+    expect(markOnboardingCompleted).toHaveBeenCalledWith('tara:onboarding:dashboard:v2');
 
+    hasCompletedOnboarding.mockReturnValue(true);
+    await router.push('/ticket');
+    await router.push('/dashboard');
+    await flushPromises();
+    await nextTick();
+
+    expect(startTour).toHaveBeenCalledTimes(1);
+    wrapper.unmount();
+  });
+
+  it('replays a completed tour from the guide button', async () => {
+    hasCompletedOnboarding.mockReturnValue(true);
+    const router = createTestRouter();
+    await router.push('/ticket');
+    const wrapper = mountTour(router);
+    await flushPromises();
+    await nextTick();
+
+    expect(startTour).not.toHaveBeenCalled();
+
+    tourReplayNonce.value += 1;
+    await flushPromises();
+    await nextTick();
+
+    expect(router.currentRoute.value.name).toBe('dashboard');
+    expect(startTour).toHaveBeenCalledTimes(1);
     wrapper.unmount();
   });
 

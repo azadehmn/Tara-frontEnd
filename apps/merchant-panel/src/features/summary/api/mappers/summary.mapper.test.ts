@@ -20,10 +20,19 @@ describe('mapMerchantSummary', () => {
     expect(mapped.weeklyPerformance.previous.returnRate).toBe(2.78);
   });
 
+  it('reads yesterday sales when the API sends that field', () => {
+    const mapped = mapMerchantSummary({ data: { dailySales: 500, yesterdaySales: 900 } });
+
+    expect(mapped.dailySales).toBe(900);
+  });
+
   it('falls back to zero for missing fields', () => {
     const mapped = mapMerchantSummary({ data: { dailySales: 500 } });
 
     expect(mapped.dailySales).toBe(500);
+    expect(mapped.transactionsAmount).toBe(0);
+    expect(mapped.returnedTransactionsAmount).toBe(0);
+    expect(mapped.currentYearSales).toBe(0);
     expect(mapped.withdrawableBalance).toBe(0);
     expect(mapped.currentWeekSuccessfulTransactionsAmount).toBe(0);
     expect(mapped.currentMonthSuccessfulTransactionsCount).toBe(0);

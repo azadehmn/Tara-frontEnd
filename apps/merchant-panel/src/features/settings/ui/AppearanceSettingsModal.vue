@@ -3,7 +3,7 @@
     class="appearance-modal"
     :open="open"
     width="34rem"
-    height="400px"
+    height="480px"
     :title="t('layout.settings.title')"
     :close-aria-label="t('layout.settings.close')"
     :header-border="false"
@@ -68,6 +68,19 @@
       </button>
     </div>
 
+    <button
+      type="button"
+      class="mt-lg flex w-full cursor-pointer flex-col items-start gap-2xs rounded-[14px] border border-solid border-[#E6EAF2] bg-white px-md py-sm text-start dark:border-gray-800 dark:bg-surface-dark"
+      @click="onGuide"
+    >
+      <span class="text-body-md text-[#1F2937] dark:text-text-dark">
+        {{ t('layout.settings.guide.title') }}
+      </span>
+      <span class="text-body-sm text-[#6B7280] dark:text-text-dark-soft">
+        {{ t('layout.settings.guide.caption') }}
+      </span>
+    </button>
+
     <p
       class="mb-0 mt-lg flex items-center justify-start gap-xs text-caption-regular text-[#6B7280] dark:text-text-dark-soft"
     >
@@ -82,6 +95,7 @@
 <script setup lang="ts">
 import { TrIcon, TrModal } from '@tara/ui';
 import InfoFillIcon from '@tara/ui/icons/InfoFillIcon.vue';
+import { requestPanelTour } from '@features/onboarding';
 import { useThemeStore } from '../store/theme.store';
 import type { ThemeMode } from '../lib/theme';
 import ThemeSketch from './ThemeSketch.vue';
@@ -96,6 +110,11 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 const themeStore = useThemeStore();
+
+function onGuide() {
+  emit('close');
+  requestPanelTour();
+}
 
 const options: { mode: ThemeMode; titleKey: string; emoji: string }[] = [
   { mode: 'light', titleKey: 'layout.settings.theme.light.title', emoji: '☀️' },

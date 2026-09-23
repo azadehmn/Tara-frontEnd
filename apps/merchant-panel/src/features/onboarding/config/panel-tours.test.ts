@@ -23,6 +23,7 @@ describe('dashboard tour config', () => {
       '[data-tour="contract-list"]',
     ]);
     expect(steps.at(-2)?.advanceOnClick).toBe(true);
+    expect(steps.at(-1)?.doneOnly).toBe(true);
     expect(steps.at(-1)?.routeNames).toEqual([
       'contracts-organization',
       'contracts-acceptor',

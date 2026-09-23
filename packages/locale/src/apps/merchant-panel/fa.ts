@@ -64,6 +64,10 @@ export const merchantPanelFa: MessageTree = {
       title: 'تنظیمات ظاهری پنل',
       intro: 'تم دلخواه خود را انتخاب کنید. این تنظیمات برای دفعات بعد ذخیره می‌شود.',
       note: 'می‌توانید هر زمان این تنظیمات را تغییر دهید.',
+      guide: {
+        title: 'راهنما',
+        caption: 'آشنایی با بخش‌های پنل',
+      },
       close: 'بستن',
       theme: {
         light: {
@@ -98,16 +102,18 @@ export const merchantPanelFa: MessageTree = {
     },
     sales: {
       title: 'فروش',
-      daily: 'فروش امروز',
+      daily: 'فروش دیروز',
       week: 'فروش هفته قبل',
       month: 'فروش ماه قبل',
       year: 'فروش سال قبل',
     },
     balance: {
       title: 'موجودی و تراکنش',
-      withdrawable: 'موجودی قابل برداشت',
+      withdrawable: 'میزان فروش سال جاری',
       totalTransactions: 'تعداد تراکنش',
-      returned: 'تراکنش مرجوعی',
+      transactionsAmount: 'مبلغ تراکنش',
+      returned: 'تعداد تراکنش مرجوعی',
+      returnedAmount: 'مبلغ تراکنش مرجوعی',
     },
   },
   income: {
@@ -222,7 +228,7 @@ export const merchantPanelFa: MessageTree = {
     },
   },
   campaign: {
-    create: 'ساخت کمپین',
+    create: 'درخواست کمپین',
     periodRange: '{start} تا {end}',
     kpi: {
       spend: 'هزینه کل',

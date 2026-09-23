@@ -64,6 +64,10 @@ export const merchantPanelEn: MessageTree = {
       title: 'Panel appearance settings',
       intro: 'Choose your preferred theme. This setting is saved for next time.',
       note: 'You can change this setting whenever you like.',
+      guide: {
+        title: 'Guide',
+        caption: 'A walkthrough of the panel',
+      },
       close: 'Close',
       theme: {
         light: {
@@ -98,16 +102,18 @@ export const merchantPanelEn: MessageTree = {
     },
     sales: {
       title: 'Sales',
-      daily: 'Daily sales',
+      daily: "Yesterday's sales",
       week: 'Previous week sales',
       month: 'Previous month sales',
       year: 'Previous year sales',
     },
     balance: {
       title: 'Balance and transactions',
-      withdrawable: 'Withdrawable balance',
-      totalTransactions: 'Transactions',
-      returned: 'Returned transactions',
+      withdrawable: 'Current year sales',
+      totalTransactions: 'Transaction count',
+      transactionsAmount: 'Transaction amount',
+      returned: 'Returned transaction count',
+      returnedAmount: 'Returned transaction amount',
     },
   },
   income: {
@@ -221,7 +227,7 @@ export const merchantPanelEn: MessageTree = {
     },
   },
   campaign: {
-    create: 'Create campaign',
+    create: 'Request campaign',
     periodRange: '{start} – {end}',
     kpi: {
       spend: 'Total spend',

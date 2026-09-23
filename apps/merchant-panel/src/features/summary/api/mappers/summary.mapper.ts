@@ -40,8 +40,11 @@ export function mapMerchantSummary(raw: unknown): MerchantSummary {
     ),
     currentMonthSuccessfulTransactionsCount: toNumber(data.currentMonthSuccessfulTransactionsCount),
     totalTransactions: toNumber(data.totalTransactions),
+    transactionsAmount: toNumber(data.transactionsAmount),
     returnedTransactions: toNumber(data.returnedTransactions),
-    dailySales: toNumber(data.dailySales),
+    returnedTransactionsAmount: toNumber(data.returnedTransactionsAmount),
+    dailySales: toNumber(data.yesterdaySales ?? data.dailySales),
+    currentYearSales: toNumber(data.currentYearSales),
     withdrawableBalance: toNumber(data.withdrawableBalance),
     weeklyPerformance: mapWeeklyPerformance(data.weeklyPerformance),
   };

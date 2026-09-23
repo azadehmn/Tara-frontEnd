@@ -72,9 +72,6 @@ export function startTour(options: StartTourOptions): TourStep[] | null {
     },
     onDestroyed: () => {
       if (activeTour === tour) activeTour = null;
-      if (completing) return;
-      completing = true;
-      options.onComplete?.();
     },
   });
 
@@ -93,6 +90,10 @@ export function startTour(options: StartTourOptions): TourStep[] | null {
         if (direction === 'next') current.moveNext();
         else current.movePrevious();
         return;
+      }
+      if (!completing) {
+        completing = true;
+        options.onComplete?.();
       }
       current.destroy();
     } finally {
@@ -115,6 +116,7 @@ function toDriveStep(step: TourStep): DriveStep {
       description: step.intro,
       side: step.side ?? 'bottom',
       align: step.align ?? 'start',
+      showButtons: step.doneOnly ? ['next'] : undefined,
     },
   };
 }

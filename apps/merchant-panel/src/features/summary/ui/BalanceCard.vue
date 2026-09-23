@@ -14,9 +14,20 @@ const rows = computed(() => [
     value: formatNumber(props.summary.totalTransactions, locale.value),
   },
   {
+    label: t('summary.balance.transactionsAmount'),
+    value: formatAmount(props.summary.transactionsAmount, locale.value),
+    currency: true,
+  },
+  {
     label: t('summary.balance.returned'),
     value: formatNumber(props.summary.returnedTransactions, locale.value),
   },
+  {
+    label: t('summary.balance.returnedAmount'),
+    value: formatAmount(props.summary.returnedTransactionsAmount, locale.value),
+    currency: true,
+  },
+
   {
     label: t('summary.sales.daily'),
     value: formatAmount(props.summary.dailySales, locale.value),
@@ -29,7 +40,7 @@ const rows = computed(() => [
   <SummaryCard
     :title="t('summary.balance.title')"
     :hero-label="t('summary.balance.withdrawable')"
-    :hero-value="formatAmount(summary.withdrawableBalance, locale)"
+    :hero-value="formatAmount(summary.currentYearSales, locale)"
     :rows="rows"
   />
 </template>

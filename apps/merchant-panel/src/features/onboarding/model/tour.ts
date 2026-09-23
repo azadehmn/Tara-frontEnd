@@ -8,6 +8,8 @@ export type TourStep = {
   routeNames?: readonly string[];
   /** Clicking the highlighted element advances the tour, same as Next. */
   advanceOnClick?: boolean;
+  /** Last step: only the done button, without back or close. */
+  doneOnly?: boolean;
 };
 
 // Translation function for tour texts

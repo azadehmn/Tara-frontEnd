@@ -12,6 +12,7 @@ import {
   moveActiveTour,
   startTour,
 } from '../lib/start-tour';
+import { tourReplayNonce } from '../lib/tour-request';
 import { tourStorageKey, type TourDefinition, type TourStep } from '../model/tour';
 
 export type UsePanelTourOptions = {
@@ -72,7 +73,7 @@ export function usePanelTour(options: UsePanelTourOptions = {}) {
     }
   }
 
-  async function maybeStart(): Promise<void> {
+  async function maybeStart(force = false): Promise<void> {
     const token = ++startToken;
     destroyActiveTour();
     journey = null;
@@ -83,12 +84,8 @@ export function usePanelTour(options: UsePanelTourOptions = {}) {
     if (!tour) return;
 
     const storageKey = tourStorageKey(tour);
-    if (
-      !ALWAYS_SHOW_TOUR &&
-      (hasCompletedOnboarding(storageKey) || startedKeys.has(storageKey))
-    ) {
-      return;
-    }
+    if (!force && hasCompletedOnboarding(storageKey)) return;
+    if (!force && !ALWAYS_SHOW_TOUR && startedKeys.has(storageKey)) return;
 
     await options.prepare?.();
     await nextTick();
@@ -105,7 +102,8 @@ export function usePanelTour(options: UsePanelTourOptions = {}) {
       prepareStep,
       onComplete: () => {
         journey = null;
-        if (!ALWAYS_SHOW_TOUR) markOnboardingCompleted(storageKey);
+        startedKeys.add(storageKey);
+        markOnboardingCompleted(storageKey);
       },
     });
 
@@ -129,6 +127,26 @@ export function usePanelTour(options: UsePanelTourOptions = {}) {
     if (handoff || String(route.name ?? '') !== routeName) return;
     moveActiveTour(index + 1);
   }
+
+  async function startFromRequest(): Promise<void> {
+    handoff = true;
+    try {
+      const home = panelTours[0]?.routeNames[0];
+      if (home && String(route.name ?? '') !== home) {
+        await router.push({ name: home });
+        await nextTick();
+        await waitForPaint();
+      }
+      await maybeStart(true);
+    } finally {
+      handoff = false;
+    }
+  }
+
+  watch(tourReplayNonce, (nonce) => {
+    if (!nonce) return;
+    void startFromRequest();
+  });
 
   watch([() => route.name, isLoading], () => {
     if (handoff) return;
