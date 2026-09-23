@@ -31,7 +31,7 @@ const { t } = useI18n();
 
     <ul class="mt-md flex flex-col gap-sm">
       <li v-for="row in rows" :key="row.label" class="flex items-baseline gap-xs text-body-sm">
-        <span class="shrink-0 text-text-soft dark:text-text-dark-soft">{{ row.label }}</span>
+        <span class="shrink-0 text-end font-medium text-text dark:text-text-dark">{{ row.label }}</span>
         <span
           class="min-w-4 flex-1 border-b border-dotted border-text-soft dark:border-text-dark-soft"
           aria-hidden="true"

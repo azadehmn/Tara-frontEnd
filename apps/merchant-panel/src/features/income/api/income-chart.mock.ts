@@ -109,3 +109,98 @@ export const weeklyIncomeChartMock: IncomeChartEnvelopeDto = {
     },
   },
 };
+// import type { IncomeChartEnvelopeDto } from '../model/income-chart';
+
+// export const monthlyIncomeChartMock: IncomeChartEnvelopeDto = {
+//   data: {
+//     period: 'MONTHLY',
+
+//     current: {
+//       from: '2026-09-23',
+//       to: '2026-09-23',
+//       totalValue: 12_800_000,
+//       totalCount: 34,
+//       items: [
+//         { date: '2026-09-23', value: 12_800_000, count: 34 },
+//       ],
+//     },
+
+//     previous: {
+//       from: '2026-08-23',
+//       to: '2026-09-22',
+//       totalValue: 550_200_000,
+//       totalCount: 1436,
+//       items: [
+//         { date: '2026-08-23', value: 15_200_000, count: 31 },
+//         { date: '2026-08-24', value: 13_900_000, count: 36 },
+//         { date: '2026-08-25', value: 11_100_000, count: 38 },
+//         { date: '2026-08-26', value: 11_800_000, count: 40 },
+//         { date: '2026-08-27', value: 15_400_000, count: 43 },
+//         { date: '2026-08-28', value: 16_900_000, count: 39 },
+//         { date: '2026-08-29', value: 14_300_000, count: 45 },
+//         { date: '2026-08-30', value: 16_800_000, count: 42 },
+//         { date: '2026-08-31', value: 18_600_000, count: 48 },
+
+//         { date: '2026-09-01', value: 12_500_000, count: 34 },
+//         { date: '2026-09-02', value: 14_800_000, count: 39 },
+//         { date: '2026-09-03', value: 13_200_000, count: 36 },
+//         { date: '2026-09-04', value: 17_900_000, count: 43 },
+//         { date: '2026-09-05', value: 23_100_000, count: 47 },
+//         { date: '2026-09-06', value: 15_700_000, count: 41 },
+//         { date: '2026-09-07', value: 19_200_000, count: 49 },
+//         { date: '2026-09-08', value: 17_600_000, count: 45 },
+//         { date: '2026-09-09', value: 20_100_000, count: 52 },
+//         { date: '2026-09-10', value: 18_400_000, count: 48 },
+//         { date: '2026-09-11', value: 21_300_000, count: 55 },
+//         { date: '2026-09-12', value: 19_800_000, count: 51 },
+//         { date: '2026-09-13', value: 22_400_000, count: 58 },
+//         { date: '2026-09-14', value: 20_700_000, count: 53 },
+//         { date: '2026-09-15', value: 17_200_000, count: 58 },
+
+//         { date: '2026-09-16', value: 18_600_000, count: 49 },
+//         { date: '2026-09-17', value: 19_400_000, count: 51 },
+//         { date: '2026-09-18', value: 21_100_000, count: 54 },
+//         { date: '2026-09-19', value: 20_500_000, count: 52 },
+//         { date: '2026-09-20', value: 22_200_000, count: 56 },
+//         { date: '2026-09-21', value: 18_900_000, count: 48 },
+//         { date: '2026-09-22', value: 21_600_000, count: 55 },
+//       ],
+//     },
+//   },
+// };
+
+// export const weeklyIncomeChartMock: IncomeChartEnvelopeDto = {
+//   data: {
+//     period: 'WEEKLY',
+
+//     current: {
+//       from: '2026-09-19',
+//       to: '2026-09-23',
+//       totalValue: 96_000_000,
+//       totalCount: 245,
+//       items: [
+//         { date: '2026-09-19', value: 20_500_000, count: 52 },
+//         { date: '2026-09-20', value: 22_200_000, count: 56 },
+//         { date: '2026-09-21', value: 18_900_000, count: 48 },
+//         { date: '2026-09-22', value: 21_600_000, count: 55 },
+//         { date: '2026-09-23', value: 12_800_000, count: 34 },
+//       ],
+//     },
+
+//     previous: {
+//       from: '2026-09-12',
+//       to: '2026-09-18',
+//       totalValue: 139_200_000,
+//       totalCount: 374,
+//       items: [
+//         { date: '2026-09-12', value: 19_800_000, count: 51 },
+//         { date: '2026-09-13', value: 22_400_000, count: 58 },
+//         { date: '2026-09-14', value: 20_700_000, count: 53 },
+//         { date: '2026-09-15', value: 17_200_000, count: 58 },
+//         { date: '2026-09-16', value: 18_600_000, count: 49 },
+//         { date: '2026-09-17', value: 19_400_000, count: 51 },
+//         { date: '2026-09-18', value: 21_100_000, count: 54 },
+//       ],
+//     },
+//   },
+// };

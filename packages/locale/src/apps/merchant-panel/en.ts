@@ -24,9 +24,9 @@ export const merchantPanelEn: MessageTree = {
       installments: 'Collections',
       adsAndPromotions: 'Ads & promotions',
       adsSearch: 'Search ads',
-      campaigns: 'Campaigns',
-      campaignBannerAds: 'Banner ads',
-      campaignClickAds: 'Click ads',
+      campaigns: 'Ads',
+      campaignBannerAds: 'Banner',
+      campaignClickAds: 'Click',
       ticket: 'Tickets',
       ticketList: 'Tickets',
       ticketFaq: 'FAQ',
@@ -64,6 +64,8 @@ export const merchantPanelEn: MessageTree = {
       title: 'Panel appearance settings',
       intro: 'Choose your preferred theme. This setting is saved for next time.',
       note: 'You can change this setting whenever you like.',
+      themeSection: 'Theme settings',
+      guideSection: 'Panel tutorial',
       guide: {
         title: 'Guide',
         caption: 'A walkthrough of the panel',
@@ -227,7 +229,7 @@ export const merchantPanelEn: MessageTree = {
     },
   },
   campaign: {
-    create: 'Request campaign',
+    create: 'Request ads',
     periodRange: '{start} – {end}',
     kpi: {
       spend: 'Total spend',

@@ -3,7 +3,6 @@
     class="appearance-modal"
     :open="open"
     width="34rem"
-    height="480px"
     :title="t('layout.settings.title')"
     :close-aria-label="t('layout.settings.close')"
     :header-border="false"
@@ -19,6 +18,10 @@
         </div>
       </div>
     </template>
+
+    <h3 class="mb-sm mt-0 text-body-md font-medium text-text dark:text-text-dark">
+      {{ t('layout.settings.themeSection') }}
+    </h3>
 
     <div dir="ltr" class="grid grid-cols-1 gap-sm sm:grid-cols-3">
       <button
@@ -68,9 +71,15 @@
       </button>
     </div>
 
+    <div class="appearance-modal__divider" role="separator" />
+
+    <h3 class="mb-sm mt-lg text-body-md font-medium text-text dark:text-text-dark">
+      {{ t('layout.settings.guideSection') }}
+    </h3>
+
     <button
       type="button"
-      class="mt-lg flex w-full cursor-pointer flex-col items-start gap-2xs rounded-[14px] border border-solid border-[#E6EAF2] bg-white px-md py-sm text-start dark:border-gray-800 dark:bg-surface-dark"
+      class="flex w-full cursor-pointer flex-col items-start gap-2xs rounded-[14px] border border-solid border-[#E6EAF2] bg-white px-md py-sm text-start dark:border-gray-800 dark:bg-surface-dark"
       @click="onGuide"
     >
       <span class="text-body-md text-[#1F2937] dark:text-text-dark">
@@ -89,11 +98,18 @@
       </TrIcon>
       {{ t('layout.settings.note') }}
     </p>
+
+    <TrButton
+      class="mt-lg w-full"
+      variant="primary"
+      :text="t('layout.settings.close')"
+      @click="emit('close')"
+    />
   </TrModal>
 </template>
 
 <script setup lang="ts">
-import { TrIcon, TrModal } from '@tara/ui';
+import { TrButton, TrIcon, TrModal } from '@tara/ui';
 import InfoFillIcon from '@tara/ui/icons/InfoFillIcon.vue';
 import { requestPanelTour } from '@features/onboarding';
 import { useThemeStore } from '../store/theme.store';
@@ -130,8 +146,23 @@ const options: { mode: ThemeMode; titleKey: string; emoji: string }[] = [
 
 .appearance-modal .tr-modal__header {
   align-items: flex-start;
-  padding-bottom: 4px;
+  padding-bottom: 16px;
   padding-inline: 32px;
+  border-bottom: 1px solid var(--color-border-divider);
+}
+
+html[data-theme='dark'] .appearance-modal .tr-modal__header {
+  border-bottom-color: #1d2939;
+}
+
+.appearance-modal__divider {
+  height: 1px;
+  margin-top: 20px;
+  background: var(--color-border-divider);
+}
+
+html[data-theme='dark'] .appearance-modal__divider {
+  background: #1d2939;
 }
 
 .appearance-modal .tr-modal__body {

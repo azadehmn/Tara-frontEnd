@@ -24,9 +24,9 @@ export const merchantPanelFa: MessageTree = {
       installments: 'وصول مطالبات',
       adsAndPromotions: 'تبلیغات و پروموشن',
       adsSearch: 'جستجو تبلیغات ',
-      campaigns: 'کمپین‌ها',
-      campaignBannerAds: 'تبلیغات بنری',
-      campaignClickAds: 'تبلیغات کلیکی',
+      campaigns: 'تبلیغات',
+      campaignBannerAds: 'بنری',
+      campaignClickAds: 'کلیکی',
       ticket: 'تیکت‌ها',
       ticketList: 'تیکت‌ها',
       ticketFaq: 'سوالات پرتکرار',
@@ -64,6 +64,8 @@ export const merchantPanelFa: MessageTree = {
       title: 'تنظیمات ظاهری پنل',
       intro: 'تم دلخواه خود را انتخاب کنید. این تنظیمات برای دفعات بعد ذخیره می‌شود.',
       note: 'می‌توانید هر زمان این تنظیمات را تغییر دهید.',
+      themeSection: 'تنظیمات قالب',
+      guideSection: 'راهنمای آموزشی پنل',
       guide: {
         title: 'راهنما',
         caption: 'آشنایی با بخش‌های پنل',
@@ -228,7 +230,7 @@ export const merchantPanelFa: MessageTree = {
     },
   },
   campaign: {
-    create: 'درخواست کمپین',
+    create: 'درخواست تبلیغات',
     periodRange: '{start} تا {end}',
     kpi: {
       spend: 'هزینه کل',
