@@ -20,6 +20,14 @@ describe('TrEmptyState', () => {
     expect(wrapper.find('svg').exists()).toBe(true);
   });
 
+  it('loads the Announcement vector', () => {
+    const wrapper = mount(TrEmptyState, {
+      props: { vector: 'Announcement', title: 'اعلانی وجود ندارد' },
+    });
+
+    expect(wrapper.find('svg').exists()).toBe(true);
+  });
+
   it('loads the Transactions vector', () => {
     const wrapper = mount(TrEmptyState, {
       props: { vector: 'Transactions', title: 'خالی' },

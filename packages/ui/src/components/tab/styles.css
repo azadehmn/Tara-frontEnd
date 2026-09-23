@@ -1,0 +1,70 @@
+@reference 'tailwindcss';
+@reference '../../styles/index.css';
+
+.tr-tab {
+  @apply flex items-center;
+}
+
+.tr-tab--start {
+  @apply justify-start;
+}
+
+.tr-tab--end {
+  @apply justify-end;
+}
+
+.tr-tab--block {
+  @apply justify-between;
+}
+
+.tr-tab--border {
+  @apply border-b border-solid border-border-divider dark:border-border-dark-divider;
+}
+
+.tr-tab__button {
+  @apply mx-xs h-14 cursor-pointer border-0 border-b-2 border-solid border-transparent
+    bg-transparent px-2xs text-body-md text-text-soft
+    dark:text-text-dark-soft;
+}
+
+.tr-tab__button--block {
+  @apply mx-0 w-full;
+}
+
+.tr-tab__button:hover:not(:disabled):not(.is-active) {
+  @apply border-b-border text-text dark:border-b-border-dark dark:text-text-dark;
+}
+
+.tr-tab__button.is-active {
+  @apply border-b-primary text-text dark:border-b-primary-dark dark:text-text-dark;
+}
+
+.tr-tab__button:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-focus dark:outline-primary-dark-focus;
+}
+
+.tr-tab__button:disabled {
+  @apply cursor-default;
+}
+
+.tr-tab__label {
+  @apply inline-flex items-center justify-center gap-xs;
+}
+
+.tr-tab__icon {
+  @apply relative inline-flex pe-2xs text-text dark:text-text-dark;
+}
+
+.tr-tab__count {
+  @apply absolute -top-1.5 -end-2 inline-flex h-4 min-w-4 items-center justify-center
+    rounded-full bg-primary px-2xs text-[10px] leading-none text-text-onPrimary
+    dark:bg-primary-dark dark:text-text-dark-onPrimary;
+}
+
+.tr-tab__dot {
+  @apply inline-block size-1.5 rounded-full bg-primary dark:bg-primary-dark;
+}
+
+.tr-tab__skeleton {
+  @apply inline-block h-3 w-14 animate-pulse rounded-sm bg-surface-hover dark:bg-surface-dark-hover;
+}

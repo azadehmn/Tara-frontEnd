@@ -1,5 +1,7 @@
 <template>
-  <div class="flex h-dvh flex-col overflow-hidden bg-background text-text dark:bg-background-dark dark:text-text-dark">
+  <div
+    class="flex h-dvh flex-col overflow-hidden bg-background text-text dark:bg-background-dark dark:text-text-dark"
+  >
     <TrTopBar>
       <template #start>
         <div
@@ -12,14 +14,15 @@
           @keydown.enter.prevent="toggleNavigation"
           @keydown.space.prevent="toggleNavigation"
         >
-          <TrIcon >
+          <TrIcon>
             <TrMenuIcon />
           </TrIcon>
         </div>
         <img :src="taraLogo" alt="Tara" width="61" height="25" class="h-[40px]" />
       </template>
       <template #end>
-        <ThemeToggle />
+        <ThemeToggle /> <NotificationMenu />
+
         <UserMenu />
       </template>
     </TrTopBar>
@@ -54,6 +57,7 @@ import { useRoute } from 'vue-router';
 import { TrIcon, TrNavigationBar, TrTopBar, useNavigationMode } from '@tara/ui';
 import TrMenuIcon from '@tara/ui/icons/MenuIcon.vue';
 import UserMenu from '@features/auth/ui/UserMenu.vue';
+import { NotificationMenu } from '@features/notifications';
 import { ThemeToggle } from '@features/settings';
 import { usePanelTour } from '@features/onboarding';
 import AppSidebar from './AppSidebar.vue';

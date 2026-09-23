@@ -21,6 +21,7 @@ import { TrAccordion } from './components/accordion';
 import { TrNavLink } from './components/nav-link';
 import { TrModal } from './components/modal';
 import { TrSummary } from './components/summary';
+import { TrTab } from './components/tab';
 
 /**
  * Registers kit components for templates as TrButton, TrTopBar, etc.
@@ -49,6 +50,7 @@ export const taraUi: Plugin = {
     app.component('TrNavLink', TrNavLink);
     app.component('TrModal', TrModal);
     app.component('TrSummary', TrSummary);
+    app.component('TrTab', TrTab);
     app.component('TrTopBar', TrTopBar);
     app.component('TrTooltip', TrTooltip);
   },

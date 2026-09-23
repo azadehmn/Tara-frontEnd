@@ -41,6 +41,19 @@ export const merchantPanelEn: MessageTree = {
       toLight: 'Switch to light mode',
       toDark: 'Switch to dark mode',
     },
+    notifications: {
+      open: 'Notifications',
+      readAll: 'Mark all as read',
+      markRead: 'Mark as read',
+      tabs: {
+        announcements: 'Announcements',
+        alerts: 'Alerts',
+      },
+      empty: {
+        title: 'No announcements',
+        caption: 'You have not received an announcement yet',
+      },
+    },
     userMenu: {
       open: 'Account menu',
       settings: 'Settings',

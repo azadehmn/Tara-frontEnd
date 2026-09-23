@@ -97,6 +97,8 @@ export { TrNavLink } from './components/nav-link';
 export type { TrNavLinkProps } from './components/nav-link';
 export { TrModal } from './components/modal';
 export type { TrModalProps, TrModalSize } from './components/modal';
+export { TrTab } from './components/tab';
+export type { TrTabAlign, TrTabItem, TrTabProps } from './components/tab';
 export { TrSummary } from './components/summary';
 export type { TrSummaryDivider, TrSummaryItem, TrSummaryProps, TrSummaryStatus } from './components/summary';
 export { TrTooltip } from './components/tooltip';

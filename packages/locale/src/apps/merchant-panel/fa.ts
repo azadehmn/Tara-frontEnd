@@ -41,6 +41,19 @@ export const merchantPanelFa: MessageTree = {
       toLight: 'تغییر به حالت روشن',
       toDark: 'تغییر به حالت تاریک',
     },
+    notifications: {
+      open: 'اعلان‌ها',
+      readAll: 'همه را خواندم',
+      markRead: 'خوانده شد',
+      tabs: {
+        announcements: 'اطلاعیه‌ها',
+        alerts: 'اعلانات',
+      },
+      empty: {
+        title: 'اعلانی وجود ندارد',
+        caption: 'هنوز اعلانی دریافت نکرده‌اید',
+      },
+    },
     userMenu: {
       open: 'حساب کاربری',
       settings: 'تنظیمات ظاهری پنل',
