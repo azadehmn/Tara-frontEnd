@@ -23,13 +23,7 @@ const { t } = useI18n();
 const variants: TrButtonVariant[] = ['primary', 'secondary', 'outlined'];
 const sizes: TrButtonSize[] = ['small', 'medium', 'large'];
 
-const statusTypes: TrStatusType[] = [
-  'neutral',
-  'informative',
-  'warning',
-  'negative',
-  'positive',
-];
+const statusTypes: TrStatusType[] = ['neutral', 'informative', 'warning', 'negative', 'positive'];
 
 const labelTypes: TrLabelType[] = [
   'neutral',
@@ -82,7 +76,11 @@ const otpComplete = ref('');
     <section class="mb-12 flex flex-col gap-8">
       <div>
         <span class="mb-md block text-xs opacity-60">title + description + action</span>
-        <TrPageHeading title="تیکت‌ها" description="درخواست‌های پشتیبانی را ثبت و پیگیری کنید." :sticky="false">
+        <TrPageHeading
+          title="تیکت‌ها"
+          description="درخواست‌های پشتیبانی را ثبت و پیگیری کنید."
+          :sticky="false"
+        >
           <template #action>
             <TrButton text="ارسال تیکت" />
           </template>
@@ -172,13 +170,7 @@ const otpComplete = ref('');
 
       <div class="flex flex-col gap-2">
         <span class="text-xs opacity-60 mb-md">amount + unit + words on focus</span>
-        <TrTextField
-          v-model="amountValue"
-          placeholder="مبلغ"
-          amount
-          dir="ltr"
-          unit="ریال"
-        />
+        <TrTextField v-model="amountValue" placeholder="مبلغ" amount dir="ltr" unit="ریال" />
       </div>
 
       <div class="flex flex-col gap-2">
@@ -215,7 +207,12 @@ const otpComplete = ref('');
     <section class="mb-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
       <div class="flex flex-col gap-2">
         <span class="text-xs opacity-60 mb-md">default 6 digits ({{ otpValue || 'empty' }})</span>
-        <TrOtpField v-model="otpValue" name="otp" aria-label="کد تایید" @complete="otpComplete = $event" />
+        <TrOtpField
+          v-model="otpValue"
+          name="otp"
+          aria-label="کد تایید"
+          @complete="otpComplete = $event"
+        />
         <span v-if="otpComplete" class="text-xs opacity-60">complete: {{ otpComplete }}</span>
       </div>
 
@@ -285,11 +282,7 @@ const otpComplete = ref('');
 
     <p class="mb-6 text-sm opacity-70">TrSegmentedControl demo</p>
     <section class="mb-10">
-      <TrSegmentedControl
-        v-model="segmentValue"
-        :options="segmentOptions"
-        label="بازه زمانی"
-      />
+      <TrSegmentedControl v-model="segmentValue" :options="segmentOptions" label="بازه زمانی" />
     </section>
 
     <p class="mb-6 text-sm opacity-70">TrLabel demo</p>

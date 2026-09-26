@@ -19,11 +19,10 @@ const slides = computed(() =>
     class="flex h-auto w-[90%] max-w-[90%] flex-col overflow-hidden rounded-2xl border border-transparent bg-surface shadow-[0_8px_48px_rgba(0,0,0,0.10)] min-[567px]:w-[450px] min-[567px]:max-w-[450px] min-[992px]:min-h-[560px] min-[992px]:max-h-[88vh] min-[992px]:w-[992px] min-[992px]:max-w-[992px] min-[992px]:flex-row-reverse dark:border-gray-800 dark:bg-surface-dark dark:shadow-[0_8px_48px_rgba(0,0,0,0.40)]"
   >
     <div class="relative hidden min-h-0 min-[992px]:block min-[992px]:w-1/2">
-       <!-- :interval-ms="10000" -->
       <ImageSlider
-        class="absolute inset-0"
+        class="absolute inset-0 object-cover"
         fit="cover"
-        :autoplay="false"
+        :interval-ms="2000"
         :slides="slides"
         :prev-label="t('common.prev')"
         :next-label="t('common.next')"
@@ -37,7 +36,7 @@ const slides = computed(() =>
     </div>
 
     <section
-      class="flex w-full flex-col items-center justify-center overflow-y-auto px-xl py-2xl min-[992px]:w-1/2 min-[992px]:flex-none min-[992px]:px-0"
+      class="flex w-full flex-col items-center justify-center overflow-y-auto bg-surface px-xl py-2xl dark:bg-[#1e2634] min-[992px]:w-1/2 min-[992px]:flex-none min-[992px]:px-0"
     >
       <div class="flex w-full flex-col min-[992px]:w-[80%]">
         <slot />
